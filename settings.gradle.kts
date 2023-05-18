@@ -13,19 +13,22 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+  }
 
-    includeBuild("build-logic")
+  includeBuild("build-logic")
 }
 
 buildCache {
-    local {
-        removeUnusedEntriesAfterDays = 7
-    }
+  local {
+    removeUnusedEntriesAfterDays = 7
+  }
 }
 
-include(":app")
+include(
+  ":app",
+  ":cake",
+)

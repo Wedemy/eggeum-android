@@ -1,10 +1,10 @@
 ## Issue
 
-- close #ISSUE_NUMBER
+- Resolve #ISSUE_NUMBER
 
 ## Overview (Required)
 
-- 
+-
 
 ## Screenshot
 

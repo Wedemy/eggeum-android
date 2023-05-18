@@ -1,16 +1,31 @@
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
+@file:Suppress("UnstableApiUsage")
+
+rootProject.name = "eggeum-android"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+
 pluginManagement {
     repositories {
-        google()
-        mavenCentral()
         gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
         google()
         mavenCentral()
     }
+
+    includeBuild("build-logic")
 }
-rootProject.name = "eggeum"
+
+buildCache {
+    local {
+        removeUnusedEntriesAfterDays = 7
+    }
+}
+
 include(":app")

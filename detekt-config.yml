@@ -1,0 +1,69 @@
+complexity:
+  LongMethod:
+    threshold: 100
+  LongParameterList:
+    active: false
+  TooManyFunctions:
+    active: false
+  ComplexCondition:
+    threshold: 7
+
+performance:
+  SpreadOperator:
+    active: false
+
+formatting:
+  TrailingCommaOnCallSite:
+    active: true
+  TrailingCommaOnDeclarationSite:
+    active: true
+  ImportOrdering:
+    active: false
+  MaximumLineLength:
+    active: false
+  Indentation:
+    indentSize: 2
+  ArgumentListWrapping:
+    indentSize: 2
+    maxLineLength: 150
+  KdocWrapping:
+    active: true
+    indentSize: 2
+  Wrapping:
+    indentSize: 2
+  CommentWrapping:
+    active: true
+    indentSize: 2
+  Filename:
+    active: false
+  PackageName:
+    active: false
+  AnnotationOnSeparateLine:
+    active: false
+
+style:
+  MagicNumber:
+    ignoreAnnotated: [ 'AllowMagicNumber' ]
+  ForbiddenComment:
+    active: false
+  ThrowsCount:
+    active: false
+  ReturnCount:
+    active: false
+  LoopWithTooManyJumpStatements:
+    active: false
+  DestructuringDeclarationWithTooManyEntries:
+    active: false
+  MaxLineLength:
+    maxLineLength: 150
+    excludeCommentStatements: true
+
+naming:
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Z0-9_]*'
+  MatchingDeclarationName:
+    active: false
+  VariableNaming:
+    active: false
+  PackageNaming:
+    packagePattern: '[a-z]+(\._?[_?A-Za-z0-9]*)*'

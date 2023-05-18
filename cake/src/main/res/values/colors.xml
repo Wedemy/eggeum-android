@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<resources>
+  <color name="white">#ffffff</color>
+  <color name="black">#000000</color>
+
+  <color name="cool_gray_50">#f9fafb</color>
+  <color name="cool_gray_100">#f3f4f6</color>
+  <color name="cool_gray_200">#e5e7eb</color>
+  <color name="cool_gray_300">#d1d5db</color>
+  <color name="cool_gray_400">#9ca3af</color>
+  <color name="cool_gray_500">#6b7280</color>
+  <color name="cool_gray_600">#4b5563</color>
+  <color name="cool_gray_700">#374151</color>
+  <color name="cool_gray_800">#1f2937</color>
+  <color name="cool_gray_900">#111827</color>
+
+  <color name="teal_50">#f0fdfa</color>
+  <color name="teal_100">#ccfbf1</color>
+  <color name="teal_200">#99f6e4</color>
+  <color name="teal_300">#5eead4</color>
+  <color name="teal_400">#2dd4bf</color>
+  <color name="teal_500">#14b8a6</color>
+  <color name="teal_600">#0d9488</color>
+  <color name="teal_700">#0f766e</color>
+  <color name="teal_800">#115e59</color>
+  <color name="teal_900">#134e4a</color>
+
+  <color name="error_500">#ef4444</color>
+</resources>

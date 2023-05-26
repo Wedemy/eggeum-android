@@ -8,6 +8,7 @@
 <resources>
   <color name="white">#ffffff</color>
   <color name="black">#000000</color>
+
   <color name="gray_50">#f9fafb</color>
   <color name="gray_100">#f3f4f6</color>
   <color name="gray_200">#e5e7eb</color>
@@ -17,7 +18,9 @@
   <color name="gray_700">#374151</color>
   <color name="gray_800">#1f2937</color>
   <color name="gray_900">#111827</color>
+
   <color name="teal_500">#14b8a6</color>
   <color name="teal_600">#0d9488</color>
+
   <color name="error_500">#ef4444</color>
 </resources>

@@ -19,6 +19,7 @@ gradlePlugin {
     "AndroidLibraryPlugin" to "android-library",
     "AndroidGmdPlugin" to "android-gmd",
     "JvmKotlinPlugin" to "jvm-kotlin",
+    "KotlinExplicitApiPlugin" to "kotlin-explicit-api",
     "TestJUnitPlugin" to "test-junit",
     "TestKotestPlugin" to "test-kotest",
   )

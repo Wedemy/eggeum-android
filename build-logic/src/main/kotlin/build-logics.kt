@@ -33,6 +33,9 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.gradle.kotlin.dsl.KotlinClosure2
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+private const val EXPLICIT_API = "-Xexplicit-api=strict"
 
 internal abstract class BuildLogicPlugin(private val block: Project.() -> Unit) : Plugin<Project> {
   final override fun apply(project: Project) {
@@ -88,6 +91,22 @@ internal class JvmKotlinPlugin : BuildLogicPlugin({
   }
 
   dependencies.add("detektPlugins", libs.findLibrary("detekt-plugin-formatting").get())
+})
+
+internal class KotlinExplicitApiPlugin : BuildLogicPlugin({
+  tasks
+    .matching { task ->
+      task is KotlinCompile &&
+        !task.name.contains("test", ignoreCase = true)
+    }
+    .configureEach {
+      if (!project.hasProperty("kotlin.optOutExplicitApi")) {
+        val kotlinCompile = this as KotlinCompile
+        if (EXPLICIT_API !in kotlinCompile.kotlinOptions.freeCompilerArgs) {
+          kotlinCompile.kotlinOptions.freeCompilerArgs += EXPLICIT_API
+        }
+      }
+    }
 })
 
 // prefix가 `Jvm`이 아니라 `Test`인 이유:

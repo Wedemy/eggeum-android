@@ -15,6 +15,4 @@ class CakeText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : AppCompatTextView(context, attrs, defStyleAttr) {
-  
-}
+) : AppCompatTextView(context, attrs, defStyleAttr)

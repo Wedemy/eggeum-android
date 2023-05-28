@@ -1,6 +1,9 @@
 complexity:
   LongMethod:
     threshold: 100
+    ignoreAnnotated: [ 'Composable' ]
+  CyclomaticComplexMethod:
+    ignoreAnnotated: [ 'Composable' ]
   LongParameterList:
     active: false
   TooManyFunctions:
@@ -21,8 +24,12 @@ formatting:
     active: false
   MaximumLineLength:
     active: false
+  MultiLineIfElse:
+    active: false
   Indentation:
     indentSize: 2
+  ParameterListWrapping:
+    active: false
   ArgumentListWrapping:
     indentSize: 2
     maxLineLength: 150
@@ -31,9 +38,9 @@ formatting:
     indentSize: 2
   Wrapping:
     indentSize: 2
+    active: false
   CommentWrapping:
-    active: true
-    indentSize: 2
+    active: false
   Filename:
     active: false
   PackageName:
@@ -43,9 +50,12 @@ formatting:
 
 style:
   MagicNumber:
+    active: false
     ignoreAnnotated: [ 'AllowMagicNumber' ]
   ForbiddenComment:
     active: false
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' ]
   ThrowsCount:
     active: false
   ReturnCount:
@@ -55,12 +65,13 @@ style:
   DestructuringDeclarationWithTooManyEntries:
     active: false
   MaxLineLength:
-    maxLineLength: 150
-    excludeCommentStatements: true
+    active: false
 
 naming:
   TopLevelPropertyNaming:
-    constantPattern: '[A-Z][A-Z0-9_]*'
+    constantPattern: '[A-Z][A-Za-z0-9_]*'
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
   MatchingDeclarationName:
     active: false
   VariableNaming:

@@ -18,6 +18,7 @@ android {
 }
 
 dependencies {
+  implementation(libs.androidx.appcompat)
   testImplementations(
     libs.test.robolectric,
     libs.bundles.test.roborazzi,

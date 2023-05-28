@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<resources>
+  <declare-styleable name="CakeButton">
+    <attr name="enable" format="boolean" />
+    <attr name="text" format="string" />
+  </declare-styleable>
+</resources>

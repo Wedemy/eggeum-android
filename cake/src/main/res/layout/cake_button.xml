@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/cake_button"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/ripple_shape_radius_8"
+  android:clickable="true"
+  android:focusable="true"
+  android:gravity="center"
+  tools:backgroundTint="@color/teal_500"
+  tools:layout_gravity="center_horizontal"
+  tools:layout_width="200dp">
+
+  <TextView
+    android:id="@+id/cake_button_text"
+    style="@style/TextLMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="14dp"
+    android:textColor="@color/white"
+    tools:text="Cake Button" />
+
+</LinearLayout>
+

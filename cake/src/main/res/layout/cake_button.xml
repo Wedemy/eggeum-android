@@ -10,7 +10,7 @@
   android:id="@+id/cake_button"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/ripple_shape_radius_8"
+  android:background="@drawable/teal_ripple_shape_radius_8"
   android:clickable="true"
   android:focusable="true"
   android:gravity="center"

@@ -6,7 +6,7 @@
   -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="@color/gray_200">
+  android:color="@color/teal_600">
   <item android:id="@android:id/background">
     <shape>
       <corners android:radius="8dp" />

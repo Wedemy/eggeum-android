@@ -30,10 +30,15 @@ public class CakeButton @JvmOverloads constructor(
   private var prevOnClickListener: OnClickListener? = null
   public var enable: Boolean = true
     set(value) {
+      val background = resources.getDrawable(
+        if (value) R.drawable.teal_ripple_shape_radius_8 else R.drawable.shape_radius_8,
+        context.theme,
+      )
       val tint = resources.getColor(if (value) R.color.teal_500 else R.color.gray_300, context.theme)
+
+      binding.cakeButton.background = background
       binding.cakeButton.backgroundTintList = ColorStateList.valueOf(tint)
 
-      // TODO: enable이 false일 때는 리플 제거
       super.setOnClickListener(if (value) prevOnClickListener else null)
       isFocusable = value
       isClickable = value

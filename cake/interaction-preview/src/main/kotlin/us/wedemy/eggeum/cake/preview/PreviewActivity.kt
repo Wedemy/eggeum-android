@@ -37,14 +37,14 @@ class PreviewActivity : Activity() {
               .apply {
                 text = SN
                 enable = index != 0
-              }
+              },
           )
           if (index == 0) {
             addView(
               Space(this@PreviewActivity)
                 .apply {
                   layoutParams = ViewGroup.LayoutParams(100.px, 30.px)
-                }
+                },
             )
           }
         }

@@ -30,5 +30,5 @@ buildCache {
 
 include(
   ":app",
-  ":design",
+  ":design-resource",
 )

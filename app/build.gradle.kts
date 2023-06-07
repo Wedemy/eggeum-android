@@ -18,6 +18,6 @@ android {
 dependencies {
   implementations(
     libs.androidx.appcompat,
-    projects.design,
+    projects.designResource,
   )
 }

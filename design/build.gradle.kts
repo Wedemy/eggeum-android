@@ -6,13 +6,9 @@
  */
 
 plugins {
-  eggeum("android-application")
+  eggeum("android-library")
 }
 
 android {
-  namespace = "us.wedemy.eggeum.cake.preview"
-}
-
-dependencies {
-  implementation(projects.cake)
+  namespace = "us.wedemy.eggeum.design"
 }

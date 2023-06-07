@@ -6,26 +6,27 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/cake_button"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:background="@drawable/teal_ripple_shape_radius_8"
-  android:clickable="true"
-  android:focusable="true"
+  android:layout_height="match_parent"
   android:gravity="center"
-  tools:backgroundTint="@color/teal_500"
-  tools:layout_gravity="center_horizontal"
-  tools:layout_width="200dp">
+  android:orientation="vertical">
 
   <TextView
-    android:id="@+id/cake_button_text"
+    style="@style/TextSMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/app_name" />
+
+  <TextView
+    style="@style/TextMMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/app_name" />
+
+  <TextView
     style="@style/TextLMedium"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingVertical="14dp"
-    android:textColor="@color/white"
-    tools:text="Cake Button" />
+    android:text="@string/app_name" />
 
 </LinearLayout>
-

@@ -14,13 +14,13 @@
     <item name="android:lineSpacingExtra">17sp</item>
   </style>
 
-  <style name="Logo">
+  <!--<style name="Logo">
     <item name="android:fontFamily">@font/spacegrotesk_bold</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textSize">32sp</item>
     <item name="android:letterSpacing">-0.01</item>
     <item name="android:lineSpacingExtra">11.2sp</item>
-  </style>
+  </style>-->
 
   <style name="H2">
     <item name="android:fontFamily">@font/pretendard_bold</item>
@@ -44,7 +44,7 @@
   </style>
 
   <style name="H5">
-    <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    <item name="android:fontFamily">@font/pretendard_semibold</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">24sp</item>
     <item name="android:lineSpacingExtra">12sp</item>
@@ -52,14 +52,14 @@
 
   <style name="Title">
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    <item name="android:fontFamily">@font/pretendard_semibold</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">18sp</item>
     <item name="android:lineSpacingExtra">9sp</item>
   </style>
 
   <style name="TextLSemiBold">
-    <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    <item name="android:fontFamily">@font/pretendard_semibold</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">16sp</item>
     <item name="android:lineSpacingExtra">8sp</item>
@@ -80,7 +80,7 @@
   </style>
 
   <style name="TextMSemiBold">
-    <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    <item name="android:fontFamily">@font/pretendard_semibold</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">15sp</item>
     <item name="android:lineSpacingExtra">7.5sp</item>
@@ -101,7 +101,7 @@
   </style>
 
   <style name="TextSSemiBold">
-    <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+    <item name="android:fontFamily">@font/pretendard_semibold</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">14sp</item>
     <item name="android:lineSpacingExtra">7sp</item>

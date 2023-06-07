@@ -16,5 +16,8 @@ android {
 }
 
 dependencies {
-  implementations(libs.androidx.appcompat)
+  implementations(
+    libs.androidx.appcompat,
+    projects.design,
+  )
 }

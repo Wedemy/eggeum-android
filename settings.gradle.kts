@@ -30,6 +30,5 @@ buildCache {
 
 include(
   ":app",
-  ":cake",
-  ":cake:interaction-preview",
+  ":design-resource",
 )

@@ -14,13 +14,13 @@
     <item name="android:lineSpacingExtra">17sp</item>
   </style>
 
-  <!--<style name="Logo">
+  <style name="Logo">
     <item name="android:fontFamily">@font/spacegrotesk_bold</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textSize">32sp</item>
     <item name="android:letterSpacing">-0.01</item>
     <item name="android:lineSpacingExtra">11.2sp</item>
-  </style>-->
+  </style>
 
   <style name="H2">
     <item name="android:fontFamily">@font/pretendard_bold</item>

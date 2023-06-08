@@ -1,0 +1,41 @@
+<!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="24"
+  android:viewportHeight="24">
+  <path
+    android:fillColor="#00000000"
+    android:pathData="M17.538,8.538C19.068,8.538 20.308,7.299 20.308,5.769C20.308,4.24 19.068,3 17.538,3C16.009,3 14.769,4.24 14.769,5.769C14.769,7.299 16.009,8.538 17.538,8.538Z"
+    android:strokeWidth="1.5"
+    android:strokeColor="#6B7280"
+    android:strokeLineCap="round"
+    android:strokeLineJoin="round" />
+  <path
+    android:fillColor="#00000000"
+    android:pathData="M17.538,11.308C14.077,11.308 14.077,21 14.077,21H21C21,21 21,11.308 17.538,11.308Z"
+    android:strokeWidth="1.5"
+    android:strokeColor="#6B7280"
+    android:strokeLineCap="round"
+    android:strokeLineJoin="round" />
+  <path
+    android:fillColor="#00000000"
+    android:pathData="M6.462,8.538C7.991,8.538 9.231,7.299 9.231,5.769C9.231,4.24 7.991,3 6.462,3C4.932,3 3.692,4.24 3.692,5.769C3.692,7.299 4.932,8.538 6.462,8.538Z"
+    android:strokeWidth="1.5"
+    android:strokeColor="#6B7280"
+    android:strokeLineCap="round"
+    android:strokeLineJoin="round" />
+  <path
+    android:fillColor="#00000000"
+    android:pathData="M6.462,21C3,21 3,11.308 3,11.308H9.923C9.923,11.308 9.923,21 6.462,21Z"
+    android:strokeWidth="1.5"
+    android:strokeColor="#6B7280"
+    android:strokeLineCap="round"
+    android:strokeLineJoin="round" />
+</vector>

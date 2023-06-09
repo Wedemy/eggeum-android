@@ -15,10 +15,6 @@
 
     <activity
       android:name=".MainActivity"
-      android:exported="true"/>
-
-    <activity
-      android:name="us.wedemy.eggeum.onboard.ui.OnboardActivity"
       android:exported="true">
 
       <intent-filter>

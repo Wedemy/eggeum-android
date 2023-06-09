@@ -15,6 +15,9 @@ plugins {
   alias(libs.plugins.kotlin.detekt)
   alias(libs.plugins.kotlin.ktlint)
   alias(libs.plugins.gradle.dependency.handler.extensions)
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.kotlin.android) apply false
+  alias(libs.plugins.navigation.safeargs) apply false
 }
 
 buildscript {

@@ -31,4 +31,5 @@ buildCache {
 include(
   ":app",
   ":design-resource",
+  ":onboard"
 )

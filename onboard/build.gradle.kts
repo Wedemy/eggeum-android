@@ -52,8 +52,4 @@ dependencies {
   implementation(libs.bundles.androidx.lifecycle)
 
   implementation(libs.kotlinx.coroutine.android)
-
-  testImplementation(libs.test.junit.core)
-  androidTestImplementation(libs.androidx.test.junit)
-  androidTestImplementation(libs.androidx.test.espresso)
 }

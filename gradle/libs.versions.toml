@@ -16,8 +16,6 @@ androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-beta01"
-androidx-test-junit = "1.1.5"
-androidx-test-espresso = "3.5.1"
 
 test-kotest = "5.6.2"
 test-junit-core = "4.13.2"
@@ -64,9 +62,6 @@ androidx-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmod
 
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
-
-androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
-androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }

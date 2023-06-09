@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_onboarding"
+  app:startDestination="@id/register_account_fragment">
+
+  <fragment
+    android:id="@+id/register_account_fragment"
+    android:name="us.wedemy.eggeum.onboard.ui.RegisterAccountFragment"
+    android:label="RegisterAccountFragment"
+    tools:layout="@layout/fragment_register_account">
+    <action
+      android:id="@+id/action_registerAccountFragment_to_serviceTermsFragment"
+      app:destination="@id/service_terms_fragment" />
+    <action
+      android:id="@+id/action_registerAccountFragment_to_registerNicknameFragment"
+      app:destination="@id/register_nickname_fragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/service_terms_fragment"
+    android:name="us.wedemy.eggeum.onboard.ui.ServiceTermsFragment"
+    android:label="ServiceTermsFragment"
+    tools:layout="@layout/fragment_service_terms"/>
+
+  <fragment
+    android:id="@+id/register_nickname_fragment"
+    android:name="us.wedemy.eggeum.onboard.ui.RegisterNicknameFragment"
+    android:label="RegisterNicknameFragment"
+    tools:layout="@layout/fragment_register_nickname"/>
+</navigation>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="us.wedemy.eggeum.onboard.ui.RegisterAccountFragment">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tb_service_terms"
+    style="@style/Widget.Eggeum.Toolbar.WithArrow"
+    android:layout_width="0dp"
+    android:layout_height="56dp"
+    android:elevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/service_terms"
+      android:textColor="@color/gray_900" />
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <TextView
+    android:id="@+id/tv_register_account_title"
+    style="@style/H3"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/register_account_title"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_service_terms" />
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="24dp"
+    app:layout_constraintBottom_toTopOf="@id/line_service_terms"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_register_account_title">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/hangeul_ipsum" />
+
+  </ScrollView>
+
+  <View
+    android:id="@+id/line_service_terms"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_service_terms_check"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_service_terms_check"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="@color/teal_500"
+    android:text="@string/check"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
- * Designed and developed by Wedemy 2023.
- *
- * Licensed under the MIT.
- * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
- */
-
 package us.wedemy.eggeum.onboard.util
 
 import android.os.Bundle
@@ -61,7 +54,7 @@ fun NavController.safeNavigate(direction: NavDirections) {
 fun NavController.safeNavigate(
   @IdRes currentDestinationId: Int,
   @IdRes id: Int,
-  args: Bundle? = null
+  args: Bundle? = null,
 ) {
   if (currentDestinationId == currentDestination?.id) {
     navigate(id, args)

@@ -39,7 +39,7 @@ class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>(R.layout.
     }
   }
 
+  @Suppress("EmptyFunctionBlock")
   private fun initObserver() {
-
   }
 }

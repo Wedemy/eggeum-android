@@ -58,8 +58,8 @@
       style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
       android:ellipsize="end"
       android:hint="@string/nickname"
-      android:maxLines="1"
-      android:inputType="text"/>
+      android:inputType="text"
+      android:maxLines="1" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,10 +76,10 @@
   <Button
     android:id="@+id/btn_register_nickname"
     style="@style/Widget.Eggeum.Button"
-    android:text="@string/next"
     android:layout_width="0dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
+    android:text="@string/next"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />

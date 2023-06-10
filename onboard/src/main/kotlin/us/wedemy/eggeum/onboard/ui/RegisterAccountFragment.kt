@@ -51,7 +51,6 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>(R.l
         viewModel.setCbAgreeToServiceTerms()
       }
 
-
       clAgreeToCollectPersonalInfo.setOnClickListener {
         viewModel.setCbAgreeToCollectPersonalInfo()
       }

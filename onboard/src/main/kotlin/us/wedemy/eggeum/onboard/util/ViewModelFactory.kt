@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import us.wedemy.eggeum.onboard.viewmodel.RegisterAccountViewModel
 import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
 
-class ViewModelFactory(private val savedStateHandle: SavedStateHandle): ViewModelProvider.Factory {
+class ViewModelFactory(private val savedStateHandle: SavedStateHandle) : ViewModelProvider.Factory {
   override fun <T : ViewModel> create(modelClass: Class<T>): T {
     return when {
       modelClass.isAssignableFrom(RegisterAccountViewModel::class.java) -> {

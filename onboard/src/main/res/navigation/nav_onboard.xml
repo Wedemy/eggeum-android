@@ -28,11 +28,12 @@
     android:id="@+id/service_terms_fragment"
     android:name="us.wedemy.eggeum.onboard.ui.ServiceTermsFragment"
     android:label="ServiceTermsFragment"
-    tools:layout="@layout/fragment_service_terms"/>
+    tools:layout="@layout/fragment_service_terms" />
 
   <fragment
     android:id="@+id/register_nickname_fragment"
     android:name="us.wedemy.eggeum.onboard.ui.RegisterNicknameFragment"
     android:label="RegisterNicknameFragment"
-    tools:layout="@layout/fragment_register_nickname"/>
+    tools:layout="@layout/fragment_register_nickname" />
+
 </navigation>

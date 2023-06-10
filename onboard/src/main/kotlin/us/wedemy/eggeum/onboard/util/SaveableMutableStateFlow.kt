@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 class SaveableMutableStateFlow<T>(
   private val savedStateHandle: SavedStateHandle,
   private val key: String,
-  initialValue: T
+  initialValue: T,
 ) {
   private val state: StateFlow<T> = savedStateHandle.getStateFlow(key, initialValue)
   var value: T
@@ -27,6 +27,6 @@ class SaveableMutableStateFlow<T>(
 
 fun <T> SavedStateHandle.getMutableStateFlow(
   key: String,
-  initialValue: T
+  initialValue: T,
 ): SaveableMutableStateFlow<T> =
   SaveableMutableStateFlow(this, key, initialValue)

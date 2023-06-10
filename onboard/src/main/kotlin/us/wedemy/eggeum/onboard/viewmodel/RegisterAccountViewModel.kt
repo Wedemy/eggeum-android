@@ -63,7 +63,6 @@ class RegisterAccountViewModel(
     _agreeToCollectPersonalInfo.value = isChecked
     _agreeToProvidePersonalInfoTo3rdParty.value = isChecked
     _over14YearOld.value = isChecked
-    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = isChecked
   }
 
   val enableRegisterAccount: StateFlow<Boolean> = combine(
@@ -71,7 +70,6 @@ class RegisterAccountViewModel(
     agreeToCollectPersonalInfo,
     agreeToProvidePersonalInfoTo3rdParty,
     over14YearOld,
-    wouldLikeToReceiveInfoAboutNewCafeAndEvents,
   ) { checks: Array<Boolean> ->
     checks.all { it }
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)

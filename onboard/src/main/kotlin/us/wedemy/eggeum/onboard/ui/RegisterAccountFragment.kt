@@ -47,29 +47,31 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>(R.l
         }
       }
 
-      cbAgreeToServiceTerms.setOnCheckedChangeListener { _, isChecked ->
-        viewModel.setCbAgreeToServiceTerms(isChecked)
+      clAgreeToServiceTerms.setOnClickListener {
+        viewModel.setCbAgreeToServiceTerms()
       }
 
-      cbAgreeToCollectPersonalInfo.setOnCheckedChangeListener { _, isChecked ->
-        viewModel.setCbAgreeToCollectPersonalInfo(isChecked)
+
+      clAgreeToCollectPersonalInfo.setOnClickListener {
+        viewModel.setCbAgreeToCollectPersonalInfo()
       }
 
-      cbAgreeToProvidePersonalInfoTo3rdParty.setOnCheckedChangeListener { _, isChecked ->
-        viewModel.setCbAgreeToProvidePersonalInfoTo3rdParty(isChecked)
+      clAgreeToProvidePersonalInfoTo3rdParty.setOnClickListener {
+        viewModel.setCbAgreeToProvidePersonalInfoTo3rdParty()
       }
 
-      cbOver14YearOld.setOnCheckedChangeListener { _, isChecked ->
-        viewModel.setCbOver14YearOld(isChecked)
+      clOver14YearOld.setOnClickListener {
+        viewModel.setCbOver14YearOld()
       }
 
-      cbWouldLikeToReceiveInfoAboutNewCafeAndEvents.setOnCheckedChangeListener { _, isChecked ->
-        viewModel.setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents(isChecked)
+      clWouldLikeToReceiveInfoAboutNewCafeAndEvents.setOnClickListener {
+        viewModel.setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents()
       }
 
-      cbAgreeToAllRequiredItems.setOnClickListener {
-        val currentState = cbAgreeToAllRequiredItems.isChecked
-        viewModel.setCbAgreeToAllRequiredItem(currentState)
+      clAgreeToAllRequiredItems.setOnClickListener {
+        // val currentState = cbAgreeToAllRequiredItems.isChecked
+        viewModel.setCbAgreeToAllRequiredItems()
+        viewModel.setAgreeToAllRequiredItems()
       }
 
       tvAgreeToServiceTermsDetail.setOnClickListener {

@@ -37,32 +37,38 @@ class RegisterAccountViewModel(
   val wouldLikeToReceiveInfoAboutNewCafeAndEvents: StateFlow<Boolean> =
     _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
 
+  private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_6, false)
+  val agreeToAllRequiredItems: StateFlow<Boolean> = _agreeToAllRequiredItems.asStateFlow()
 
-  fun setCbAgreeToServiceTerms(isChecked: Boolean) {
-    _agreeToServiceTerms.value = isChecked
+  fun setCbAgreeToServiceTerms() {
+    _agreeToServiceTerms.value = !agreeToServiceTerms.value
   }
 
-  fun setCbAgreeToCollectPersonalInfo(isChecked: Boolean) {
-    _agreeToCollectPersonalInfo.value = isChecked
+  fun setCbAgreeToCollectPersonalInfo() {
+    _agreeToCollectPersonalInfo.value = !agreeToCollectPersonalInfo.value
   }
 
-  fun setCbAgreeToProvidePersonalInfoTo3rdParty(isChecked: Boolean) {
-    _agreeToProvidePersonalInfoTo3rdParty.value = isChecked
+  fun setCbAgreeToProvidePersonalInfoTo3rdParty() {
+    _agreeToProvidePersonalInfoTo3rdParty.value = !agreeToProvidePersonalInfoTo3rdParty.value
   }
 
-  fun setCbOver14YearOld(isChecked: Boolean) {
-    _over14YearOld.value = isChecked
+  fun setCbOver14YearOld() {
+    _over14YearOld.value = !over14YearOld.value
   }
 
-  fun setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents(isChecked: Boolean) {
-    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = isChecked
+  fun setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents() {
+    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = !wouldLikeToReceiveInfoAboutNewCafeAndEvents.value
   }
 
-  fun setCbAgreeToAllRequiredItem(isChecked: Boolean) {
-    _agreeToServiceTerms.value = isChecked
-    _agreeToCollectPersonalInfo.value = isChecked
-    _agreeToProvidePersonalInfoTo3rdParty.value = isChecked
-    _over14YearOld.value = isChecked
+  fun setCbAgreeToAllRequiredItems() {
+    _agreeToAllRequiredItems.value = !agreeToAllRequiredItems.value
+  }
+
+  fun setAgreeToAllRequiredItems() {
+    _agreeToServiceTerms.value = agreeToAllRequiredItems.value
+    _agreeToCollectPersonalInfo.value = agreeToAllRequiredItems.value
+    _agreeToProvidePersonalInfoTo3rdParty.value = agreeToAllRequiredItems.value
+    _over14YearOld.value = agreeToAllRequiredItems.value
   }
 
   val enableRegisterAccount: StateFlow<Boolean> = combine(
@@ -80,5 +86,6 @@ class RegisterAccountViewModel(
     private const val KEY_CHECK_BOX_3 = "check_box_3"
     private const val KEY_CHECK_BOX_4 = "check_box_4"
     private const val KEY_CHECK_BOX_5 = "check_box_5"
+    private const val KEY_CHECK_BOX_6 = "check_box_6"
   }
 }

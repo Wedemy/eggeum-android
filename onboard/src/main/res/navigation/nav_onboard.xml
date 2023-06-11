@@ -18,10 +18,18 @@
     tools:layout="@layout/fragment_register_account">
     <action
       android:id="@+id/action_registerAccountFragment_to_serviceTermsFragment"
-      app:destination="@id/service_terms_fragment" />
+      app:destination="@id/service_terms_fragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     <action
       android:id="@+id/action_registerAccountFragment_to_registerNicknameFragment"
-      app:destination="@id/register_nickname_fragment" />
+      app:destination="@id/register_nickname_fragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
 
   <fragment

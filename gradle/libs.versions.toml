@@ -16,7 +16,7 @@ androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-beta01"
-androidx-hilt = "2.45"
+androidx-hilt = "2.46.1"
 androidx-hilt-navigation = "1.0.0"
 
 test-kotest = "5.6.2"

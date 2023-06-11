@@ -68,8 +68,6 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>(R.l
       }
 
       clAgreeToAllRequiredItems.setOnClickListener {
-        // val currentState = cbAgreeToAllRequiredItems.isChecked
-        viewModel.setCbAgreeToAllRequiredItems()
         viewModel.setAgreeToAllRequiredItems()
       }
 

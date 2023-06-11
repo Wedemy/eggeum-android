@@ -60,15 +60,12 @@ class RegisterAccountViewModel(
     _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = !wouldLikeToReceiveInfoAboutNewCafeAndEvents.value
   }
 
-  fun setCbAgreeToAllRequiredItems() {
-    _agreeToAllRequiredItems.value = !agreeToAllRequiredItems.value
-  }
-
   fun setAgreeToAllRequiredItems() {
     _agreeToServiceTerms.value = agreeToAllRequiredItems.value
     _agreeToCollectPersonalInfo.value = agreeToAllRequiredItems.value
     _agreeToProvidePersonalInfoTo3rdParty.value = agreeToAllRequiredItems.value
     _over14YearOld.value = agreeToAllRequiredItems.value
+    _agreeToAllRequiredItems.value = !agreeToAllRequiredItems.value
   }
 
   val enableRegisterAccount: StateFlow<Boolean> = combine(

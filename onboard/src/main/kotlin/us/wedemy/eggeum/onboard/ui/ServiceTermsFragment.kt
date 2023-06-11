@@ -22,7 +22,6 @@ class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>(R.layout.
     super.onViewCreated(view, savedInstanceState)
 
     initListener()
-    initObserver()
   }
 
   private fun initListener() {
@@ -37,9 +36,5 @@ class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>(R.layout.
         requireActivity().finish()
       }
     }
-  }
-
-  @Suppress("EmptyFunctionBlock")
-  private fun initObserver() {
   }
 }

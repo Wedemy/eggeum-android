@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterNicknameBinding
 import us.wedemy.eggeum.onboard.ui.base.BaseFragment
+import us.wedemy.eggeum.onboard.util.EditTextState
 import us.wedemy.eggeum.onboard.util.ViewModelFactory
 import us.wedemy.eggeum.onboard.util.repeatOnStarted
 import us.wedemy.eggeum.onboard.util.textChangesToFlow
@@ -55,9 +56,26 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
       val editTextFlow = binding.tietRegisterNickname.textChangesToFlow()
       editTextFlow
         .onEach { text ->
-          handleNicknameValidation(text)
+          val nickname = text.toString().trim()
+          viewModel.handleNicknameValidation(nickname)
         }
         .launchIn(this)
+
+      launch {
+        viewModel.inputNicknameState.collect { state ->
+          when (state) {
+            EditTextState.Idle -> {
+              clearError()
+            }
+            is EditTextState.Success -> {
+              setValidState()
+            }
+            is EditTextState.Error -> {
+              setErrorMessage(state.stringRes)
+            }
+          }
+        }
+      }
 
       launch {
         viewModel.enableRegisterNickname.collect {
@@ -67,22 +85,20 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
     }
   }
 
-  private fun handleNicknameValidation(text: CharSequence?) {
-    text?.let {
-      val nickname = it.toString().trim()
-      when {
-        nickname.isEmpty() -> {
-          setEmptyError()
-        }
-        nickname.length < 2 -> {
-          setMinLengthError()
-          viewModel.setButtonState(false)
-        }
-        else -> {
-          setValidState()
-          viewModel.setNickname(nickname)
-          viewModel.setButtonState(true)
-        }
+  private fun clearError() {
+    binding.tilRegisterNickname.apply {
+      error = null
+      endIconDrawable = null
+    }
+  }
+
+  private fun setErrorMessage(stringRes: Int) {
+    when (stringRes) {
+      R.string.empty_error_text -> {
+        setEmptyError()
+      }
+      else -> {
+        setMinLengthError()
       }
     }
   }
@@ -100,6 +116,9 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
       setEndIconDrawable(us.wedemy.eggeum.design.R.drawable.ic_x_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))
+      setEndIconOnClickListener {
+        binding.tietRegisterNickname.text?.clear()
+      }
     }
   }
 
@@ -110,6 +129,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.teal_500)
       setEndIconTintList(ColorStateList.valueOf(color))
       boxStrokeColor = color
+      setEndIconOnClickListener {}
     }
   }
 }

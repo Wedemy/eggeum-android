@@ -19,5 +19,6 @@ dependencies {
   implementations(
     libs.androidx.appcompat,
     projects.designResource,
+    projects.onboard,
   )
 }

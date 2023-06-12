@@ -9,6 +9,7 @@
 
   <style name="Theme.Eggeum" parent="Theme.MaterialComponents.Light.NoActionBar">
     <!-- Status bar color. -->
-    <item name="android:statusBarColor">@color/white</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
 </resources>

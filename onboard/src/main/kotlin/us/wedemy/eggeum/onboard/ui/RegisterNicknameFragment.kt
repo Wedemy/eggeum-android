@@ -74,12 +74,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
               setErrorMessage(state.stringRes)
             }
           }
-        }
-      }
-
-      launch {
-        viewModel.enableRegisterNickname.collect {
-          binding.btnRegisterNickname.isEnabled = it
+          binding.btnRegisterNickname.isEnabled = (state == EditTextState.Success)
         }
       }
     }

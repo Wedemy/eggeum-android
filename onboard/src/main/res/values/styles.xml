@@ -43,7 +43,7 @@
     <item name="android:fontFamily">@font/pretendard_medium</item>
   </style>
 
-  <style name="Widget.Eggeum.TextInputLayout.Cursor" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+  <style name="ThemeOverlay.Eggeum.TextInputLayout.CursorColor" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
     <item name="colorControlActivated">@color/teal_500</item>
   </style>
 
@@ -64,7 +64,7 @@
     <item name="errorTextAppearance">@style/TextXsRegular</item>
     <item name="errorTextColor">@color/error_500</item>
     <item name="hintEnabled">false</item>
-    <item name="android:theme">@style/Widget.Eggeum.TextInputLayout.Cursor</item>
+    <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>
   </style>
 
   <style name="Widget.Eggeum.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">

@@ -11,9 +11,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
 import us.wedemy.eggeum.onboard.R
-import us.wedemy.eggeum.onboard.util.EditTextState
-import us.wedemy.eggeum.onboard.util.SaveableMutableStateFlow
-import us.wedemy.eggeum.onboard.util.getMutableStateFlow
+import us.wedemy.eggeum.common.util.EditTextState
+import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
+import us.wedemy.eggeum.common.util.getMutableStateFlow
 
 class RegisterNicknameViewModel(
   savedStateHandle: SavedStateHandle,

@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.onboard.util
+package us.wedemy.eggeum.common.util
 
 import android.os.Bundle
 import android.text.Editable

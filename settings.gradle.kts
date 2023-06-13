@@ -7,6 +7,7 @@
 
 @file:Suppress("UnstableApiUsage")
 
+
 rootProject.name = "eggeum-android"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -31,5 +32,6 @@ buildCache {
 include(
   ":app",
   ":design-resource",
-  ":onboard"
+  ":common",
+  ":onboard",
 )

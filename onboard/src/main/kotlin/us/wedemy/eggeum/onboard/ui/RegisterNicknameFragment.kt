@@ -17,14 +17,14 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.common.ui.base.BaseFragment
+import us.wedemy.eggeum.common.util.EditTextState
+import us.wedemy.eggeum.common.util.repeatOnStarted
+import us.wedemy.eggeum.common.util.textChangesToFlow
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterNicknameBinding
-import us.wedemy.eggeum.onboard.ui.base.BaseFragment
-import us.wedemy.eggeum.onboard.util.EditTextState
-import us.wedemy.eggeum.onboard.util.ViewModelFactory
-import us.wedemy.eggeum.onboard.util.repeatOnStarted
-import us.wedemy.eggeum.onboard.util.textChangesToFlow
 import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
+import us.wedemy.eggeum.onboard.viewmodel.OnboardViewModelFactory
 
 class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R.layout.fragment_register_nickname) {
 
@@ -36,7 +36,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
     super.onViewCreated(view, savedInstanceState)
 
     val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = ViewModelFactory(savedStateHandle)
+    val viewModelFactory = OnboardViewModelFactory(savedStateHandle)
     viewModel = ViewModelProvider(this, viewModelFactory)[RegisterNicknameViewModel::class.java]
 
     initListener()

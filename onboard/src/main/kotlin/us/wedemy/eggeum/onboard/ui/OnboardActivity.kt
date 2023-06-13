@@ -10,9 +10,9 @@ package us.wedemy.eggeum.onboard.ui
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import us.wedemy.eggeum.common.ui.base.BaseActivity
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.ActivityOnboardBinding
-import us.wedemy.eggeum.onboard.ui.base.BaseActivity
 
 class OnboardActivity : BaseActivity<ActivityOnboardBinding>(R.layout.activity_onboard) {
 

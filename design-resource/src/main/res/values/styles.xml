@@ -56,7 +56,6 @@
     <item name="boxCornerRadiusBottomEnd">8dp</item>
     <item name="boxCornerRadiusBottomStart">8dp</item>
     <item name="boxStrokeWidthFocused">1dp</item>
-    <item name="boxStrokeColor">@color/gray_500</item>
     <item name="boxStrokeWidth">1dp</item>
     <item name="boxBackgroundColor">@color/white</item>
     <item name="endIconMode">custom</item>

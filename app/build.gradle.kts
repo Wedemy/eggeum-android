@@ -19,6 +19,8 @@ dependencies {
   implementations(
     libs.androidx.appcompat,
     projects.designResource,
+    projects.common,
     projects.onboard,
+    projects.registerCafe,
   )
 }

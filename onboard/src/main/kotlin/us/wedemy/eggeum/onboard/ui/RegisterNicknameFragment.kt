@@ -89,7 +89,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
 
   private fun setErrorMessage(stringRes: Int) {
     when (stringRes) {
-      R.string.empty_error_text -> {
+      us.wedemy.eggeum.design.R.string.empty_error_text -> {
         setEmptyError()
       }
       else -> {
@@ -100,14 +100,14 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
 
   private fun setEmptyError() {
     binding.tilRegisterNickname.apply {
-      error = context.getString(R.string.empty_error_text)
+      error = context.getString(us.wedemy.eggeum.design.R.string.empty_error_text)
       endIconDrawable = null
     }
   }
 
   private fun setMinLengthError() {
     binding.tilRegisterNickname.apply {
-      error = context.getString(R.string.min_length_error_text)
+      error = context.getString(us.wedemy.eggeum.design.R.string.min_length_error_text)
       setEndIconDrawable(us.wedemy.eggeum.design.R.drawable.ic_x_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))

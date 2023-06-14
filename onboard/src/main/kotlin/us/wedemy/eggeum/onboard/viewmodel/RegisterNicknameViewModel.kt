@@ -10,7 +10,6 @@ package us.wedemy.eggeum.onboard.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
-import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.common.util.getMutableStateFlow
@@ -28,11 +27,11 @@ class RegisterNicknameViewModel(
     when {
       nickname.isEmpty() -> {
         if (_inputNicknameState.value != EditTextState.Idle) {
-          _inputNicknameState.value = EditTextState.Error(R.string.empty_error_text)
+          _inputNicknameState.value = EditTextState.Error(us.wedemy.eggeum.design.R.string.empty_error_text)
         }
       }
       nickname.length < 2 -> {
-        _inputNicknameState.value = EditTextState.Error(R.string.min_length_error_text)
+        _inputNicknameState.value = EditTextState.Error(us.wedemy.eggeum.design.R.string.min_length_error_text)
       }
       else -> {
         _inputNickname.value = nickname

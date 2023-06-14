@@ -49,7 +49,6 @@
       android:layout_marginTop="4dp"
       android:text="@string/register_cafe_complete_subtitle"
       android:textColor="@color/gray_400"
-      app:layout_constraintBaseline_toTopOf=""
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_complete_title" />

@@ -98,7 +98,7 @@
         android:id="@+id/til_register_cafe_name"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="4dp"
-        app:boxStrokeColor="@color/gray_200"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_name">
@@ -128,7 +128,7 @@
         android:id="@+id/til_register_cafe_address"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="4dp"
-        app:boxStrokeColor="@color/gray_200"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_address">
@@ -158,7 +158,7 @@
         android:id="@+id/til_register_cafe_area"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="4dp"
-        app:boxStrokeColor="@color/gray_200"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_area">

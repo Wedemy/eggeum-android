@@ -16,7 +16,7 @@ sealed class EditTextState {
   object Success : EditTextState(), Parcelable
 
   @Parcelize
-  data class Error(@StringRes val stringRes: Int) : EditTextState(), Parcelable
+  data class Error(@StringRes val stringRes: Int? = null) : EditTextState(), Parcelable
 
   @Parcelize
   object Idle : EditTextState(), Parcelable

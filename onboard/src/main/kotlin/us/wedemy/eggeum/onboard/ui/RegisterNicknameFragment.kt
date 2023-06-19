@@ -71,7 +71,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
               setValidState()
             }
             is EditTextState.Error -> {
-              setErrorMessage(state.stringRes)
+              state.stringRes?.let { setErrorMessage(it) }
             }
           }
           binding.btnRegisterNickname.isEnabled = (state == EditTextState.Success)

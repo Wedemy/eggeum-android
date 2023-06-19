@@ -26,7 +26,9 @@ import us.wedemy.eggeum.common.util.repeatOnStarted
 import us.wedemy.eggeum.common.util.safeNavigate
 import us.wedemy.eggeum.common.util.textChangesToFlow
 import us.wedemy.eggeum.register_cafe.R
+import us.wedemy.eggeum.register_cafe.adapter.CafeImageAdapter
 import us.wedemy.eggeum.register_cafe.databinding.FragmentRegisterCafeBinding
+import us.wedemy.eggeum.register_cafe.item.CafeImageItem
 import us.wedemy.eggeum.register_cafe.viewmodel.RegisterCafeViewModel
 import us.wedemy.eggeum.register_cafe.viewmodel.RegisterCafeViewModelFactory
 
@@ -35,8 +37,11 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
 
   private lateinit var viewModel: RegisterCafeViewModel
+  private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
-  lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+  private val cafeImageAdapter by lazy {
+    CafeImageAdapter()
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -44,16 +49,29 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
     val viewModelFactory = RegisterCafeViewModelFactory(savedStateHandle)
     viewModel = ViewModelProvider(this, viewModelFactory)[RegisterCafeViewModel::class.java]
 
-    pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uri ->
-      if (uri != null) {
-        Log.d("PhotoPicker", "Selected URI: $uri")
+    pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
+      if (uris.isNotEmpty()) {
+        Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
+        binding.tvRegisterCafePictureNumber.text = "${uris.size}/10"
+        val imageItems = uris.map { CafeImageItem(it.toString()) }
+        cafeImageAdapter.submitList(imageItems)
       } else {
         Log.d("PhotoPicker", "No media selected")
       }
     }
 
+    initView()
     initListener()
     initObserver()
+  }
+
+  private fun initView() {
+    binding.apply {
+      rvCafeImage.apply {
+        setHasFixedSize(true)
+        adapter = cafeImageAdapter
+      }
+    }
   }
 
   private fun initListener() {

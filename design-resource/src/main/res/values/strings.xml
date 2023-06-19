@@ -43,4 +43,6 @@
   <string name="register_cafe_complete_title">카페 등록 신청을\n 완료 했어요.</string>
   <string name="register_cafe_complete_subtitle">심사 후에 카페가 확인되면 지도에 등록할게요.</string>
   <string name="complete">완료</string>
+  <string name="cafe_image">cafe_image</string>
+  <string name="cafe_image_close">cafe_image_close</string>
 </resources>

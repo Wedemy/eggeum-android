@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.register_cafe"
+  namespace = "us.wedemy.eggeum.registercafe"
 
   buildFeatures {
     viewBinding = true

@@ -1,9 +1,9 @@
-package us.wedemy.eggeum.register_cafe.adapter.viewholder
+package us.wedemy.eggeum.registercafe.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import us.wedemy.eggeum.register_cafe.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.register_cafe.item.CafeImageItem
+import us.wedemy.eggeum.registercafe.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
 class CafeImageViewHolder(
   val binding: ItemCafeImageBinding,

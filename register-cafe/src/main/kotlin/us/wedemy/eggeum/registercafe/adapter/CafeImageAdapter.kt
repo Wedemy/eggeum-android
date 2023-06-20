@@ -1,22 +1,22 @@
-package us.wedemy.eggeum.register_cafe.adapter
+package us.wedemy.eggeum.registercafe.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import us.wedemy.eggeum.register_cafe.adapter.viewholder.CafeImageViewHolder
-import us.wedemy.eggeum.register_cafe.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.register_cafe.item.CafeImageItem
-import us.wedemy.eggeum.register_cafe.ui.CafeImageItemClickListener
+import us.wedemy.eggeum.registercafe.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.registercafe.adapter.viewholder.CafeImageViewHolder
+import us.wedemy.eggeum.registercafe.item.CafeImageItem
+import us.wedemy.eggeum.registercafe.ui.CafeImageItemClickListener
 
 class CafeImageAdapter(private val clickListener: CafeImageItemClickListener) :
   ListAdapter<CafeImageItem, CafeImageViewHolder>(
-    CafeImageItemDiffCallback
+    CafeImageItemDiffCallback,
   ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CafeImageViewHolder {
     return CafeImageViewHolder(
-      ItemCafeImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+      ItemCafeImageBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
   }
 

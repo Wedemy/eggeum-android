@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.register_cafe.viewmodel
+package us.wedemy.eggeum.registercafe.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,7 +18,7 @@ import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.common.util.Success
 import us.wedemy.eggeum.common.util.getMutableStateFlow
-import us.wedemy.eggeum.register_cafe.item.CafeImageItem
+import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
 class RegisterCafeViewModel(
   savedStateHandle: SavedStateHandle,
@@ -29,8 +29,6 @@ class RegisterCafeViewModel(
   private val _inputCafeName = savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
 
   private val _inputCafeAddress = savedStateHandle.getMutableStateFlow(KEY_CAFE_ADDRESS, "")
-
-  private val _inputCafeArea = savedStateHandle.getMutableStateFlow(KEY_CAFE_AREA, "")
 
   private val _inputCafeNameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME_STATE, EditTextState.Idle)
@@ -93,6 +91,5 @@ class RegisterCafeViewModel(
     private const val KEY_CAFE_NAME_STATE = "cafe_name_state"
     private const val KEY_CAFE_ADDRESS = "cafe_address"
     private const val KEY_CAFE_ADDRESS_STATE = "cafe_address_state"
-    private const val KEY_CAFE_AREA = "cafe_area"
   }
 }

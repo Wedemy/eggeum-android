@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.register_cafe.ui
+package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -27,12 +27,12 @@ import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.repeatOnStarted
 import us.wedemy.eggeum.common.util.safeNavigate
 import us.wedemy.eggeum.common.util.textChangesToFlow
-import us.wedemy.eggeum.register_cafe.R
-import us.wedemy.eggeum.register_cafe.adapter.CafeImageAdapter
-import us.wedemy.eggeum.register_cafe.databinding.FragmentRegisterCafeBinding
-import us.wedemy.eggeum.register_cafe.item.CafeImageItem
-import us.wedemy.eggeum.register_cafe.viewmodel.RegisterCafeViewModel
-import us.wedemy.eggeum.register_cafe.viewmodel.RegisterCafeViewModelFactory
+import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeBinding
+import us.wedemy.eggeum.registercafe.R
+import us.wedemy.eggeum.registercafe.adapter.CafeImageAdapter
+import us.wedemy.eggeum.registercafe.item.CafeImageItem
+import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModel
+import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModelFactory
 
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.fragment_register_cafe) {
 
@@ -42,7 +42,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
   private val cafeImageItemClickListener = CafeImageItemClickListener(
-    onDeleteClick = { position -> viewModel.deleteCafeImage(position) }
+    onDeleteClick = { position -> viewModel.deleteCafeImage(position) },
   )
 
   private val cafeImageAdapter by lazy {
@@ -50,7 +50,6 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
     val savedStateHandle = SavedStateHandle()
     val viewModelFactory = RegisterCafeViewModelFactory(savedStateHandle)
     viewModel = ViewModelProvider(this, viewModelFactory)[RegisterCafeViewModel::class.java]
@@ -108,15 +107,15 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
             binding.tvRegisterCafeImageLimit.setTextColor(
               ContextCompat.getColor(
                 requireContext(),
-                us.wedemy.eggeum.design.R.color.error_500
-              )
+                us.wedemy.eggeum.design.R.color.error_500,
+              ),
             )
           } else {
             binding.tvRegisterCafeImageLimit.setTextColor(
               ContextCompat.getColor(
                 requireContext(),
-                us.wedemy.eggeum.design.R.color.gray_400
-              )
+                us.wedemy.eggeum.design.R.color.gray_400,
+              ),
             )
           }
         }

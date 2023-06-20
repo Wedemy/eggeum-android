@@ -13,7 +13,7 @@
 
   <fragment
     android:id="@+id/register_cafe_fragment"
-    android:name="us.wedemy.eggeum.register_cafe.ui.RegisterCafeFragment"
+    android:name="us.wedemy.eggeum.registercafe.ui.RegisterCafeFragment"
     android:label="RegisterCafeFragment"
     tools:layout="@layout/fragment_register_cafe">
     <action
@@ -29,7 +29,7 @@
 
   <fragment
     android:id="@+id/register_cafe_complete_fragment"
-    android:name="us.wedemy.eggeum.register_cafe.ui.RegisterCafeCompleteFragment"
+    android:name="us.wedemy.eggeum.registercafe.ui.RegisterCafeCompleteFragment"
     android:label="RegisterCafeCompleteFragment"
     tools:layout="@layout/fragment_register_cafe_complete" />
 </navigation>

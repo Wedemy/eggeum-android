@@ -5,14 +5,14 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.register_cafe.ui
+package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import us.wedemy.eggeum.common.ui.base.BaseActivity
-import us.wedemy.eggeum.register_cafe.R
-import us.wedemy.eggeum.register_cafe.databinding.ActivityRegisterCafeBinding
+import us.wedemy.eggeum.registercafe.R
+import us.wedemy.eggeum.registercafe.databinding.ActivityRegisterCafeBinding
 
 class RegisterCafeActivity : BaseActivity<ActivityRegisterCafeBinding>(R.layout.activity_register_cafe) {
 

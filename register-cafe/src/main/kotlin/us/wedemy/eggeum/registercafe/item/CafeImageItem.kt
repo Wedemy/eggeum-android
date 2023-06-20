@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.register_cafe.item
+package us.wedemy.eggeum.registercafe.item
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -13,4 +13,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CafeImageItem(
   val url: String,
-): Parcelable
+) : Parcelable

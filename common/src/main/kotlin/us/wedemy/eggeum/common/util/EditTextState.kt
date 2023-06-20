@@ -21,3 +21,6 @@ sealed class EditTextState {
   @Parcelize
   object Idle : EditTextState(), Parcelable
 }
+
+val EditTextState?.Success
+  get() = this is EditTextState.Success

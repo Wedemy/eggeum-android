@@ -27,6 +27,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:contentDescription="@string/cafe_image_close"
+    android:paddingStart="8dp"
+    android:paddingEnd="0dp"
+    android:paddingBottom="8dp"
     android:src="@drawable/ic_x_filled_16"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />

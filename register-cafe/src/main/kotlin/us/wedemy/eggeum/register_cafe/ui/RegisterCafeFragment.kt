@@ -39,8 +39,12 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   private lateinit var viewModel: RegisterCafeViewModel
   private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
+  private val cafeImageItemClickListener = CafeImageItemClickListener(
+    onDeleteClick = { position -> viewModel.deleteCafeImage(position) }
+  )
+
   private val cafeImageAdapter by lazy {
-    CafeImageAdapter()
+    CafeImageAdapter(cafeImageItemClickListener)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,9 +55,8 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
 
     pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
       if (uris.isNotEmpty()) {
-        binding.tvRegisterCafePictureNumber.text = "${uris.size}/10"
         val imageItems = uris.map { CafeImageItem(it.toString()) }
-        cafeImageAdapter.submitList(imageItems)
+        viewModel.setCafeImageList(imageItems)
       } else {
         Log.d("PhotoPicker", "No media selected")
       }
@@ -94,6 +97,13 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
 
   private fun initObserver() {
     repeatOnStarted {
+      launch {
+        viewModel.cafeImageList.collect {
+          cafeImageAdapter.submitList(it)
+          binding.tvRegisterCafePictureNumber.text = getString(R.string.cafe_picture_number, it.size.toString())
+        }
+      }
+
       val cafeNameEditTextFlow = binding.tietRegisterCafeName.textChangesToFlow()
       cafeNameEditTextFlow
         .onEach { text ->

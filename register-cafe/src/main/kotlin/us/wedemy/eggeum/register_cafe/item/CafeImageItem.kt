@@ -7,4 +7,10 @@
 
 package us.wedemy.eggeum.register_cafe.item
 
-data class CafeImageItem(val url: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class CafeImageItem(
+  val url: String,
+): Parcelable

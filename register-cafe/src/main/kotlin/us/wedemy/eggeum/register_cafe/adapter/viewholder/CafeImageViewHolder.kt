@@ -6,7 +6,7 @@ import us.wedemy.eggeum.register_cafe.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.register_cafe.item.CafeImageItem
 
 class CafeImageViewHolder(
-  private val binding: ItemCafeImageBinding,
+  val binding: ItemCafeImageBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun bind(cafeImageItem: CafeImageItem) {
     itemView.apply {

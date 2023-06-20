@@ -13,6 +13,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
@@ -102,6 +103,22 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
         viewModel.cafeImages.collect {
           cafeImageAdapter.submitList(it)
           binding.tvRegisterCafeImageNumber.text = getString(R.string.cafe_image_number, it.size.toString())
+
+          if (it.isEmpty()) {
+            binding.tvRegisterCafeImageLimit.setTextColor(
+              ContextCompat.getColor(
+                requireContext(),
+                us.wedemy.eggeum.design.R.color.error_500
+              )
+            )
+          } else {
+            binding.tvRegisterCafeImageLimit.setTextColor(
+              ContextCompat.getColor(
+                requireContext(),
+                us.wedemy.eggeum.design.R.color.gray_400
+              )
+            )
+          }
         }
       }
 
@@ -173,9 +190,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   }
 
   private fun setEmptyError(textInputLayout: TextInputLayout) {
-    textInputLayout.apply {
-      error = "temp"
-    }
+    textInputLayout.error = " "
   }
 
   private fun setValidState(textInputLayout: TextInputLayout) {

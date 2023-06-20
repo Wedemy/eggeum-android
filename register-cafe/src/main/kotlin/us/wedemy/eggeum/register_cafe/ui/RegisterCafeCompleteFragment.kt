@@ -13,7 +13,8 @@ import us.wedemy.eggeum.common.ui.base.BaseFragment
 import us.wedemy.eggeum.register_cafe.R
 import us.wedemy.eggeum.register_cafe.databinding.FragmentRegisterCafeCompleteBinding
 
-class RegisterCafeCompleteFragment : BaseFragment<FragmentRegisterCafeCompleteBinding>(R.layout.fragment_register_cafe_complete) {
+class RegisterCafeCompleteFragment :
+  BaseFragment<FragmentRegisterCafeCompleteBinding>(R.layout.fragment_register_cafe_complete) {
 
   override fun getViewBinding() = FragmentRegisterCafeCompleteBinding.inflate(layoutInflater)
 
@@ -23,7 +24,7 @@ class RegisterCafeCompleteFragment : BaseFragment<FragmentRegisterCafeCompleteBi
 
   private fun initListener() {
     binding.btnRegisterCafeComplete.setOnClickListener {
-      
+      requireActivity().finish()
     }
   }
 }

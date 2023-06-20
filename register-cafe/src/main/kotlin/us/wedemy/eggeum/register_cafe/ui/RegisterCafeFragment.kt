@@ -13,6 +13,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isInvisible
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -56,7 +57,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
     pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
       if (uris.isNotEmpty()) {
         val imageItems = uris.map { CafeImageItem(it.toString()) }
-        viewModel.setCafeImageList(imageItems)
+        viewModel.setCafeImages(imageItems)
       } else {
         Log.d("PhotoPicker", "No media selected")
       }
@@ -84,7 +85,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
         }
       }
 
-      binding.clRegisterCafePicture.setOnClickListener {
+      binding.clRegisterCafeImage.setOnClickListener {
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
       }
 
@@ -98,9 +99,9 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeImageList.collect {
+        viewModel.cafeImages.collect {
           cafeImageAdapter.submitList(it)
-          binding.tvRegisterCafePictureNumber.text = getString(R.string.cafe_picture_number, it.size.toString())
+          binding.tvRegisterCafeImageNumber.text = getString(R.string.cafe_image_number, it.size.toString())
         }
       }
 
@@ -158,6 +159,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
 
       launch {
         viewModel.enableRegisterCafe.collect { state ->
+          binding.tvPleaseToInputAllRequiredItem.isInvisible = state
           binding.btnRegisterCafe.isEnabled = state
         }
       }

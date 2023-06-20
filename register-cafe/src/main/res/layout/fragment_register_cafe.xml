@@ -50,58 +50,58 @@
       android:layout_height="wrap_content">
 
       <TextView
-        android:id="@+id/tv_register_cafe_picture"
+        android:id="@+id/tv_register_cafe_image"
         style="@style/TextSMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cafe_picture"
+        android:text="@string/cafe_image"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
-        android:id="@+id/tv_register_cafe_picture_limit"
+        android:id="@+id/tv_register_cafe_image_limit"
         style="@style/TextXsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="@string/cafe_picture_limit"
+        android:text="@string/cafe_image_limit"
         android:textColor="@color/gray_400"
-        app:layout_constraintStart_toEndOf="@id/tv_register_cafe_picture"
+        app:layout_constraintStart_toEndOf="@id/tv_register_cafe_image"
         app:layout_constraintTop_toTopOf="parent" />
 
 
       <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_register_cafe_picture"
+        android:id="@+id/cl_register_cafe_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/ic_stroke"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_picture">
+        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_image">
 
         <ImageView
-          android:id="@+id/iv_register_cafe_picture"
+          android:id="@+id/iv_register_cafe_image"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="9dp"
-          android:contentDescription="@string/ic_register_cafe_picture"
+          android:contentDescription="@string/ic_register_cafe_image"
           android:src="@drawable/ic_camera_outlined_32"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-          android:id="@+id/tv_register_cafe_picture_number"
+          android:id="@+id/tv_register_cafe_image_number"
           style="@style/TextXsRegular"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
-          android:text="@string/cafe_picture_number"
+          android:text="@string/cafe_image_number"
           android:textColor="@color/gray_400"
-          app:layout_constraintEnd_toEndOf="@id/iv_register_cafe_picture"
-          app:layout_constraintStart_toStartOf="@id/iv_register_cafe_picture"
-          app:layout_constraintTop_toBottomOf="@id/iv_register_cafe_picture" />
+          app:layout_constraintEnd_toEndOf="@id/iv_register_cafe_image"
+          app:layout_constraintStart_toStartOf="@id/iv_register_cafe_image"
+          app:layout_constraintTop_toBottomOf="@id/iv_register_cafe_image" />
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,10 +113,10 @@
         android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="@id/cl_register_cafe_picture"
+        app:layout_constraintBottom_toBottomOf="@id/cl_register_cafe_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cl_register_cafe_picture"
-        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_picture"
+        app:layout_constraintStart_toEndOf="@id/cl_register_cafe_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_image"
         tools:listitem="@layout/item_cafe_image" />
 
       <TextView
@@ -128,7 +128,7 @@
         android:text="@string/cafe_name"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_register_cafe_picture" />
+        app:layout_constraintTop_toBottomOf="@id/cl_register_cafe_image" />
 
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_register_cafe_name"
@@ -210,14 +210,14 @@
       </com.google.android.material.textfield.TextInputLayout>
 
       <TextView
-        android:id="@+id/tv_please_to_agree_all_required_item"
+        android:id="@+id/tv_please_to_input_all_required_item"
         style="@style/TextXsRegular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:text="@string/please_agree_to_all_required_items"
+        android:text="@string/please_input_to_all_required_items"
         android:textColor="@color/error_500"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

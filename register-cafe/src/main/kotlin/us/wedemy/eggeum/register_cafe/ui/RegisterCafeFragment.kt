@@ -51,7 +51,6 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
 
     pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
       if (uris.isNotEmpty()) {
-        Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
         binding.tvRegisterCafePictureNumber.text = "${uris.size}/10"
         val imageItems = uris.map { CafeImageItem(it.toString()) }
         cafeImageAdapter.submitList(imageItems)

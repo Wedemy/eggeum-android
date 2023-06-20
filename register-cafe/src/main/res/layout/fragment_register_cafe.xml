@@ -49,6 +49,28 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
+      <TextView
+        android:id="@+id/tv_register_cafe_picture"
+        style="@style/TextSMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cafe_picture"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        android:id="@+id/tv_register_cafe_picture_limit"
+        style="@style/TextXsRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/cafe_picture_limit"
+        android:textColor="@color/gray_400"
+        app:layout_constraintStart_toEndOf="@id/tv_register_cafe_picture"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_register_cafe_picture"
         android:layout_width="70dp"
@@ -56,7 +78,7 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/ic_stroke"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_picture">
 
         <ImageView
           android:id="@+id/iv_register_cafe_picture"
@@ -94,7 +116,7 @@
         app:layout_constraintBottom_toBottomOf="@id/cl_register_cafe_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cl_register_cafe_picture"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_picture"
         tools:listitem="@layout/item_cafe_image" />
 
       <TextView
@@ -186,6 +208,23 @@
           android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_please_to_agree_all_required_item"
+        style="@style/TextXsRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/please_agree_to_all_required_items"
+        android:textColor="@color/error_500"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_register_cafe_area"
+        app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

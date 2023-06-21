@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import us.wedemy.eggeum.registercafe.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.registercafe.adapter.viewholder.CafeImageViewHolder
+import us.wedemy.eggeum.registercafe.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
-import us.wedemy.eggeum.registercafe.ui.CafeImageItemClickListener
 
-class CafeImageAdapter(private val clickListener: CafeImageItemClickListener) :
+class CafeImageAdapter(private val clickListener: (Int) -> Unit) :
   ListAdapter<CafeImageItem, CafeImageViewHolder>(
     CafeImageItemDiffCallback,
   ) {
@@ -27,7 +26,7 @@ class CafeImageAdapter(private val clickListener: CafeImageItemClickListener) :
       cafeImageItem?.let { cafeImage ->
         bind(cafeImage)
         binding.ivCafeImageClose.setOnClickListener {
-          clickListener.onDeleteClick(adapterPosition)
+          clickListener(adapterPosition)
         }
       } ?: run {
         binding.ivCafeImageClose.setOnClickListener(null)

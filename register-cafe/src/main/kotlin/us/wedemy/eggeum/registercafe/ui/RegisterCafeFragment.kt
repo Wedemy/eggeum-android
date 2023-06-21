@@ -41,12 +41,8 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   private lateinit var viewModel: RegisterCafeViewModel
   private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
-  private val cafeImageItemClickListener = CafeImageItemClickListener(
-    onDeleteClick = { position -> viewModel.deleteCafeImage(position) },
-  )
-
   private val cafeImageAdapter by lazy {
-    CafeImageAdapter(cafeImageItemClickListener)
+    CafeImageAdapter { position -> viewModel.deleteCafeImage(position) }
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

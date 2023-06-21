@@ -22,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 fun EditText.textChangesToFlow(): Flow<CharSequence?> {
@@ -36,8 +35,6 @@ fun EditText.textChangesToFlow(): Flow<CharSequence?> {
     }
     addTextChangedListener(listener)
     awaitClose { removeTextChangedListener(listener) }
-  }.onStart {
-    emit(text)
   }
 }
 

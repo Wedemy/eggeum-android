@@ -41,9 +41,7 @@ class RegisterCafeViewModel(
   fun handleCafeNameValidation(cafeName: String) {
     when {
       cafeName.isEmpty() -> {
-        if (inputCafeNameState.value != EditTextState.Idle) {
-          _inputCafeNameState.value = EditTextState.Error()
-        }
+        _inputCafeNameState.value = EditTextState.Error()
       }
       else -> {
         _inputCafeName.value = cafeName
@@ -55,9 +53,7 @@ class RegisterCafeViewModel(
   fun handleCafeAddressValidation(cafeAddress: String) {
     when {
       cafeAddress.isEmpty() -> {
-        if (inputCafeAddressState.value != EditTextState.Idle) {
-          _inputCafeAddressState.value = EditTextState.Error()
-        }
+        _inputCafeAddressState.value = EditTextState.Error()
       }
       else -> {
         _inputCafeAddress.value = cafeAddress

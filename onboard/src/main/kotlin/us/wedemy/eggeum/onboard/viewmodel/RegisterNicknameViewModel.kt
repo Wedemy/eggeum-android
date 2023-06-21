@@ -26,9 +26,7 @@ class RegisterNicknameViewModel(
   fun handleNicknameValidation(nickname: String) {
     when {
       nickname.isEmpty() -> {
-        if (_inputNicknameState.value != EditTextState.Idle) {
-          _inputNicknameState.value = EditTextState.Error(us.wedemy.eggeum.design.R.string.empty_error_text)
-        }
+        _inputNicknameState.value = EditTextState.Error(us.wedemy.eggeum.design.R.string.empty_error_text)
       }
       nickname.length < 2 -> {
         _inputNicknameState.value = EditTextState.Error(us.wedemy.eggeum.design.R.string.min_length_error_text)

@@ -135,6 +135,7 @@
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_name">
@@ -165,6 +166,7 @@
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_register_cafe_address">

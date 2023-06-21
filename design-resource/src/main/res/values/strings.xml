@@ -34,7 +34,7 @@
   <string name="cafe_image_number">%1$s/10</string>
   <string name="cafe_name">카페 이름 <font color="#14b8a6">*</font></string>
   <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
-  <string name="cafe_area">카페 면적</string>
+  <string name="cafe_area">카페 면적 (m²)</string>
   <string name="ic_register_cafe_image">ic_register_cafe_image</string>
   <string name="input_cafe_name">카페 이름을 입력해주세요.</string>
   <string name="input_cafe_address">카페 주소를 입력해주세요.</string>

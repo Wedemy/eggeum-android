@@ -77,4 +77,8 @@
     <item name="android:textColorHint">@color/gray_400</item>
   </style>
 
+  <style name="ErrorAppearance" parent="@style/TextAppearance.Design.Error">
+    <item name="android:textSize">0sp</item>
+  </style>
+
 </resources>

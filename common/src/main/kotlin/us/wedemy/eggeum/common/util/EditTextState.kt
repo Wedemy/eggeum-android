@@ -22,5 +22,5 @@ sealed class EditTextState {
   object Idle : EditTextState(), Parcelable
 }
 
-val EditTextState?.Success
+val EditTextState?.isSuccess
   get() = this is EditTextState.Success

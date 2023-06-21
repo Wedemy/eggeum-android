@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
-import us.wedemy.eggeum.common.util.Success
 import us.wedemy.eggeum.common.util.getMutableStateFlow
+import us.wedemy.eggeum.common.util.isSuccess
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
 class RegisterCafeViewModel(
@@ -78,7 +78,7 @@ class RegisterCafeViewModel(
     inputCafeNameState,
     inputCafeAddressState,
   ) { images, name, address ->
-    images.isNotEmpty() && name.Success && address.Success
+    images.isNotEmpty() && name.isSuccess && address.isSuccess
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
   private companion object {

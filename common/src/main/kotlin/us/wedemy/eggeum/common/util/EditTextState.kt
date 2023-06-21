@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.onboard.util
+package us.wedemy.eggeum.common.util
 
 import android.os.Parcelable
 import androidx.annotation.StringRes
@@ -16,8 +16,11 @@ sealed class EditTextState {
   object Success : EditTextState(), Parcelable
 
   @Parcelize
-  data class Error(@StringRes val stringRes: Int) : EditTextState(), Parcelable
+  data class Error(@StringRes val stringRes: Int? = null) : EditTextState(), Parcelable
 
   @Parcelize
   object Idle : EditTextState(), Parcelable
 }
+
+val EditTextState?.isSuccess
+  get() = this is EditTextState.Success

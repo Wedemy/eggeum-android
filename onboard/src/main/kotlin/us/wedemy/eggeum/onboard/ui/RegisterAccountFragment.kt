@@ -14,13 +14,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.common.ui.base.BaseFragment
+import us.wedemy.eggeum.common.util.repeatOnStarted
+import us.wedemy.eggeum.common.util.safeNavigate
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterAccountBinding
-import us.wedemy.eggeum.onboard.ui.base.BaseFragment
-import us.wedemy.eggeum.onboard.util.ViewModelFactory
-import us.wedemy.eggeum.onboard.util.repeatOnStarted
-import us.wedemy.eggeum.onboard.util.safeNavigate
 import us.wedemy.eggeum.onboard.viewmodel.RegisterAccountViewModel
+import us.wedemy.eggeum.onboard.viewmodel.OnboardViewModelFactory
 
 class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>(R.layout.fragment_register_account) {
 
@@ -32,7 +32,7 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>(R.l
     super.onViewCreated(view, savedInstanceState)
 
     val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = ViewModelFactory(savedStateHandle)
+    val viewModelFactory = OnboardViewModelFactory(savedStateHandle)
     viewModel = ViewModelProvider(this, viewModelFactory)[RegisterAccountViewModel::class.java]
 
     initListener()

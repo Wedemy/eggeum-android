@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.onboard"
+  namespace = "us.wedemy.eggeum.common"
 
   buildFeatures {
     viewBinding = true
@@ -23,14 +23,10 @@ android {
 
 dependencies {
   implementations(
-    libs.android.material,
     libs.androidx.core,
     libs.androidx.appcompat,
-    libs.androidx.constraintlayout,
     libs.kotlinx.coroutine.android,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
-    projects.designResource,
-    projects.common,
   )
 }

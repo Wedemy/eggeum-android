@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.onboard"
+  namespace = "us.wedemy.eggeum.registercafe"
 
   buildFeatures {
     viewBinding = true
@@ -30,6 +30,7 @@ dependencies {
     libs.kotlinx.coroutine.android,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
+    libs.glide,
     projects.designResource,
     projects.common,
   )

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import us.wedemy.eggeum.onboard.util.getMutableStateFlow
+import us.wedemy.eggeum.common.util.getMutableStateFlow
 
 class RegisterAccountViewModel(
   savedStateHandle: SavedStateHandle,

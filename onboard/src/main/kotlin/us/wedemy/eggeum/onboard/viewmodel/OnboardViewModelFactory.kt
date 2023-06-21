@@ -5,15 +5,13 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.onboard.util
+package us.wedemy.eggeum.onboard.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import us.wedemy.eggeum.onboard.viewmodel.RegisterAccountViewModel
-import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
 
-class ViewModelFactory(private val savedStateHandle: SavedStateHandle) : ViewModelProvider.Factory {
+class OnboardViewModelFactory(private val savedStateHandle: SavedStateHandle) : ViewModelProvider.Factory {
   override fun <T : ViewModel> create(modelClass: Class<T>): T {
     return when {
       modelClass.isAssignableFrom(RegisterAccountViewModel::class.java) -> {

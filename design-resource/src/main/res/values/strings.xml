@@ -41,7 +41,7 @@
   <string name="select_cafe_area">카페 면적을 선택해주세요.</string>
   <string name="register">등록하기</string>
   <string name="ic_register_cafe_complete">ic_register_cafe_complete</string>
-  <string name="register_cafe_complete_title">카페 등록 신청을\n 완료 했어요.</string>
+  <string name="register_cafe_complete_title">카페 등록 신청을\n완료 했어요.</string>
   <string name="register_cafe_complete_subtitle">심사 후에 카페가 확인되면 지도에 등록할게요.</string>
   <string name="complete">완료</string>
   <string name="cafe_image_close">cafe_image_close</string>

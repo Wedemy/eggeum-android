@@ -85,7 +85,7 @@ class RegisterCafeViewModel(
     images.isNotEmpty() && name.Success && address.Success
   }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
-  companion object {
+  private companion object {
     private const val KEY_CAFE_IMAGE_URL_LIST = "cafe_image_url_list"
     private const val KEY_CAFE_NAME = "cafe_name"
     private const val KEY_CAFE_NAME_STATE = "cafe_name_state"

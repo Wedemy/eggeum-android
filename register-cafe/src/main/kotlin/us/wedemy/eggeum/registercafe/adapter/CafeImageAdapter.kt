@@ -9,9 +9,7 @@ import us.wedemy.eggeum.registercafe.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
 class CafeImageAdapter(private val clickListener: (Int) -> Unit) :
-  ListAdapter<CafeImageItem, CafeImageViewHolder>(
-    CafeImageItemDiffCallback,
-  ) {
+  ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CafeImageViewHolder {
     return CafeImageViewHolder(
@@ -34,7 +32,7 @@ class CafeImageAdapter(private val clickListener: (Int) -> Unit) :
     }
   }
 
-  companion object {
+  private companion object {
     private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageItem>() {
       override fun areItemsTheSame(
         oldItem: CafeImageItem,

@@ -65,11 +65,9 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   }
 
   private fun initView() {
-    binding.apply {
-      rvCafeImage.apply {
-        setHasFixedSize(true)
-        adapter = cafeImageAdapter
-      }
+    binding.rvCafeImage.apply {
+      setHasFixedSize(true)
+      adapter = cafeImageAdapter
     }
   }
 
@@ -81,11 +79,11 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
         }
       }
 
-      binding.clRegisterCafeImage.setOnClickListener {
+      clRegisterCafeImage.setOnClickListener {
         pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
       }
 
-      binding.btnRegisterCafe.setOnClickListener {
+      btnRegisterCafe.setOnClickListener {
         val action = RegisterCafeFragmentDirections.actionRegisterCafeFragmentToRegisterCafeCompleteFragment()
         findNavController().safeNavigate(action)
       }
@@ -179,9 +177,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   }
 
   private fun clearError(textInputLayout: TextInputLayout) {
-    textInputLayout.apply {
-      error = null
-    }
+    textInputLayout.error = null
   }
 
   private fun setEmptyError(textInputLayout: TextInputLayout) {
@@ -189,8 +185,6 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   }
 
   private fun setValidState(textInputLayout: TextInputLayout) {
-    textInputLayout.apply {
-      error = null
-    }
+    textInputLayout.error = null
   }
 }

@@ -7,4 +7,7 @@
 
 <resources>
   <string name="app_name">이끔</string>
+  <string name="app_name_english">eggeum</string>
+
+  <string name="app_slogan">나에게 맞는 카페 찾기, 이끔</string>
 </resources>

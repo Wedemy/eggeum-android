@@ -18,6 +18,7 @@ android {
 dependencies {
   implementations(
     libs.androidx.appcompat,
+    libs.androidx.splash,
     projects.designResource,
     projects.common,
     projects.onboard,

@@ -14,7 +14,7 @@
     tools:ignore="MissingApplicationIcon">
 
     <activity
-      android:name=".MainActivity"
+      android:name=".IntroActivity"
       android:exported="true"
       android:theme="@style/Theme.Eggeum">
 
@@ -23,6 +23,10 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
+    <activity
+      android:name=".LoginActivity"
+      android:theme="@style/Theme.Eggeum" />
 
   </application>
 

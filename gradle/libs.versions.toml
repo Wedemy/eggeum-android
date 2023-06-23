@@ -4,7 +4,7 @@ gradle-dependency-handler-extensions = "1.1.0"
 
 kotlin-core = "1.8.22"
 kotlin-detekt = "1.23.0"
-kotlin-ktlint-gradle = "11.4.1"
+kotlin-ktlint-gradle = "11.4.2"
 kotlin-ktlint-source = "0.48.2"
 kotlin-ksp = "1.8.22-1.0.11"
 

@@ -12,8 +12,10 @@ kotlinx-coroutine = "1.7.1"
 
 android-material = "1.9.0"
 
+androidx-splash = "1.0.1"
 androidx-core = "1.8.0"
 androidx-appcompat = "1.6.1"
+androidx-activity = "1.8.0-alpha06"
 androidx-constraintlayout = "2.1.4"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-beta01"
@@ -21,6 +23,8 @@ androidx-hilt = "2.46.1"
 androidx-hilt-navigation = "1.0.0"
 
 glide = "4.15.1"
+lottie = "6.0.1"
+insetter = "0.6.1"
 
 test-kotest = "5.6.2"
 test-junit-core = "4.13.2"
@@ -49,6 +53,7 @@ test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-rob
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "gradle-android" }
 
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-core" }
+
 # This isn't strictly used but allows Renovate to see us using the ktlint artifact
 kotlin-ktlint = { module = "com.pinterest:ktlint", version.ref = "kotlin-ktlint-source" }
 
@@ -56,8 +61,10 @@ kotlinx-coroutine-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines
 
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
 
-androidx-core = { module = "androidx.core:core-ktx", version.ref = "kotlin-core" }
+androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
@@ -70,6 +77,9 @@ androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fr
 
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glide" }
+
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref="insetter" }
 
 test-kotest-framework = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "test-kotest" }
 test-kotest-assertion = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "test-kotest" }
@@ -84,5 +94,4 @@ detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-format
 [bundles]
 androidx-lifecycle = ["androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel", "androidx-lifecycle-savedstate"]
 androidx-navigation = ["androidx-navigation-ui", "androidx-navigation-fragment"]
-
 test-roborazzi = ["test-roborazzi-core", "test-roborazzi-rule"]

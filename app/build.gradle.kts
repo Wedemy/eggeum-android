@@ -13,11 +13,20 @@ plugins {
 
 android {
   namespace = "us.wedemy.eggeum.android"
+
+  buildFeatures {
+    viewBinding = true
+  }
 }
 
 dependencies {
   implementations(
-    libs.androidx.appcompat,
+    libs.androidx.splash,
+    libs.androidx.activity,
+    libs.androidx.appcompat, // needed for Lottie
+    libs.androidx.constraintlayout,
+    libs.lottie,
+    libs.insetter,
     projects.designResource,
     projects.common,
     projects.onboard,

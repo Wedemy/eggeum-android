@@ -8,7 +8,6 @@
 package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -20,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.common.extension.repeatOnStarted
 import us.wedemy.eggeum.common.extension.safeNavigate
 import us.wedemy.eggeum.common.extension.textChangesAsFlow
@@ -52,7 +52,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
         val imageItems = uris.map { CafeImageItem(it.toString()) }
         viewModel.setCafeImages(imageItems)
       } else {
-        Log.d("PhotoPicker", "No media selected")
+        Timber.tag("PhotoPicker").d("No media selected")
       }
     }
 

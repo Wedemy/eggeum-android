@@ -30,6 +30,7 @@ dependencies {
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     libs.coil,
+    libs.timber,
     projects.designResource,
     projects.common,
   )

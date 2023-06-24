@@ -16,6 +16,7 @@ android {
 
   buildFeatures {
     viewBinding = true
+    buildConfig = true
   }
 }
 
@@ -27,6 +28,7 @@ dependencies {
     libs.androidx.constraintlayout,
     libs.lottie,
     libs.insetter,
+    libs.timber,
     projects.designResource,
     projects.common,
     projects.onboard,

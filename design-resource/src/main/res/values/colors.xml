@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Designed and developed by Wedemy 2023.
   ~
   ~ Licensed under the MIT.
@@ -6,6 +6,7 @@
   -->
 
 <resources>
+
   <color name="white">#ffffff</color>
   <color name="black">#000000</color>
 
@@ -24,4 +25,5 @@
   <color name="teal_600">#0d9488</color>
 
   <color name="error_500">#ef4444</color>
+
 </resources>

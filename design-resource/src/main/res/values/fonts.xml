@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Designed and developed by Wedemy 2023.
   ~
   ~ Licensed under the MIT.
@@ -134,4 +134,5 @@
     <item name="android:textStyle">normal</item>
     <item name="android:textSize">10sp</item>
   </style>
+
 </resources>

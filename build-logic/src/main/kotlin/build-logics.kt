@@ -109,8 +109,6 @@ internal class KotlinExplicitApiPlugin : BuildLogicPlugin({
     }
 })
 
-// prefix가 `Jvm`이 아니라 `Test`인 이유:
-// 적용 타켓(android or pure)에 따라 `useJUnitPlatform()` 방식이 달라짐
 internal class TestJUnitPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
   dependencies {
@@ -120,6 +118,7 @@ internal class TestJUnitPlugin : BuildLogicPlugin({
     )
   }
 })
+
 internal class TestKotestPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
   dependencies.add("testImplementation", libs.findLibrary("test-kotest-framework").get())

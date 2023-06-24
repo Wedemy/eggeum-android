@@ -9,7 +9,7 @@
 
 plugins {
   `kotlin-dsl`
-  alias(libs.plugins.kotlin.jvm)
+  kotlin("jvm") version libs.versions.kotlin.core.get()
   alias(libs.plugins.gradle.dependency.handler.extensions)
 }
 
@@ -52,8 +52,8 @@ sourceSets {
 
 dependencies {
   implementations(
-    libs.gradle.android,
-    libs.kotlin.gradle,
+    "com.android.tools.build:gradle:${libs.versions.gradle.android.get()}",
+    "org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.core.get()}",
   )
 }
 

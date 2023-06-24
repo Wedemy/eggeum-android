@@ -15,6 +15,8 @@ plugins {
   alias(libs.plugins.kotlin.detekt)
   alias(libs.plugins.kotlin.ktlint)
   alias(libs.plugins.gradle.dependency.handler.extensions)
+  alias(libs.plugins.gradle.android.application) apply false
+  alias(libs.plugins.gradle.android.library) apply false
 }
 
 buildscript {
@@ -24,8 +26,7 @@ buildscript {
   }
 
   dependencies {
-    classpath(libs.kotlin.gradle)
-    classpath(libs.gradle.android)
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.core.get()}")
   }
 }
 
@@ -66,6 +67,6 @@ allprojects {
   }
 }
 
-tasks.register(name = "cleanAll", type = Delete::class) {
+tasks.register("cleanAll", type = Delete::class) {
   allprojects.map(Project::getBuildDir).forEach(::delete)
 }

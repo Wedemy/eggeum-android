@@ -9,13 +9,10 @@ package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import android.view.View
-import us.wedemy.eggeum.common.ui.base.BaseFragment
+import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeCompleteBinding
-import us.wedemy.eggeum.registercafe.R
 
-class RegisterCafeCompleteFragment :
-  BaseFragment<FragmentRegisterCafeCompleteBinding>(R.layout.fragment_register_cafe_complete) {
-
+class RegisterCafeCompleteFragment : BaseFragment<FragmentRegisterCafeCompleteBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeCompleteBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

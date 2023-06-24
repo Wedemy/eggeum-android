@@ -14,20 +14,17 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.common.ui.base.BaseFragment
+import us.wedemy.eggeum.common.extension.repeatOnStarted
+import us.wedemy.eggeum.common.extension.textChangesAsFlow
+import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.common.util.EditTextState
-import us.wedemy.eggeum.common.util.repeatOnStarted
-import us.wedemy.eggeum.common.util.textChangesToFlow
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterNicknameBinding
-import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
 import us.wedemy.eggeum.onboard.viewmodel.OnboardViewModelFactory
+import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
 
-class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R.layout.fragment_register_nickname) {
-
+class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>() {
   override fun getViewBinding() = FragmentRegisterNicknameBinding.inflate(layoutInflater)
 
   private lateinit var viewModel: RegisterNicknameViewModel
@@ -53,28 +50,22 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
 
   private fun initObserver() {
     repeatOnStarted {
-      val editTextFlow = binding.tietRegisterNickname.textChangesToFlow()
-      editTextFlow
-        .onEach { text ->
+      launch {
+        val editTextFlow = binding.tietRegisterNickname.textChangesAsFlow()
+        editTextFlow.collect { text ->
           val nickname = text.toString().trim()
           viewModel.handleNicknameValidation(nickname)
         }
-        .launchIn(this)
+      }
 
       launch {
         viewModel.inputNicknameState.collect { state ->
           when (state) {
-            EditTextState.Idle -> {
-              clearError()
-            }
-            is EditTextState.Success -> {
-              setValidState()
-            }
-            is EditTextState.Error -> {
-              state.stringRes?.let { setErrorMessage(it) }
-            }
+            EditTextState.Idle -> clearError()
+            is EditTextState.Success -> setValidState()
+            is EditTextState.Error -> state.stringRes?.let(::setErrorMessage)
           }
-          binding.btnRegisterNickname.isEnabled = (state == EditTextState.Success)
+          binding.btnRegisterNickname.isEnabled = state == EditTextState.Success
         }
       }
     }
@@ -89,25 +80,21 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>(R
 
   private fun setErrorMessage(stringRes: Int) {
     when (stringRes) {
-      us.wedemy.eggeum.design.R.string.empty_error_text -> {
-        setEmptyError()
-      }
-      else -> {
-        setMinLengthError()
-      }
+      R.string.empty_error_text -> setEmptyError()
+      else -> setMinLengthError()
     }
   }
 
   private fun setEmptyError() {
     binding.tilRegisterNickname.apply {
-      error = context.getString(us.wedemy.eggeum.design.R.string.empty_error_text)
+      error = getString(R.string.empty_error_text)
       endIconDrawable = null
     }
   }
 
   private fun setMinLengthError() {
     binding.tilRegisterNickname.apply {
-      error = context.getString(us.wedemy.eggeum.design.R.string.min_length_error_text)
+      error = getString(R.string.min_length_error_text)
       setEndIconDrawable(us.wedemy.eggeum.design.R.drawable.ic_x_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))

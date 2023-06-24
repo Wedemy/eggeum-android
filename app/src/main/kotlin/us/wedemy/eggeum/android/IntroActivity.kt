@@ -19,15 +19,15 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.databinding.ActivityIntroBinding
-import us.wedemy.eggeum.common.util.changeActivityWithAnimation
+import us.wedemy.eggeum.common.extension.changeActivityWithAnimation
+import us.wedemy.eggeum.common.ui.BaseActivity
 
-class IntroActivity : AppActivity() {
+class IntroActivity : BaseActivity() {
   override val binding by lazy { ActivityIntroBinding.inflate(layoutInflater) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
     super.onCreate(savedInstanceState)
-
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       splashScreen.setOnExitAnimationListener { splashScreenView ->
         ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f).run {

@@ -10,17 +10,14 @@ package us.wedemy.eggeum.onboard.ui
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import us.wedemy.eggeum.onboard.R
+import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.onboard.databinding.FragmentServiceTermsBinding
-import us.wedemy.eggeum.common.ui.base.BaseFragment
 
-class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>(R.layout.fragment_service_terms) {
-
+class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>() {
   override fun getViewBinding() = FragmentServiceTermsBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     initListener()
   }
 

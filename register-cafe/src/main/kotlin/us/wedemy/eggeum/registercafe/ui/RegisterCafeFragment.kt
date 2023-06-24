@@ -19,23 +19,20 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.common.ui.base.BaseFragment
+import us.wedemy.eggeum.common.extension.repeatOnStarted
+import us.wedemy.eggeum.common.extension.safeNavigate
+import us.wedemy.eggeum.common.extension.textChangesAsFlow
+import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.common.util.EditTextState
-import us.wedemy.eggeum.common.util.repeatOnStarted
-import us.wedemy.eggeum.common.util.safeNavigate
-import us.wedemy.eggeum.common.util.textChangesToFlow
-import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeBinding
 import us.wedemy.eggeum.registercafe.R
 import us.wedemy.eggeum.registercafe.adapter.CafeImageAdapter
+import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeBinding
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModel
 import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModelFactory
 
-class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.fragment_register_cafe) {
-
+class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
 
   private lateinit var viewModel: RegisterCafeViewModel
@@ -93,21 +90,21 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeImages.collect {
-          cafeImageAdapter.submitList(it)
-          binding.tvRegisterCafeImageNumber.text = getString(R.string.cafe_image_number, it.size.toString())
+        viewModel.cafeImages.collect { cafeImages ->
+          cafeImageAdapter.submitList(cafeImages)
+          binding.tvRegisterCafeImageNumber.text = getString(R.string.cafe_image_number, cafeImages.size.toString())
 
-          if (it.isEmpty()) {
+          if (cafeImages.isEmpty()) {
             binding.tvRegisterCafeImageLimit.setTextColor(
               ContextCompat.getColor(
-                requireContext(),
+                requireActivity(),
                 us.wedemy.eggeum.design.R.color.error_500,
               ),
             )
           } else {
             binding.tvRegisterCafeImageLimit.setTextColor(
               ContextCompat.getColor(
-                requireContext(),
+                requireActivity(),
                 us.wedemy.eggeum.design.R.color.gray_400,
               ),
             )
@@ -115,36 +112,28 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
         }
       }
 
-      val cafeNameEditTextFlow = binding.tietRegisterCafeName.textChangesToFlow()
-      cafeNameEditTextFlow
-        .onEach { text ->
+      launch {
+        val cafeNameEditTextFlow = binding.tietRegisterCafeName.textChangesAsFlow()
+        cafeNameEditTextFlow.collect { text ->
           val cafeName = text.toString().trim()
           viewModel.handleCafeNameValidation(cafeName)
         }
-        .launchIn(this)
+      }
 
-      val cafeAddressEditTextFlow = binding.tietRegisterCafeAddress.textChangesToFlow()
-      cafeAddressEditTextFlow
-        .onEach { text ->
+      launch {
+        val cafeAddressEditTextFlow = binding.tietRegisterCafeAddress.textChangesAsFlow()
+        cafeAddressEditTextFlow.collect { text ->
           val cafeAddress = text.toString().trim()
           viewModel.handleCafeAddressValidation(cafeAddress)
         }
-        .launchIn(this)
+      }
 
       launch {
         viewModel.inputCafeNameState.collect { state ->
           when (state) {
-            is EditTextState.Idle -> {
-              clearError(binding.tilRegisterCafeName)
-            }
-
-            is EditTextState.Error -> {
-              setEmptyError(binding.tilRegisterCafeName)
-            }
-
-            is EditTextState.Success -> {
-              setValidState(binding.tilRegisterCafeName)
-            }
+            is EditTextState.Idle -> clearError(binding.tilRegisterCafeName)
+            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeName)
+            is EditTextState.Success -> setValidState(binding.tilRegisterCafeName)
           }
         }
       }
@@ -152,17 +141,9 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>(R.layout.
       launch {
         viewModel.inputCafeAddressState.collect { state ->
           when (state) {
-            is EditTextState.Idle -> {
-              clearError(binding.tilRegisterCafeAddress)
-            }
-
-            is EditTextState.Error -> {
-              setEmptyError(binding.tilRegisterCafeAddress)
-            }
-
-            is EditTextState.Success -> {
-              setValidState(binding.tilRegisterCafeAddress)
-            }
+            is EditTextState.Idle -> clearError(binding.tilRegisterCafeAddress)
+            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeAddress)
+            is EditTextState.Success -> setValidState(binding.tilRegisterCafeAddress)
           }
         }
       }

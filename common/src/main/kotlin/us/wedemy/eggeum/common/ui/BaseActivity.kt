@@ -5,25 +5,25 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android
+package us.wedemy.eggeum.common.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 
-abstract class AppActivity : ComponentActivity() {
+abstract class BaseActivity(
+  private val statusBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+  private val navigationBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
+) : AppCompatActivity() {
   abstract val binding: ViewBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    enableEdgeToEdge(
-      statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
-      navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
-    )
+    enableEdgeToEdge(statusBarStyle = statusBarStyle, navigationBarStyle = navigationBarStyle)
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
     binding.root.applyInsetter {

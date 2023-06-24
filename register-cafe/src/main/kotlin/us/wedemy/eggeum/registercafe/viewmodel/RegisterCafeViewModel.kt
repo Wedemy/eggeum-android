@@ -11,7 +11,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.EditTextState
@@ -20,11 +19,9 @@ import us.wedemy.eggeum.common.util.getMutableStateFlow
 import us.wedemy.eggeum.common.util.isSuccess
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
-class RegisterCafeViewModel(
-  savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+class RegisterCafeViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageItem>())
-  val cafeImages: StateFlow<List<CafeImageItem>> = _cafeImages.asStateFlow()
+  val cafeImages = _cafeImages.asStateFlow()
 
   private val _inputCafeName = savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
 
@@ -32,11 +29,11 @@ class RegisterCafeViewModel(
 
   private val _inputCafeNameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME_STATE, EditTextState.Idle)
-  val inputCafeNameState: StateFlow<EditTextState> = _inputCafeNameState.asStateFlow()
+  val inputCafeNameState = _inputCafeNameState.asStateFlow()
 
   private val _inputCafeAddressState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_ADDRESS_STATE, EditTextState.Idle)
-  val inputCafeAddressState: StateFlow<EditTextState> = _inputCafeAddressState.asStateFlow()
+  val inputCafeAddressState = _inputCafeAddressState.asStateFlow()
 
   fun handleCafeNameValidation(cafeName: String) {
     when {
@@ -73,13 +70,19 @@ class RegisterCafeViewModel(
     _cafeImages.value = updatedList
   }
 
-  val enableRegisterCafe: StateFlow<Boolean> = combine(
-    cafeImages,
-    inputCafeNameState,
-    inputCafeAddressState,
-  ) { images, name, address ->
-    images.isNotEmpty() && name.isSuccess && address.isSuccess
-  }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+  val enableRegisterCafe =
+    combine(
+      cafeImages,
+      inputCafeNameState,
+      inputCafeAddressState,
+    ) { images, name, address ->
+      images.isNotEmpty() && name.isSuccess && address.isSuccess
+    }
+      .stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false,
+      )
 
   private companion object {
     private const val KEY_CAFE_IMAGE_URL_LIST = "cafe_image_url_list"

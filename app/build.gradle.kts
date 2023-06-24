@@ -23,7 +23,7 @@ dependencies {
   implementations(
     libs.androidx.splash,
     libs.androidx.activity,
-    libs.androidx.appcompat, // needed for Lottie
+    libs.androidx.appcompat,
     libs.androidx.constraintlayout,
     libs.lottie,
     libs.insetter,

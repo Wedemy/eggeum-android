@@ -24,8 +24,10 @@ android {
 dependencies {
   implementations(
     libs.androidx.core,
-    libs.androidx.appcompat,
-    libs.kotlinx.coroutine.android,
+    libs.androidx.activity,
+    libs.kotlinx.coroutines.android,
+    libs.lottie,
+    libs.insetter,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
   )

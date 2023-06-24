@@ -8,7 +8,8 @@
 package us.wedemy.eggeum.android
 
 import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
+import us.wedemy.eggeum.common.ui.BaseActivity
 
-class LoginActivity : AppActivity() {
+class LoginActivity : BaseActivity() {
   override val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
 }

@@ -10,7 +10,7 @@
 plugins {
   eggeum("android-library")
   alias(libs.plugins.androidx.navigation.safeargs)
-  id("kotlin-parcelize")
+  `kotlin-parcelize`
 }
 
 android {
@@ -25,9 +25,8 @@ dependencies {
   implementations(
     libs.android.material,
     libs.androidx.core,
-    libs.androidx.appcompat,
     libs.androidx.constraintlayout,
-    libs.kotlinx.coroutine.android,
+    libs.kotlinx.coroutines.android,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     projects.designResource,

@@ -6,5 +6,22 @@
   -->
 
 <resources>
+  <string name="register_cafe_title">카페 등록</string>
+  <string name="cafe_image">사진 <font color="#14b8a6">*</font></string>
   <string name="cafe_image_number">%1$s/10</string>
+  <string name="cafe_name">카페 이름 <font color="#14b8a6">*</font></string>
+  <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
+  <string name="cafe_area">카페 면적 (m²)</string>
+  <string name="ic_register_cafe_image">ic_register_cafe_image</string>
+  <string name="input_cafe_name">카페 이름을 입력해주세요.</string>
+  <string name="input_cafe_address">카페 주소를 입력해주세요.</string>
+  <string name="select_cafe_area">카페 면적을 선택해주세요.</string>
+  <string name="register">등록하기</string>
+  <string name="ic_register_cafe_complete">ic_register_cafe_complete</string>
+  <string name="register_cafe_complete_title">카페 등록 신청을\n완료 했어요.</string>
+  <string name="register_cafe_complete_subtitle">심사 후에 카페가 확인되면 지도에 등록할게요.</string>
+  <string name="complete">완료</string>
+  <string name="cafe_image_close">cafe_image_close</string>
+  <string name="cafe_image_limit">최소 1장 이상 등록해주세요.</string>
+  <string name="please_input_to_all_required_items">필수 항목을 모두 입력 해주세요.</string>
 </resources>

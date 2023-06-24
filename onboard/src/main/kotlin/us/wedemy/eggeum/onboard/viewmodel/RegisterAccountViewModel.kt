@@ -11,34 +11,29 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.getMutableStateFlow
 
-class RegisterAccountViewModel(
-  savedStateHandle: SavedStateHandle,
-) : ViewModel() {
-
+class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_1, false)
-  val agreeToServiceTerms: StateFlow<Boolean> = _agreeToServiceTerms.asStateFlow()
+  val agreeToServiceTerms = _agreeToServiceTerms.asStateFlow()
 
   private val _agreeToCollectPersonalInfo = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_2, false)
-  val agreeToCollectPersonalInfo: StateFlow<Boolean> = _agreeToCollectPersonalInfo.asStateFlow()
+  val agreeToCollectPersonalInfo = _agreeToCollectPersonalInfo.asStateFlow()
 
   private val _agreeToProvidePersonalInfoTo3rdParty = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_3, false)
-  val agreeToProvidePersonalInfoTo3rdParty: StateFlow<Boolean> = _agreeToProvidePersonalInfoTo3rdParty.asStateFlow()
+  val agreeToProvidePersonalInfoTo3rdParty = _agreeToProvidePersonalInfoTo3rdParty.asStateFlow()
 
   private val _over14YearOld = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_4, false)
-  val over14YearOld: StateFlow<Boolean> = _over14YearOld.asStateFlow()
+  val over14YearOld = _over14YearOld.asStateFlow()
 
   private val _wouldLikeToReceiveInfoAboutNewCafeAndEvents =
     savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_5, false)
-  val wouldLikeToReceiveInfoAboutNewCafeAndEvents: StateFlow<Boolean> =
-    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
+  val wouldLikeToReceiveInfoAboutNewCafeAndEvents = _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
 
   private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_6, false)
-  val agreeToAllRequiredItems: StateFlow<Boolean> = _agreeToAllRequiredItems.asStateFlow()
+  val agreeToAllRequiredItems = _agreeToAllRequiredItems.asStateFlow()
 
   fun setCbAgreeToServiceTerms() {
     _agreeToServiceTerms.value = !agreeToServiceTerms.value
@@ -68,16 +63,22 @@ class RegisterAccountViewModel(
     _agreeToAllRequiredItems.value = !agreeToAllRequiredItems.value
   }
 
-  val enableRegisterAccount: StateFlow<Boolean> = combine(
-    agreeToServiceTerms,
-    agreeToCollectPersonalInfo,
-    agreeToProvidePersonalInfoTo3rdParty,
-    over14YearOld,
-  ) { checks: Array<Boolean> ->
-    checks.all { it }
-  }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+  val enableRegisterAccount =
+    combine(
+      agreeToServiceTerms,
+      agreeToCollectPersonalInfo,
+      agreeToProvidePersonalInfoTo3rdParty,
+      over14YearOld,
+    ) { checks ->
+      checks.all { it }
+    }
+      .stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false,
+      )
 
-  companion object {
+  private companion object {
     private const val KEY_CHECK_BOX_1 = "check_box_1"
     private const val KEY_CHECK_BOX_2 = "check_box_2"
     private const val KEY_CHECK_BOX_3 = "check_box_3"

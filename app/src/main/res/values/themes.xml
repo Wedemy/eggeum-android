@@ -7,7 +7,7 @@
 
 <resources>
 
-  <style name="Theme.Eggeum" parent="android:Theme.Material.Light.NoActionBar" />
+  <style name="Theme.Eggeum" parent="@style/Theme.AppCompat.NoActionBar" />
 
   <style name="Theme.Eggeum.Splash" parent="Theme.SplashScreen">
     <item name="windowSplashScreenBackground">@color/white</item>

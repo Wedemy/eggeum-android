@@ -8,17 +8,15 @@
 package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import us.wedemy.eggeum.common.ui.base.BaseActivity
+import us.wedemy.eggeum.common.ui.BaseActivity
 import us.wedemy.eggeum.registercafe.R
 import us.wedemy.eggeum.registercafe.databinding.ActivityRegisterCafeBinding
 
-class RegisterCafeActivity : BaseActivity<ActivityRegisterCafeBinding>(R.layout.activity_register_cafe) {
+class RegisterCafeActivity : BaseActivity() {
+  override val binding by lazy { ActivityRegisterCafeBinding.inflate(layoutInflater) }
 
-  override fun getViewBinding() = ActivityRegisterCafeBinding.inflate(layoutInflater)
-
-  private val navController: NavController?
+  private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,5 +24,5 @@ class RegisterCafeActivity : BaseActivity<ActivityRegisterCafeBinding>(R.layout.
     navController?.setGraph(R.navigation.nav_register_cafe)
   }
 
-  override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
+  override fun onSupportNavigateUp() = navController?.navigateUp() ?: false
 }

@@ -31,6 +31,7 @@ buildCache {
 
 include(
   ":app",
+  ":data",
   ":design-resource",
   ":common",
   ":onboard",

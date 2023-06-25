@@ -29,6 +29,7 @@ dependencies {
     libs.lottie,
     libs.insetter,
     libs.timber,
+    projects.data,
     projects.designResource,
     projects.common,
     projects.onboard,

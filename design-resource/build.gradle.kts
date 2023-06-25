@@ -12,3 +12,7 @@ plugins {
 android {
   namespace = "us.wedemy.eggeum.design"
 }
+
+dependencies {
+  implementation(libs.android.material)
+}

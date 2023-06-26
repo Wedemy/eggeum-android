@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_setting"
+  app:startDestination="@id/fragment_edit_my_info">
+
+  <fragment
+    android:id="@+id/fragment_edit_my_info"
+    android:name="us.wedemy.eggeum.setting.ui.EditMyInfoFragment"
+    android:label="fragment_edit_my_info"
+    tools:layout="@layout/fragment_edit_my_info" />
+</navigation>

@@ -21,7 +21,7 @@ class EditMyInfoViewModel @Inject constructor(
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   private val _profileImageUri = savedStateHandle.getMutableStateFlow(KEY_PROFILE_IMAGE_URL, "")
-  val profileImageUri  = _profileImageUri .asStateFlow()
+  val profileImageUri = _profileImageUri.asStateFlow()
 
   private val _inputNickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
 

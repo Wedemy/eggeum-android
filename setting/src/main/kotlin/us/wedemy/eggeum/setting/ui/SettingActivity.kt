@@ -8,10 +8,12 @@ package us.wedemy.eggeum.setting.ui
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.common.ui.BaseActivity
 import us.wedemy.eggeum.setting.R
 import us.wedemy.eggeum.setting.databinding.ActivitySettingBinding
 
+@AndroidEntryPoint
 class SettingActivity : BaseActivity() {
   override val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
 

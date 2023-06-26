@@ -16,11 +16,11 @@ import androidx.viewbinding.ViewBinding
 import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 
-abstract class BaseActivity(
-  private val statusBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
-  private val navigationBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),
-) : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
   abstract val binding: ViewBinding
+
+  private val statusBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+  private val navigationBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge(statusBarStyle = statusBarStyle, navigationBarStyle = navigationBarStyle)

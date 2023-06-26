@@ -19,7 +19,6 @@ androidx-activity = "1.8.0-alpha06"
 androidx-constraintlayout = "2.1.4"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-beta01"
-androidx-hilt = "2.46.1"
 androidx-hilt-navigation = "1.0.0"
 
 ktor-client-core = "2.3.0"
@@ -43,6 +42,7 @@ gradle-dependency-handler-extensions = { id = "land.sungbin.dependency.handler.e
 
 kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "kotlin-detekt" }
 kotlin-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "kotlin-ktlint-gradle" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin-core" }
 
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "android-hilt" }
 
@@ -70,8 +70,6 @@ androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-kt
 androidx-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
-androidx-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "androidx-hilt" }
-androidx-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "androidx-hilt" }
 androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "androidx-hilt-navigation" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }

@@ -9,6 +9,8 @@
 
 plugins {
   eggeum("android-application")
+  alias(libs.plugins.android.hilt)
+  `kotlin-kapt`
 }
 
 android {
@@ -29,11 +31,15 @@ dependencies {
     libs.lottie,
     libs.insetter,
     libs.timber,
+    libs.android.hilt.runtime,
     projects.data,
     projects.designResource,
     projects.common,
     projects.onboard,
     projects.registerCafe,
     projects.setting,
+  )
+  kapts(
+    libs.android.hilt.compile
   )
 }

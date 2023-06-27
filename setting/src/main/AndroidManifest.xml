@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <application>
+    <activity
+      android:name=".ui.SettingActivity"
+      android:exported="true"
+      android:theme="@style/Theme.Eggeum.Setting"
+      android:windowSoftInputMode="adjustResize" />
+
+  </application>
+
+</manifest>

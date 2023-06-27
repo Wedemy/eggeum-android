@@ -35,5 +35,6 @@ include(
   ":design-resource",
   ":common",
   ":onboard",
-  ":register-cafe"
+  ":register-cafe",
+  ":setting",
 )

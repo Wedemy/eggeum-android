@@ -61,6 +61,7 @@
     <item name="endIconMode">custom</item>
     <item name="errorIconDrawable">@null</item>
     <item name="errorTextAppearance">@style/TextXsRegular</item>
+    <item name="boxStrokeErrorColor">@color/error_500</item>
     <item name="errorTextColor">@color/error_500</item>
     <item name="hintEnabled">false</item>
     <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>

@@ -9,10 +9,12 @@ package us.wedemy.eggeum.android
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.activity.SystemBarStyle
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +26,9 @@ import us.wedemy.eggeum.common.ui.BaseActivity
 
 class IntroActivity : BaseActivity() {
   override val binding by lazy { ActivityIntroBinding.inflate(layoutInflater) }
+
+  override var statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+  override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()

@@ -11,7 +11,7 @@ plugins {
   alias(libs.plugins.androidx.navigation.safeargs)
   `kotlin-parcelize`
   alias(libs.plugins.android.hilt)
-  `kotlin-kapt`
+  kotlin("kapt")
 }
 
 android {

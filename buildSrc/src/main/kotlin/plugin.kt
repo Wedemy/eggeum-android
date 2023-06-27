@@ -18,6 +18,3 @@ inline fun PluginDependenciesSpec.android(pluginId: String): PluginDependencySpe
 
 val PluginDependenciesSpec.`kotlin-parcelize`: PluginDependencySpec
   inline get() = id("kotlin-parcelize")
-
-val PluginDependenciesSpec.`kotlin-kapt`: PluginDependencySpec
-  inline get() = id("kotlin-kapt")

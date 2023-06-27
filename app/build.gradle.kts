@@ -10,7 +10,7 @@
 plugins {
   eggeum("android-application")
   alias(libs.plugins.android.hilt)
-  `kotlin-kapt`
+  kotlin("kapt")
 }
 
 android {

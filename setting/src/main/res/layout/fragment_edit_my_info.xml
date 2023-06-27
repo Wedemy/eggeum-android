@@ -111,7 +111,7 @@
         android:id="@+id/til_edit_nickname"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         android:layout_marginTop="8dp"
-        app:boxStrokeColor="@color/gray_500"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_edit_nickname_title">

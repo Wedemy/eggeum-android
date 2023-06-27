@@ -10,7 +10,6 @@ package us.wedemy.eggeum.setting.ui
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -33,19 +32,16 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   override fun getViewBinding() = FragmentEditMyInfoBinding.inflate(layoutInflater)
 
   private val viewModel by viewModels<EditMyInfoViewModel>()
-  private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+  private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    if (uri != null) {
+      viewModel.setProfileImageUri(uri.toString())
+    } else {
+      Timber.tag("PhotoPicker").d("No media selected")
+    }
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-      if (uri != null) {
-        viewModel.setProfileImageUri(uri.toString())
-      } else {
-        Timber.tag("PhotoPicker").d("No media selected")
-      }
-    }
-
     initListener()
     initObserver()
   }

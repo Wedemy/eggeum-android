@@ -7,5 +7,5 @@
 
 <resources>
 
-  <style name="Theme.Eggeum" parent="Theme.MaterialComponents.Light.NoActionBar" />
+  <style name="Theme.Eggeum.Setting" parent="Theme.MaterialComponents.Light.NoActionBar" />
 </resources>

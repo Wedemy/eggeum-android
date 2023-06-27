@@ -5,6 +5,8 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package us.wedemy.eggeum.common.ui
 
 import android.graphics.Color
@@ -16,11 +18,11 @@ import androidx.viewbinding.ViewBinding
 import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 
-abstract class BaseActivity() : AppCompatActivity() {
-  abstract val binding: ViewBinding
+abstract class BaseActivity : AppCompatActivity() {
+  protected abstract val binding: ViewBinding
 
-  private val statusBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
-  private val navigationBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+  protected open var statusBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+  protected open var navigationBarStyle = SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge(statusBarStyle = statusBarStyle, navigationBarStyle = navigationBarStyle)

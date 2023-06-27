@@ -17,9 +17,7 @@ import us.wedemy.eggeum.common.util.getMutableStateFlow
 import us.wedemy.eggeum.setting.R
 
 @HiltViewModel
-class EditMyInfoViewModel @Inject constructor(
-  savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+class EditMyInfoViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _profileImageUri = savedStateHandle.getMutableStateFlow(KEY_PROFILE_IMAGE_URL, "")
   val profileImageUri = _profileImageUri.asStateFlow()
 

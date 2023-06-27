@@ -6,7 +6,9 @@
  */
 package us.wedemy.eggeum.setting.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.common.ui.BaseActivity
@@ -16,6 +18,8 @@ import us.wedemy.eggeum.setting.databinding.ActivitySettingBinding
 @AndroidEntryPoint
 class SettingActivity : BaseActivity() {
   override val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
+
+  override var statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()

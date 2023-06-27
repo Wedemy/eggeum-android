@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+  kapt(libs.android.hilt.compile)
   implementations(
     libs.androidx.splash,
     libs.androidx.activity,
@@ -38,8 +39,5 @@ dependencies {
     projects.onboard,
     projects.registerCafe,
     projects.setting,
-  )
-  kapts(
-    libs.android.hilt.compile
   )
 }

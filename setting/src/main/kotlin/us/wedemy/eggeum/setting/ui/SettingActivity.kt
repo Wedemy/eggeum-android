@@ -4,6 +4,7 @@
  * Licensed under the MIT.
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
+
 package us.wedemy.eggeum.setting.ui
 
 import android.os.Bundle

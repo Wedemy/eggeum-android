@@ -16,7 +16,7 @@ import androidx.viewbinding.ViewBinding
 import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 
-abstract class BaseActivity() : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
   abstract val binding: ViewBinding
 
   private val statusBarStyle: SystemBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)

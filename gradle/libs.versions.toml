@@ -42,7 +42,6 @@ gradle-dependency-handler-extensions = { id = "land.sungbin.dependency.handler.e
 
 kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "kotlin-detekt" }
 kotlin-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "kotlin-ktlint-gradle" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin-core" }
 
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "android-hilt" }
 

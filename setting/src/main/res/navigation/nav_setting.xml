@@ -16,4 +16,5 @@
     android:name="us.wedemy.eggeum.setting.ui.EditMyInfoFragment"
     android:label="fragment_edit_my_info"
     tools:layout="@layout/fragment_edit_my_info" />
+
 </navigation>

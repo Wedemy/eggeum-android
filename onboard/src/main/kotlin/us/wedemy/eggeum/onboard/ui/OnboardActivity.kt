@@ -10,10 +10,12 @@ package us.wedemy.eggeum.onboard.ui
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.common.ui.BaseActivity
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.ActivityOnboardBinding
 
+@AndroidEntryPoint
 class OnboardActivity : BaseActivity() {
   override val binding by lazy { ActivityOnboardBinding.inflate(layoutInflater) }
 

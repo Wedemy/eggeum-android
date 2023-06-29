@@ -9,12 +9,15 @@ package us.wedemy.eggeum.onboard.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.common.util.getMutableStateFlow
 import us.wedemy.eggeum.onboard.R
 
-class RegisterNicknameViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+@HiltViewModel
+class RegisterNicknameViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _inputNickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
 
   private val _inputNicknameState: SaveableMutableStateFlow<EditTextState> =

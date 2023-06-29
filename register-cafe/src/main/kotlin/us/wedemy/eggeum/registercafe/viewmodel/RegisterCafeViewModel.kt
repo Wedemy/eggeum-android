@@ -10,6 +10,8 @@ package us.wedemy.eggeum.registercafe.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
@@ -19,7 +21,8 @@ import us.wedemy.eggeum.common.util.getMutableStateFlow
 import us.wedemy.eggeum.common.util.isSuccess
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
-class RegisterCafeViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+@HiltViewModel
+class RegisterCafeViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageItem>())
   val cafeImages = _cafeImages.asStateFlow()
 

@@ -13,10 +13,10 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.common.extension.repeatOnStarted
@@ -29,12 +29,12 @@ import us.wedemy.eggeum.registercafe.adapter.CafeImageAdapter
 import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeBinding
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModel
-import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModelFactory
 
+@AndroidEntryPoint
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
 
-  private lateinit var viewModel: RegisterCafeViewModel
+  private val viewModel by viewModels<RegisterCafeViewModel>()
 
   private var pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
     if (uris.isNotEmpty()) {
@@ -50,10 +50,6 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = RegisterCafeViewModelFactory(savedStateHandle)
-    viewModel = ViewModelProvider(this, viewModelFactory)[RegisterCafeViewModel::class.java]
-
     initView()
     initListener()
     initObserver()

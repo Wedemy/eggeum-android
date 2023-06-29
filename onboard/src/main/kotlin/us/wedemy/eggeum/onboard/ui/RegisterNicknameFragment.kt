@@ -11,9 +11,9 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.common.extension.repeatOnStarted
 import us.wedemy.eggeum.common.extension.textChangesAsFlow
@@ -21,21 +21,16 @@ import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterNicknameBinding
-import us.wedemy.eggeum.onboard.viewmodel.OnboardViewModelFactory
 import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
 
+@AndroidEntryPoint
 class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>() {
   override fun getViewBinding() = FragmentRegisterNicknameBinding.inflate(layoutInflater)
 
-  private lateinit var viewModel: RegisterNicknameViewModel
+  private val viewModel by viewModels<RegisterNicknameViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = OnboardViewModelFactory(savedStateHandle)
-    viewModel = ViewModelProvider(this, viewModelFactory)[RegisterNicknameViewModel::class.java]
-
     initListener()
     initObserver()
   }

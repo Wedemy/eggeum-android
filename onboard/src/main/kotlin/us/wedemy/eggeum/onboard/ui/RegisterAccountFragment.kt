@@ -10,29 +10,24 @@ package us.wedemy.eggeum.onboard.ui
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isInvisible
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.common.extension.repeatOnStarted
 import us.wedemy.eggeum.common.extension.safeNavigate
 import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterAccountBinding
-import us.wedemy.eggeum.onboard.viewmodel.OnboardViewModelFactory
 import us.wedemy.eggeum.onboard.viewmodel.RegisterAccountViewModel
 
+@AndroidEntryPoint
 class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
   override fun getViewBinding() = FragmentRegisterAccountBinding.inflate(layoutInflater)
 
-  private lateinit var viewModel: RegisterAccountViewModel
+  private val viewModel by viewModels<RegisterAccountViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = OnboardViewModelFactory(savedStateHandle)
-    viewModel = ViewModelProvider(this, viewModelFactory)[RegisterAccountViewModel::class.java]
-
     initListener()
     initObserver()
   }

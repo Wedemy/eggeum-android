@@ -10,6 +10,8 @@
 plugins {
   eggeum("android-library")
   alias(libs.plugins.androidx.navigation.safeargs)
+  alias(libs.plugins.android.hilt)
+  kotlin("kapt")
   `kotlin-parcelize`
 }
 
@@ -22,8 +24,10 @@ android {
 }
 
 dependencies {
+  kapt(libs.android.hilt.compile)
   implementations(
     libs.android.material,
+    libs.android.hilt.runtime,
     libs.androidx.core,
     libs.androidx.constraintlayout,
     libs.kotlinx.coroutines.android,

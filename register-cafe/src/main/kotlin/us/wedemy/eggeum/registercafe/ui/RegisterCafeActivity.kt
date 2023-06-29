@@ -9,10 +9,12 @@ package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.common.ui.BaseActivity
 import us.wedemy.eggeum.registercafe.R
 import us.wedemy.eggeum.registercafe.databinding.ActivityRegisterCafeBinding
 
+@AndroidEntryPoint
 class RegisterCafeActivity : BaseActivity() {
   override val binding by lazy { ActivityRegisterCafeBinding.inflate(layoutInflater) }
 

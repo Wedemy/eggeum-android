@@ -10,12 +10,15 @@ package us.wedemy.eggeum.onboard.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.getMutableStateFlow
 
-class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+@HiltViewModel
+class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_SERVICE_TERMS, false)
   val agreeToServiceTerms = _agreeToServiceTerms.asStateFlow()
 

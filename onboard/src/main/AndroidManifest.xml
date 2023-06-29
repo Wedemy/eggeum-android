@@ -11,7 +11,7 @@
     <activity
       android:name=".ui.OnboardActivity"
       android:exported="true"
-      android:theme="Theme.Eggeum.Onboard"
+      android:theme="@style/Theme.Eggeum.Onboard"
       android:windowSoftInputMode="adjustPan" />
   </application>
 

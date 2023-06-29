@@ -123,21 +123,21 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
       }
 
       launch {
-        viewModel.inputCafeNameState.collect { state ->
+        viewModel.cafeNameState.collect { state ->
           when (state) {
             is EditTextState.Idle -> clearError(binding.tilRegisterCafeName)
-            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeName)
-            is EditTextState.Success -> setValidState(binding.tilRegisterCafeName)
+            is EditTextState.Error -> setError(binding.tilRegisterCafeName)
+            is EditTextState.Success -> setValid(binding.tilRegisterCafeName)
           }
         }
       }
 
       launch {
-        viewModel.inputCafeAddressState.collect { state ->
+        viewModel.cafeAddressState.collect { state ->
           when (state) {
             is EditTextState.Idle -> clearError(binding.tilRegisterCafeAddress)
-            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeAddress)
-            is EditTextState.Success -> setValidState(binding.tilRegisterCafeAddress)
+            is EditTextState.Error -> setError(binding.tilRegisterCafeAddress)
+            is EditTextState.Success -> setValid(binding.tilRegisterCafeAddress)
           }
         }
       }
@@ -155,11 +155,11 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
     textInputLayout.error = null
   }
 
-  private fun setEmptyError(textInputLayout: TextInputLayout) {
+  private fun setError(textInputLayout: TextInputLayout) {
     textInputLayout.error = " "
   }
 
-  private fun setValidState(textInputLayout: TextInputLayout) {
+  private fun setValid(textInputLayout: TextInputLayout) {
     textInputLayout.error = null
   }
 }

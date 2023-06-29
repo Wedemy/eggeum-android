@@ -13,28 +13,32 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
+import us.wedemy.eggeum.common.util.TextInputError
 import us.wedemy.eggeum.common.util.getMutableStateFlow
-import us.wedemy.eggeum.onboard.R
 
 @HiltViewModel
 class RegisterNicknameViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
-  private val _inputNickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
+  private val _nickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
 
-  private val _inputNicknameState: SaveableMutableStateFlow<EditTextState> =
+  private val _nicknameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_NICKNAME_STATE, EditTextState.Idle)
-  val inputNicknameState = _inputNicknameState.asStateFlow()
+  val nicknameState = _nicknameState.asStateFlow()
+
+  fun setNickname(nickname: String) {
+    _nickname.value = nickname
+  }
 
   fun handleNicknameValidation(nickname: String) {
+    setNickname(nickname)
     when {
       nickname.isEmpty() -> {
-        _inputNicknameState.value = EditTextState.Error(R.string.empty_error_text)
+        _nicknameState.value = EditTextState.Error(TextInputError.EMPTY)
       }
       nickname.length < 2 -> {
-        _inputNicknameState.value = EditTextState.Error(R.string.min_length_error_text)
+        _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
       }
       else -> {
-        _inputNickname.value = nickname
-        _inputNicknameState.value = EditTextState.Success
+        _nicknameState.value = EditTextState.Success
       }
     }
   }

@@ -22,8 +22,8 @@
   <string name="please_agree_to_all_required_items">필수 항목에 모두 동의 해주세요.</string>
   <string name="nickname">닉네임</string>
   <string name="next">다음</string>
-  <string name="min_length_error_text">최소 2자 이상 입력해주세요.</string>
+  <string name="too_short_text_error">최소 2자 이상 입력해주세요.</string>
   <string name="register_nickname_title">닉네임을 설정해주세요.</string>
   <string name="temp">최소 2자 이상 입력해주세요.</string>
-  <string name="empty_error_text">닉네임을 입력해주세요.</string>
+  <string name="empty_text_error">닉네임을 입력해주세요.</string>
 </resources>

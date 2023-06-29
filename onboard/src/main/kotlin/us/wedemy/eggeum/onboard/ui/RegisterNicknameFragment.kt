@@ -19,6 +19,7 @@ import us.wedemy.eggeum.common.extension.repeatOnStarted
 import us.wedemy.eggeum.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.common.util.EditTextState
+import us.wedemy.eggeum.common.util.TextInputError
 import us.wedemy.eggeum.onboard.R
 import us.wedemy.eggeum.onboard.databinding.FragmentRegisterNicknameBinding
 import us.wedemy.eggeum.onboard.viewmodel.RegisterNicknameViewModel
@@ -54,11 +55,11 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
       }
 
       launch {
-        viewModel.inputNicknameState.collect { state ->
+        viewModel.nicknameState.collect { state ->
           when (state) {
-            EditTextState.Idle -> clearError()
-            is EditTextState.Success -> setValidState()
-            is EditTextState.Error -> state.stringRes?.let(::setErrorMessage)
+            is EditTextState.Idle -> clearError()
+            is EditTextState.Success -> setValid()
+            is EditTextState.Error -> setError(state.error)
           }
           binding.btnRegisterNickname.isEnabled = state == EditTextState.Success
         }
@@ -73,40 +74,40 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
     }
   }
 
-  private fun setErrorMessage(stringRes: Int) {
-    when (stringRes) {
-      R.string.empty_error_text -> setEmptyError()
-      else -> setMinLengthError()
+  private fun setError(error: TextInputError) {
+    when (error) {
+      TextInputError.EMPTY -> setEmptyTextError()
+      else -> setTooShortTextError()
     }
   }
 
-  private fun setEmptyError() {
+  private fun setEmptyTextError() {
     binding.tilRegisterNickname.apply {
-      error = getString(R.string.empty_error_text)
+      error = getString(R.string.empty_text_error)
       endIconDrawable = null
     }
   }
 
-  private fun setMinLengthError() {
+  private fun setTooShortTextError() {
     binding.tilRegisterNickname.apply {
-      error = getString(R.string.min_length_error_text)
+      error = getString(R.string.too_short_text_error)
       setEndIconDrawable(us.wedemy.eggeum.design.R.drawable.ic_x_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))
       setEndIconOnClickListener {
         binding.tietRegisterNickname.text?.clear()
+        viewModel.setNickname("")
       }
     }
   }
 
-  private fun setValidState() {
+  private fun setValid() {
     binding.tilRegisterNickname.apply {
       error = null
       setEndIconDrawable(us.wedemy.eggeum.design.R.drawable.ic_check_colored_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.teal_500)
       setEndIconTintList(ColorStateList.valueOf(color))
       boxStrokeColor = color
-      setEndIconOnClickListener {}
     }
   }
 }

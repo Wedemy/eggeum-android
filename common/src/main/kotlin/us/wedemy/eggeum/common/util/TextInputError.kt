@@ -9,5 +9,5 @@ package us.wedemy.eggeum.common.util
 
 enum class TextInputError {
   EMPTY,
-  TOO_SHORT
+  TOO_SHORT,
 }

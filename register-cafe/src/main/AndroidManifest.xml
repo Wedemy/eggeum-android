@@ -11,6 +11,7 @@
     <activity
       android:name=".ui.RegisterCafeActivity"
       android:exported="true"
+      android:theme="Theme.Eggeum.RegisterCafe"
       android:windowSoftInputMode="adjustResize" />
 
   </application>

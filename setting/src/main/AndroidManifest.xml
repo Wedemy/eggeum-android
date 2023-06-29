@@ -12,7 +12,7 @@
       android:name=".ui.SettingActivity"
       android:exported="true"
       android:theme="@style/Theme.Eggeum.Setting"
-      android:windowSoftInputMode="adjustResize" />
+      android:windowSoftInputMode="adjustPan" />
 
   </application>
 

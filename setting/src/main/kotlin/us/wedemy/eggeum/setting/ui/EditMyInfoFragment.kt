@@ -32,6 +32,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   override fun getViewBinding() = FragmentEditMyInfoBinding.inflate(layoutInflater)
 
   private val viewModel by viewModels<EditMyInfoViewModel>()
+
   private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
     if (uri != null) {
       viewModel.setProfileImageUri(uri.toString())

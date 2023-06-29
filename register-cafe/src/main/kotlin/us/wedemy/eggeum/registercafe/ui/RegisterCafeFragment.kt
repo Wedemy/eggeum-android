@@ -9,7 +9,6 @@ package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -36,7 +35,15 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
 
   private lateinit var viewModel: RegisterCafeViewModel
-  private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+
+  private var pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
+    if (uris.isNotEmpty()) {
+      val imageItems = uris.map { CafeImageItem(it.toString()) }
+      viewModel.setCafeImages(imageItems)
+    } else {
+      Timber.tag("PhotoPicker").d("No media selected")
+    }
+  }
 
   private val cafeImageAdapter by lazy {
     CafeImageAdapter { position -> viewModel.deleteCafeImage(position) }
@@ -46,15 +53,6 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
     val savedStateHandle = SavedStateHandle()
     val viewModelFactory = RegisterCafeViewModelFactory(savedStateHandle)
     viewModel = ViewModelProvider(this, viewModelFactory)[RegisterCafeViewModel::class.java]
-
-    pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
-      if (uris.isNotEmpty()) {
-        val imageItems = uris.map { CafeImageItem(it.toString()) }
-        viewModel.setCafeImages(imageItems)
-      } else {
-        Timber.tag("PhotoPicker").d("No media selected")
-      }
-    }
 
     initView()
     initListener()

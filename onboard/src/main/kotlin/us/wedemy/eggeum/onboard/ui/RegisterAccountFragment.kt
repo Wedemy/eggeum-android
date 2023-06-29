@@ -57,7 +57,7 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
         viewModel.setCbAgreeToProvidePersonalInfoTo3rdParty()
       }
 
-      clOver14YearOld.setOnClickListener {
+      clIsOver14YearOld.setOnClickListener {
         viewModel.setCbOver14YearOld()
       }
 
@@ -112,8 +112,8 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
       }
 
       launch {
-        viewModel.over14YearOld.collect { isChecked ->
-          binding.cbOver14YearOld.isChecked = isChecked
+        viewModel.isOver14YearOld.collect { isChecked ->
+          binding.cbIsOver14YearOld.isChecked = isChecked
         }
       }
 

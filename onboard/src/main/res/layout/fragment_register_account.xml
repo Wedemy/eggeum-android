@@ -214,7 +214,7 @@
         app:layout_constraintTop_toTopOf="@id/cl_agree_to_provide_personal_info_to_3rd_party" />
 
       <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_over_14_year_old"
+        android:id="@+id/cl_is_over_14_year_old"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -226,7 +226,7 @@
         app:layout_constraintTop_toBottomOf="@id/cl_agree_to_provide_personal_info_to_3rd_party">
 
         <CheckBox
-          android:id="@+id/cb_over_14_year_old"
+          android:id="@+id/cb_is_over_14_year_old"
           android:layout_width="16dp"
           android:layout_height="16dp"
           android:background="@drawable/selector_check_16"
@@ -237,18 +237,18 @@
           app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-          android:id="@+id/tv_over_14_year_old"
+          android:id="@+id/tv_is_over_14_year_old"
           style="@style/TextSMedium"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
-          android:text="@string/over_14_year_old"
+          android:text="@string/is_over_14_year_old"
           android:textColor="@color/gray_700"
-          app:layout_constraintBottom_toBottomOf="@id/cb_over_14_year_old"
+          app:layout_constraintBottom_toBottomOf="@id/cb_is_over_14_year_old"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0"
-          app:layout_constraintStart_toEndOf="@+id/cb_over_14_year_old"
-          app:layout_constraintTop_toTopOf="@id/cb_over_14_year_old" />
+          app:layout_constraintStart_toEndOf="@+id/cb_is_over_14_year_old"
+          app:layout_constraintTop_toTopOf="@id/cb_is_over_14_year_old" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,7 +262,7 @@
         android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_over_14_year_old">
+        app:layout_constraintTop_toBottomOf="@id/cl_is_over_14_year_old">
 
         <CheckBox
           android:id="@+id/cb_would_like_to_receive_info_about_new_cafe_and_events"

@@ -29,6 +29,7 @@
       android:layout_gravity="center"
       android:text="@string/nickname_setting"
       android:textColor="@color/gray_900" />
+
   </com.google.android.material.appbar.MaterialToolbar>
 
   <TextView

@@ -29,6 +29,7 @@
       android:layout_gravity="center"
       android:text="@string/service_terms"
       android:textColor="@color/gray_900" />
+
   </com.google.android.material.appbar.MaterialToolbar>
 
   <TextView
@@ -57,7 +58,7 @@
     <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/hangeul_ipsum" />
+      tools:text="@tools:sample/lorem/random" />
 
   </ScrollView>
 

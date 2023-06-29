@@ -7,7 +7,7 @@ kotlin-detekt = "1.23.0"
 kotlin-ktlint-gradle = "11.4.2"
 kotlin-ktlint-source = "0.48.2"
 
-kotlinx-coroutines = "1.7.1"
+kotlinx-coroutines = "1.7.2"
 
 android-material = "1.9.0"
 android-hilt = "2.46.1"

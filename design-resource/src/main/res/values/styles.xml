@@ -67,6 +67,19 @@
     <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>
   </style>
 
+  <style name="Widget.Eggeum.TextInputLayout.SearchBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="shapeAppearance">@style/ShapeAppearance.MediumComponent</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="boxCornerRadiusTopEnd">8dp</item>
+    <item name="boxCornerRadiusTopStart">8dp</item>
+    <item name="boxCornerRadiusBottomEnd">8dp</item>
+    <item name="boxCornerRadiusBottomStart">8dp</item>
+    <item name="boxBackgroundColor">@color/white</item>
+    <item name="hintEnabled">false</item>
+    <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>
+  </style>
+
   <style name="Widget.Eggeum.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
     <item name="android:paddingStart">12dp</item>
     <item name="android:paddingTop">14dp</item>

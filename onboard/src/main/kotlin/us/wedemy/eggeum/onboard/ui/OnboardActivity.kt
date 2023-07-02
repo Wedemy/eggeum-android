@@ -7,7 +7,6 @@
 
 package us.wedemy.eggeum.onboard.ui
 
-import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,10 +21,6 @@ class OnboardActivity : BaseActivity() {
   private val navController: NavController?
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    navController?.setGraph(R.navigation.nav_onboard)
-  }
-
   override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
 }
+

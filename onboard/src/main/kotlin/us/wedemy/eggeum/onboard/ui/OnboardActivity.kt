@@ -17,10 +17,8 @@ import us.wedemy.eggeum.onboard.databinding.ActivityOnboardBinding
 @AndroidEntryPoint
 class OnboardActivity : BaseActivity() {
   override val binding by lazy { ActivityOnboardBinding.inflate(layoutInflater) }
-
   private val navController: NavController?
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
   override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
 }
-

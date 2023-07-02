@@ -16,10 +16,8 @@ import us.wedemy.eggeum.setting.databinding.ActivitySettingBinding
 @AndroidEntryPoint
 class SettingActivity : BaseActivity() {
   override val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
-
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
   override fun onSupportNavigateUp() = navController?.navigateUp() ?: false
 }
-

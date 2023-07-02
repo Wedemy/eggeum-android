@@ -16,10 +16,8 @@ import us.wedemy.eggeum.registercafe.databinding.ActivityRegisterCafeBinding
 @AndroidEntryPoint
 class RegisterCafeActivity : BaseActivity() {
   override val binding by lazy { ActivityRegisterCafeBinding.inflate(layoutInflater) }
-
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
   override fun onSupportNavigateUp() = navController?.navigateUp() ?: false
 }
-

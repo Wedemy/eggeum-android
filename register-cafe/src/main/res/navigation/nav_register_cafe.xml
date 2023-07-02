@@ -25,6 +25,7 @@
       app:popExitAnim="@anim/nav_default_pop_exit_anim"
       app:popUpTo="@id/register_cafe_fragment"
       app:popUpToInclusive="true"/>
+
   </fragment>
 
   <fragment
@@ -32,4 +33,5 @@
     android:name="us.wedemy.eggeum.registercafe.ui.RegisterCafeCompleteFragment"
     android:label="RegisterCafeCompleteFragment"
     tools:layout="@layout/fragment_register_cafe_complete" />
+
 </navigation>

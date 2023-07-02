@@ -9,15 +9,14 @@ package us.wedemy.eggeum.registercafe.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.common.extension.repeatOnStarted
@@ -30,32 +29,27 @@ import us.wedemy.eggeum.registercafe.adapter.CafeImageAdapter
 import us.wedemy.eggeum.registercafe.databinding.FragmentRegisterCafeBinding
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModel
-import us.wedemy.eggeum.registercafe.viewmodel.RegisterCafeViewModelFactory
 
+@AndroidEntryPoint
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
 
-  private lateinit var viewModel: RegisterCafeViewModel
-  private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
+  private val viewModel by viewModels<RegisterCafeViewModel>()
+
+  private var pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
+    if (uris.isNotEmpty()) {
+      val imageItems = uris.map { CafeImageItem(it.toString()) }
+      viewModel.setCafeImages(imageItems)
+    } else {
+      Timber.tag("PhotoPicker").d("No media selected")
+    }
+  }
 
   private val cafeImageAdapter by lazy {
     CafeImageAdapter { position -> viewModel.deleteCafeImage(position) }
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    val savedStateHandle = SavedStateHandle()
-    val viewModelFactory = RegisterCafeViewModelFactory(savedStateHandle)
-    viewModel = ViewModelProvider(this, viewModelFactory)[RegisterCafeViewModel::class.java]
-
-    pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
-      if (uris.isNotEmpty()) {
-        val imageItems = uris.map { CafeImageItem(it.toString()) }
-        viewModel.setCafeImages(imageItems)
-      } else {
-        Timber.tag("PhotoPicker").d("No media selected")
-      }
-    }
-
     initView()
     initListener()
     initObserver()
@@ -129,21 +123,21 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
       }
 
       launch {
-        viewModel.inputCafeNameState.collect { state ->
+        viewModel.cafeNameState.collect { state ->
           when (state) {
             is EditTextState.Idle -> clearError(binding.tilRegisterCafeName)
-            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeName)
-            is EditTextState.Success -> setValidState(binding.tilRegisterCafeName)
+            is EditTextState.Error -> setError(binding.tilRegisterCafeName)
+            is EditTextState.Success -> setValid(binding.tilRegisterCafeName)
           }
         }
       }
 
       launch {
-        viewModel.inputCafeAddressState.collect { state ->
+        viewModel.cafeAddressState.collect { state ->
           when (state) {
             is EditTextState.Idle -> clearError(binding.tilRegisterCafeAddress)
-            is EditTextState.Error -> setEmptyError(binding.tilRegisterCafeAddress)
-            is EditTextState.Success -> setValidState(binding.tilRegisterCafeAddress)
+            is EditTextState.Error -> setError(binding.tilRegisterCafeAddress)
+            is EditTextState.Success -> setValid(binding.tilRegisterCafeAddress)
           }
         }
       }
@@ -161,11 +155,11 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
     textInputLayout.error = null
   }
 
-  private fun setEmptyError(textInputLayout: TextInputLayout) {
+  private fun setError(textInputLayout: TextInputLayout) {
     textInputLayout.error = " "
   }
 
-  private fun setValidState(textInputLayout: TextInputLayout) {
+  private fun setValid(textInputLayout: TextInputLayout) {
     textInputLayout.error = null
   }
 }

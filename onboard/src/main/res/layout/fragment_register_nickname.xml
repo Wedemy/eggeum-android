@@ -29,6 +29,7 @@
       android:layout_gravity="center"
       android:text="@string/nickname_setting"
       android:textColor="@color/gray_900" />
+
   </com.google.android.material.appbar.MaterialToolbar>
 
   <TextView
@@ -49,7 +50,7 @@
     style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="62dp"
-    app:boxStrokeColor="@color/gray_500"
+    app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_500"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_register_nickname_title">

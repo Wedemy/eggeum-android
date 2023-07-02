@@ -8,7 +8,6 @@
 package us.wedemy.eggeum.common.util
 
 import android.os.Parcelable
-import androidx.annotation.StringRes
 import kotlinx.parcelize.Parcelize
 
 sealed class EditTextState {
@@ -16,7 +15,7 @@ sealed class EditTextState {
   object Success : EditTextState(), Parcelable
 
   @Parcelize
-  data class Error(@StringRes val stringRes: Int? = null) : EditTextState(), Parcelable
+  data class Error(val error: TextInputError) : EditTextState(), Parcelable
 
   @Parcelize
   object Idle : EditTextState(), Parcelable

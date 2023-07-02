@@ -10,6 +10,7 @@
 plugins {
   eggeum("android-application")
   alias(libs.plugins.android.hilt)
+  alias(libs.plugins.secrets.gradle.plugin)
   kotlin("kapt")
 }
 
@@ -33,6 +34,7 @@ dependencies {
     libs.insetter,
     libs.timber,
     libs.android.hilt.runtime,
+    libs.naver.map,
     projects.data,
     projects.designResource,
     projects.common,
@@ -41,4 +43,8 @@ dependencies {
     projects.registerCafe,
     projects.setting,
   )
+}
+
+secrets {
+  defaultPropertiesFileName = "secrets.defaults.properties"
 }

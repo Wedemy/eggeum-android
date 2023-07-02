@@ -10,4 +10,5 @@
 build
 release
 local.properties
+secrets.defaults.properties
 google-services.json

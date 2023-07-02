@@ -14,17 +14,17 @@
     android:fillColor="#00000000"
     android:pathData="M21,14.5V12C21,7.029 16.971,3 12,3C7.029,3 3,7.029 3,12V14.5M5.5,18C4.119,18 3,16.881 3,15.5V13.5C3,12.119 4.119,11 5.5,11C6.881,11 8,12.119 8,13.5V15.5C8,16.881 6.881,18 5.5,18ZM18.5,18C17.119,18 16,16.881 16,15.5V13.5C16,12.119 17.119,11 18.5,11C19.881,11 21,12.119 21,13.5V15.5C21,16.881 19.881,18 18.5,18Z"
     android:strokeWidth="1.5"
-    android:strokeColor="#6B7280"
+    android:strokeColor="#374151"
     android:strokeLineCap="round"
     android:strokeLineJoin="round" />
   <path
     android:fillColor="#00000000"
     android:pathData="M21,15.5C21,17.709 19.971,20 15,20"
     android:strokeWidth="1.5"
-    android:strokeColor="#6B7280"
+    android:strokeColor="#374151"
     android:strokeLineCap="round"
     android:strokeLineJoin="round" />
   <path
-    android:fillColor="#6B7280"
+    android:fillColor="#374151"
     android:pathData="M12.5,18L14.5,18A1.5,1.5 0,0 1,16 19.5L16,19.5A1.5,1.5 0,0 1,14.5 21L12.5,21A1.5,1.5 0,0 1,11 19.5L11,19.5A1.5,1.5 0,0 1,12.5 18z" />
 </vector>

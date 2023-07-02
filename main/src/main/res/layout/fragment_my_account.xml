@@ -7,16 +7,285 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="MyAccount"
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:fillViewport="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_my_account_profile_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="33.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.LargeComponent"
+        tools:src="@tools:sample/avatars" />
+
+      <TextView
+        android:id="@+id/tv_my_account_nickname"
+        style="@style/H5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="29dp"
+        android:textColor="@color/gray_900"
+        app:layout_constraintStart_toEndOf="@id/iv_my_account_profile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="김이끔" />
+
+      <TextView
+        android:id="@+id/tv_my_account_email"
+        style="@style/TextSRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/gray_400"
+        app:layout_constraintStart_toEndOf="@id/iv_my_account_profile_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_nickname"
+        tools:text="eggeum@gmail.com" />
+
+      <TextView
+        android:id="@+id/tv_my_account_edit_my_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47.5dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/edit_my_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_customer_support"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_frame_gray_100"
+        app:layout_constraintEnd_toStartOf="@id/cl_my_account_notice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_email">
+
+        <ImageView
+          android:id="@+id/iv_my_account_customer_support_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:contentDescription="Customer Support Icon"
+          android:src="@drawable/ic_headphone_outlined_24"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:ignore="HardcodedText">
+
+        </ImageView>
+
+        <TextView
+          android:id="@+id/tv_my_account_customer_service"
+          style="@style/TextLMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:text="@string/customer_support"
+          android:textColor="@color/gray_700"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/iv_my_account_customer_support_icon" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_notice"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_frame_gray_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cl_my_account_customer_support"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_email">
+
+        <ImageView
+          android:id="@+id/iv_my_account_notice_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:contentDescription="Customer Support Icon"
+          android:src="@drawable/ic_pager_outlined_24"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:ignore="HardcodedText">
+
+        </ImageView>
+
+        <TextView
+          android:id="@+id/tv_my_account_notice"
+          style="@style/TextLMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:text="@string/notice"
+          android:textColor="@color/gray_700"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/iv_my_account_notice_icon" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+        android:id="@+id/tv_my_account_terms_of_service"
+        style="@style/TextMMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/terms_of_service"
+        android:textColor="@color/gray_900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_my_account_customer_support" />
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Right Arrow"
+        android:src="@drawable/ic_arrow_right_outlined_16"
+        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_terms_of_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_my_account_terms_of_service"
+        tools:ignore="HardcodedText" />
+
+      <View
+        android:id="@+id/line_my_account_terms_of_service"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_terms_of_service" />
+
+      <TextView
+        android:id="@+id/tv_my_account_privacy_policy"
+        style="@style/TextMMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/privacy_policy"
+        android:textColor="@color/gray_900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_my_account_terms_of_service" />
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Right Arrow"
+        android:src="@drawable/ic_arrow_right_outlined_16"
+        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_privacy_policy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_my_account_privacy_policy"
+        tools:ignore="HardcodedText" />
+
+      <View
+        android:id="@+id/line_my_account_privacy_policy"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_privacy_policy" />
+
+      <TextView
+        android:id="@+id/tv_my_account_version_info"
+        style="@style/TextMMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/version_info"
+        android:textColor="@color/gray_900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_my_account_privacy_policy" />
+
+      <TextView
+        android:id="@+id/tv_my_account_version_num"
+        style="@style/TextSRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/gray_700"
+        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_version_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_my_account_version_info"
+        tools:text="1.0" />
+
+      <View
+        android:id="@+id/line_my_account_version_info"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_version_info" />
+
+      <TextView
+        android:id="@+id/tv_my_account_setting"
+        style="@style/TextMMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/setting"
+        android:textColor="@color/gray_900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_my_account_version_info" />
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Right Arrow"
+        android:src="@drawable/ic_arrow_right_outlined_16"
+        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_my_account_setting"
+        tools:ignore="HardcodedText" />
+
+      <View
+        android:id="@+id/line_my_account_setting"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_account_setting" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

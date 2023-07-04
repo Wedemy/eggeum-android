@@ -29,6 +29,7 @@ dependencies {
   implementations(
     libs.android.material,
     libs.android.hilt.runtime,
+    libs.android.play.services.location,
     libs.androidx.core,
     libs.androidx.constraintlayout,
     libs.kotlinx.coroutines.android,

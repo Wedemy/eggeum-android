@@ -15,6 +15,7 @@ import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.main.viewmodel.HomeViewModel
 
+//TODO 더미 데이터를 통한 화면 구성
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)

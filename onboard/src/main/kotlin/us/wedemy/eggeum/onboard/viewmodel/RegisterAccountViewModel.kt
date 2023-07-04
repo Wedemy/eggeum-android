@@ -10,30 +10,34 @@ package us.wedemy.eggeum.onboard.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.getMutableStateFlow
 
-class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
-  private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_1, false)
+@HiltViewModel
+class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+  private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_SERVICE_TERMS, false)
   val agreeToServiceTerms = _agreeToServiceTerms.asStateFlow()
 
-  private val _agreeToCollectPersonalInfo = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_2, false)
+  private val _agreeToCollectPersonalInfo =
+    savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_COLLECT_PERSONAL_INFO, false)
   val agreeToCollectPersonalInfo = _agreeToCollectPersonalInfo.asStateFlow()
 
-  private val _agreeToProvidePersonalInfoTo3rdParty = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_3, false)
+  private val _agreeToProvidePersonalInfoTo3rdParty =
+    savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_PROVIDE_PERSONAL_INFO_TO_3RD_PARTY, false)
   val agreeToProvidePersonalInfoTo3rdParty = _agreeToProvidePersonalInfoTo3rdParty.asStateFlow()
 
-  private val _over14YearOld = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_4, false)
-  val over14YearOld = _over14YearOld.asStateFlow()
+  private val _isOver14YearOld = savedStateHandle.getMutableStateFlow(KEY_IS_OVER_14_YEAR_OLD, false)
+  val isOver14YearOld = _isOver14YearOld.asStateFlow()
 
   private val _wouldLikeToReceiveInfoAboutNewCafeAndEvents =
-    savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_5, false)
+    savedStateHandle.getMutableStateFlow(KEY_WOULD_LIKE_TO_RECEIVE_INFO_ABOUT_NEW_CAFE_EVENTS, false)
   val wouldLikeToReceiveInfoAboutNewCafeAndEvents = _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
 
-  private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_CHECK_BOX_6, false)
-  val agreeToAllRequiredItems = _agreeToAllRequiredItems.asStateFlow()
+  private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_REQUIRED_ITEMS, false)
 
   fun setCbAgreeToServiceTerms() {
     _agreeToServiceTerms.value = !agreeToServiceTerms.value
@@ -48,7 +52,7 @@ class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel()
   }
 
   fun setCbOver14YearOld() {
-    _over14YearOld.value = !over14YearOld.value
+    _isOver14YearOld.value = !isOver14YearOld.value
   }
 
   fun setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents() {
@@ -56,11 +60,12 @@ class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel()
   }
 
   fun setAgreeToAllRequiredItems() {
-    _agreeToServiceTerms.value = agreeToAllRequiredItems.value
-    _agreeToCollectPersonalInfo.value = agreeToAllRequiredItems.value
-    _agreeToProvidePersonalInfoTo3rdParty.value = agreeToAllRequiredItems.value
-    _over14YearOld.value = agreeToAllRequiredItems.value
-    _agreeToAllRequiredItems.value = !agreeToAllRequiredItems.value
+    _agreeToAllRequiredItems.value = !_agreeToAllRequiredItems.value
+    _agreeToServiceTerms.value = _agreeToAllRequiredItems.value
+    _agreeToCollectPersonalInfo.value = _agreeToAllRequiredItems.value
+    _agreeToProvidePersonalInfoTo3rdParty.value = _agreeToAllRequiredItems.value
+    _isOver14YearOld.value = _agreeToAllRequiredItems.value
+    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = _agreeToAllRequiredItems.value
   }
 
   val enableRegisterAccount =
@@ -68,7 +73,7 @@ class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel()
       agreeToServiceTerms,
       agreeToCollectPersonalInfo,
       agreeToProvidePersonalInfoTo3rdParty,
-      over14YearOld,
+      isOver14YearOld,
     ) { checks ->
       checks.all { it }
     }
@@ -79,11 +84,12 @@ class RegisterAccountViewModel(savedStateHandle: SavedStateHandle) : ViewModel()
       )
 
   private companion object {
-    private const val KEY_CHECK_BOX_1 = "check_box_1"
-    private const val KEY_CHECK_BOX_2 = "check_box_2"
-    private const val KEY_CHECK_BOX_3 = "check_box_3"
-    private const val KEY_CHECK_BOX_4 = "check_box_4"
-    private const val KEY_CHECK_BOX_5 = "check_box_5"
-    private const val KEY_CHECK_BOX_6 = "check_box_6"
+    private const val KEY_AGREE_TO_SERVICE_TERMS = "agree_to_service_terms"
+    private const val KEY_AGREE_TO_COLLECT_PERSONAL_INFO = "agree_to_collect_personal_info"
+    private const val KEY_AGREE_TO_PROVIDE_PERSONAL_INFO_TO_3RD_PARTY = "agree_to_provide_personal_info_to_3rd_party"
+    private const val KEY_IS_OVER_14_YEAR_OLD = "is_over_14_year_old"
+    private const val KEY_WOULD_LIKE_TO_RECEIVE_INFO_ABOUT_NEW_CAFE_EVENTS =
+      "would_like_to_receive_info_about_new_cafe_and_events"
+    private const val KEY_AGREE_TO_REQUIRED_ITEMS = "agree_to_all_required_items"
   }
 }

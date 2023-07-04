@@ -10,51 +10,55 @@ package us.wedemy.eggeum.registercafe.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.common.util.EditTextState
 import us.wedemy.eggeum.common.util.SaveableMutableStateFlow
+import us.wedemy.eggeum.common.util.TextInputError
 import us.wedemy.eggeum.common.util.getMutableStateFlow
 import us.wedemy.eggeum.common.util.isSuccess
 import us.wedemy.eggeum.registercafe.item.CafeImageItem
 
-class RegisterCafeViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+@HiltViewModel
+class RegisterCafeViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageItem>())
   val cafeImages = _cafeImages.asStateFlow()
 
-  private val _inputCafeName = savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
+  private val _cafeName = savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
 
-  private val _inputCafeAddress = savedStateHandle.getMutableStateFlow(KEY_CAFE_ADDRESS, "")
-
-  private val _inputCafeNameState: SaveableMutableStateFlow<EditTextState> =
+  private val _cafeNameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME_STATE, EditTextState.Idle)
-  val inputCafeNameState = _inputCafeNameState.asStateFlow()
+  val cafeNameState = _cafeNameState.asStateFlow()
 
-  private val _inputCafeAddressState: SaveableMutableStateFlow<EditTextState> =
+  private val _cafeAddress = savedStateHandle.getMutableStateFlow(KEY_CAFE_ADDRESS, "")
+
+  private val _cafeAddressState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_ADDRESS_STATE, EditTextState.Idle)
-  val inputCafeAddressState = _inputCafeAddressState.asStateFlow()
+  val cafeAddressState = _cafeAddressState.asStateFlow()
 
   fun handleCafeNameValidation(cafeName: String) {
+    _cafeName.value = cafeName
     when {
-      cafeName.isEmpty() -> {
-        _inputCafeNameState.value = EditTextState.Error()
+      _cafeName.value.isEmpty() -> {
+        _cafeNameState.value = EditTextState.Error(TextInputError.EMPTY)
       }
       else -> {
-        _inputCafeName.value = cafeName
-        _inputCafeNameState.value = EditTextState.Success
+        _cafeNameState.value = EditTextState.Success
       }
     }
   }
 
   fun handleCafeAddressValidation(cafeAddress: String) {
+    _cafeAddress.value = cafeAddress
     when {
-      cafeAddress.isEmpty() -> {
-        _inputCafeAddressState.value = EditTextState.Error()
+      _cafeAddress.value.isEmpty() -> {
+        _cafeAddressState.value = EditTextState.Error(TextInputError.EMPTY)
       }
       else -> {
-        _inputCafeAddress.value = cafeAddress
-        _inputCafeAddressState.value = EditTextState.Success
+        _cafeAddressState.value = EditTextState.Success
       }
     }
   }
@@ -73,8 +77,8 @@ class RegisterCafeViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
   val enableRegisterCafe =
     combine(
       cafeImages,
-      inputCafeNameState,
-      inputCafeAddressState,
+      cafeNameState,
+      cafeAddressState,
     ) { images, name, address ->
       images.isNotEmpty() && name.isSuccess && address.isSuccess
     }

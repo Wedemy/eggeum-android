@@ -27,7 +27,7 @@
     android:layout_marginBottom="16dp"
     android:backgroundTint="@color/white"
     android:contentDescription="Tracking"
-    android:src="@drawable/ic_mark_filled_60"
+    android:foreground="@drawable/ic_mark_filled_40"
     app:borderWidth="0dp"
     app:layout_constraintBottom_toTopOf="@id/cv_search_cafe"
     app:layout_constraintEnd_toEndOf="parent"

@@ -48,7 +48,6 @@ class LoginActivity : BaseActivity() {
       }
     }
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     oneTapClient = Identity.getSignInClient(this)
@@ -56,7 +55,7 @@ class LoginActivity : BaseActivity() {
       .setPasswordRequestOptions(
         BeginSignInRequest.PasswordRequestOptions.builder()
           .setSupported(true)
-          .build()
+          .build(),
       )
       .setGoogleIdTokenRequestOptions(
         BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -65,7 +64,7 @@ class LoginActivity : BaseActivity() {
           .setServerClientId(BuildConfig.GOOGLE_CLIENT_ID)
           // Only show accounts previously used to sign in.
           .setFilterByAuthorizedAccounts(false)
-          .build()
+          .build(),
       )
       // Automatically sign in when exactly one credential is retrieved.
       .setAutoSelectEnabled(true)
@@ -92,4 +91,3 @@ class LoginActivity : BaseActivity() {
     }
   }
 }
-

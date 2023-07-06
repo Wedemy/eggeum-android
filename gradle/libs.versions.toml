@@ -1,6 +1,7 @@
 [versions]
 gradle-android = "8.0.2"
 gradle-dependency-handler-extensions = "1.1.0"
+secrets-gradle-plugin = "2.0.1"
 
 google-gms-google-services = "4.3.15"
 google-gms-play-services-auth = "20.6.0"
@@ -44,6 +45,7 @@ test-robolectric = "4.10.3"
 gradle-android-application = { id = "com.android.application", version.ref = "gradle-android" }
 gradle-android-library = { id = "com.android.library", version.ref = "gradle-android" }
 gradle-dependency-handler-extensions = { id = "land.sungbin.dependency.handler.extensions", version.ref = "gradle-dependency-handler-extensions" }
+secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets-gradle-plugin" }
 
 google-gms = { id = "com.google.gms.google-services", version.ref = "google-gms-google-services" }
 

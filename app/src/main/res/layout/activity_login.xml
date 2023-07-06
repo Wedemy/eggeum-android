@@ -71,12 +71,14 @@
     app:layout_constraintStart_toStartOf="parent">
 
     <LinearLayout
+      android:id="@+id/ll_google_login"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_vertical|center_horizontal"
       tools:ignore="UseCompoundDrawables">
 
       <ImageView
+        android:id="@+id/iv_google_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -84,6 +86,7 @@
         android:contentDescription="Google Logo" />
 
       <TextView
+        android:id="@+id/tv_google_login"
         style="@style/TextLMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

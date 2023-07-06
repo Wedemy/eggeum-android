@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:gravity="bottom"
     android:orientation="horizontal"
-    app:layout_constraintBottom_toTopOf="@+id/btn_google_login"
+    app:layout_constraintBottom_toTopOf="@+id/cv_google_login"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -58,16 +58,41 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/ll_container_title" />
 
-  <!-- TODO: 구글 로그인 SDK 연결 -->
-  <Button
-    android:id="@+id/btn_google_login"
-    android:layout_width="match_parent"
+  <androidx.cardview.widget.CardView
+    android:id="@+id/cv_google_login"
+    android:layout_width="0dp"
     android:layout_height="52dp"
-    android:layout_marginBottom="24dp"
-    android:backgroundTint="@color/white"
-    android:text="Google 계정으로 로그인 (TODO)"
+    android:layout_marginHorizontal="16dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="0dp"
+    android:padding="16dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical|center_horizontal"
+      tools:ignore="UseCompoundDrawables">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ic_google_logo"
+        android:contentDescription="Google Logo" />
+
+      <TextView
+        style="@style/TextLMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:text="@string/google_login" />
+
+    </LinearLayout>
+
+  </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

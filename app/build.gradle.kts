@@ -27,11 +27,13 @@ dependencies {
   kapt(libs.android.hilt.compile)
   implementations(
     platform(libs.firebase.bom),
+    libs.android.material,
+    libs.android.hilt.runtime,
     libs.androidx.splash,
     libs.androidx.activity,
     libs.androidx.appcompat,
     libs.androidx.constraintlayout,
-    libs.android.hilt.runtime,
+    libs.bundles.androidx.lifecycle,
     libs.firebase.auth,
     libs.google.gms.play.services.auth,
     libs.lottie,

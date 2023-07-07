@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
             Timber.tag("idToken").d(idToken)
           }
         } catch (e: ApiException) {
-          Timber.d(e.localizedMessage)
+          Timber.e(e.localizedMessage)
         }
       }
     }
@@ -86,7 +86,7 @@ class LoginActivity : BaseActivity() {
         .addOnFailureListener(this) { e ->
           // No saved credentials found. Launch the One Tap sign-up flow, or
           // do nothing and continue presenting the signed-out UI.
-          Timber.d(e.localizedMessage)
+          Timber.e(e.localizedMessage)
         }
     }
   }

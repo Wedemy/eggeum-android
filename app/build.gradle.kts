@@ -9,7 +9,9 @@
 
 plugins {
   eggeum("android-application")
+  id(libs.plugins.google.gms.get().pluginId)
   alias(libs.plugins.android.hilt)
+  alias(libs.plugins.secrets.gradle.plugin)
   kotlin("kapt")
 }
 
@@ -25,14 +27,19 @@ android {
 dependencies {
   kapt(libs.android.hilt.compile)
   implementations(
+    platform(libs.firebase.bom),
+    libs.android.material,
+    libs.android.hilt.runtime,
     libs.androidx.splash,
     libs.androidx.activity,
     libs.androidx.appcompat,
     libs.androidx.constraintlayout,
+    libs.bundles.androidx.lifecycle,
+    libs.firebase.auth,
+    libs.google.gms.play.services.auth,
     libs.lottie,
     libs.insetter,
     libs.timber,
-    libs.android.hilt.runtime,
     projects.data,
     projects.designResource,
     projects.common,
@@ -40,4 +47,8 @@ dependencies {
     projects.registerCafe,
     projects.setting,
   )
+}
+
+secrets {
+  defaultPropertiesFileName = "secrets.defaults.properties"
 }

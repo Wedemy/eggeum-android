@@ -52,8 +52,8 @@ sourceSets {
 
 dependencies {
   implementations(
-    "com.android.tools.build:gradle:${libs.versions.gradle.android.get()}",
-    "org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.core.get()}",
+    libs.gradle.android,
+    libs.gradle.kotlin,
   )
 }
 

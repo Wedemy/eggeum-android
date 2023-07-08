@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity() {
           val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
 
           @Suppress("UNUSED_VARIABLE")
-          val idToken = credential.googleIdToken?.also { idToken ->
+          val idToken = credential.googleIdToken.also { idToken ->
             Timber.tag("idToken").d(idToken)
           }
         } catch (exception: ApiException) {

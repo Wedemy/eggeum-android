@@ -11,7 +11,7 @@ plugins {
   eggeum("android-application")
   id(libs.plugins.google.gms.get().pluginId)
   alias(libs.plugins.android.hilt)
-  alias(libs.plugins.secrets.gradle.plugin)
+  alias(libs.plugins.google.secrets)
   kotlin("kapt")
 }
 
@@ -50,5 +50,5 @@ dependencies {
 }
 
 secrets {
-  defaultPropertiesFileName = "secrets.defaults.properties"
+  defaultPropertiesFileName = "secrets.properties"
 }

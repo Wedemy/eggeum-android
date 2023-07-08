@@ -33,6 +33,7 @@ class IntroActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
     super.onCreate(savedInstanceState)
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       splashScreen.setOnExitAnimationListener { splashScreenView ->
         ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f).run {

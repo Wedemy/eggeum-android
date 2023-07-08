@@ -19,7 +19,6 @@ plugins {
   alias(libs.plugins.gradle.android.application) apply false
   alias(libs.plugins.gradle.android.library) apply false
   alias(libs.plugins.android.hilt) apply false
-  alias(libs.plugins.secrets.gradle.plugin) apply false
 }
 
 buildscript {
@@ -29,7 +28,7 @@ buildscript {
   }
 
   dependencies {
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.core.get()}")
+    classpath(libs.gradle.kotlin)
   }
 }
 

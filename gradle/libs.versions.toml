@@ -28,7 +28,7 @@ androidx-navigation = "2.7.0-beta02"
 androidx-hilt-navigation = "1.0.0"
 
 ktor-client-core = "2.3.0"
-jackson-core = "2.14.2"
+jackson-core = "2.15.2"
 
 coil = "2.4.0"
 lottie = "6.0.1"

@@ -38,18 +38,24 @@ class LoginActivity : BaseActivity() {
       if (result.resultCode == Activity.RESULT_OK) {
         try {
           val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
-          val idToken = credential.googleIdToken
-          if (idToken != null) {
+
+          @Suppress("UNUSED_VARIABLE")
+          val idToken = credential.googleIdToken?.also { idToken ->
             Timber.tag("idToken").d(idToken)
           }
-        } catch (e: ApiException) {
-          Timber.e(e.localizedMessage)
+        } catch (exception: ApiException) {
+          Timber.e(exception.localizedMessage)
         }
       }
     }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    initGoogleLogin()
+    initListener()
+  }
+
+  private fun initGoogleLogin() {
     oneTapClient = Identity.getSignInClient(this)
     signInRequest = BeginSignInRequest.builder()
       .setPasswordRequestOptions(
@@ -60,33 +66,27 @@ class LoginActivity : BaseActivity() {
       .setGoogleIdTokenRequestOptions(
         BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
           .setSupported(true)
-          // Your server's client ID, not your Android client ID.
           .setServerClientId(BuildConfig.GOOGLE_CLIENT_ID)
-          // Only show accounts previously used to sign in.
           .setFilterByAuthorizedAccounts(false)
           .build(),
       )
-      // Automatically sign in when exactly one credential is retrieved.
       .setAutoSelectEnabled(true)
       .build()
-
-    initListener()
   }
 
   private fun initListener() {
     binding.cvGoogleLogin.setOnClickListener {
-      oneTapClient.beginSignIn(signInRequest)
+      oneTapClient
+        .beginSignIn(signInRequest)
         .addOnSuccessListener(this) { result ->
           try {
             oneTapClientResult.launch(IntentSenderRequest.Builder(result.pendingIntent.intentSender).build())
-          } catch (e: IntentSender.SendIntentException) {
-            Timber.e("Couldn't start One Tap UI: ${e.localizedMessage}")
+          } catch (exception: IntentSender.SendIntentException) {
+            Timber.e("Couldn't start One Tap UI: ${exception.localizedMessage}")
           }
         }
-        .addOnFailureListener(this) { e ->
-          // No saved credentials found. Launch the One Tap sign-up flow, or
-          // do nothing and continue presenting the signed-out UI.
-          Timber.e(e.localizedMessage)
+        .addOnFailureListener(this) { exception ->
+          Timber.e(exception.localizedMessage)
         }
     }
   }

@@ -8,6 +8,7 @@
 plugins {
   eggeum("jvm-kotlin")
   eggeum("kotlin-explicit-api")
+  eggeum("test-kotest")
 }
 
 dependencies {

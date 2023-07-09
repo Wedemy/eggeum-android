@@ -15,6 +15,7 @@ plugins {
   alias(libs.plugins.kotlin.detekt)
   alias(libs.plugins.kotlin.ktlint)
   alias(libs.plugins.gradle.dependency.handler.extensions)
+  alias(libs.plugins.google.gms) apply false
   alias(libs.plugins.gradle.android.application) apply false
   alias(libs.plugins.gradle.android.library) apply false
   alias(libs.plugins.secrets.gradle.plugin) apply false
@@ -28,7 +29,7 @@ buildscript {
   }
 
   dependencies {
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.core.get()}")
+    classpath(libs.gradle.kotlin)
   }
 }
 

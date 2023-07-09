@@ -1,0 +1,29 @@
+<!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="19dp"
+  android:height="18dp"
+  android:viewportWidth="19"
+  android:viewportHeight="18">
+  <path
+    android:fillColor="#4285F4"
+    android:fillType="evenOdd"
+    android:pathData="M18.14,9.204C18.14,8.566 18.083,7.952 17.976,7.363H9.5V10.845H14.344C14.135,11.97 13.501,12.923 12.548,13.561V15.819H15.456C17.158,14.252 18.14,11.945 18.14,9.204Z" />
+  <path
+    android:fillColor="#34A853"
+    android:fillType="evenOdd"
+    android:pathData="M9.5,18C11.93,18 13.967,17.194 15.456,15.819L12.547,13.561C11.742,14.101 10.711,14.42 9.5,14.42C7.156,14.42 5.172,12.837 4.464,10.71H1.457V13.042C2.938,15.983 5.982,18 9.5,18Z" />
+  <path
+    android:fillColor="#FBBC05"
+    android:fillType="evenOdd"
+    android:pathData="M4.464,10.71C4.284,10.17 4.182,9.593 4.182,9C4.182,8.407 4.284,7.83 4.464,7.29V4.958H1.457C0.848,6.173 0.5,7.548 0.5,9C0.5,10.452 0.848,11.827 1.457,13.042L4.464,10.71Z" />
+  <path
+    android:fillColor="#EA4335"
+    android:fillType="evenOdd"
+    android:pathData="M9.5,3.58C10.821,3.58 12.007,4.034 12.94,4.925L15.522,2.344C13.963,0.892 11.926,0 9.5,0C5.982,0 2.938,2.017 1.457,4.958L4.464,7.29C5.172,5.163 7.156,3.58 9.5,3.58Z" />
+</vector>

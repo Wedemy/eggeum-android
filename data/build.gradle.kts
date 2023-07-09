@@ -7,22 +7,41 @@
 
 @file:Suppress("INLINE_FROM_HIGHER_PLATFORM", "UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   eggeum("android-library")
-  kotlin("kapt")
-  alias(libs.plugins.android.hilt)
+  eggeum("android-hilt")
+  eggeum("kotlin-explicit-api")
+  eggeum("test-kotest")
+  alias(libs.plugins.google.secrets)
+  alias(libs.plugins.moshix.ir)
 }
 
 android {
   namespace = "us.wedemy.eggeum.android.data"
+
+  buildFeatures {
+    buildConfig = true
+  }
 }
 
 dependencies {
-  kapt(libs.android.hilt.compile)
   implementations(
-    libs.android.hilt.runtime,
     libs.timber,
-    libs.bundles.jackson,
+    libs.moshi.core,
     libs.bundles.ktor.client,
+    projects.domain,
   )
+  testImplementation(libs.test.ktor.client.mock)
+}
+
+tasks.withType<KotlinCompile> {
+  kotlinOptions {
+    freeCompilerArgs = freeCompilerArgs + listOf("-opt-in=kotlin.ExperimentalStdlibApi")
+  }
+}
+
+secrets {
+  defaultPropertiesFileName = "secrets.properties"
 }

@@ -32,9 +32,10 @@ buildCache {
 include(
   ":app",
   ":data",
-  ":design-resource",
-  ":common",
+  ":domain",
   ":onboard",
   ":register-cafe",
   ":setting",
+  ":common",
+  ":design-resource",
 )

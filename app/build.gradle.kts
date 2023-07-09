@@ -9,10 +9,9 @@
 
 plugins {
   eggeum("android-application")
+  eggeum("android-hilt")
   id(libs.plugins.google.gms.get().pluginId)
-  alias(libs.plugins.android.hilt)
   alias(libs.plugins.google.secrets)
-  kotlin("kapt")
 }
 
 android {
@@ -25,11 +24,9 @@ android {
 }
 
 dependencies {
-  kapt(libs.android.hilt.compile)
   implementations(
     platform(libs.firebase.bom),
     libs.android.material,
-    libs.android.hilt.runtime,
     libs.androidx.splash,
     libs.androidx.activity,
     libs.androidx.appcompat,
@@ -41,11 +38,12 @@ dependencies {
     libs.insetter,
     libs.timber,
     projects.data,
-    projects.designResource,
-    projects.common,
+    projects.domain,
     projects.onboard,
     projects.registerCafe,
     projects.setting,
+    projects.designResource,
+    projects.common,
   )
 }
 

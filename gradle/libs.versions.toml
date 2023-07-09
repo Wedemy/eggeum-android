@@ -28,12 +28,16 @@ androidx-navigation = "2.7.0-beta02"
 androidx-hilt-navigation = "1.0.0"
 
 ktor-client-core = "2.3.0"
-jackson-core = "2.14.2"
+
+moshi = "1.15.0"
+moshix-ir = "0.23.0"
 
 coil = "2.4.0"
 lottie = "6.0.1"
 insetter = "0.6.1"
 timber = "5.0.1"
+
+javax-inject = "1"
 
 test-kotest = "5.6.2"
 test-junit-core = "4.13.2"
@@ -56,6 +60,8 @@ android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "android-h
 
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
 
+moshix-ir = { id = "dev.zacsweers.moshix", version.ref = "moshix-ir" }
+
 test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-roborazzi" }
 
 [libraries]
@@ -73,8 +79,8 @@ kotlin-ktlint = { module = "com.pinterest:ktlint", version.ref = "kotlin-ktlint-
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
-android-hilt-runtime = { module = "com.google.dagger:hilt-android", version.ref = "android-hilt" }
 android-hilt-compile = { module = "com.google.dagger:hilt-android-compiler", version.ref = "android-hilt" }
+android-hilt-runtime = { module = "com.google.dagger:hilt-android", version.ref = "android-hilt" }
 
 androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -91,16 +97,15 @@ androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fr
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-client-core" }
 ktor-client-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client-core" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-client-core" }
-ktor-client-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor-client-core" }
 
-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson-core" }
-jackson-annotation = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson-core" }
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
 
 test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor-client-core" }
 test-kotest-framework = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "test-kotest" }
@@ -116,6 +121,5 @@ detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-format
 [bundles]
 androidx-lifecycle = ["androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel", "androidx-lifecycle-savedstate"]
 androidx-navigation = ["androidx-navigation-ui", "androidx-navigation-fragment"]
-jackson = ["jackson-databind", "jackson-annotation"]
-ktor-client = ["ktor-client-core", "ktor-client-logging", "ktor-client-engine-cio", "ktor-client-content-negotiation", "ktor-client-serialization-jackson"]
+ktor-client = ["ktor-client-core", "ktor-client-logging", "ktor-client-engine-cio"]
 test-roborazzi = ["test-roborazzi-core", "test-roborazzi-rule"]

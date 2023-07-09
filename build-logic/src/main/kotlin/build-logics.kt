@@ -69,6 +69,15 @@ internal class AndroidLibraryPlugin : BuildLogicPlugin({
   }
 })
 
+internal class AndroidHiltPlugin : BuildLogicPlugin({
+  applyPlugins(
+    libs.findPlugin("android-hilt").get().get().pluginId,
+    Plugins.KotlinKapt,
+  )
+  dependencies.add("kapt", libs.findLibrary("android-hilt-compile").get())
+  dependencies.add("implementation", libs.findLibrary("android-hilt-runtime").get())
+})
+
 internal class AndroidGmdPlugin : BuildLogicPlugin({
   configureGmd(androidExtensions)
 })

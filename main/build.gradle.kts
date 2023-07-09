@@ -9,7 +9,7 @@
 
 plugins {
   eggeum("android-library")
-  alias(libs.plugins.secrets.gradle.plugin)
+  alias(libs.plugins.google.secrets)
   alias(libs.plugins.androidx.navigation.safeargs)
   alias(libs.plugins.android.hilt)
   kotlin("kapt")
@@ -44,5 +44,5 @@ dependencies {
 }
 
 secrets {
-  defaultPropertiesFileName = "secrets.defaults.properties"
+  defaultPropertiesFileName = "secrets.properties"
 }

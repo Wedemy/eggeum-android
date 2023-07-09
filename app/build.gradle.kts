@@ -40,6 +40,7 @@ dependencies {
     libs.naver.map,
     projects.data,
     projects.domain,
+    projects.main,
     projects.onboard,
     projects.registerCafe,
     projects.setting,

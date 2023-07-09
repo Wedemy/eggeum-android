@@ -26,12 +26,15 @@
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bnv_main"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:paddingHorizontal="28dp"
+    android:paddingTop="16dp"
     app:itemBackground="@android:color/transparent"
     app:itemTextColor="@drawable/selector_bottom_nav_text"
     app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

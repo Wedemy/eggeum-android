@@ -70,7 +70,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter
-        isNestedScrollingEnabled = false
         val colorDrawable =
           ColorDrawable(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_300))
         val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)

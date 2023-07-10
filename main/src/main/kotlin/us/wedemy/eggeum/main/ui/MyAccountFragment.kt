@@ -24,10 +24,10 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   }
 
   private fun initListener() {
-    //TODO 화면 전환 클릭 이벤트 리스너 구현
+    // TODO 화면 전환 클릭 이벤트 리스너 구현
   }
 
   private fun initObserver() {
-    //TODO 프로필 정보 및 버전 정보 가져오기
+    // TODO 프로필 정보 및 버전 정보 가져오기
   }
 }

@@ -7,7 +7,7 @@
 
 package us.wedemy.eggeum.main.ui.item
 
-data class NewCafeItem (
+data class NewCafeItem(
   val cafeTitle: String,
-  val cafeAddress: String
+  val cafeAddress: String,
 )

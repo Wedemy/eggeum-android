@@ -88,7 +88,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initObserver() {
-    //TODO 현재 보여지는 지도 내에 등록된 카페 목록 가져오기
+    // TODO 현재 보여지는 지도 내에 등록된 카페 목록 가져오기
   }
 
   private fun initNaverMap() {
@@ -117,8 +117,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun shouldShowPermissionRationale(): Boolean {
-    return (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-      || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION))
+    return (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) ||
+      shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION))
   }
 
   private fun showLocationPermissionRationaleDialog() {

@@ -98,18 +98,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
           }
 
-          override fun onTabUnselected(tab: TabLayout.Tab) {}
-          override fun onTabReselected(tab: TabLayout.Tab) {}
+          override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+          override fun onTabReselected(tab: TabLayout.Tab) = Unit
         })
       }
     }
   }
 
   private fun initListener() {
-    //TODO 화면 전환 클릭 이벤트 리스터 구현
+    // TODO 화면 전환 클릭 이벤트 리스터 구현
   }
 
   private fun initObserver() {
-    //TODO 새로운 카페 목록 및 공지사항 목록 가져오기
+    // TODO 새로운 카페 목록 및 공지사항 목록 가져오기
   }
 }

@@ -9,17 +9,13 @@ package us.wedemy.eggeum.main.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.common.ui.BaseFragment
 import us.wedemy.eggeum.main.databinding.FragmentMyAccountBinding
-import us.wedemy.eggeum.main.viewmodel.MyAccountViewModel
 
 @AndroidEntryPoint
 class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   override fun getViewBinding() = FragmentMyAccountBinding.inflate(layoutInflater)
-
-  private val viewModel by viewModels<MyAccountViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -27,7 +23,11 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
     initObserver()
   }
 
-  private fun initListener() {}
+  private fun initListener() {
+    //TODO 화면 전환 클릭 이벤트 리스너 구현
+  }
 
-  private fun initObserver() {}
+  private fun initObserver() {
+    //TODO 프로필 정보 및 버전 정보 가져오기
+  }
 }

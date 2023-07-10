@@ -14,7 +14,9 @@
 
 package us.wedemy.eggeum.main.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,9 +24,13 @@ import us.wedemy.eggeum.common.ui.BaseActivity
 import us.wedemy.eggeum.main.R
 import us.wedemy.eggeum.main.databinding.ActivityMainBinding
 
+//TODO 화면 위아래 하얀 공백 제거
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
   override val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+  override var statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+  override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()

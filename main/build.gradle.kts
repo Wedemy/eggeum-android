@@ -23,14 +23,12 @@ android {
 }
 
 dependencies {
-  kapt(libs.android.hilt.compile)
   implementations(
+    libs.kotlinx.coroutines.android,
     libs.android.material,
-    libs.android.hilt.runtime,
     libs.android.play.services.location,
     libs.androidx.core,
     libs.androidx.constraintlayout,
-    libs.kotlinx.coroutines.android,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     libs.coil,

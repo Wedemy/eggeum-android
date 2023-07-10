@@ -22,4 +22,7 @@
   <string name="cafe">카페</string>
   <string name="study_cafe">스터디 카페</string>
   <string name="study_room">스터디 룸</string>
+  <string name="location_permission_educational_message">지도 사용을 위해 위치 권한을 허용해주세요.(필수권한)</string>
+  <string name="check">확인</string>
+  <string name="cancel">취소</string>
 </resources>

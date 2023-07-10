@@ -9,10 +9,9 @@
 
 plugins {
   eggeum("android-library")
+  eggeum("android-hilt")
   alias(libs.plugins.google.secrets)
   alias(libs.plugins.androidx.navigation.safeargs)
-  alias(libs.plugins.android.hilt)
-  kotlin("kapt")
   `kotlin-parcelize`
 }
 

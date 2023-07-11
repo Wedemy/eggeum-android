@@ -4,48 +4,38 @@
  * Licensed under the MIT.
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
-
 @file:Suppress("UnstableApiUsage", "INLINE_FROM_HIGHER_PLATFORM")
 
+
 plugins {
-  eggeum("android-application")
+  eggeum("android-library")
   eggeum("android-hilt")
-  id(libs.plugins.google.gms.get().pluginId)
   alias(libs.plugins.google.secrets)
+  alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 android {
-  namespace = "us.wedemy.eggeum.android"
+  namespace = "us.wedemy.eggeum.android.main"
 
   buildFeatures {
     viewBinding = true
-    buildConfig = true
   }
 }
 
 dependencies {
   implementations(
-    platform(libs.firebase.bom),
+    libs.kotlinx.coroutines.android,
     libs.android.material,
-    libs.androidx.splash,
-    libs.androidx.activity,
-    libs.androidx.appcompat,
+    libs.android.play.services.location,
+    libs.androidx.core,
     libs.androidx.constraintlayout,
     libs.bundles.androidx.lifecycle,
-    libs.firebase.auth,
-    libs.google.gms.play.services.auth,
-    libs.lottie,
-    libs.insetter,
+    libs.bundles.androidx.navigation,
+    libs.coil,
     libs.timber,
     libs.naver.map,
-    projects.data,
-    projects.domain,
-    projects.main,
-    projects.onboard,
-    projects.registerCafe,
-    projects.setting,
-    projects.designResource,
     projects.common,
+    projects.designResource,
   )
 }
 

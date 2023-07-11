@@ -34,6 +34,7 @@ include(
   ":data",
   ":domain",
   ":onboard",
+  ":main",
   ":register-cafe",
   ":setting",
   ":common",

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.naver.maps.map.MapView
+    android:id="@+id/mv_search"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab_search_tracking"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:background="@android:color/transparent"
+    android:backgroundTint="@color/white"
+    android:contentDescription="Tracking"
+    android:foreground="@drawable/ic_mark_filled_40"
+    app:borderWidth="0dp"
+    app:layout_constraintBottom_toTopOf="@id/cv_search_cafe"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:ignore="HardcodedText" />
+
+  <androidx.cardview.widget.CardView
+    android:id="@+id/cv_search_cafe"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_search_cafe"
+      style="@style/Widget.Eggeum.TextInputLayout.SearchBox"
+      app:boxStrokeColor="@drawable/selector_box_stroke_color_white"
+      app:startIconDrawable="@drawable/ic_search_filled_16">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tiet_search_cafe"
+        style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+        android:ellipsize="end"
+        android:hint="@string/search_cafe"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+  </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

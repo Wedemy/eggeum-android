@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/fragment_home"
+    android:enabled="true"
+    android:icon="@drawable/selector_home"
+    android:title="@string/home"/>
+  <item
+    android:id="@+id/fragment_search"
+    android:enabled="true"
+    android:icon="@drawable/selector_search"
+    android:title="@string/search"/>
+  <item
+    android:id="@+id/fragment_my_account"
+    android:enabled="true"
+    android:icon="@drawable/selector_my_account"
+    android:title="@string/my_account"/>
+</menu>

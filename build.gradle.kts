@@ -18,6 +18,7 @@ plugins {
   alias(libs.plugins.google.gms) apply false
   alias(libs.plugins.gradle.android.application) apply false
   alias(libs.plugins.gradle.android.library) apply false
+  alias(libs.plugins.google.secrets) apply false
   alias(libs.plugins.android.hilt) apply false
 }
 
@@ -36,6 +37,7 @@ allprojects {
   repositories {
     google()
     mavenCentral()
+    maven("https://naver.jfrog.io/artifactory/maven/")
   }
 
   apply {

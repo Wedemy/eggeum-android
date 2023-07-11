@@ -5,15 +5,15 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.main.ui.adapter
+package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import us.wedemy.eggeum.android.main.databinding.ItemNoticeBinding
 import us.wedemy.eggeum.common.extension.layoutInflater
-import us.wedemy.eggeum.main.databinding.ItemNoticeBinding
-import us.wedemy.eggeum.main.ui.adapter.viewholder.NoticeViewHolder
-import us.wedemy.eggeum.main.ui.item.NoticeItem
+import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeViewHolder
+import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 
 class NoticeAdapter(private val clickListener: (Int) -> Unit) :
   ListAdapter<NoticeItem, NoticeViewHolder>(NoticeItemDiffCallback) {

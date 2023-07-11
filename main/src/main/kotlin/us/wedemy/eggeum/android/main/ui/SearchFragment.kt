@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.main.ui
+package us.wedemy.eggeum.android.main.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -26,9 +26,9 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.main.R
+import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.common.ui.BaseFragment
-import us.wedemy.eggeum.main.R
-import us.wedemy.eggeum.main.databinding.FragmentSearchBinding
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {

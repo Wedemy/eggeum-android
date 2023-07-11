@@ -5,15 +5,15 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.main.ui.adapter
+package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 import us.wedemy.eggeum.common.extension.layoutInflater
-import us.wedemy.eggeum.main.databinding.ItemNewCafeBinding
-import us.wedemy.eggeum.main.ui.adapter.viewholder.NewCafeViewHolder
-import us.wedemy.eggeum.main.ui.item.NewCafeItem
+import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NewCafeViewHolder
+import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
 
 class NewCafeAdapter(private val clickListener: (Int) -> Unit) :
   ListAdapter<NewCafeItem, NewCafeViewHolder>(NewCafeItemDiffCallback) {

@@ -5,14 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
-* Designed and developed by Wedemy 2023.
-*
-* Licensed under the MIT.
-* Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
-*/
-
-package us.wedemy.eggeum.main.ui
+package us.wedemy.eggeum.android.main.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -20,9 +13,9 @@ import androidx.activity.SystemBarStyle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.main.R
+import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
 import us.wedemy.eggeum.common.ui.BaseActivity
-import us.wedemy.eggeum.main.R
-import us.wedemy.eggeum.main.databinding.ActivityMainBinding
 
 // TODO 화면 위아래 하얀 공백 제거
 @AndroidEntryPoint

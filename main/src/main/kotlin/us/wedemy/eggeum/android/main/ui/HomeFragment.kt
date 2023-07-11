@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.main.ui
+package us.wedemy.eggeum.android.main.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,12 +14,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.common.ui.BaseFragment
-import us.wedemy.eggeum.main.databinding.FragmentHomeBinding
-import us.wedemy.eggeum.main.ui.adapter.NewCafeAdapter
-import us.wedemy.eggeum.main.ui.adapter.NoticeAdapter
-import us.wedemy.eggeum.main.ui.item.NewCafeItem
-import us.wedemy.eggeum.main.ui.item.NoticeItem
+import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
+import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
+import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {

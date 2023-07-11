@@ -14,19 +14,19 @@
 
   <fragment
     android:id="@+id/fragment_home"
-    android:name="us.wedemy.eggeum.main.ui.HomeFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.HomeFragment"
     android:label="HomeFragment"
     tools:layout="@layout/fragment_home" />
 
   <fragment
     android:id="@+id/fragment_search"
-    android:name="us.wedemy.eggeum.main.ui.SearchFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.SearchFragment"
     android:label="SearchFragment"
     tools:layout="@layout/fragment_search" />
 
   <fragment
     android:id="@+id/fragment_my_account"
-    android:name="us.wedemy.eggeum.main.ui.MyAccountFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.MyAccountFragment"
     android:label="MyAccountFragment"
     tools:layout="@layout/fragment_my_account" />
 

@@ -85,13 +85,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       noticeAdapter.submitList(notices)
 
       binding.tlHomeNewCafe.apply {
+        val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
         addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
           override fun onTabSelected(tab: TabLayout.Tab) {
-            when (tab.position) {
-              0 -> newCafeAdapter.submitList(newCafes)
-              1 -> newCafeAdapter.submitList(newStudyCafes)
-              2 -> newCafeAdapter.submitList(newStudyRooms)
-            }
+            newCafeAdapter.submitList(cafeLists[tab.position])
           }
 
           override fun onTabUnselected(tab: TabLayout.Tab) = Unit

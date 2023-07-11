@@ -4,6 +4,7 @@
  * Licensed under the MIT.
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
+
 @file:Suppress("UnstableApiUsage", "INLINE_FROM_HIGHER_PLATFORM")
 
 plugins {
@@ -15,7 +16,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.setting"
+  namespace = "us.wedemy.eggeum.android.setting"
 
   buildFeatures {
     viewBinding = true

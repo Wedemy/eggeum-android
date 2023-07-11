@@ -16,7 +16,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.onboard"
+  namespace = "us.wedemy.eggeum.android.onboard"
 
   buildFeatures {
     viewBinding = true

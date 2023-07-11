@@ -9,8 +9,8 @@ package us.wedemy.eggeum.android.data.mapper
 
 import us.wedemy.eggeum.android.data.model.notice.NoticeBodyResponse
 import us.wedemy.eggeum.android.data.model.notice.NoticeListResponse
-import us.wedemy.eggeum.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.domain.model.notice.NoticeList
+import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
+import us.wedemy.eggeum.android.domain.model.notice.NoticeList
 
 internal fun NoticeBodyResponse.toDomain() =
   NoticeBody(

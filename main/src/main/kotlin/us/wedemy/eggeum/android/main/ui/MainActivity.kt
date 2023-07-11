@@ -17,7 +17,6 @@ import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
 import us.wedemy.eggeum.common.ui.BaseActivity
 
-// TODO 화면 위아래 하얀 공백 제거
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
   override val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

@@ -18,9 +18,9 @@ import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.mapper.toDomain
 import us.wedemy.eggeum.android.data.model.notice.NoticeBodyResponse
 import us.wedemy.eggeum.android.data.model.notice.NoticeListResponse
-import us.wedemy.eggeum.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.domain.model.notice.NoticeList
-import us.wedemy.eggeum.domain.repository.NoticeRepository
+import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
+import us.wedemy.eggeum.android.domain.model.notice.NoticeList
+import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
 @Singleton
 public class NoticeRepositoryProvider @Inject constructor(

@@ -21,7 +21,7 @@ import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
-import us.wedemy.eggeum.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.ui.BaseActivity
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {

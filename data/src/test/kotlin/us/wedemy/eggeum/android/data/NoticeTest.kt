@@ -17,9 +17,9 @@ import io.ktor.http.fullPath
 import org.intellij.lang.annotations.Language
 import us.wedemy.eggeum.android.data.client.MoshiProvider
 import us.wedemy.eggeum.android.data.repository.NoticeRepositoryProvider
-import us.wedemy.eggeum.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.domain.model.notice.NoticeList
-import us.wedemy.eggeum.domain.repository.NoticeRepository
+import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
+import us.wedemy.eggeum.android.domain.model.notice.NoticeList
+import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
 private object DummyResponse {
   @Language("json")

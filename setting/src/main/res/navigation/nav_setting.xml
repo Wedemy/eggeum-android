@@ -13,7 +13,7 @@
 
   <fragment
     android:id="@+id/fragment_edit_my_info"
-    android:name="us.wedemy.eggeum.setting.ui.EditMyInfoFragment"
+    android:name="us.wedemy.eggeum.android.setting.ui.EditMyInfoFragment"
     android:label="fragment_edit_my_info"
     tools:layout="@layout/fragment_edit_my_info" />
 

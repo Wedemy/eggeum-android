@@ -21,8 +21,8 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.databinding.ActivityIntroBinding
-import us.wedemy.eggeum.common.extension.changeActivityWithAnimation
-import us.wedemy.eggeum.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.extension.changeActivityWithAnimation
+import us.wedemy.eggeum.android.common.ui.BaseActivity
 
 class IntroActivity : BaseActivity() {
   override val binding by lazy { ActivityIntroBinding.inflate(layoutInflater) }

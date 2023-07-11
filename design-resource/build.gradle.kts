@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-  namespace = "us.wedemy.eggeum.design"
+  namespace = "us.wedemy.eggeum.android.design"
 }
 
 dependencies {

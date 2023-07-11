@@ -11,7 +11,7 @@ firebase-bom = "32.1.1"
 kotlin-core = "1.9.0"
 kotlin-detekt = "1.23.0"
 kotlin-ktlint-gradle = "11.5.0"
-kotlin-ktlint-source = "0.48.2"
+kotlin-ktlint-source = "0.50.0"
 
 kotlinx-coroutines = "1.7.2"
 

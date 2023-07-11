@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
 
   private fun initNavigation() {
     binding.bnvMain.apply {
-      navController?.let { setupWithNavController(it) }
+      navController?.let { ::setupWithNavController }
       itemIconTintList = null
     }
   }

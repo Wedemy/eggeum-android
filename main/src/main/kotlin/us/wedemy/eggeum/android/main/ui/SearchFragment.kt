@@ -148,8 +148,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onPause() {
-    super.onPause()
     binding.mvSearch.onPause()
+    super.onPause()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
@@ -158,13 +158,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onStop() {
-    super.onStop()
     binding.mvSearch.onStop()
+    super.onStop()
+  }
+
+  override fun onDestroyView() {
+    binding.mvSearch.onDestroy()
+    super.onDestroyView()
   }
 
   override fun onLowMemory() {
-    super.onLowMemory()
     binding.mvSearch.onLowMemory()
+    super.onLowMemory()
   }
 
   private companion object {

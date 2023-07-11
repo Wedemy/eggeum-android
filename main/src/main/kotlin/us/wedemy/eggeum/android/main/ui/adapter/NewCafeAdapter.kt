@@ -36,9 +36,7 @@ class NewCafeAdapter(private val clickListener: (Int) -> Unit) :
 
   private companion object {
     private val NewCafeItemDiffCallback = object : DiffUtil.ItemCallback<NewCafeItem>() {
-      override fun areItemsTheSame(oldItem: NewCafeItem, newItem: NewCafeItem) =
-        oldItem.cafeAddress == newItem.cafeAddress
-
+      override fun areItemsTheSame(oldItem: NewCafeItem, newItem: NewCafeItem) = oldItem === newItem
       override fun areContentsTheSame(oldItem: NewCafeItem, newItem: NewCafeItem) = oldItem == newItem
     }
   }

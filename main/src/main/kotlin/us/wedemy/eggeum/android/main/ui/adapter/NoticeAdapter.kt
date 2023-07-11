@@ -36,9 +36,7 @@ class NoticeAdapter(private val clickListener: (Int) -> Unit) :
 
   private companion object {
     private val NoticeItemDiffCallback = object : DiffUtil.ItemCallback<NoticeItem>() {
-      override fun areItemsTheSame(oldItem: NoticeItem, newItem: NoticeItem) =
-        oldItem.noticeTitle == newItem.noticeTitle
-
+      override fun areItemsTheSame(oldItem: NoticeItem, newItem: NoticeItem) = oldItem === newItem
       override fun areContentsTheSame(oldItem: NoticeItem, newItem: NoticeItem) = oldItem == newItem
     }
   }

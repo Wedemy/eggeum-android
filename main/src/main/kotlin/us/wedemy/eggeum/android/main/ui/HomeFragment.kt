@@ -85,10 +85,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       noticeAdapter.submitList(notices)
 
       binding.tlHomeNewCafe.apply {
-        post {
-          getTabAt(0)?.select()
-        }
-
         addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
           override fun onTabSelected(tab: TabLayout.Tab) {
             when (tab.position) {

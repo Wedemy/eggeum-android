@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeBinding
-import us.wedemy.eggeum.common.extension.layoutInflater
+import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeViewHolder
 import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 

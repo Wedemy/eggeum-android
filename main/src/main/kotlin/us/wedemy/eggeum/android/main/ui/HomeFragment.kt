@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
-import us.wedemy.eggeum.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setHasFixedSize(true)
         adapter = newCafeAdapter
         val colorDrawable =
-          ColorDrawable(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_300))
+          ColorDrawable(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_300))
         val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         dividerItemDecoration.setDrawable(colorDrawable)
         addItemDecoration(dividerItemDecoration)

@@ -31,7 +31,7 @@ androidx-hilt-navigation = "1.0.0"
 ktor-client-core = "2.3.2"
 
 moshi = "1.15.0"
-moshix-ir = "0.23.0"
+moshix-ir = "0.22.1"
 
 coil = "2.4.0"
 lottie = "6.0.1"

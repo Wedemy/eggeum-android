@@ -16,7 +16,7 @@ kotlin-ktlint-source = "0.48.2"
 kotlinx-coroutines = "1.7.2"
 
 android-material = "1.9.0"
-android-hilt = "2.46.1"
+android-hilt = "2.47"
 android-play-services-location = "16.0.0"
 
 androidx-splash = "1.0.1"

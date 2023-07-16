@@ -15,7 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
-import us.wedemy.eggeum.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.ui.BaseActivity
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {

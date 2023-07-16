@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.view.View
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
-import us.wedemy.eggeum.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.ui.BaseFragment
 
 @AndroidEntryPoint
 class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {

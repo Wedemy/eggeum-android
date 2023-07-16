@@ -28,7 +28,7 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
-import us.wedemy.eggeum.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.ui.BaseFragment
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
@@ -131,9 +131,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       .show()
     dialog.apply {
       getButton(DialogInterface.BUTTON_POSITIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.teal_500))
+        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
       getButton(DialogInterface.BUTTON_NEGATIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.design.R.color.gray_400))
+        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
     }
   }
 

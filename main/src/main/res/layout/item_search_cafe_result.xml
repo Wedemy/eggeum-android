@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="76dp">
+
+  <ImageView
+    android:id="@+id/iv_cafe_search_result"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:contentDescription="Search Keyword"
+    android:src="@drawable/ic_pin_filled_24"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="HardcodedText" />
+
+  <TextView
+    android:id="@+id/tv_cafe_search_result_name"
+    style="@style/TextLMedium"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toStartOf="@+id/iv_cafe_search_result_arrow"
+    app:layout_constraintStart_toEndOf="@id/iv_cafe_search_result"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="1"
+    tools:text="스타벅스 강남역신분당역사점" />
+
+  <TextView
+    android:id="@+id/tv_cafe_search_result_address"
+    style="@style/TextXsRegular"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="@color/gray_400"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/iv_cafe_search_result_arrow"
+    app:layout_constraintStart_toEndOf="@id/iv_cafe_search_result"
+    app:layout_constraintVertical_bias="0"
+    tools:text="서울 특별시 강남구 강남대로 396" />
+
+  <ImageView
+    android:id="@+id/iv_cafe_search_result_arrow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:contentDescription="Search Keyword Delete"
+    android:src="@drawable/ic_arrow_right_outlined_16"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="HardcodedText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

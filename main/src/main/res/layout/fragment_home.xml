@@ -5,131 +5,121 @@
   ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:fillViewport="true">
 
-  <ScrollView
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:fillViewport="true"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+    <TextView
+      android:id="@+id/tv_home_new_cafe_title"
+      style="@style/H1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="@string/new_cafe"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
-        android:id="@+id/tv_home_new_cafe_title"
-        style="@style/H1"
+    <TextView
+      android:id="@+id/tv_home_new_cafe_subtitle"
+      style="@style/TextMRegular"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="@string/check_new_cafe"
+      android:textColor="@color/gray_500"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_home_new_cafe_title" />
+
+    <com.google.android.material.tabs.TabLayout
+      android:id="@+id/tl_home_new_cafe"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/white"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_home_new_cafe_subtitle"
+      app:tabGravity="start"
+      app:tabIndicatorColor="@color/teal_500"
+      app:tabIndicatorHeight="2dp"
+      app:tabRippleColor="@null"
+      app:tabSelectedTextColor="@color/gray_900"
+      app:tabTextColor="@color/gray_500">
+
+      <com.google.android.material.tabs.TabItem
+        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/new_cafe"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/cafe" />
 
-      <TextView
-        android:id="@+id/tv_home_new_cafe_subtitle"
-        style="@style/TextMRegular"
+      <com.google.android.material.tabs.TabItem
+        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/check_new_cafe"
-        android:textColor="@color/gray_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_new_cafe_title" />
+        android:text="@string/study_cafe" />
 
-      <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tl_home_new_cafe"
+      <com.google.android.material.tabs.TabItem
+        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_new_cafe_subtitle"
-        app:tabGravity="start"
-        app:tabIndicatorColor="@color/teal_500"
-        app:tabIndicatorHeight="2dp"
-        app:tabRippleColor="@null"
-        app:tabSelectedTextColor="@color/gray_900"
-        app:tabTextColor="@color/gray_500">
+        android:text="@string/study_room" />
 
-        <com.google.android.material.tabs.TabItem
-          style="@style/TextMRegular"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/cafe" />
+    </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.tabs.TabItem
-          style="@style/TextMRegular"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/study_cafe" />
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_home_new_cafe"
+      android:layout_width="0dp"
+      android:layout_height="228dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tl_home_new_cafe"
+      tools:listitem="@layout/item_new_cafe" />
 
-        <com.google.android.material.tabs.TabItem
-          style="@style/TextMRegular"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/study_room" />
+    <TextView
+      android:id="@+id/tv_home_notice_title"
+      style="@style/H1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="32dp"
+      android:text="@string/notice"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/rv_home_new_cafe" />
 
-      </com.google.android.material.tabs.TabLayout>
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_home_notice"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:orientation="horizontal"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_home_notice_title"
+      tools:listitem="@layout/item_notice" />
 
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_new_cafe"
-        android:layout_width="0dp"
-        android:layout_height="228dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:nestedScrollingEnabled="false"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tl_home_new_cafe"
-        tools:listitem="@layout/item_new_cafe" />
+    <View
+      android:layout_width="0dp"
+      android:layout_height="40dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/rv_home_notice" />
 
-      <TextView
-        android:id="@+id/tv_home_notice_title"
-        style="@style/H1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/notice"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_home_new_cafe" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_notice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_notice_title"
-        tools:listitem="@layout/item_notice" />
-
-      <View
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_home_notice" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-  </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -7,15 +7,13 @@
 
 package us.wedemy.eggeum.android.main.ui
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.util.addDivider
+import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
@@ -70,11 +68,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter
-        val colorDrawable =
-          ColorDrawable(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_300))
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        dividerItemDecoration.setDrawable(colorDrawable)
-        addItemDecoration(dividerItemDecoration)
+        addDivider(us.wedemy.eggeum.android.design.R.color.gray_300)
       }
 
       rvHomeNotice.apply {

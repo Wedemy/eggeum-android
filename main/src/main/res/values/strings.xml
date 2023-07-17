@@ -25,4 +25,22 @@
   <string name="location_permission_educational_message">지도 사용을 위해 위치 권한을 허용해주세요.(필수권한)</string>
   <string name="check">확인</string>
   <string name="cancel">취소</string>
+  <string name="Info">정보</string>
+  <string name="image">사진</string>
+  <string name="menu">메뉴</string>
+  <string name="area">면적</string>
+  <string name="meeting_room">회의실</string>
+  <string name="multi_seat">다인석</string>
+  <string name="single_seat">1인석</string>
+  <string name="business_hours">영업시간</string>
+  <string name="toilet">화장실</string>
+  <string name="parking">주차</string>
+  <string name="smoking_zone">흡연구역</string>
+  <string name="wifi">WIFI</string>
+  <string name="plug">콘센트</string>
+  <string name="sns">SNS</string>
+  <string name="phone">전화</string>
+  <string name="phone_charging">휴대폰 충전</string>
+  <string name="sns_list"><font color="#14b8a6">블로그</font><font color="#e5e7eb">•</font><font color="#14b8a6">인스타그램</font><font color="#e5e7eb">•</font><font color="#14b8a6">웹사이트</font></string>
+  <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
 </resources>

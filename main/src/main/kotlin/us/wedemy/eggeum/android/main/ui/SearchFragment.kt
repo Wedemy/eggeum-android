@@ -16,6 +16,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
@@ -26,6 +27,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.common.ui.BaseFragment
@@ -84,6 +86,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun initListener() {
     binding.fabSearchTracking.setOnClickListener {
       naverMap.locationTrackingMode = LocationTrackingMode.Follow
+    }
+
+    binding.tietSearchCafe.setOnClickListener {
+      binding.cvSearchCafe.performClick()
+    }
+
+    binding.cvSearchCafe.setOnClickListener {
+      val action = SearchFragmentDirections.actionFragmentSearchToSearchCafeFragment()
+      findNavController().safeNavigate(action)
     }
   }
 

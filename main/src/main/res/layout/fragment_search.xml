@@ -57,6 +57,7 @@
         android:id="@+id/tiet_search_cafe"
         style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
         android:ellipsize="end"
+        android:focusable="false"
         android:hint="@string/search_cafe"
         android:inputType="text"
         android:maxLines="1" />

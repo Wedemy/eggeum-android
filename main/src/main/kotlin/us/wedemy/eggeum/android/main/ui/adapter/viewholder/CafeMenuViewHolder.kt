@@ -14,9 +14,9 @@ import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
 import us.wedemy.eggeum.android.main.ui.item.CafeMenuItem
 
 class CafeMenuViewHolder(val binding: ItemCafeMenuBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(cafeMenuItem: CafeMenuItem) {
-    binding.tvCafeMenuName.text = cafeMenuItem.cafeMenuName
-    binding.tvCafeMenuPrice.text = formatPrice(cafeMenuItem.cafeMenuPrice)
+  fun bind(cafeMenu: CafeMenuItem) {
+    binding.tvCafeMenuName.text = cafeMenu.name
+    binding.tvCafeMenuPrice.text = formatPrice(cafeMenu.price)
   }
 
   private fun formatPrice(price: Int): String {

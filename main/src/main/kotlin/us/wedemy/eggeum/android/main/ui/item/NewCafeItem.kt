@@ -8,6 +8,6 @@
 package us.wedemy.eggeum.android.main.ui.item
 
 data class NewCafeItem(
-  val cafeTitle: String,
-  val cafeAddress: String,
+  val name: String,
+  val address: String,
 )

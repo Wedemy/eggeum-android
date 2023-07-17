@@ -7,7 +7,7 @@
 
 package us.wedemy.eggeum.android.main.ui.item
 
-data class CafeMenuItem (
+data class CafeMenuItem(
   val cafeMenuName: String,
   val cafeMenuPrice: Int,
 )

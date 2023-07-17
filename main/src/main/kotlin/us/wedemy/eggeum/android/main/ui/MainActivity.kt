@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
       itemIconTintList = null
       navController?.addOnDestinationChangedListener { _, destination, _ ->
         visibility = when (destination.id) {
-          R.id.fragment_home, R.id.fragment_search,R.id.fragment_my_account -> View.VISIBLE
+          R.id.fragment_home, R.id.fragment_search, R.id.fragment_my_account -> View.VISIBLE
           else -> View.GONE
         }
       }

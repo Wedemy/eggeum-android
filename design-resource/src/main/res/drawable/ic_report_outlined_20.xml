@@ -1,0 +1,30 @@
+<!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+  <path
+      android:strokeWidth="1"
+      android:pathData="M4.167,8.333C4.167,5.112 6.778,2.5 10,2.5V2.5C13.222,2.5 15.833,5.112 15.833,8.333V14.167H4.167V8.333Z"
+      android:fillColor="#00000000"
+      android:strokeColor="#6B7280"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M6.25,7.917C6.25,7.5 6.667,5.833 7.917,5.417"
+      android:strokeLineJoin="round"
+      android:fillColor="#00000000"
+      android:strokeColor="#6B7280"
+      android:strokeLineCap="round"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M4.167,14.167L15.833,14.167A1.667,1.667 0,0 1,17.5 15.833L17.5,15.833A1.667,1.667 0,0 1,15.833 17.5L4.167,17.5A1.667,1.667 0,0 1,2.5 15.833L2.5,15.833A1.667,1.667 0,0 1,4.167 14.167z"
+      android:fillColor="#00000000"
+      android:strokeColor="#6B7280"/>
+</vector>

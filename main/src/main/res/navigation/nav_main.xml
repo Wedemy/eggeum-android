@@ -39,6 +39,7 @@
     android:name="us.wedemy.eggeum.android.main.ui.MyAccountFragment"
     android:label="MyAccountFragment"
     tools:layout="@layout/fragment_my_account" />
+
   <fragment
     android:id="@+id/fragment_search_cafe"
     android:name="us.wedemy.eggeum.android.main.ui.SearchCafeFragment"

@@ -9,7 +9,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  tools:ignore="HardcodedText">
 
   <com.naver.maps.map.MapView
     android:id="@+id/mv_search"
@@ -32,8 +33,7 @@
     android:foreground="@drawable/ic_mark_filled_40"
     app:borderWidth="0dp"
     app:layout_constraintBottom_toTopOf="@id/cv_search_cafe"
-    app:layout_constraintEnd_toEndOf="parent"
-    tools:ignore="HardcodedText" />
+    app:layout_constraintEnd_toEndOf="parent" />
 
   <androidx.cardview.widget.CardView
     android:id="@+id/cv_search_cafe"

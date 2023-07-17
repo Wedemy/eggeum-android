@@ -9,7 +9,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="76dp">
+  android:layout_height="76dp"
+  tools:ignore="HardcodedText">
 
   <ImageView
     android:id="@+id/iv_cafe_search_result"
@@ -20,8 +21,7 @@
     android:src="@drawable/ic_pin_filled_24"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:ignore="HardcodedText" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/tv_cafe_search_result_name"
@@ -54,7 +54,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/iv_cafe_search_result_arrow"
     app:layout_constraintStart_toEndOf="@id/iv_cafe_search_result"
-    app:layout_constraintVertical_bias="0"
     tools:text="서울 특별시 강남구 강남대로 396" />
 
   <ImageView
@@ -66,8 +65,7 @@
     android:src="@drawable/ic_arrow_right_outlined_16"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:ignore="HardcodedText" />
+    app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

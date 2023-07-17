@@ -9,7 +9,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  tools:ignore="HardcodedText">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -125,8 +126,7 @@
       android:contentDescription="Business Hours"
       android:src="@drawable/ic_clock_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_multi_seat"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_multi_seat" />
 
 
     <TextView
@@ -173,8 +173,7 @@
       android:contentDescription="Toilet"
       android:src="@drawable/ic_toilet_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_business_hours"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_business_hours" />
 
     <TextView
       android:id="@+id/tv_cafe_info_toilet"
@@ -220,8 +219,7 @@
       android:contentDescription="Parking"
       android:src="@drawable/ic_parking_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_toilet"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_toilet" />
 
     <TextView
       android:id="@+id/tv_cafe_info_parking"
@@ -267,8 +265,7 @@
       android:contentDescription="Smoking"
       android:src="@drawable/ic_smoking_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_parking"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_parking" />
 
     <TextView
       android:id="@+id/tv_cafe_info_smoking"
@@ -291,7 +288,6 @@
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_smoking"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_smoking"
-      tools:ignore="HardcodedText"
       tools:src="@drawable/ic_x_filled_16" />
 
     <View
@@ -314,8 +310,7 @@
       android:contentDescription="WIFI"
       android:src="@drawable/ic_wifi_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_smoking"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_smoking" />
 
     <TextView
       android:id="@+id/tv_cafe_info_wifi"
@@ -338,7 +333,6 @@
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_wifi"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_wifi"
-      tools:ignore="HardcodedText"
       tools:src="@drawable/ic_o_filled_16" />
 
     <View
@@ -361,8 +355,7 @@
       android:contentDescription="Plug"
       android:src="@drawable/ic_plug_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_wifi"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_wifi" />
 
     <TextView
       android:id="@+id/tv_cafe_info_plug"
@@ -385,7 +378,6 @@
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_plug"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_plug"
-      tools:ignore="HardcodedText"
       tools:src="@drawable/ic_o_filled_16" />
 
     <View
@@ -408,8 +400,7 @@
       android:contentDescription="Phone Charging"
       android:src="@drawable/ic_phone_charging_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_plug"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_plug" />
 
     <TextView
       android:id="@+id/tv_cafe_info_phone_charging"
@@ -455,8 +446,7 @@
       android:contentDescription="Phone"
       android:src="@drawable/ic_phone_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone_charging"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone_charging" />
 
     <TextView
       android:id="@+id/tv_cafe_info_phone"
@@ -502,8 +492,7 @@
       android:contentDescription="SNS"
       android:src="@drawable/ic_sns_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone"
-      tools:ignore="HardcodedText" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone" />
 
     <TextView
       android:id="@+id/tv_cafe_info_sns"
@@ -538,7 +527,6 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_sns" />
-
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

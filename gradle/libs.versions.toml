@@ -24,6 +24,7 @@ androidx-core = "1.10.1"
 androidx-appcompat = "1.6.1"
 androidx-activity = "1.8.0-alpha06"
 androidx-constraintlayout = "2.1.4"
+androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-beta02"
 androidx-hilt-navigation = "1.0.0"
@@ -90,6 +91,7 @@ androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-cor
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx.datastore" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }

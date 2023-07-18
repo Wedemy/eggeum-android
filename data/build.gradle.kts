@@ -28,6 +28,7 @@ android {
 
 dependencies {
   implementations(
+    libs.androidx.datastore.preferences,
     libs.timber,
     libs.moshi.core,
     libs.bundles.ktor.client,

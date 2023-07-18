@@ -37,7 +37,7 @@ coil = "2.4.0"
 lottie = "6.1.0"
 insetter = "0.6.1"
 timber = "5.0.1"
-naver-map = "3.16.2"
+naver-map = "3.17.0"
 
 javax-inject = "1"
 

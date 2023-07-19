@@ -29,7 +29,7 @@ internal interface JsonBuilder {
   fun build(): String
 }
 
-// 매 DSL 마다 `builder` 인스턴스를 새로 만들어야 함
+// 매 DSL 마다 `buffer` 및 `writer` 인스턴스를 새로 만들어야 함
 // -> 싱글톤 불가
 internal class JsonBuilderInstance(private val pretty: Boolean) : JsonBuilder {
   private val buffer = Buffer()

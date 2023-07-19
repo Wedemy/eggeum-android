@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data
+package us.wedemy.eggeum.android.data.repository
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -16,7 +16,6 @@ import io.ktor.client.engine.mock.respondOk
 import io.ktor.http.fullPath
 import org.intellij.lang.annotations.Language
 import us.wedemy.eggeum.android.data.client.MoshiProvider
-import us.wedemy.eggeum.android.data.repository.NoticeRepositoryProvider
 import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
 import us.wedemy.eggeum.android.domain.model.notice.NoticeList
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
@@ -93,7 +92,16 @@ class NoticeTest : StringSpec() {
     }
 
     "list" {
-      val actual = repository.getNoticeList()
+      val actual =
+        repository
+          .getNoticeList(
+            search = null,
+            page = null,
+            size = null,
+            sort = null,
+            startDate = null,
+            endDate = null,
+          )
       val expect =
         NoticeList(
           elements = listOf(

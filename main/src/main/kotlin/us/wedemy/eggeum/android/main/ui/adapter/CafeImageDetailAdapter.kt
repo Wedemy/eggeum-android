@@ -7,38 +7,26 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageDetailBinding
+import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageDetailViewHolder
 
 class CafeImageDetailAdapter(
   private var imageUrlList: MutableList<String> = mutableListOf(),
   private var currentPosition: Int = 0,
-) : RecyclerView.Adapter<CafeImageDetailAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CafeImageDetailViewHolder>() {
 
-  inner class ViewHolder(val binding: ItemCafeImageDetailBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(position: Int) {
-      val adjustedPosition = getAdjustedPosition(position)
-      binding.ivCafeImageDetail.load(imageUrlList[adjustedPosition])
-    }
-  }
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    CafeImageDetailViewHolder(
+      ItemCafeImageDetailBinding.inflate(parent.context.layoutInflater, parent, false)
+    )
 
-  init {
-    // Add the first and last items to the end and beginning of the list
-    imageUrlList.add(0, imageUrlList.last())
-    imageUrlList.add(imageUrlList[1])
-  }
-
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val layoutInflater = LayoutInflater.from(parent.context)
-    val binding = ItemCafeImageDetailBinding.inflate(layoutInflater, parent, false)
-    return ViewHolder(binding)
-  }
-
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(position)
+  override fun onBindViewHolder(holder: CafeImageDetailViewHolder, position: Int) {
+    val adjustedPosition = getAdjustedPosition(position)
+    val imageUrl = imageUrlList[adjustedPosition]
+    holder.bind(imageUrl)
   }
 
   override fun getItemCount(): Int = imageUrlList.size
@@ -52,7 +40,8 @@ class CafeImageDetailAdapter(
   }
 
   private fun getAdjustedPosition(position: Int): Int {
-    // Adjust the position to support infinite scrolling
+    if (imageUrlList.size <= 1) return 0
+
     if (position == 0) {
       return imageUrlList.size - 2
     } else if (position == imageUrlList.size - 1) {

@@ -12,7 +12,7 @@ import android.view.View
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.common.util.addDivider
+import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter

@@ -25,13 +25,10 @@ abstract class BaseBottomSheetFragment<VB : ViewBinding> : BottomSheetDialogFrag
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View {
-    _binding = getViewBinding()
-    return binding.root
-  }
+  ): View = getViewBinding().also { _binding = it }.root
 
   override fun onDestroyView() {
-    super.onDestroyView()
     _binding = null
+    super.onDestroyView()
   }
 }

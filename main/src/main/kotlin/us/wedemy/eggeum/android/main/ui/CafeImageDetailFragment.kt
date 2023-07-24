@@ -27,8 +27,6 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
   }
 
   private fun initView() {
-    binding.vpCafeImageDetail.apply {
-      adapter = cafeImageDetailAdapter
-    }
+    binding.vpCafeImageDetail.adapter = cafeImageDetailAdapter
   }
 }

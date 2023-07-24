@@ -7,28 +7,23 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageViewHolder
 
 class CafeImageAdapter(private var imageUrlList: List<String> = emptyList()) :
-  RecyclerView.Adapter<CafeImageAdapter.ViewHolder>() {
-  inner class ViewHolder(val binding: ItemCafeImageBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(position: Int) {
-      binding.ivCafeImage.load(imageUrlList[position])
-    }
-  }
+  RecyclerView.Adapter<CafeImageViewHolder>() {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val layoutInflater = LayoutInflater.from(parent.context)
-    val binding = ItemCafeImageBinding.inflate(layoutInflater, parent, false)
-    return ViewHolder(binding)
-  }
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    CafeImageViewHolder(
+      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false)
+    )
 
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(position)
+  override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
+    val imageUrl = imageUrlList[position]
+    holder.bind(imageUrl)
   }
 
   override fun getItemCount() = imageUrlList.size

@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "270541493935",
-    "project_id": "eggeum-389ba",
-    "storage_bucket": "eggeum-389ba.appspot.com"
+    "project_number": "44067650485",
+    "project_id": "eggeum-9e931",
+    "storage_bucket": "eggeum-9e931.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270541493935:android:cc3af4bc9f10cf48a0665a",
+        "mobilesdk_app_id": "1:44067650485:android:6db76e089f26635492f7fc",
         "android_client_info": {
           "package_name": "us.wedemy.eggeum.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "270541493935-q0lvvmcbrpkhdac4fqum3uvg2d5es78t.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "us.wedemy.eggeum.android",
-            "certificate_hash": "0b83a82666681e2897ce6982f4b35f1731f99f91"
-          }
-        },
-        {
-          "client_id": "270541493935-ercnf3qkk6f2cr487kmpst23dti8qb38.apps.googleusercontent.com",
+          "client_id": "44067650485-en2vd28ie333dlaba4gb8amecuookbic.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCLAMi83-b8tU1WtcgMpwKgpRzXASd6_AM"
+          "current_key": "AIzaSyDq7B7AzASaXLLK-eUbawSKfVuTyl3pzm8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "270541493935-ercnf3qkk6f2cr487kmpst23dti8qb38.apps.googleusercontent.com",
+              "client_id": "44067650485-en2vd28ie333dlaba4gb8amecuookbic.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

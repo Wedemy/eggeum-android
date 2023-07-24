@@ -9,7 +9,6 @@ package us.wedemy.eggeum.android.main.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseBottomSheetFragment
@@ -22,14 +21,14 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    showFragment(CafeInfoFragment())
+    showFragment(TAG_CAFE_INFO_FRAGMENT)
 
     binding.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         when (tab?.position) {
-          0 -> showFragment(CafeInfoFragment())
-          1 -> showFragment(CafeImageFragment())
-          2 -> showFragment(CafeMenuFragment())
+          0 -> showFragment(TAG_CAFE_INFO_FRAGMENT)
+          1 -> showFragment(TAG_CAFE_IMAGE_FRAGMENT)
+          2 -> showFragment(TAG_CAFE_MENU_FRAGMENT)
         }
       }
 
@@ -38,16 +37,28 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
     })
   }
 
-  private fun showFragment(fragment: Fragment) {
-    val existingFragment = childFragmentManager.findFragmentByTag(fragment::class.java.simpleName)
+  private fun showFragment(fragmentTag: String) {
+    val existingFragment = childFragmentManager.findFragmentByTag(fragmentTag)
     childFragmentManager.beginTransaction().apply {
       childFragmentManager.fragments.forEach { hide(it) }
       if (existingFragment == null) {
-        add(R.id.child_fragment_container, fragment, fragment::class.java.simpleName)
+        val newFragment = when (tag) {
+          TAG_CAFE_INFO_FRAGMENT -> CafeInfoFragment()
+          TAG_CAFE_IMAGE_FRAGMENT -> CafeImageFragment()
+          TAG_CAFE_MENU_FRAGMENT -> CafeMenuFragment()
+          else -> throw IllegalArgumentException("Unknown fragment tag: $tag")
+        }
+        add(R.id.child_fragment_container, newFragment, tag)
       } else {
         show(existingFragment)
       }
       commit()
     }
+  }
+
+  private companion object {
+    private const val TAG_CAFE_INFO_FRAGMENT = "CafeInfoFragment"
+    private const val TAG_CAFE_IMAGE_FRAGMENT = "CafeImageFragment"
+    private const val TAG_CAFE_MENU_FRAGMENT = "CafeMenuFragment"
   }
 }

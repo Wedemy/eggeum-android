@@ -20,7 +20,7 @@ class CafeImageDetailAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageDetailViewHolder(
-      ItemCafeImageDetailBinding.inflate(parent.context.layoutInflater, parent, false)
+      ItemCafeImageDetailBinding.inflate(parent.context.layoutInflater, parent, false),
     )
 
   override fun onBindViewHolder(holder: CafeImageDetailViewHolder, position: Int) {

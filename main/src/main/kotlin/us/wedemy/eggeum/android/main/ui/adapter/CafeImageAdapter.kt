@@ -18,7 +18,7 @@ class CafeImageAdapter(private var imageUrlList: List<String> = emptyList()) :
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageViewHolder(
-      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false)
+      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false),
     )
 
   override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {

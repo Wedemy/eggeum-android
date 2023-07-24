@@ -39,7 +39,6 @@ internal class TokenDataStoreImpl @Inject constructor(
       else throw exception
     }.map { preferences -> preferences[KEY_ACCESS_TOKEN] ?: "" }
 
-
   override fun getRefreshToken() = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())

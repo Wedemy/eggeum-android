@@ -9,7 +9,6 @@ package us.wedemy.eggeum.android.main.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
@@ -31,8 +30,6 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
     binding.rvCafeImage.apply {
       setHasFixedSize(true)
       adapter = cafeImageAdapter
-      // TODO 단순한 그리드 레이아웃이 아니므로 추후 수정, 아이템 레이아웃도
-      layoutManager = GridLayoutManager(requireContext(), 2)
     }
   }
 }

@@ -20,7 +20,7 @@ private val EnumApiResponseIsNull = IOException("The Enum API response is null."
 public class GetEnumListUseCase @Inject constructor(
   private val repository: EnumRepository,
 ) {
-  public suspend operator fun invoke(): Result<EnumList> =
+  public suspend fun execute(): Result<EnumList> =
     runSuspendCatching {
       repository.getEnumList() ?: throw EnumApiResponseIsNull
     }

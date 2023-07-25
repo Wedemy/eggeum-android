@@ -21,7 +21,7 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
   fun getLoginBody(idToken: String) {
     viewModelScope.launch {
-      val result = getLoginBodyUseCase(idToken)
+      val result = getLoginBodyUseCase.execute(idToken)
       if (result.isSuccess) {
         val loginBody = result.getOrNull()
         Timber.d("$loginBody")

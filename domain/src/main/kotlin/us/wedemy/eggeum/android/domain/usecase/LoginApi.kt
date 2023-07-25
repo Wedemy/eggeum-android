@@ -21,7 +21,7 @@ private val LoginApiResponseIsNull = IOException("The Login API response is null
 public class GetLoginBodyUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
-  public suspend operator fun invoke(idToken: String? = null): Result<LoginBody> =
+  public suspend fun execute(idToken: String? = null): Result<LoginBody> =
     runSuspendCatching {
       repository.getLoginBody(idToken) ?: throw LoginApiResponseIsNull
     }
@@ -31,7 +31,7 @@ public class GetLoginBodyUseCase @Inject constructor(
 public class GetSignUpBodyUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
-  public suspend operator fun invoke(
+  public suspend fun execute(
     agreemMarketing: Boolean? = null,
     idToken: String? = null,
     nickname: String? = null,

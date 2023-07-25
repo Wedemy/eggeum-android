@@ -17,7 +17,9 @@ import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 @AndroidEntryPoint
 class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
 
-  private val cafeImageAdapter by lazy { CafeImageAdapter() }
+  private val cafeImageAdapter by lazy {
+    CafeImageAdapter { _ -> run {} }
+  }
 
   override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)
 

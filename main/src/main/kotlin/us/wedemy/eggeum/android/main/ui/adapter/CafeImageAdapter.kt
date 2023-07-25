@@ -13,8 +13,10 @@ import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageViewHolder
 
-class CafeImageAdapter(private var imageUrlList: List<String> = emptyList()) :
-  RecyclerView.Adapter<CafeImageViewHolder>() {
+class CafeImageAdapter(
+  private var imageUrlList: List<String> = emptyList(),
+  private val clickListener: (Int) -> Unit,
+) : RecyclerView.Adapter<CafeImageViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageViewHolder(
@@ -23,13 +25,17 @@ class CafeImageAdapter(private var imageUrlList: List<String> = emptyList()) :
 
   override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
     val imageUrl = imageUrlList[position]
-    holder.bind(imageUrl)
+    with(holder) {
+      bind(imageUrl)
+      binding.root.setOnClickListener {
+        clickListener(adapterPosition)
+      }
+    }
   }
 
   override fun getItemCount() = imageUrlList.size
 
   fun submitList(list: List<String>) {
     imageUrlList = list
-    notifyDataSetChanged()
   }
 }

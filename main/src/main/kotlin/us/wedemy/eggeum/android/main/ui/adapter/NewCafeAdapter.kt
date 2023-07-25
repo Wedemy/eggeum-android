@@ -8,36 +8,33 @@
 package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
+import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.common.extension.layoutInflater
+import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NewCafeViewHolder
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
 
-class NewCafeAdapter(private val clickListener: (Int) -> Unit) :
-  ListAdapter<NewCafeItem, NewCafeViewHolder>(NewCafeItemDiffCallback) {
+class NewCafeAdapter(
+  private var cafeList: List<NewCafeItem> = emptyList(),
+  private val clickListener: (Int) -> Unit,
+) : RecyclerView.Adapter<NewCafeViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     NewCafeViewHolder(ItemNewCafeBinding.inflate(parent.context.layoutInflater, parent, false))
 
   override fun onBindViewHolder(holder: NewCafeViewHolder, position: Int) {
-    val newCafeItem = getItem(position)
-
+    val cafe = cafeList[position]
     with(holder) {
-      newCafeItem?.let { newCafe ->
-        bind(newCafe)
-        binding.root.setOnClickListener {
-          clickListener(adapterPosition)
-        }
-      } ?: binding.root.setOnClickListener(null)
+      bind(cafe)
+      binding.root.setOnClickListener {
+        clickListener(adapterPosition)
+      }
     }
   }
 
-  private companion object {
-    private val NewCafeItemDiffCallback = object : DiffUtil.ItemCallback<NewCafeItem>() {
-      override fun areItemsTheSame(oldItem: NewCafeItem, newItem: NewCafeItem) = oldItem === newItem
-      override fun areContentsTheSame(oldItem: NewCafeItem, newItem: NewCafeItem) = oldItem == newItem
-    }
+  override fun getItemCount() = cafeList.size
+
+  fun submitList(list: List<NewCafeItem>) {
+    cafeList = list
   }
 }

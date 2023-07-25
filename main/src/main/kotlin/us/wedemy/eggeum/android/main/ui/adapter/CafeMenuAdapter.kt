@@ -8,26 +8,22 @@
 package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeMenuViewHolder
 import us.wedemy.eggeum.android.main.ui.item.CafeMenuItem
 
-class CafeMenuAdapter : ListAdapter<CafeMenuItem, CafeMenuViewHolder>(CafeMenuItemDiffCallback) {
+class CafeMenuAdapter(
+  private var menuList: List<CafeMenuItem> = emptyList(),
+) : RecyclerView.Adapter<CafeMenuViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeMenuViewHolder(ItemCafeMenuBinding.inflate(parent.context.layoutInflater, parent, false))
 
   override fun onBindViewHolder(holder: CafeMenuViewHolder, position: Int) {
-    val cafeMenuItem = getItem(position)
-    cafeMenuItem?.let { cafeMenu -> holder.bind(cafeMenu) }
+    val menu = menuList[position]
+    holder.bind(menu)
   }
 
-  private companion object {
-    private val CafeMenuItemDiffCallback = object : DiffUtil.ItemCallback<CafeMenuItem>() {
-      override fun areItemsTheSame(oldItem: CafeMenuItem, newItem: CafeMenuItem) = oldItem === newItem
-      override fun areContentsTheSame(oldItem: CafeMenuItem, newItem: CafeMenuItem) = oldItem == newItem
-    }
-  }
+  override fun getItemCount() = menuList.size
 }

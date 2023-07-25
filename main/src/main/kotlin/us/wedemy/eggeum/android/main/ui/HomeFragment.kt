@@ -31,23 +31,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeAdapter { _ -> run {} }
   }
 
-  val newCafes = listOf(
+  private val newCafes = listOf(
     NewCafeItem("스타벅스 강남역신분당역사점", "서울특별시 강남구 강남대로 396"),
     NewCafeItem("아티제 삼성타운점", "서울특별시 강남구 서초대로74길 11"),
     NewCafeItem("스타벅스 강남R점", "서울특별시 강남구 강남대로 390"),
   )
-  val newStudyCafes = listOf(
+  private val newStudyCafes = listOf(
     NewCafeItem("세컨드 라이브러리", "서울특별시 강남구 영동대로137길 6"),
     NewCafeItem("데일리스터디카페 대치점", "서울특별시 강남구 삼성로58길 13"),
     NewCafeItem("랭스터디카페 대치점", "서울특별시 강남구 도곡로 446"),
   )
-  val newStudyRooms = listOf(
+  private val newStudyRooms = listOf(
     NewCafeItem("맥스터디 24시", "서울특별시 강남구 개포로 508"),
     NewCafeItem("토즈 워크센터 선릉점", "서울특별시 강남구 테헤란로52길 21"),
     NewCafeItem("옐로스톤 스터디룸", "서울특별시 강남구 강남대로94길 21"),
   )
 
-  val notices = listOf(
+  private val notices = listOf(
     NoticeItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
     NoticeItem("카페 평가하는 법", "23.03.01"),
     NoticeItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),

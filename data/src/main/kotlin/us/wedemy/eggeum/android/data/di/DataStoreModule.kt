@@ -19,6 +19,8 @@ import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreImpl
 
 private const val TOKEN_DATASTORE = "token_datastore"
+
+@Suppress("unused")
 private val Context.tokenDataStore: DataStore<Preferences> by preferencesDataStore(name = TOKEN_DATASTORE)
 
 @Module

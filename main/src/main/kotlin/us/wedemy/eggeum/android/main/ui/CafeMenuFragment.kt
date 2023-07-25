@@ -24,10 +24,6 @@ class CafeMenuFragment : BaseFragment<FragmentCafeMenuBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initView()
-  }
-
-  private fun initView() {
     binding.rvCafeMenu.apply {
       setHasFixedSize(true)
       adapter = cafeMenuAdapter

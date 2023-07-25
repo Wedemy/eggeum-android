@@ -31,7 +31,10 @@ public class NoticeRepositoryProvider @Inject constructor(
   private val noticeListAdapter = moshi.adapter<NoticeListResponse>()
 
   override suspend fun getNoticeBody(noticeId: Int): NoticeBody? {
-    val responseText = client.get("notice/$noticeId").bodyAsText()
+    val responseText =
+      client
+        .get("notice/$noticeId")
+        .bodyAsText()
     val response = noticeBodyAdapter.fromJson(responseText)
     return response?.toDomain()
   }

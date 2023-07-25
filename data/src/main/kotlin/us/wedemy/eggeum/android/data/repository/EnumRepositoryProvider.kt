@@ -26,7 +26,10 @@ public class EnumRepositoryProvider @Inject constructor(
 ) : EnumRepository {
   private val enumListAdapter = moshi.adapter<EnumListResponse>()
   override suspend fun getEnumList(): EnumList? {
-    val responseText = client.get("/enums").bodyAsText()
+    val responseText =
+      client
+        .get("/enums")
+        .bodyAsText()
     val response = enumListAdapter.fromJson(responseText)
     return response?.toDomain()
   }

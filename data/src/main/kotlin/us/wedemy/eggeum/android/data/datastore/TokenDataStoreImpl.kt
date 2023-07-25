@@ -15,7 +15,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
 
 internal class TokenDataStoreImpl @Inject constructor(
   private val dataStore: DataStore<Preferences>,
@@ -33,17 +33,18 @@ internal class TokenDataStoreImpl @Inject constructor(
     dataStore.edit { preferences -> preferences[KEY_REFRESH_TOKEN] = refreshToken }
   }
 
-  override fun getAccessToken() = dataStore.data
+  override suspend fun getAccessToken() = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())
       else throw exception
-    }.map { preferences -> preferences[KEY_ACCESS_TOKEN] ?: "" }
+    }.first()[KEY_ACCESS_TOKEN] ?: ""
 
-  override fun getRefreshToken() = dataStore.data
+
+  override suspend fun getRefreshToken() = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())
       else throw exception
-    }.map { preferences -> preferences[KEY_ACCESS_TOKEN] ?: "" }
+    }.first()[KEY_REFRESH_TOKEN] ?: ""
 
   override suspend fun clearDataStore() {
     dataStore.edit { it.clear() }

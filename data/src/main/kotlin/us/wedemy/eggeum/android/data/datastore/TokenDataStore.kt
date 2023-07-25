@@ -7,16 +7,14 @@
 
 package us.wedemy.eggeum.android.data.datastore
 
-import kotlinx.coroutines.flow.Flow
-
 internal interface TokenDataStore {
   suspend fun setAccessToken(accessToken: String)
 
   suspend fun setRefreshToken(refreshToken: String)
 
-  fun getAccessToken(): Flow<String>
+  suspend fun getAccessToken(): String
 
-  fun getRefreshToken(): Flow<String>
+  suspend fun getRefreshToken(): String
 
   suspend fun clearDataStore()
 }

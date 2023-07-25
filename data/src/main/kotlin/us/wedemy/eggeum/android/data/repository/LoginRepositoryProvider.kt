@@ -31,11 +31,13 @@ public class LoginRepositoryProvider @Inject constructor(
   private val signUpBodyAdapter = moshi.adapter<SignUpBodyResponse>()
 
   override suspend fun getLoginBody(idToken: String?): LoginBody? {
-    val responseText = client.post("app/sns-sign-in") {
-      jsonBody(true) {
-        "idToken" withString idToken
-      }
-    }.bodyAsText()
+    val responseText =
+      client
+        .post("app/sns-sign-in") {
+          jsonBody(true) {
+            "idToken" withString idToken
+          }
+        }.bodyAsText()
     val response = loginBodyAdapter.fromJson(responseText)
     return response?.toDomain()
   }
@@ -45,13 +47,15 @@ public class LoginRepositoryProvider @Inject constructor(
     idToken: String?,
     nickname: String?,
   ): SignUpBody? {
-    val responseText = client.post("app/sns-sign-up") {
-      jsonBody(true) {
-        "agreemMarketing" withBoolean agreemMarketing
-        "idToken" withString nickname
-        "nickname" withString nickname
-      }
-    }.bodyAsText()
+    val responseText =
+      client
+        .post("app/sns-sign-up") {
+          jsonBody(true) {
+            "agreemMarketing" withBoolean agreemMarketing
+            "idToken" withString nickname
+            "nickname" withString nickname
+          }
+        }.bodyAsText()
     val response = signUpBodyAdapter.fromJson(responseText)
     return response?.toDomain()
   }

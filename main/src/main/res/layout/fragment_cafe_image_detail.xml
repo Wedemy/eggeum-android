@@ -49,13 +49,25 @@
     tools:background="@color/white" />
 
   <ImageView
+    android:id="@+id/iv_cafe_image_detail_next"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="6dp"
+    android:layout_marginEnd="16dp"
     android:contentDescription="Right Arrow"
     android:src="@drawable/ic_arrow_right_filled_32"
     app:layout_constraintBottom_toBottomOf="@id/vp_cafe_image_detail"
     app:layout_constraintEnd_toEndOf="@id/vp_cafe_image_detail"
+    app:layout_constraintTop_toTopOf="@id/vp_cafe_image_detail" />
+
+  <ImageView
+    android:id="@+id/iv_cafe_image_detail_prev"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:contentDescription="Left Arrow"
+    android:src="@drawable/ic_arrow_left_filled_32"
+    app:layout_constraintBottom_toBottomOf="@id/vp_cafe_image_detail"
+    app:layout_constraintStart_toStartOf="@id/vp_cafe_image_detail"
     app:layout_constraintTop_toTopOf="@id/vp_cafe_image_detail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

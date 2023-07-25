@@ -19,14 +19,16 @@ import us.wedemy.eggeum.android.domain.usecase.GetLoginBodyUseCase
 class LoginViewModel @Inject constructor(
   private val getLoginBodyUseCase: GetLoginBodyUseCase,
 ) : ViewModel() {
-  fun getLoginBody(idToken: String) = viewModelScope.launch {
-    val result = getLoginBodyUseCase(idToken)
-    if (result.isSuccess) {
-      val loginBody = result.getOrNull()
-      Timber.d("$loginBody")
-    } else if (result.isFailure) {
-      val exception = result.exceptionOrNull()
-      Timber.e(exception)
+  fun getLoginBody(idToken: String) {
+    viewModelScope.launch {
+      val result = getLoginBodyUseCase(idToken)
+      if (result.isSuccess) {
+        val loginBody = result.getOrNull()
+        Timber.d("$loginBody")
+      } else if (result.isFailure) {
+        val exception = result.exceptionOrNull()
+        Timber.e(exception)
+      }
     }
   }
 }

@@ -33,8 +33,4 @@ class NoticeAdapter(
   }
 
   override fun getItemCount() = noticeList.size
-
-  fun submitList(list: List<NoticeItem>) {
-    noticeList = list
-  }
 }

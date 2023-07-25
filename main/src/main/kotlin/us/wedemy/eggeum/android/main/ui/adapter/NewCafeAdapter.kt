@@ -33,8 +33,4 @@ class NewCafeAdapter(
   }
 
   override fun getItemCount() = cafeList.size
-
-  fun submitList(list: List<NewCafeItem>) {
-    cafeList = list
-  }
 }

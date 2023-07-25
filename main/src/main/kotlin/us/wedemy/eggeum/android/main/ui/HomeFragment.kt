@@ -23,13 +23,8 @@ import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-  private val newCafeAdapter by lazy {
-    NewCafeAdapter { _ -> run {} }
-  }
-
-  private val noticeAdapter by lazy {
-    NoticeAdapter { _ -> run {} }
-  }
+  private lateinit var newCafeAdapter: NewCafeAdapter
+  private lateinit var noticeAdapter: NoticeAdapter
 
   private val newCafes = listOf(
     NewCafeItem("스타벅스 강남역신분당역사점", "서울특별시 강남구 강남대로 396"),
@@ -75,14 +70,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setHasFixedSize(true)
         adapter = noticeAdapter
       }
-      newCafeAdapter.submitList(newCafes)
-      noticeAdapter.submitList(notices)
-
+      newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
+      noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
       binding.tlHomeNewCafe.apply {
         val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
         addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
           override fun onTabSelected(tab: TabLayout.Tab) {
-            newCafeAdapter.submitList(cafeLists[tab.position])
+            newCafeAdapter = NewCafeAdapter(cafeLists[tab.position]) { _ -> run {} }
           }
 
           override fun onTabUnselected(tab: TabLayout.Tab) = Unit

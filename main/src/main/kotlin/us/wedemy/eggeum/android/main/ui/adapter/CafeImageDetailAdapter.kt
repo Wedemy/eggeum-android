@@ -29,8 +29,4 @@ class CafeImageDetailAdapter(
   }
 
   override fun getItemCount() = if (imageUrlList.size > 1) Integer.MAX_VALUE else imageUrlList.size
-
-  fun submitList(list: List<String>) {
-    imageUrlList = list
-  }
 }

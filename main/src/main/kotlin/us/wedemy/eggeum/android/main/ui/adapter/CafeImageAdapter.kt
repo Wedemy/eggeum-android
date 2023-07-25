@@ -34,8 +34,4 @@ class CafeImageAdapter(
   }
 
   override fun getItemCount() = imageUrlList.size
-
-  fun submitList(list: List<String>) {
-    imageUrlList = list
-  }
 }

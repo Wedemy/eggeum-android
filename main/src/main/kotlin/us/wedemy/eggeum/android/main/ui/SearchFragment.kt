@@ -44,7 +44,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private var permissionsGranted = false
 
   private val requestMultiplePermissionsLauncher =
-    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
       if (isPermissionsGranted()) {
         permissionsGranted = true
       } else {

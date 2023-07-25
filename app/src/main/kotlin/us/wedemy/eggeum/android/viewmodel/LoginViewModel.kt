@@ -22,12 +22,18 @@ class LoginViewModel @Inject constructor(
   fun getLoginBody(idToken: String) {
     viewModelScope.launch {
       val result = getLoginBodyUseCase.execute(idToken)
-      if (result.isSuccess) {
-        val loginBody = result.getOrNull()
-        Timber.d("$loginBody")
-      } else if (result.isFailure) {
-        val exception = result.exceptionOrNull()
-        Timber.e(exception)
+      when {
+        result.isSuccess && result.getOrNull() != null -> {
+          val loginBody = result.getOrNull()
+          Timber.d("$loginBody")
+        }
+        result.isSuccess && result.getOrNull() == null -> {
+          Timber.e("Request succeeded but data validation failed.")
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+        }
       }
     }
   }

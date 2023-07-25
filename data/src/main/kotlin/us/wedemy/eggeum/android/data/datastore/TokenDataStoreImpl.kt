@@ -39,7 +39,6 @@ internal class TokenDataStoreImpl @Inject constructor(
       else throw exception
     }.first()[KEY_ACCESS_TOKEN] ?: ""
 
-
   override suspend fun getRefreshToken() = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())

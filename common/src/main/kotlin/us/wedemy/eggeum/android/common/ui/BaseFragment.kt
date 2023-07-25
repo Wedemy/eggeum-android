@@ -9,7 +9,6 @@ package us.wedemy.eggeum.android.common.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
@@ -25,7 +24,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View = getViewBinding().also { _binding = it }.root
+  ) = getViewBinding().also { _binding = it }.root
 
   override fun onDestroyView() {
     _binding = null

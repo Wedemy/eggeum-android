@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.activity.SystemBarStyle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -36,6 +37,12 @@ class MainActivity : BaseActivity() {
     binding.bnvMain.apply {
       navController?.let(::setupWithNavController)
       itemIconTintList = null
+      navController?.addOnDestinationChangedListener { _, destination, _ ->
+        visibility = when (destination.id) {
+          R.id.fragment_home, R.id.fragment_search, R.id.fragment_my_account -> View.VISIBLE
+          else -> View.GONE
+        }
+      }
     }
   }
 

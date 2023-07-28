@@ -12,8 +12,8 @@ import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
 
 class NewCafeViewHolder(val binding: ItemNewCafeBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(newCafeItem: NewCafeItem) {
-    binding.tvNewCafeName.text = newCafeItem.cafeTitle
-    binding.tvNewCafeAddress.text = newCafeItem.cafeAddress
+  fun bind(newCafe: NewCafeItem) {
+    binding.tvNewCafeName.text = newCafe.name
+    binding.tvNewCafeAddress.text = newCafe.address
   }
 }

@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android
+package us.wedemy.eggeum.android.ui
 
 import android.app.Activity
 import android.content.IntentSender
@@ -14,14 +14,17 @@ import android.os.Bundle
 import androidx.activity.SystemBarStyle
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
+import us.wedemy.eggeum.android.BuildConfig
 import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
+import us.wedemy.eggeum.android.viewmodel.LoginViewModel
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
@@ -29,6 +32,8 @@ class LoginActivity : BaseActivity() {
 
   override var statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
   override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+  private val viewModel by viewModels<LoginViewModel>()
 
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
@@ -38,10 +43,9 @@ class LoginActivity : BaseActivity() {
       if (result.resultCode == Activity.RESULT_OK) {
         try {
           val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
-
-          @Suppress("UNUSED_VARIABLE")
-          val idToken = credential.googleIdToken.also { idToken ->
-            Timber.tag("idToken").d(idToken)
+          val idToken = credential.googleIdToken
+          idToken?.let {
+            viewModel.getLoginBody(it)
           }
         } catch (exception: ApiException) {
           Timber.e(exception.localizedMessage)

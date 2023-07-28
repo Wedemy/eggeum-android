@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android
+package us.wedemy.eggeum.android.ui
 
 import android.animation.Animator
 import android.animation.ObjectAnimator

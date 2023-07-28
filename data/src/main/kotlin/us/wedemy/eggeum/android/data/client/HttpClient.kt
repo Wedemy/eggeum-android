@@ -37,7 +37,7 @@ private val KtorClient =
       }
     }
     defaultRequest {
-      url(BuildConfig.SERVER_BASEURL)
+      url(BuildConfig.SERVER_BASE_URL)
       contentType(ContentType.Application.Json)
     }
     install(Logging) {

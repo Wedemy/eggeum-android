@@ -19,7 +19,7 @@
     tools:ignore="MissingApplicationIcon">
 
     <activity
-      android:name=".IntroActivity"
+      android:name=".ui.IntroActivity"
       android:exported="true"
       android:theme="@style/Theme.Eggeum">
 
@@ -30,7 +30,7 @@
     </activity>
 
     <activity
-      android:name=".LoginActivity"
+      android:name=".ui.LoginActivity"
       android:theme="@style/Theme.Eggeum" />
 
   </application>

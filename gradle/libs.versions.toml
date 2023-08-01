@@ -29,7 +29,7 @@ androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.7.0-rc01"
 androidx-hilt-navigation = "1.0.0"
 
-ktor-client-core = "2.3.2"
+ktor-client-core = "2.3.3"
 
 moshi = "1.15.0"
 moshix-ir = "0.22.1"

@@ -19,7 +19,6 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +39,6 @@ class LoginActivity : BaseActivity() {
 
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
-  private lateinit var auth: FirebaseAuth
 
   private val oneTapClientResult =
     registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
@@ -49,14 +47,13 @@ class LoginActivity : BaseActivity() {
           val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
           val googleIdToken = credential.googleIdToken
           if (googleIdToken != null) {
-            val user = FirebaseAuth.getInstance().currentUser
-            user!!.getIdToken(true)
+            Firebase.auth.currentUser!!.getIdToken(true)
               .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                   val firebaseIdToken: String? = task.result.token
                   viewModel.getLoginBody(firebaseIdToken!!)
                 } else {
-                  Timber.d("${task.exception}")
+                  Timber.e(task.exception)
                 }
               }
           } else {
@@ -70,7 +67,6 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    auth = Firebase.auth
     initGoogleLogin()
     initListener()
   }

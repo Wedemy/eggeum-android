@@ -8,6 +8,6 @@
 package us.wedemy.eggeum.android.main.ui.item
 
 data class NoticeItem(
-  val noticeTitle: String,
-  val noticeDate: String,
+  val title: String,
+  val date: String,
 )

@@ -7,15 +7,13 @@
 
 package us.wedemy.eggeum.android.main.ui
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.extension.addDivider
+import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
@@ -25,31 +23,26 @@ import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-  private val newCafeAdapter by lazy {
-    NewCafeAdapter { _ -> run {} }
-  }
+  private lateinit var newCafeAdapter: NewCafeAdapter
+  private lateinit var noticeAdapter: NoticeAdapter
 
-  private val noticeAdapter by lazy {
-    NoticeAdapter { _ -> run {} }
-  }
-
-  val newCafes = listOf(
+  private val newCafes = listOf(
     NewCafeItem("스타벅스 강남역신분당역사점", "서울특별시 강남구 강남대로 396"),
     NewCafeItem("아티제 삼성타운점", "서울특별시 강남구 서초대로74길 11"),
     NewCafeItem("스타벅스 강남R점", "서울특별시 강남구 강남대로 390"),
   )
-  val newStudyCafes = listOf(
+  private val newStudyCafes = listOf(
     NewCafeItem("세컨드 라이브러리", "서울특별시 강남구 영동대로137길 6"),
     NewCafeItem("데일리스터디카페 대치점", "서울특별시 강남구 삼성로58길 13"),
     NewCafeItem("랭스터디카페 대치점", "서울특별시 강남구 도곡로 446"),
   )
-  val newStudyRooms = listOf(
+  private val newStudyRooms = listOf(
     NewCafeItem("맥스터디 24시", "서울특별시 강남구 개포로 508"),
     NewCafeItem("토즈 워크센터 선릉점", "서울특별시 강남구 테헤란로52길 21"),
     NewCafeItem("옐로스톤 스터디룸", "서울특별시 강남구 강남대로94길 21"),
   )
 
-  val notices = listOf(
+  private val notices = listOf(
     NoticeItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
     NoticeItem("카페 평가하는 법", "23.03.01"),
     NoticeItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
@@ -70,25 +63,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter
-        val colorDrawable =
-          ColorDrawable(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_300))
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        dividerItemDecoration.setDrawable(colorDrawable)
-        addItemDecoration(dividerItemDecoration)
+        addDivider(us.wedemy.eggeum.android.design.R.color.gray_300)
       }
 
       rvHomeNotice.apply {
         setHasFixedSize(true)
         adapter = noticeAdapter
       }
-      newCafeAdapter.submitList(newCafes)
-      noticeAdapter.submitList(notices)
-
+      newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
+      noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
       binding.tlHomeNewCafe.apply {
         val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
         addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
           override fun onTabSelected(tab: TabLayout.Tab) {
-            newCafeAdapter.submitList(cafeLists[tab.position])
+            newCafeAdapter = NewCafeAdapter(cafeLists[tab.position]) { _ -> run {} }
           }
 
           override fun onTabUnselected(tab: TabLayout.Tab) = Unit

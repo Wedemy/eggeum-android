@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/action_share"
+    android:icon="@drawable/ic_share_white_outlined_24"
+    android:title="@string/share"
+    app:showAsAction="ifRoom" />
+  <item
+    android:id="@+id/action_options"
+    android:icon="@drawable/ic_overflow_white_outlined_24"
+    android:title="@string/options"
+    app:showAsAction="ifRoom" />
+</menu>

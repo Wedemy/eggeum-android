@@ -19,6 +19,8 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import us.wedemy.eggeum.android.BuildConfig
@@ -43,9 +45,19 @@ class LoginActivity : BaseActivity() {
       if (result.resultCode == Activity.RESULT_OK) {
         try {
           val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
-          val idToken = credential.googleIdToken
-          idToken?.let {
-            viewModel.getLoginBody(it)
+          val googleIdToken = credential.googleIdToken
+          if (googleIdToken != null) {
+            Firebase.auth.currentUser!!.getIdToken(true)
+              .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                  val firebaseIdToken: String? = task.result.token
+                  viewModel.getLoginBody(firebaseIdToken!!)
+                } else {
+                  Timber.e(task.exception)
+                }
+              }
+          } else {
+            Timber.d("No ID token!")
           }
         } catch (exception: ApiException) {
           Timber.e(exception.localizedMessage)

@@ -26,7 +26,7 @@ androidx-activity = "1.8.0-alpha06"
 androidx-constraintlayout = "2.1.4"
 androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.6.1"
-androidx-navigation = "2.7.0-rc01"
+androidx-navigation = "2.7.0"
 androidx-hilt-navigation = "1.0.0"
 
 ktor-client-core = "2.3.3"

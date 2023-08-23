@@ -18,12 +18,14 @@ internal interface JsonBuilder {
   infix fun String.withFloat(value: Float?)
   infix fun String.withBoolean(value: Boolean?)
   infix fun String.withString(value: String?)
+  infix fun String.withDouble(value: Double?)
   fun <T> String.withPojo(adapter: JsonAdapter<T>, value: T?)
 
   infix fun String.withInts(value: List<Int>)
   infix fun String.withFloats(value: List<Float>)
   infix fun String.withBooleans(value: List<Boolean>)
   infix fun String.withStrings(value: List<String>)
+  infix fun String.withDoubles(value: List<Double>)
   fun <T> String.withPojos(adapter: JsonAdapter<List<T?>>, value: List<T?>?)
 
   fun build(): String
@@ -55,6 +57,10 @@ internal class JsonBuilderInstance(private val pretty: Boolean) : JsonBuilder {
   }
 
   override fun String.withString(value: String?) {
+    writer.name(this).value(value)
+  }
+
+  override fun String.withDouble(value: Double?) {
     writer.name(this).value(value)
   }
 
@@ -91,6 +97,15 @@ internal class JsonBuilderInstance(private val pretty: Boolean) : JsonBuilder {
   }
 
   override fun String.withStrings(value: List<String>) {
+    writer.name(this)
+    writer.beginArray()
+    for (element in value) {
+      writer.value(element)
+    }
+    writer.endArray()
+  }
+
+  override fun String.withDoubles(value: List<Double>) {
     writer.name(this)
     writer.beginArray()
     for (element in value) {

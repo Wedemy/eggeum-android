@@ -42,7 +42,7 @@ naver-map = "3.17.0"
 
 javax-inject = "1"
 
-test-kotest = "5.7.0"
+test-kotest = "5.7.1"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.0"
 test-roborazzi = "1.4.0"

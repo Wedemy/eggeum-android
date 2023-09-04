@@ -39,6 +39,7 @@ lottie = "6.1.0"
 insetter = "0.6.1"
 timber = "5.0.1"
 naver-map = "3.17.0"
+ksp = "1.8.22-1.0.11"
 
 javax-inject = "1"
 
@@ -64,6 +65,7 @@ android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "android-h
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
 
 moshix-ir = { id = "dev.zacsweers.moshix", version.ref = "moshix-ir" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-roborazzi" }
 

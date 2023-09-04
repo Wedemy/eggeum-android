@@ -20,6 +20,7 @@ plugins {
   alias(libs.plugins.gradle.android.library) apply false
   alias(libs.plugins.google.secrets) apply false
   alias(libs.plugins.android.hilt) apply false
+  alias(libs.plugins.ksp) apply false
 }
 
 buildscript {

@@ -12,6 +12,7 @@ import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,6 +46,7 @@ class LoginActivity : BaseActivity() {
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
 
+  // TODO 네트워크 연결 문제 관련 토스트 출력
   private val oneTapClientResult =
     registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
       if (result.resultCode == Activity.RESULT_OK) {
@@ -112,6 +114,7 @@ class LoginActivity : BaseActivity() {
         }
     }
   }
+
   private fun initObserver() {
     repeatOnStarted {
       launch {
@@ -125,6 +128,12 @@ class LoginActivity : BaseActivity() {
         viewModel.navigateToOnBaordingEvent.collect {
           startActivity(Intent(this@LoginActivity, OnboardActivity::class.java))
           finish()
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
         }
       }
     }

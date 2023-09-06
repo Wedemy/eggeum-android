@@ -7,15 +7,13 @@
 
 package us.wedemy.eggeum.android.domain.usecase
 
-import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
 import us.wedemy.eggeum.android.domain.model.notice.NoticeList
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
+import us.wedemy.eggeum.android.domain.util.NoticeApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
-
-private val NoticeApiResponseIsNull = IOException("The Notice API response is null.")
 
 @Singleton
 public class GetNoticeBodyUseCase @Inject constructor(

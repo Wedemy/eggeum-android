@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetLoginBodyUseCase
+import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -28,6 +29,9 @@ class LoginViewModel @Inject constructor(
 
   private val _navigateToOnBoardingEvent = MutableSharedFlow<Unit>()
   val navigateToOnBaordingEvent: SharedFlow<Unit> = _navigateToOnBoardingEvent.asSharedFlow()
+
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
   fun getLoginBody(idToken: String) {
     viewModelScope.launch {
@@ -44,8 +48,11 @@ class LoginViewModel @Inject constructor(
         result.isFailure -> {
           val exception = result.exceptionOrNull()
           Timber.d(exception)
-          //TODO errorCode 가 404 일때만 온보딩 화면으로 이동
-          _navigateToOnBoardingEvent.emit(Unit)
+          if (exception == LoginApiResponseNotFound) {
+            _navigateToOnBoardingEvent.emit(Unit)
+          } else {
+            _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+          }
         }
       }
     }

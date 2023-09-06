@@ -79,7 +79,7 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
         findNavController().safeNavigate(action)
       }
 
-      btnRegisterNickname.setOnClickListener {
+      btnRegisterAccount.setOnClickListener {
         val action = RegisterAccountFragmentDirections.actionRegisterAccountFragmentToRegisterNicknameFragment()
         findNavController().safeNavigate(action)
       }
@@ -120,7 +120,7 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
 
       launch {
         viewModel.enableRegisterAccount.collect { flag ->
-          binding.btnRegisterNickname.isEnabled = flag
+          binding.btnRegisterAccount.isEnabled = flag
           binding.tvPleaseToAgreeAllRequiredItem.isInvisible = flag
           binding.cbAgreeToAllRequiredItems.isChecked = flag
         }

@@ -28,9 +28,11 @@ dependencies {
     libs.android.material,
     libs.androidx.core,
     libs.androidx.constraintlayout,
+    libs.timber,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     projects.common,
     projects.designResource,
+    projects.domain,
   )
 }

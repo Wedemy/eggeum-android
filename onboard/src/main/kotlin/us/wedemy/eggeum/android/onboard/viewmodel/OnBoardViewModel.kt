@@ -12,13 +12,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import us.wedemy.eggeum.android.common.util.EditTextState
+import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
+import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.usecase.GetSignUpBodyUseCase
 
 @HiltViewModel
-class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+class OnBoardViewModel @Inject constructor(
+  savedStateHandle: SavedStateHandle,
+  private val getSignUpBodyUseCase: GetSignUpBodyUseCase,
+) : ViewModel() {
   private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_SERVICE_TERMS, false)
   val agreeToServiceTerms = _agreeToServiceTerms.asStateFlow()
 
@@ -38,6 +50,18 @@ class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateH
   val wouldLikeToReceiveInfoAboutNewCafeAndEvents = _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
 
   private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_REQUIRED_ITEMS, false)
+
+  private val _nickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
+
+  private val _nicknameState: SaveableMutableStateFlow<EditTextState> =
+    savedStateHandle.getMutableStateFlow(KEY_NICKNAME_STATE, EditTextState.Idle)
+  val nicknameState = _nicknameState.asStateFlow()
+
+  private val _navigateToMainEvent = MutableSharedFlow<Unit>()
+  val navigateToMainEvent: SharedFlow<Unit> = _navigateToMainEvent.asSharedFlow()
+
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
   fun setCbAgreeToServiceTerms() {
     _agreeToServiceTerms.value = !agreeToServiceTerms.value
@@ -83,6 +107,50 @@ class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateH
         initialValue = false,
       )
 
+  fun setNickname(nickname: String) {
+    _nickname.value = nickname
+  }
+
+  fun handleNicknameValidation(nickname: String) {
+    setNickname(nickname)
+    when {
+      nickname.isEmpty() -> {
+        _nicknameState.value = EditTextState.Error(TextInputError.EMPTY)
+      }
+      nickname.length < 2 -> {
+        _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
+      }
+      else -> {
+        _nicknameState.value = EditTextState.Success
+      }
+    }
+  }
+
+  fun getSignUpBody(
+    agreeMarketing: Boolean,
+    idToken: String,
+    nickname: String,
+  ) {
+    viewModelScope.launch {
+      val result = getSignUpBodyUseCase.execute(agreeMarketing, idToken, nickname)
+      when {
+        result.isSuccess && result.getOrNull() != null -> {
+          val signUpBody = result.getOrNull()
+          Timber.d("$signUpBody")
+          _navigateToMainEvent.emit(Unit)
+        }
+        result.isSuccess && result.getOrNull() == null -> {
+          Timber.e("Request succeeded but data validation failed.")
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+        }
+      }
+    }
+  }
+
   private companion object {
     private const val KEY_AGREE_TO_SERVICE_TERMS = "agree_to_service_terms"
     private const val KEY_AGREE_TO_COLLECT_PERSONAL_INFO = "agree_to_collect_personal_info"
@@ -91,5 +159,7 @@ class RegisterAccountViewModel @Inject constructor(savedStateHandle: SavedStateH
     private const val KEY_WOULD_LIKE_TO_RECEIVE_INFO_ABOUT_NEW_CAFE_EVENTS =
       "would_like_to_receive_info_about_new_cafe_and_events"
     private const val KEY_AGREE_TO_REQUIRED_ITEMS = "agree_to_all_required_items"
+    private const val KEY_NICKNAME = "nickname"
+    private const val KEY_NICKNAME_STATE = "nickname_state"
   }
 }

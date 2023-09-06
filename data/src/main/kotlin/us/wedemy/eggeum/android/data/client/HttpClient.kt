@@ -58,6 +58,6 @@ public object HttpClientProvider {
   public fun ktorClient(): HttpClient = KtorClient
 }
 
-internal fun HttpRequestBuilder.jsonBody(pretty: Boolean = false, builder: JsonBuilder.() -> Unit) {
+internal fun HttpRequestBuilder.jsonBody(pretty: Boolean = true, builder: JsonBuilder.() -> Unit) {
   setBody(buildJson(pretty, builder))
 }

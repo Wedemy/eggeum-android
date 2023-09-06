@@ -34,7 +34,7 @@ public class LoginRepositoryProvider @Inject constructor(
     val responseText =
       client
         .post("app/sns-sign-in") {
-          jsonBody(true) {
+          jsonBody {
             "idToken" withString idToken
           }
         }.bodyAsText()
@@ -50,7 +50,7 @@ public class LoginRepositoryProvider @Inject constructor(
     val responseText =
       client
         .post("app/sns-sign-up") {
-          jsonBody(true) {
+          jsonBody {
             "agreemMarketing" withBoolean agreemMarketing
             "idToken" withString nickname
             "nickname" withString nickname

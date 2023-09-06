@@ -82,7 +82,7 @@ public class PlaceRepositoryProvider @Inject constructor(
   override suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody) {
     client
       .get("app/place/edits") {
-        jsonBody(true) {
+        jsonBody {
           "address1" withString upsertPlaceBody.address1
           "address2" withString upsertPlaceBody.address2
           "image".withPojo(imageAdapter, upsertPlaceBody.image.toData())

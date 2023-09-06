@@ -14,14 +14,16 @@
 
   <application
     android:name=".App"
+    android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:theme="@style/Theme.Eggeum.Splash"
+    android:theme="@style/Theme.Eggeum"
+    android:roundIcon="@mipmap/ic_launcher_round"
     tools:ignore="MissingApplicationIcon">
 
     <activity
       android:name=".ui.IntroActivity"
       android:exported="true"
-      android:theme="@style/Theme.Eggeum">
+      android:theme="@style/Theme.Eggeum.Splash">
 
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

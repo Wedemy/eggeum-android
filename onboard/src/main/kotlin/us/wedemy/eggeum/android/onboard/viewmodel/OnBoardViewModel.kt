@@ -28,9 +28,12 @@ import us.wedemy.eggeum.android.domain.usecase.GetSignUpBodyUseCase
 
 @HiltViewModel
 class OnBoardViewModel @Inject constructor(
-  savedStateHandle: SavedStateHandle,
   private val getSignUpBodyUseCase: GetSignUpBodyUseCase,
+  savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+  private val idToken: String =
+    savedStateHandle[ID_TOKEN] ?: throw IllegalArgumentException("ID_TOKEN is missing from SavedStateHandle")
+
   private val _agreeToServiceTerms = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_SERVICE_TERMS, false)
   val agreeToServiceTerms = _agreeToServiceTerms.asStateFlow()
 
@@ -45,9 +48,8 @@ class OnBoardViewModel @Inject constructor(
   private val _isOver14YearOld = savedStateHandle.getMutableStateFlow(KEY_IS_OVER_14_YEAR_OLD, false)
   val isOver14YearOld = _isOver14YearOld.asStateFlow()
 
-  private val _wouldLikeToReceiveInfoAboutNewCafeAndEvents =
-    savedStateHandle.getMutableStateFlow(KEY_WOULD_LIKE_TO_RECEIVE_INFO_ABOUT_NEW_CAFE_EVENTS, false)
-  val wouldLikeToReceiveInfoAboutNewCafeAndEvents = _wouldLikeToReceiveInfoAboutNewCafeAndEvents.asStateFlow()
+  private val _agreeMarketing = savedStateHandle.getMutableStateFlow(AGREE_MARKETING, false)
+  val agreeMarketing = _agreeMarketing.asStateFlow()
 
   private val _agreeToAllRequiredItems = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_REQUIRED_ITEMS, false)
 
@@ -80,7 +82,7 @@ class OnBoardViewModel @Inject constructor(
   }
 
   fun setCbWouldLikeToReceiveInfoAboutNewCafeAndEvents() {
-    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = !wouldLikeToReceiveInfoAboutNewCafeAndEvents.value
+    _agreeMarketing.value = !agreeMarketing.value
   }
 
   fun setAgreeToAllRequiredItems() {
@@ -89,7 +91,7 @@ class OnBoardViewModel @Inject constructor(
     _agreeToCollectPersonalInfo.value = _agreeToAllRequiredItems.value
     _agreeToProvidePersonalInfoTo3rdParty.value = _agreeToAllRequiredItems.value
     _isOver14YearOld.value = _agreeToAllRequiredItems.value
-    _wouldLikeToReceiveInfoAboutNewCafeAndEvents.value = _agreeToAllRequiredItems.value
+    _agreeMarketing.value = _agreeToAllRequiredItems.value
   }
 
   val enableRegisterAccount =
@@ -126,13 +128,13 @@ class OnBoardViewModel @Inject constructor(
     }
   }
 
-  fun getSignUpBody(
-    agreeMarketing: Boolean,
-    idToken: String,
-    nickname: String,
-  ) {
+  fun getSignUpBody() {
     viewModelScope.launch {
-      val result = getSignUpBodyUseCase.execute(agreeMarketing, idToken, nickname)
+      val result = getSignUpBodyUseCase.execute(
+        _agreeMarketing.value,
+        idToken,
+        _nickname.value,
+      )
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val signUpBody = result.getOrNull()
@@ -152,12 +154,12 @@ class OnBoardViewModel @Inject constructor(
   }
 
   private companion object {
+    private const val ID_TOKEN = "id_token"
     private const val KEY_AGREE_TO_SERVICE_TERMS = "agree_to_service_terms"
     private const val KEY_AGREE_TO_COLLECT_PERSONAL_INFO = "agree_to_collect_personal_info"
     private const val KEY_AGREE_TO_PROVIDE_PERSONAL_INFO_TO_3RD_PARTY = "agree_to_provide_personal_info_to_3rd_party"
     private const val KEY_IS_OVER_14_YEAR_OLD = "is_over_14_year_old"
-    private const val KEY_WOULD_LIKE_TO_RECEIVE_INFO_ABOUT_NEW_CAFE_EVENTS =
-      "would_like_to_receive_info_about_new_cafe_and_events"
+    private const val AGREE_MARKETING = "agree_marketing"
     private const val KEY_AGREE_TO_REQUIRED_ITEMS = "agree_to_all_required_items"
     private const val KEY_NICKNAME = "nickname"
     private const val KEY_NICKNAME_STATE = "nickname_state"

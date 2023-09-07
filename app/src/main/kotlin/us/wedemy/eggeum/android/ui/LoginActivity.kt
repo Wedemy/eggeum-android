@@ -45,6 +45,7 @@ class LoginActivity : BaseActivity() {
 
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
+  private lateinit var idToken: String
 
   // TODO 네트워크 연결 문제 관련 토스트 출력
   private val oneTapClientResult =
@@ -57,8 +58,8 @@ class LoginActivity : BaseActivity() {
             Firebase.auth.currentUser!!.getIdToken(true)
               .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                  val firebaseIdToken: String? = task.result.token
-                  viewModel.getLoginBody(firebaseIdToken!!)
+                  idToken = task.result.token!!
+                  viewModel.getLoginBody(idToken)
                 } else {
                   Timber.e(task.exception)
                 }
@@ -126,7 +127,9 @@ class LoginActivity : BaseActivity() {
 
       launch {
         viewModel.navigateToOnBaordingEvent.collect {
-          startActivity(Intent(this@LoginActivity, OnboardActivity::class.java))
+          val intent = Intent(this@LoginActivity, OnboardActivity::class.java)
+          intent.putExtra("id_token", idToken)
+          startActivity(intent)
           finish()
         }
       }

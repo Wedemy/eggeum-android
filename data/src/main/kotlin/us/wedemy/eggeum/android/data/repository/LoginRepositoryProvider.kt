@@ -66,7 +66,7 @@ public class LoginRepositoryProvider @Inject constructor(
         .post("app/sns-sign-up") {
           jsonBody {
             "agreemMarketing" withBoolean agreemMarketing
-            "idToken" withString nickname
+            "idToken" withString idToken
             "nickname" withString nickname
           }
         }.bodyAsText()

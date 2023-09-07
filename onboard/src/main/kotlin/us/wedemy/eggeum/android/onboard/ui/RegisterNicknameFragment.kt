@@ -7,11 +7,13 @@
 
 package us.wedemy.eggeum.android.onboard.ui
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,13 +24,13 @@ import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.onboard.R
 import us.wedemy.eggeum.android.onboard.databinding.FragmentRegisterNicknameBinding
-import us.wedemy.eggeum.android.onboard.viewmodel.RegisterNicknameViewModel
+import us.wedemy.eggeum.android.onboard.viewmodel.OnBoardViewModel
 
 @AndroidEntryPoint
 class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>() {
   override fun getViewBinding() = FragmentRegisterNicknameBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<RegisterNicknameViewModel>()
+  private val viewModel by activityViewModels<OnBoardViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -41,6 +43,9 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
       if (!findNavController().navigateUp()) {
         requireActivity().finish()
       }
+    }
+    binding.btnRegisterNickname.setOnClickListener {
+      viewModel.getSignUpBody()
     }
   }
 
@@ -62,6 +67,19 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
             is EditTextState.Error -> setError(state.error)
           }
           binding.btnRegisterNickname.isEnabled = state == EditTextState.Success
+        }
+      }
+
+      launch {
+        viewModel.navigateToMainEvent.collect {
+          startActivity(Intent(requireContext(), OnboardActivity::class.java))
+          requireActivity().finish()
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
     }

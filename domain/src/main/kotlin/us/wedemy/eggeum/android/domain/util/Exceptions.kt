@@ -19,3 +19,7 @@ public val EnumApiResponseIsNull: IOException = IOException("The Enum API respon
 
 // NoticeApi
 public val NoticeApiResponseIsNull: IOException = IOException("The Notice API response is null.")
+
+// UserApi
+public val GetUserInfoApiResponseIsNull: IOException = IOException("GetUserInfo API response is null.")
+public val CheckNicknameExistResponseIsNull: IOException = IOException("CheckNicknameExist API response is null.")

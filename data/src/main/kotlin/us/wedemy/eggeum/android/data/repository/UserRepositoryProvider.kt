@@ -52,7 +52,7 @@ public class UserRepositoryProvider @Inject constructor(
       }
   }
 
-  override suspend fun withdrawUser() {
+  override suspend fun withdraw() {
     client
       .delete("app/users/me")
   }

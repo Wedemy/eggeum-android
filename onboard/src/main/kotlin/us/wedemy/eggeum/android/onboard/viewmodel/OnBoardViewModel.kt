@@ -24,11 +24,13 @@ import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
 import us.wedemy.eggeum.android.domain.usecase.GetSignUpBodyUseCase
 
 @HiltViewModel
 class OnBoardViewModel @Inject constructor(
   private val getSignUpBodyUseCase: GetSignUpBodyUseCase,
+  private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   private val idToken: String =
@@ -123,7 +125,27 @@ class OnBoardViewModel @Inject constructor(
         _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
       }
       else -> {
-        _nicknameState.value = EditTextState.Success
+        viewModelScope.launch {
+          val result = checkNicknameExistUseCase.execute(nickname)
+          when {
+            result.isSuccess && result.getOrNull() != null -> {
+              if (result.getOrNull() == true) {
+                _nicknameState.value = EditTextState.Success
+              }
+              else {
+                _nicknameState.value = EditTextState.Error(TextInputError.ALREADY_EXIST)
+              }
+            }
+            result.isSuccess && result.getOrNull() == null -> {
+              Timber.e("Request succeeded but data validation failed.")
+            }
+            result.isFailure -> {
+              val exception = result.exceptionOrNull()
+              Timber.d(exception)
+              _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+            }
+          }
+        }
       }
     }
   }

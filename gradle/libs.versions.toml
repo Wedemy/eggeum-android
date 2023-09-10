@@ -106,6 +106,8 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client-core" }
 
 moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi"}
 
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
@@ -127,7 +129,21 @@ test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test
 detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "kotlin-detekt" }
 
 [bundles]
-androidx-lifecycle = ["androidx-lifecycle-runtime", "androidx-lifecycle-viewmodel", "androidx-lifecycle-savedstate"]
-androidx-navigation = ["androidx-navigation-ui", "androidx-navigation-fragment"]
-ktor-client = ["ktor-client-core", "ktor-client-logging", "ktor-client-engine-cio"]
-test-roborazzi = ["test-roborazzi-core", "test-roborazzi-rule"]
+androidx-lifecycle = [
+    "androidx-lifecycle-runtime",
+    "androidx-lifecycle-viewmodel",
+    "androidx-lifecycle-savedstate",
+]
+androidx-navigation = [
+    "androidx-navigation-ui",
+    "androidx-navigation-fragment",
+]
+ktor-client = [
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-client-engine-cio",
+]
+test-roborazzi = [
+    "test-roborazzi-core",
+    "test-roborazzi-rule",
+]

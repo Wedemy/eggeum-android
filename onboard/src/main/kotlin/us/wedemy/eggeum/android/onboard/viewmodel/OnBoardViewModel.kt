@@ -131,8 +131,7 @@ class OnBoardViewModel @Inject constructor(
             result.isSuccess && result.getOrNull() != null -> {
               if (result.getOrNull() == true) {
                 _nicknameState.value = EditTextState.Success
-              }
-              else {
+              } else {
                 _nicknameState.value = EditTextState.Error(TextInputError.ALREADY_EXIST)
               }
             }

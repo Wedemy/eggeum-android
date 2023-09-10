@@ -5,6 +5,8 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
+@file:OptIn(FlowPreview::class)
+
 package us.wedemy.eggeum.android.onboard.ui
 
 import android.content.Intent
@@ -16,6 +18,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
@@ -53,10 +57,12 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
     repeatOnStarted {
       launch {
         val editTextFlow = binding.tietRegisterNickname.textChangesAsFlow()
-        editTextFlow.collect { text ->
-          val nickname = text.toString().trim()
-          viewModel.handleNicknameValidation(nickname)
-        }
+        editTextFlow
+          .debounce(500L)
+          .collect { text ->
+            val nickname = text.toString().trim()
+            viewModel.handleNicknameValidation(nickname)
+          }
       }
 
       launch {

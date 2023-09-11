@@ -27,7 +27,7 @@ class NoticeAdapter(
     with(holder) {
       bind(notice)
       binding.root.setOnClickListener {
-        clickListener(adapterPosition)
+        clickListener(bindingAdapterPosition)
       }
     }
   }

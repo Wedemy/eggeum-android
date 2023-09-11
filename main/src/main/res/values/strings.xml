@@ -68,4 +68,9 @@
   <string name="unsubscribe">탈퇴하기</string>
   <string name="delete_activity_history">활동 이력이 삭제됩니다.</string>
   <string name="agree_to_notification">안내 사항을 확인하고 회원탈퇴에 동의합니다.</string>
+  <string name="inquiry">문의</string>
+  <string name="inquiry_title">제목 <font color="#14b8a6">*</font></string>
+  <string name="inquiry_content">문의 내용 <font color="#14b8a6">*</font></string>
+  <string name="input_inquiry_content">문의 내용을 입력해주세요.</string>
+  <string name="input_inquiry_title">제목을 입력해주세요.</string>
 </resources>

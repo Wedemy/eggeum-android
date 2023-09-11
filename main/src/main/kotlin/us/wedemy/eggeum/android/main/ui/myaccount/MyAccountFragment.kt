@@ -26,9 +26,16 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   }
 
   private fun initListener() {
-    binding.clMyAccountSetting.setOnClickListener {
-      val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
-      findNavController().safeNavigate(action)
+    with(binding) {
+      clMyAccountSetting.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
+        findNavController().safeNavigate(action)
+      }
+
+      clMyAccountCustomerSupport.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentInquiry()
+        findNavController().safeNavigate(action)
+      }
     }
   }
 

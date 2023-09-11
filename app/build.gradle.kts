@@ -46,6 +46,7 @@ dependencies {
     projects.setting,
     projects.designResource,
     projects.common,
+    projects.updateCafe,
   )
 }
 

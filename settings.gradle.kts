@@ -39,4 +39,5 @@ include(
   ":setting",
   ":common",
   ":design-resource",
+  ":update-cafe",
 )

@@ -33,7 +33,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
       }
 
       clSettingLogout.setOnClickListener {
-        //TODO 로그아웃 구현
+        // TODO 로그아웃 구현
       }
 
       clSettingWithdraw.setOnClickListener {

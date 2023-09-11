@@ -63,7 +63,7 @@ public class ReportRepositoryProvider @Inject constructor(
   ) {
     client
       .post("app/report/set") {
-        jsonBody(true) {
+        jsonBody {
           "content" withString content
           "title" withString title
         }
@@ -77,7 +77,7 @@ public class ReportRepositoryProvider @Inject constructor(
   ) {
     client
       .patch("app/report/update/$reportId") {
-        jsonBody(true) {
+        jsonBody {
           "content" withString content
           "title" withString title
         }

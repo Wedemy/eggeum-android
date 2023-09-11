@@ -7,14 +7,12 @@
 
 package us.wedemy.eggeum.android.domain.usecase
 
-import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.enums.EnumList
 import us.wedemy.eggeum.android.domain.repository.EnumRepository
+import us.wedemy.eggeum.android.domain.util.EnumApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
-
-private val EnumApiResponseIsNull = IOException("The Enum API response is null.")
 
 @Singleton
 public class GetEnumListUseCase @Inject constructor(

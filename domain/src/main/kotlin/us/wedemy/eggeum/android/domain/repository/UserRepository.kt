@@ -28,7 +28,7 @@ public interface UserRepository {
    * 회원 탈퇴
    *
    */
-  public suspend fun withdrawUser()
+  public suspend fun withdraw()
 
   /**
    * 닉네임 수정

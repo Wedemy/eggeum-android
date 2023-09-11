@@ -12,6 +12,7 @@ import com.squareup.moshi.adapter
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.client.jsonBody
@@ -21,6 +22,8 @@ import us.wedemy.eggeum.android.data.model.login.SignUpBodyResponse
 import us.wedemy.eggeum.android.domain.model.login.LoginBody
 import us.wedemy.eggeum.android.domain.model.login.SignUpBody
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
+import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
+import us.wedemy.eggeum.android.domain.util.LoginApiResponseUnknownError
 
 @Singleton
 public class LoginRepositoryProvider @Inject constructor(
@@ -31,15 +34,26 @@ public class LoginRepositoryProvider @Inject constructor(
   private val signUpBodyAdapter = moshi.adapter<SignUpBodyResponse>()
 
   override suspend fun getLoginBody(idToken: String?): LoginBody? {
-    val responseText =
+    val httpResponse =
       client
         .post("app/sns-sign-in") {
-          jsonBody(true) {
+          jsonBody {
             "idToken" withString idToken
           }
-        }.bodyAsText()
-    val response = loginBodyAdapter.fromJson(responseText)
-    return response?.toDomain()
+        }
+    when (httpResponse.status.value) {
+      HttpStatusCode.OK.value -> {
+        val responseText = httpResponse.bodyAsText()
+        val response = loginBodyAdapter.fromJson(responseText)
+        return response?.toDomain()
+      }
+      HttpStatusCode.NotFound.value -> {
+        throw LoginApiResponseNotFound
+      }
+      else -> {
+        throw LoginApiResponseUnknownError
+      }
+    }
   }
 
   override suspend fun getSignUpBody(
@@ -50,9 +64,9 @@ public class LoginRepositoryProvider @Inject constructor(
     val responseText =
       client
         .post("app/sns-sign-up") {
-          jsonBody(true) {
+          jsonBody {
             "agreemMarketing" withBoolean agreemMarketing
-            "idToken" withString nickname
+            "idToken" withString idToken
             "nickname" withString nickname
           }
         }.bodyAsText()

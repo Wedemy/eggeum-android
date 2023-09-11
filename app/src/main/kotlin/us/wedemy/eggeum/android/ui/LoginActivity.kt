@@ -8,9 +8,11 @@
 package us.wedemy.eggeum.android.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,10 +24,14 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.BuildConfig
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseActivity
 import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
+import us.wedemy.eggeum.android.main.ui.MainActivity
+import us.wedemy.eggeum.android.onboard.ui.OnboardActivity
 import us.wedemy.eggeum.android.viewmodel.LoginViewModel
 
 @AndroidEntryPoint
@@ -39,7 +45,9 @@ class LoginActivity : BaseActivity() {
 
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
+  private lateinit var idToken: String
 
+  // TODO 네트워크 연결 문제 관련 토스트 출력
   private val oneTapClientResult =
     registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
       if (result.resultCode == Activity.RESULT_OK) {
@@ -50,8 +58,8 @@ class LoginActivity : BaseActivity() {
             Firebase.auth.currentUser!!.getIdToken(true)
               .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                  val firebaseIdToken: String? = task.result.token
-                  viewModel.getLoginBody(firebaseIdToken!!)
+                  idToken = task.result.token!!
+                  viewModel.getLoginBody(idToken)
                 } else {
                   Timber.e(task.exception)
                 }
@@ -69,6 +77,7 @@ class LoginActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     initGoogleLogin()
     initListener()
+    initObserver()
   }
 
   private fun initGoogleLogin() {
@@ -104,6 +113,32 @@ class LoginActivity : BaseActivity() {
         .addOnFailureListener(this) { exception ->
           Timber.e(exception.localizedMessage)
         }
+    }
+  }
+
+  private fun initObserver() {
+    repeatOnStarted {
+      launch {
+        viewModel.navigateToMainEvent.collect {
+          startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+          finish()
+        }
+      }
+
+      launch {
+        viewModel.navigateToOnBaordingEvent.collect {
+          val intent = Intent(this@LoginActivity, OnboardActivity::class.java)
+          intent.putExtra("id_token", idToken)
+          startActivity(intent)
+          finish()
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
+        }
+      }
     }
   }
 }

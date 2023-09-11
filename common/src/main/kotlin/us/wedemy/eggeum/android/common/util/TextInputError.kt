@@ -10,4 +10,5 @@ package us.wedemy.eggeum.android.common.util
 enum class TextInputError {
   EMPTY,
   TOO_SHORT,
+  ALREADY_EXIST,
 }

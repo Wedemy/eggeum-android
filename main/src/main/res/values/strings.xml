@@ -62,4 +62,10 @@
   <string name="default_email">eggeum@gamil.com</string>
   <string name="logout">로그아웃</string>
   <string name="withdraw">회원탈퇴</string>
+  <string name="delete_id">ID가 삭제됩니다.</string>
+  <string name="delete_privacy_and_setting">개인정보와 설정이 삭제됩니다.</string>
+  <string name="delete_linked_social_account_info">연결된 소설 계정 정보가 삭제됩니다.</string>
+  <string name="unsubscribe">탈퇴하기</string>
+  <string name="delete_activity_history">활동 이력이 삭제됩니다.</string>
+  <string name="agree_to_notification">안내 사항을 확인하고 회원탈퇴에 동의합니다.</string>
 </resources>

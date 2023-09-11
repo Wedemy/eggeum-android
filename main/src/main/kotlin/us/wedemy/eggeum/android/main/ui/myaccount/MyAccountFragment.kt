@@ -9,7 +9,9 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 
@@ -24,7 +26,10 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   }
 
   private fun initListener() {
-    // TODO 화면 전환 클릭 이벤트 리스너 구현
+    binding.clMyAccountSetting.setOnClickListener {
+      val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
+      findNavController().safeNavigate(action)
+    }
   }
 
   private fun initObserver() {

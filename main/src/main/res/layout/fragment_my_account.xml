@@ -147,142 +147,183 @@
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <TextView
-        android:id="@+id/tv_my_account_terms_of_service"
-        style="@style/TextMMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/terms_of_service"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_my_account_customer_support" />
-
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="Right Arrow"
-        android:src="@drawable/ic_arrow_right_outlined_16"
-        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_terms_of_service"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_my_account_terms_of_service"
-        tools:ignore="HardcodedText" />
-
-      <View
-        android:id="@+id/line_my_account_terms_of_service"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_terms_of_service"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/gray_100"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_account_terms_of_service" />
+        app:layout_constraintTop_toBottomOf="@id/cl_my_account_customer_support">
 
-      <TextView
-        android:id="@+id/tv_my_account_privacy_policy"
-        style="@style/TextMMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/privacy_policy"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_my_account_terms_of_service" />
+        <TextView
+          android:id="@+id/tv_my_account_terms_of_service"
+          style="@style/TextMMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/terms_of_service"
+          android:textColor="@color/gray_900"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="Right Arrow"
-        android:src="@drawable/ic_arrow_right_outlined_16"
-        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_privacy_policy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_my_account_privacy_policy"
-        tools:ignore="HardcodedText" />
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:contentDescription="Right Arrow"
+          android:src="@drawable/ic_arrow_right_outlined_16"
+          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_terms_of_service"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/tv_my_account_terms_of_service"
+          tools:ignore="HardcodedText" />
 
-      <View
-        android:id="@+id/line_my_account_privacy_policy"
+        <View
+          android:id="@+id/line_my_account_terms_of_service"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:layout_marginHorizontal="16dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/gray_100"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_my_account_terms_of_service" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_privacy_policy"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/gray_100"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_account_privacy_policy" />
+        app:layout_constraintTop_toBottomOf="@id/cl_my_account_terms_of_service">
 
-      <TextView
-        android:id="@+id/tv_my_account_version_info"
-        style="@style/TextMMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/version_info"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_my_account_privacy_policy" />
+        <TextView
+          android:id="@+id/tv_my_account_privacy_policy"
+          style="@style/TextMMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/privacy_policy"
+          android:textColor="@color/gray_900"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
-        android:id="@+id/tv_my_account_version_num"
-        style="@style/TextSRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textColor="@color/gray_700"
-        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_version_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_my_account_version_info"
-        tools:text="1.0" />
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:contentDescription="Right Arrow"
+          android:src="@drawable/ic_arrow_right_outlined_16"
+          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_privacy_policy"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/tv_my_account_privacy_policy"
+          tools:ignore="HardcodedText" />
 
-      <View
-        android:id="@+id/line_my_account_version_info"
+        <View
+          android:id="@+id/line_my_account_privacy_policy"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:layout_marginHorizontal="16dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/gray_100"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_my_account_privacy_policy" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_version_info"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/gray_100"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_account_version_info" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_my_account_privacy_policy">
 
-      <TextView
-        android:id="@+id/tv_my_account_setting"
-        style="@style/TextMMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/setting"
-        android:textColor="@color/gray_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_my_account_version_info" />
+        <TextView
+          android:id="@+id/tv_my_account_version_info"
+          style="@style/TextMMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/version_info"
+          android:textColor="@color/gray_900"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="Right Arrow"
-        android:src="@drawable/ic_arrow_right_outlined_16"
-        app:layout_constraintBottom_toBottomOf="@id/tv_my_account_setting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_my_account_setting"
-        tools:ignore="HardcodedText" />
+        <TextView
+          android:id="@+id/tv_my_account_version_num"
+          style="@style/TextSRegular"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:textColor="@color/gray_700"
+          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_version_info"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/tv_my_account_version_info"
+          tools:text="1.0" />
 
-      <View
-        android:id="@+id/line_my_account_setting"
+        <View
+          android:id="@+id/line_my_account_version_info"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:layout_marginHorizontal="16dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/gray_100"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_my_account_version_info" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_account_setting"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/gray_100"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_account_setting" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_my_account_version_info">
+
+        <TextView
+          android:id="@+id/tv_my_account_setting"
+          style="@style/TextMMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:text="@string/setting"
+          android:textColor="@color/gray_900"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:contentDescription="Right Arrow"
+          android:src="@drawable/ic_arrow_right_outlined_16"
+          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_setting"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/tv_my_account_setting"
+          tools:ignore="HardcodedText" />
+
+        <View
+          android:id="@+id/line_my_account_setting"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:layout_marginHorizontal="16dp"
+          android:layout_marginTop="16dp"
+          android:background="@color/gray_100"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_my_account_setting" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -59,6 +59,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   }
 
   private fun initView() {
+    newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
+    noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
     with(binding) {
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
@@ -70,8 +72,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         setHasFixedSize(true)
         adapter = noticeAdapter
       }
-      newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
-      noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
       binding.tlHomeNewCafe.apply {
         val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
         addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

@@ -31,72 +31,81 @@
 
   </com.google.android.material.appbar.MaterialToolbar>
 
-  <TextView
-    android:id="@+id/tv_logout"
-    style="@style/TextMMedium"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
-    android:text="@string/logout"
-    android:textColor="@color/gray_900"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_setting" />
-
-  <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:contentDescription="Right Arrow"
-    android:src="@drawable/ic_arrow_right_outlined_16"
-    app:layout_constraintBottom_toBottomOf="@id/tv_logout"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/tv_logout"
-    tools:ignore="HardcodedText" />
-
-  <View
-    android:id="@+id/line_logout"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_setting_logout"
     android:layout_width="0dp"
-    android:layout_height="1dp"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/gray_100"
+    android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_logout" />
+    app:layout_constraintTop_toBottomOf="@id/tb_setting">
 
-  <TextView
-    android:id="@+id/tv_withdraw"
-    style="@style/TextMMedium"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
-    android:text="@string/withdraw"
-    android:textColor="@color/gray_900"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/line_logout" />
+    <TextView
+      android:id="@+id/tv_setting_logout"
+      style="@style/TextMMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="@string/logout"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-  <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:contentDescription="Right Arrow"
-    android:src="@drawable/ic_arrow_right_outlined_16"
-    app:layout_constraintBottom_toBottomOf="@id/tv_withdraw"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/tv_withdraw"
-    tools:ignore="HardcodedText" />
+    <View
+      android:id="@+id/line_setting_logout"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_setting_logout" />
 
-  <View
-    android:id="@+id/line_withdraw"
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_setting_withdraw"
     android:layout_width="0dp"
-    android:layout_height="1dp"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/gray_100"
+    android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_withdraw" />
+    app:layout_constraintTop_toBottomOf="@id/cl_setting_logout">
+
+    <TextView
+      android:id="@+id/tv_setting_withdraw"
+      style="@style/TextMMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:text="@string/withdraw"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:contentDescription="Right Arrow"
+      android:src="@drawable/ic_arrow_right_outlined_16"
+      app:layout_constraintBottom_toBottomOf="@id/tv_setting_withdraw"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/tv_setting_withdraw"
+      tools:ignore="HardcodedText" />
+
+    <View
+      android:id="@+id/line_setting_withdraw"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_setting_withdraw" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

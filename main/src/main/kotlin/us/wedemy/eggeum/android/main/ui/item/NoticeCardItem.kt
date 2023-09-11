@@ -7,7 +7,7 @@
 
 package us.wedemy.eggeum.android.main.ui.item
 
-data class NoticeItem(
+data class NoticeCardItem(
   val title: String,
-  val content: String,
+  val date: String,
 )

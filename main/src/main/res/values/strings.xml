@@ -73,4 +73,5 @@
   <string name="inquiry_content">문의 내용 <font color="#14b8a6">*</font></string>
   <string name="input_inquiry_content">문의 내용을 입력해주세요.</string>
   <string name="input_inquiry_title">제목을 입력해주세요.</string>
+  <string name="search_keyword">검색어를 입력해주세요.</string>
 </resources>

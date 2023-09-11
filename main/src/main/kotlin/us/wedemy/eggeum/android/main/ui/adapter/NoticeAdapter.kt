@@ -16,20 +16,13 @@ import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 
 class NoticeAdapter(
   private var noticeList: List<NoticeItem> = emptyList(),
-  private val clickListener: (Int) -> Unit,
 ) : RecyclerView.Adapter<NoticeViewHolder>() {
-
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     NoticeViewHolder(ItemNoticeBinding.inflate(parent.context.layoutInflater, parent, false))
 
   override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
     val notice = noticeList[position]
-    with(holder) {
-      bind(notice)
-      binding.root.setOnClickListener {
-        clickListener(bindingAdapterPosition)
-      }
-    }
+    holder.bind(notice)
   }
 
   override fun getItemCount() = noticeList.size

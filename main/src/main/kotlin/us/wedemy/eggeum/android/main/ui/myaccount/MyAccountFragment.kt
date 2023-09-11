@@ -36,6 +36,11 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
         val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentInquiry()
         findNavController().safeNavigate(action)
       }
+
+      clMyAccountNotice.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentNotice()
+        findNavController().safeNavigate(action)
+      }
     }
   }
 

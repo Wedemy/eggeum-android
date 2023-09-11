@@ -15,16 +15,16 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
-import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
-import us.wedemy.eggeum.android.main.ui.item.NoticeItem
+import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
   private lateinit var newCafeAdapter: NewCafeAdapter
-  private lateinit var noticeAdapter: NoticeAdapter
+  private lateinit var noticeAdapter: NoticeCardAdapter
 
   private val newCafes = listOf(
     NewCafeItem("스타벅스 강남역신분당역사점", "서울특별시 강남구 강남대로 396"),
@@ -43,12 +43,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   )
 
   private val notices = listOf(
-    NoticeItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
-    NoticeItem("카페 평가하는 법", "23.03.01"),
-    NoticeItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
-    NoticeItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
-    NoticeItem("카페 평가하는 법", "23.03.01"),
-    NoticeItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
+    NoticeCardItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
+    NoticeCardItem("카페 평가하는 법", "23.03.01"),
+    NoticeCardItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
+    NoticeCardItem("공부하기 좋은 카페 찾는 법", "23.03.01"),
+    NoticeCardItem("카페 평가하는 법", "23.03.01"),
+    NoticeCardItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
   )
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,10 +60,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
   private fun initView() {
     newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
-    noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
+    noticeAdapter = NoticeCardAdapter(notices) { _ -> run {} }
     with(binding) {
       newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
-      noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
+      noticeAdapter = NoticeCardAdapter(notices) { _ -> run {} }
 
       rvHomeNewCafe.apply {
         setHasFixedSize(true)

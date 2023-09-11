@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_my_account_email">
 
         <ImageView
-          android:id="@+id/iv_my_account_notice_icon"
+          android:id="@+id/iv_notice"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="16dp"
@@ -143,7 +143,7 @@
           android:textColor="@color/gray_700"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/iv_my_account_notice_icon" />
+          app:layout_constraintTop_toBottomOf="@id/iv_notice" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 

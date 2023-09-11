@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.setting.ui
+package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -19,14 +19,14 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import us.wedemy.eggeum.android.setting.R
-import us.wedemy.eggeum.android.setting.databinding.FragmentEditMyInfoBinding
-import us.wedemy.eggeum.android.setting.viewmodel.EditMyInfoViewModel
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.TextInputError
+import us.wedemy.eggeum.android.main.R
+import us.wedemy.eggeum.android.main.databinding.FragmentEditMyInfoBinding
+import us.wedemy.eggeum.android.main.viewmodel.EditMyInfoViewModel
 
 @AndroidEntryPoint
 class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {

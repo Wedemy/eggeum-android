@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.main.ui
+package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View

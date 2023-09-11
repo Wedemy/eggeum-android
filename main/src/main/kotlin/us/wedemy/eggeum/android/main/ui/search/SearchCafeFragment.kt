@@ -5,29 +5,25 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.main.ui
+package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
-import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
+import us.wedemy.eggeum.android.common.extension.addDivider
+import us.wedemy.eggeum.android.design.R
+import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
 
 @AndroidEntryPoint
-class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
-
-  private val cafeImageAdapter by lazy {
-    CafeImageAdapter { _ -> run {} }
-  }
-
-  override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)
+class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
+  override fun getViewBinding() = FragmentSearchCafeBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.rvCafeImage.apply {
+    binding.rvSearchCafe.apply {
       setHasFixedSize(true)
-      adapter = cafeImageAdapter
+      addDivider(R.color.gray_300)
     }
   }
 }

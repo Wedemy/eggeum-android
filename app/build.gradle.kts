@@ -43,7 +43,6 @@ dependencies {
     projects.main,
     projects.onboard,
     projects.registerCafe,
-    projects.setting,
     projects.designResource,
     projects.common,
   )

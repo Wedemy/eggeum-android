@@ -14,13 +14,13 @@
 
   <fragment
     android:id="@+id/fragment_home"
-    android:name="us.wedemy.eggeum.android.main.ui.HomeFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.home.HomeFragment"
     android:label="HomeFragment"
     tools:layout="@layout/fragment_home" />
 
   <fragment
     android:id="@+id/fragment_search"
-    android:name="us.wedemy.eggeum.android.main.ui.SearchFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.search.SearchFragment"
     android:label="SearchFragment"
     tools:layout="@layout/fragment_search">
 
@@ -36,13 +36,13 @@
 
   <fragment
     android:id="@+id/fragment_my_account"
-    android:name="us.wedemy.eggeum.android.main.ui.MyAccountFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.myaccount.MyAccountFragment"
     android:label="MyAccountFragment"
     tools:layout="@layout/fragment_my_account" />
 
   <fragment
     android:id="@+id/fragment_search_cafe"
-    android:name="us.wedemy.eggeum.android.main.ui.SearchCafeFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.search.SearchCafeFragment"
     android:label="SearchCafeFragment"
     tools:layout="@layout/fragment_search_cafe" />
 

@@ -5,6 +5,8 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
+@file:Suppress("unused", "UnusedPrivateProperty")
+
 package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
@@ -26,7 +28,11 @@ class UpdateCafeFragment : BaseFragment<FragmentUpdateCafeBinding>() {
     initObserver()
   }
 
-  private fun initListener() {}
+  private fun initListener() {
+    // TODO
+  }
 
-  private fun initObserver() {}
+  private fun initObserver() {
+    // TODO
+  }
 }

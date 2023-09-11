@@ -124,7 +124,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   private fun setTooShortTextError() {
     binding.tilEditNickname.apply {
       error = getString(R.string.too_short_text_error)
-      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_x_filled_16)
+      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))
       setEndIconOnClickListener {

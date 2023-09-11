@@ -288,7 +288,7 @@
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_smoking"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_smoking"
-      tools:src="@drawable/ic_x_filled_16" />
+      tools:src="@drawable/ic_x_colored_16" />
 
     <View
       android:id="@+id/line_cafe_info_smoking"

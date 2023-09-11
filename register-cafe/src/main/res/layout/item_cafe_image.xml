@@ -30,7 +30,7 @@
     android:paddingStart="8dp"
     android:paddingEnd="0dp"
     android:paddingBottom="8dp"
-    android:src="@drawable/ic_x_filled_16"
+    android:src="@drawable/ic_close_filled_16"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 

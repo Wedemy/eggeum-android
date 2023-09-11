@@ -143,9 +143,9 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
       }
 
       launch {
-        viewModel.enableRegisterCafe.collect { state ->
-          binding.tvPleaseToInputAllRequiredItem.isInvisible = state
-          binding.btnRegisterCafe.isEnabled = state
+        viewModel.enableRegisterCafe.collect { flag ->
+          binding.tvPleaseToInputAllRequiredItem.isInvisible = flag
+          binding.btnRegisterCafe.isEnabled = flag
         }
       }
     }

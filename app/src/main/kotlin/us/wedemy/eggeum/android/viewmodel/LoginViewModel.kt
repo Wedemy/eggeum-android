@@ -11,14 +11,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetLoginBodyUseCase
+import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
   private val getLoginBodyUseCase: GetLoginBodyUseCase,
 ) : ViewModel() {
+
+  private val _navigateToMainEvent = MutableSharedFlow<Unit>()
+  val navigateToMainEvent: SharedFlow<Unit> = _navigateToMainEvent.asSharedFlow()
+
+  private val _navigateToOnBoardingEvent = MutableSharedFlow<Unit>()
+  val navigateToOnBaordingEvent: SharedFlow<Unit> = _navigateToOnBoardingEvent.asSharedFlow()
+
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+
   fun getLoginBody(idToken: String) {
     viewModelScope.launch {
       val result = getLoginBodyUseCase.execute(idToken)
@@ -26,6 +40,7 @@ class LoginViewModel @Inject constructor(
         result.isSuccess && result.getOrNull() != null -> {
           val loginBody = result.getOrNull()
           Timber.d("$loginBody")
+          _navigateToMainEvent.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")
@@ -33,6 +48,11 @@ class LoginViewModel @Inject constructor(
         result.isFailure -> {
           val exception = result.exceptionOrNull()
           Timber.d(exception)
+          if (exception == LoginApiResponseNotFound) {
+            _navigateToOnBoardingEvent.emit(Unit)
+          } else {
+            _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+          }
         }
       }
     }

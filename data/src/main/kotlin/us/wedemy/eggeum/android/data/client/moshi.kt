@@ -8,6 +8,7 @@
 package us.wedemy.eggeum.android.data.client
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +19,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 public object MoshiProvider {
   @Provides
-  public fun defaultMoshi(): Moshi = Moshi.Builder().build()
+  public fun defaultMoshi(): Moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 }

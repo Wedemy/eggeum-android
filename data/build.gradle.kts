@@ -31,6 +31,7 @@ dependencies {
     libs.androidx.datastore.preferences,
     libs.timber,
     libs.moshi.core,
+    libs.moshi.kotlin,
     libs.bundles.ktor.client,
     projects.domain,
   )

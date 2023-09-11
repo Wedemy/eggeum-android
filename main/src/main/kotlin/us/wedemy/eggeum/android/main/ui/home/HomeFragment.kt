@@ -62,6 +62,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
     noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
     with(binding) {
+      newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
+      noticeAdapter = NoticeAdapter(notices) { _ -> run {} }
+
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter

@@ -23,6 +23,7 @@ import us.wedemy.eggeum.android.domain.repository.LoginRepository
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 import us.wedemy.eggeum.android.domain.repository.ReportRepository
+import us.wedemy.eggeum.android.domain.repository.UserRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -49,5 +50,5 @@ internal abstract class RepositoryModule {
 
   @Binds
   @Singleton
-  abstract fun provideUserRepository(userRepositoryProvider: UserRepositoryProvider): UserRepositoryProvider
+  abstract fun provideUserRepository(userRepositoryProvider: UserRepositoryProvider): UserRepository
 }

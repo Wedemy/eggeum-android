@@ -37,7 +37,6 @@ dependencies {
     libs.lottie,
     libs.insetter,
     libs.timber,
-    libs.naver.map,
     projects.data,
     projects.domain,
     projects.main,

@@ -45,14 +45,14 @@ public class UserRepositoryProvider @Inject constructor(
   override suspend fun updateUserInfo(updateUserInfoBody: UpdateUserInfoBody) {
     client
       .put("app/users/me") {
-        jsonBody(true) {
+        jsonBody {
           "nickname" withString updateUserInfoBody.nickname
           "profileImage".withPojo(profileImageAdapter, updateUserInfoBody.profileImage.toData())
         }
       }
   }
 
-  override suspend fun withdrawUser() {
+  override suspend fun withdraw() {
     client
       .delete("app/users/me")
   }
@@ -60,7 +60,7 @@ public class UserRepositoryProvider @Inject constructor(
   override suspend fun updateUserNickname(nickname: String) {
     client
       .put("app/users/me/nickname") {
-        jsonBody(true) {
+        jsonBody {
           "nickname" withString nickname
         }
       }

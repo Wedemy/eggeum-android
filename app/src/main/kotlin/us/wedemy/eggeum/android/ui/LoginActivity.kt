@@ -126,7 +126,7 @@ class LoginActivity : BaseActivity() {
       }
 
       launch {
-        viewModel.navigateToOnBaordingEvent.collect {
+        viewModel.navigateToOnBoardingEvent.collect {
           val intent = Intent(this@LoginActivity, OnboardActivity::class.java)
           intent.putExtra("id_token", idToken)
           startActivity(intent)

@@ -129,7 +129,7 @@ class OnBoardViewModel @Inject constructor(
           val result = checkNicknameExistUseCase.execute(nickname)
           when {
             result.isSuccess && result.getOrNull() != null -> {
-              if (result.getOrNull() == true) {
+              if (result.getOrNull() == false) {
                 _nicknameState.value = EditTextState.Success
               } else {
                 _nicknameState.value = EditTextState.Error(TextInputError.ALREADY_EXIST)

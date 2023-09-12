@@ -58,7 +58,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
       launch {
         val editTextFlow = binding.tietRegisterNickname.textChangesAsFlow()
         editTextFlow
-          .debounce(500L)
+          .debounce(300L)
           .collect { text ->
             val nickname = text.toString().trim()
             viewModel.handleNicknameValidation(nickname)

@@ -26,7 +26,7 @@ import us.wedemy.eggeum.android.domain.util.LoginApiResponseUnknownError
 public class LoginRemoteDataSourceProvider @Inject constructor(
   private val client: HttpClient,
   moshi: Moshi,
-): LoginRemoteDataSource {
+) : LoginRemoteDataSource {
   private val loginBodyAdapter = moshi.adapter<LoginBodyResponse>()
   private val signUpBodyAdapter = moshi.adapter<SignUpBodyResponse>()
 

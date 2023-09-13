@@ -15,7 +15,8 @@ import us.wedemy.eggeum.android.domain.model.login.SignUpBody
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
-private val LoginApiResponseIsNull = IOException("The Login API response is null.")
+private val LoginApiResponseIsNull = IOException("Login API response is null.")
+private val SignUpApiResponseIsNull = IOException("SignUp API response is null.")
 
 @Singleton
 public class LoginUseCase @Inject constructor(
@@ -41,7 +42,7 @@ public class SignUpUseCase @Inject constructor(
         agreemMarketing = agreemMarketing,
         idToken = idToken,
         nickname = nickname,
-      ) ?: throw LoginApiResponseIsNull
+      ) ?: throw SignUpApiResponseIsNull
     }
 }
 
@@ -89,4 +90,3 @@ public class ClearDataStoreUseCase @Inject constructor(
     repository.clearLoginToken()
   }
 }
-

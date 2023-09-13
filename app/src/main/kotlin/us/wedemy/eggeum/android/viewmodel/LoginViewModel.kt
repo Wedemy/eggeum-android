@@ -24,11 +24,11 @@ class LoginViewModel @Inject constructor(
   private val getLoginBodyUseCase: GetLoginBodyUseCase,
 ) : ViewModel() {
 
-  private val _navigateToMainEvent = MutableSharedFlow<Unit>()
+  private val _navigateToMainEvent = MutableSharedFlow<Unit>(replay = 1)
   val navigateToMainEvent: SharedFlow<Unit> = _navigateToMainEvent.asSharedFlow()
 
-  private val _navigateToOnBoardingEvent = MutableSharedFlow<Unit>()
-  val navigateToOnBaordingEvent: SharedFlow<Unit> = _navigateToOnBoardingEvent.asSharedFlow()
+  private val _navigateToOnBoardingEvent = MutableSharedFlow<Unit>(replay = 1)
+  val navigateToOnBoardingEvent: SharedFlow<Unit> = _navigateToOnBoardingEvent.asSharedFlow()
 
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()

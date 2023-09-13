@@ -59,7 +59,7 @@ class LoginActivity : BaseActivity() {
               .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                   idToken = task.result.token!!
-                  viewModel.getLoginBody(idToken)
+                  viewModel.login(idToken)
                 } else {
                   Timber.e(task.exception)
                 }

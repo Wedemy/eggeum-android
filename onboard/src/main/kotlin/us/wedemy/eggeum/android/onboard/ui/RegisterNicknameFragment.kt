@@ -49,7 +49,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
       }
     }
     binding.btnRegisterNickname.setOnClickListener {
-      viewModel.getSignUpBody()
+      viewModel.signUp()
     }
   }
 

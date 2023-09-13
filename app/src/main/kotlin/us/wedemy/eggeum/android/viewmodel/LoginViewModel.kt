@@ -17,11 +17,15 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.LoginUseCase
+import us.wedemy.eggeum.android.domain.usecase.SetAccessTokenUseCase
+import us.wedemy.eggeum.android.domain.usecase.SetRefreshTokenUseCase
 import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
   private val loginUseCase: LoginUseCase,
+  private val setAccessTokenUseCase: SetAccessTokenUseCase,
+  private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
 ) : ViewModel() {
 
   private val _navigateToMainEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -39,7 +43,8 @@ class LoginViewModel @Inject constructor(
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val loginBody = result.getOrNull()
-          Timber.d("$loginBody")
+          setAccessTokenUseCase.execute(loginBody!!.accessToken)
+          setRefreshTokenUseCase.execute(loginBody.refreshToken)
           _navigateToMainEvent.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {

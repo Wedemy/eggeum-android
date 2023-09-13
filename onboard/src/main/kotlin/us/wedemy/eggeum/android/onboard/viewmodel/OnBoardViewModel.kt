@@ -25,12 +25,16 @@ import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
+import us.wedemy.eggeum.android.domain.usecase.SetAccessTokenUseCase
+import us.wedemy.eggeum.android.domain.usecase.SetRefreshTokenUseCase
 import us.wedemy.eggeum.android.domain.usecase.SignUpUseCase
 
 @HiltViewModel
 class OnBoardViewModel @Inject constructor(
   private val signUpUseCase: SignUpUseCase,
   private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
+  private val setAccessTokenUseCase: SetAccessTokenUseCase,
+  private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   private val idToken: String =
@@ -159,7 +163,8 @@ class OnBoardViewModel @Inject constructor(
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val signUpBody = result.getOrNull()
-          Timber.d("$signUpBody")
+          setAccessTokenUseCase.execute(signUpBody!!.accessToken)
+          setRefreshTokenUseCase.execute(signUpBody.refreshToken)
           _navigateToMainEvent.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {

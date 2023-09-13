@@ -16,12 +16,12 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import us.wedemy.eggeum.android.domain.usecase.GetLoginBodyUseCase
+import us.wedemy.eggeum.android.domain.usecase.LoginUseCase
 import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-  private val getLoginBodyUseCase: GetLoginBodyUseCase,
+  private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
   private val _navigateToMainEvent = MutableSharedFlow<Unit>(replay = 1)
@@ -35,7 +35,7 @@ class LoginViewModel @Inject constructor(
 
   fun getLoginBody(idToken: String) {
     viewModelScope.launch {
-      val result = getLoginBodyUseCase.execute(idToken)
+      val result = loginUseCase.execute(idToken)
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val loginBody = result.getOrNull()

@@ -18,7 +18,7 @@ import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 private val LoginApiResponseIsNull = IOException("The Login API response is null.")
 
 @Singleton
-public class GetLoginBodyUseCase @Inject constructor(
+public class LoginUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
   public suspend fun execute(idToken: String? = null): Result<LoginBody> =
@@ -28,7 +28,7 @@ public class GetLoginBodyUseCase @Inject constructor(
 }
 
 @Singleton
-public class GetSignUpBodyUseCase @Inject constructor(
+public class SignUpUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
   public suspend fun execute(

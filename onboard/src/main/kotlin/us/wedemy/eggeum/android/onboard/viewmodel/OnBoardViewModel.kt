@@ -25,11 +25,11 @@ import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
-import us.wedemy.eggeum.android.domain.usecase.GetSignUpBodyUseCase
+import us.wedemy.eggeum.android.domain.usecase.SignUpUseCase
 
 @HiltViewModel
 class OnBoardViewModel @Inject constructor(
-  private val getSignUpBodyUseCase: GetSignUpBodyUseCase,
+  private val signUpUseCase: SignUpUseCase,
   private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -151,7 +151,7 @@ class OnBoardViewModel @Inject constructor(
 
   fun getSignUpBody() {
     viewModelScope.launch {
-      val result = getSignUpBodyUseCase.execute(
+      val result = signUpUseCase.execute(
         _agreeMarketing.value,
         idToken,
         _nickname.value,

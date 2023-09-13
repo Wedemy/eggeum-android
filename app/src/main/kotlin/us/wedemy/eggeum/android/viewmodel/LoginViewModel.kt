@@ -33,7 +33,7 @@ class LoginViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
-  fun getLoginBody(idToken: String) {
+  fun login(idToken: String) {
     viewModelScope.launch {
       val result = loginUseCase.execute(idToken)
       when {

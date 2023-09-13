@@ -149,7 +149,7 @@ class OnBoardViewModel @Inject constructor(
     }
   }
 
-  fun getSignUpBody() {
+  fun signUp() {
     viewModelScope.launch {
       val result = signUpUseCase.execute(
         _agreeMarketing.value,

@@ -9,8 +9,8 @@ package us.wedemy.eggeum.android.domain.model.login
 
 public data class SignUpBody(
   val accessToken: String,
-  val expiresIn: Int,
+  val expiresIn: Long,
   val refreshToken: String,
-  val refreshExpiresIn: Int,
+  val refreshExpiresIn: Long,
   val userRoles: List<String>,
 )

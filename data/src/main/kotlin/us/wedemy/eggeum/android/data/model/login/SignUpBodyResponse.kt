@@ -16,13 +16,13 @@ public data class SignUpBodyResponse(
   public val accessToken: String,
 
   @Json(name = "expiresIn")
-  public val expiresIn: Int,
+  public val expiresIn: Long,
 
   @Json(name = "refreshToken")
   public val refreshToken: String,
 
   @Json(name = "refreshExpiresIn")
-  public val refreshExpiresIn: Int,
+  public val refreshExpiresIn: Long,
 
   @Json(name = "userRoles")
   public val userRoles: List<String>,

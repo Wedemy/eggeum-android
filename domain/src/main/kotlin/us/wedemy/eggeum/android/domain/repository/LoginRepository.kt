@@ -36,7 +36,6 @@ public interface LoginRepository {
    */
   public suspend fun setAccessToken(accessToken: String)
 
-
   /** RefreshToken 저장
    *
    * @param refreshToken 리프레시 토큰

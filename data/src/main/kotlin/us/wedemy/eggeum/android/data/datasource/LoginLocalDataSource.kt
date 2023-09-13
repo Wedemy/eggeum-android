@@ -5,9 +5,9 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data.datastore
+package us.wedemy.eggeum.android.data.datasource
 
-public interface TokenDataStore {
+public interface LoginLocalDataSource {
   public suspend fun setAccessToken(accessToken: String)
 
   public suspend fun setRefreshToken(refreshToken: String)
@@ -16,5 +16,5 @@ public interface TokenDataStore {
 
   public suspend fun getRefreshToken(): String
 
-  public suspend fun clearDataStore()
+  public suspend fun clearLoginToken()
 }

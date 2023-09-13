@@ -44,3 +44,49 @@ public class SignUpUseCase @Inject constructor(
       ) ?: throw LoginApiResponseIsNull
     }
 }
+
+@Singleton
+public class SetAccessTokenUseCase @Inject constructor(
+  private val repository: LoginRepository,
+) {
+  public suspend fun execute(accessToken: String) {
+    repository.setAccessToken(accessToken)
+  }
+}
+
+@Singleton
+public class SetRefreshTokenUseCase @Inject constructor(
+  private val repository: LoginRepository,
+) {
+  public suspend fun execute(refreshToken: String) {
+    repository.setRefreshToken(refreshToken)
+  }
+}
+
+@Singleton
+public class GetAccessTokenUseCase @Inject constructor(
+  private val repository: LoginRepository,
+) {
+  public suspend fun execute(): String {
+    return repository.getAccessToken()
+  }
+}
+
+@Singleton
+public class GetRefreshTokenUseCase @Inject constructor(
+  private val repository: LoginRepository,
+) {
+  public suspend fun execute(): String {
+    return repository.getRefreshToken()
+  }
+}
+
+@Singleton
+public class ClearDataStoreUseCase @Inject constructor(
+  private val repository: LoginRepository,
+) {
+  public suspend fun execute() {
+    repository.clearLoginToken()
+  }
+}
+

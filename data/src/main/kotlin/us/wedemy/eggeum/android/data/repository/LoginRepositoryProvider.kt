@@ -7,53 +7,21 @@
 
 package us.wedemy.eggeum.android.data.repository
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
-import io.ktor.client.HttpClient
-import io.ktor.client.request.post
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpStatusCode
 import javax.inject.Inject
 import javax.inject.Singleton
-import us.wedemy.eggeum.android.data.client.jsonBody
-import us.wedemy.eggeum.android.data.mapper.toDomain
-import us.wedemy.eggeum.android.data.model.login.LoginBodyResponse
-import us.wedemy.eggeum.android.data.model.login.SignUpBodyResponse
+import us.wedemy.eggeum.android.data.datasource.LoginLocalDataSource
+import us.wedemy.eggeum.android.data.datasource.LoginRemoteDataSource
 import us.wedemy.eggeum.android.domain.model.login.LoginBody
 import us.wedemy.eggeum.android.domain.model.login.SignUpBody
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
-import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
-import us.wedemy.eggeum.android.domain.util.LoginApiResponseUnknownError
 
 @Singleton
 public class LoginRepositoryProvider @Inject constructor(
-  private val client: HttpClient,
-  moshi: Moshi,
+  private val remoteDataSource: LoginRemoteDataSource,
+  private val localDataSource: LoginLocalDataSource,
 ) : LoginRepository {
-  private val loginBodyAdapter = moshi.adapter<LoginBodyResponse>()
-  private val signUpBodyAdapter = moshi.adapter<SignUpBodyResponse>()
-
   override suspend fun getLoginBody(idToken: String?): LoginBody? {
-    val httpResponse =
-      client
-        .post("app/sns-sign-in") {
-          jsonBody {
-            "idToken" withString idToken
-          }
-        }
-    when (httpResponse.status.value) {
-      HttpStatusCode.OK.value -> {
-        val responseText = httpResponse.bodyAsText()
-        val response = loginBodyAdapter.fromJson(responseText)
-        return response?.toDomain()
-      }
-      HttpStatusCode.NotFound.value -> {
-        throw LoginApiResponseNotFound
-      }
-      else -> {
-        throw LoginApiResponseUnknownError
-      }
-    }
+    return remoteDataSource.getLoginBody(idToken)
   }
 
   override suspend fun getSignUpBody(
@@ -61,16 +29,30 @@ public class LoginRepositoryProvider @Inject constructor(
     idToken: String?,
     nickname: String?,
   ): SignUpBody? {
-    val responseText =
-      client
-        .post("app/sns-sign-up") {
-          jsonBody {
-            "agreemMarketing" withBoolean agreemMarketing
-            "idToken" withString idToken
-            "nickname" withString nickname
-          }
-        }.bodyAsText()
-    val response = signUpBodyAdapter.fromJson(responseText)
-    return response?.toDomain()
+    return remoteDataSource.getSignUpBody(
+      agreemMarketing = agreemMarketing,
+      idToken = idToken,
+      nickname = nickname,
+    )
+  }
+
+  override suspend fun setAccessToken(accessToken: String) {
+    localDataSource.setAccessToken(accessToken)
+  }
+
+  override suspend fun setRefreshToken(refreshToken: String) {
+    localDataSource.setRefreshToken(refreshToken)
+  }
+
+  override suspend fun getAccessToken(): String {
+    return localDataSource.getAccessToken()
+  }
+
+  override suspend fun getRefreshToken(): String {
+    return localDataSource.getRefreshToken()
+  }
+
+  override suspend fun clearLoginToken() {
+    localDataSource.clearLoginToken()
   }
 }

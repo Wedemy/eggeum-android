@@ -17,7 +17,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 
-internal class TokenDataStoreImpl @Inject constructor(
+public class TokenDataStoreProvider @Inject constructor(
   private val dataStore: DataStore<Preferences>,
 ) : TokenDataStore {
   private companion object {
@@ -33,13 +33,13 @@ internal class TokenDataStoreImpl @Inject constructor(
     dataStore.edit { preferences -> preferences[KEY_REFRESH_TOKEN] = refreshToken }
   }
 
-  override suspend fun getAccessToken() = dataStore.data
+  override suspend fun getAccessToken(): String = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())
       else throw exception
     }.first()[KEY_ACCESS_TOKEN] ?: ""
 
-  override suspend fun getRefreshToken() = dataStore.data
+  override suspend fun getRefreshToken(): String = dataStore.data
     .catch { exception ->
       if (exception is IOException) emit(emptyPreferences())
       else throw exception

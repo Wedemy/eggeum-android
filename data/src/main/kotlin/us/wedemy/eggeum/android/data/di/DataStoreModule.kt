@@ -14,13 +14,12 @@ import androidx.datastore.preferences.preferencesDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreImpl
+import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 
 private const val TOKEN_DATASTORE = "token_datastore"
-
-@Suppress("unused")
 private val Context.tokenDataStore: DataStore<Preferences> by preferencesDataStore(name = TOKEN_DATASTORE)
 
 @Module
@@ -29,5 +28,9 @@ internal object DataStoreModule {
 
   @Singleton
   @Provides
-  internal fun provideTokenDataStore(dataStore: DataStore<Preferences>) = TokenDataStoreImpl(dataStore)
+  internal fun providePreferencesDataStore(@ApplicationContext context: Context) = context.tokenDataStore
+
+  @Singleton
+  @Provides
+  internal fun provideTokenDataStore(dataStore: DataStore<Preferences>) = TokenDataStoreProvider(dataStore)
 }

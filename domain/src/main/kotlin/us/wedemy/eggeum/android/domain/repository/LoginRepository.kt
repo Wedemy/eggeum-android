@@ -29,4 +29,26 @@ public interface LoginRepository {
     idToken: String?,
     nickname: String?,
   ): SignUpBody?
+
+  /** AccessToken 저장
+   *
+   * @param accessToken 엑세스 토큰
+   */
+  public suspend fun setAccessToken(accessToken: String)
+
+
+  /** RefreshToken 저장
+   *
+   * @param refreshToken 리프레시 토큰
+   */
+  public suspend fun setRefreshToken(refreshToken: String)
+
+  /** AccessToken 조회*/
+  public suspend fun getAccessToken(): String
+
+  /** RefreshToken 조회*/
+  public suspend fun getRefreshToken(): String
+
+  /** 로그인 토큰 초기화*/
+  public suspend fun clearLoginToken()
 }

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tb_select_opinion"
+    style="@style/Widget.Eggeum.Toolbar.WithArrow"
+    android:layout_width="0dp"
+    android:layout_height="100dp"
+    android:elevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/update_cafe"
+      android:textColor="@color/gray_900" />
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/update_cafe"
+      android:textColor="@color/gray_300" />
+
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginHorizontal="16dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toBottomOf="@id/line_select_opinion"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_select_opinion">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_ask_opinion"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+          android:id="@+id/tv_ask_opinion"
+          style="@style/H3"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/ask_options"
+          android:textColor="@color/gray_900"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_ask_opinion_sub"
+          style="@style/TextMRegular"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/ask_options_sub"
+          android:textColor="@color/gray_400"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_ask_opinion"
+          />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_ask_opinion">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/cl_request_correction_of_info"
+          android:paddingTop="16dp"
+          android:paddingBottom="16dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+          <CheckBox
+            android:id="@+id/cb_request_correction_of_info"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/selector_check_background_24"
+            android:button="@android:color/transparent"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+            style="@style/TextMSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/request_correction_of_info"
+            android:textColor="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="@id/cb_request_correction_of_info"
+            app:layout_constraintStart_toEndOf="@+id/cb_request_correction_of_info"
+            app:layout_constraintTop_toTopOf="@id/cb_request_correction_of_info" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="16dp"
+          android:paddingBottom="16dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cl_request_correction_of_info">
+
+          <CheckBox
+            android:id="@+id/cb_sujest_cafe"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/selector_check_background_24"
+            android:button="@android:color/transparent"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+            style="@style/TextMSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/sujest_cafe"
+            android:textColor="@color/gray_700"
+            app:layout_constraintBottom_toBottomOf="@id/cb_sujest_cafe"
+            app:layout_constraintStart_toEndOf="@+id/cb_sujest_cafe"
+            app:layout_constraintTop_toTopOf="@id/cb_sujest_cafe" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
+
+
+
+  <View
+    android:id="@+id/line_select_opinion"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_next"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_next"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:text="@string/next"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

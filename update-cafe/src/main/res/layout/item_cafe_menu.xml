@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="56dp"
+  android:paddingVertical="16dp">
+
+  <TextView
+    android:id="@+id/tv_cafe_menu_name"
+    style="@style/TextMMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/gray_400"
+    android:layout_marginRight="16dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="에스프레소" />
+
+  <TextView
+    android:id="@+id/tv_cafe_menu_price"
+    style="@style/TextMMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/gray_900"
+    android:layout_marginRight="16dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/tv_btn"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="₩3,000" />
+
+  <TextView
+    android:id="@+id/tv_btn"
+    style="@style/TextMMedium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/gray_400"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="떙떙떙" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

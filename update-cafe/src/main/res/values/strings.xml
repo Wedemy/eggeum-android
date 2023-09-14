@@ -5,4 +5,51 @@
   ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
   -->
 
-<resources></resources>
+<resources>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="update_cafe">정보 수정 및 신고</string>
+  <string name="cancel">취소</string>
+  <string name="next">다음</string>
+  <string name="ask_options">어떤 의견이 있으신가요?</string>
+  <string name="ask_options_sub">주신 의견은 한글자도 빼놓지 않고 꼼꼼히 읽어볼게요.</string>
+  <string name="request_correction_of_info">정보 수정 요청하기</string>
+  <string name="sujest_cafe">카페 제안하기</string>
+  <string name="cafe">카페</string>
+  <string name="cafe_sub">휴게음식점/일반음식점</string>
+  <string name="study_cafe">스터디 카페</string>
+  <string name="study_cafe_sub">공간임대업/휴게음식점</string>
+  <string name="study_room">스터디룸</string>
+  <string name="study_room_sub">공간임대업</string>
+  <string name="ask_cafe_categories">어떤 카테고리로 등록할까요?</string>
+  <string name="ask_info_categories">어떤 것을 개선하고 싶으세요?</string>
+  <string name="info">정보</string>
+  <string name="info_sub">카페명, 주소, 추가 정보</string>
+  <string name="menu">메뉴</string>
+  <string name="menu_sub">메뉴명, 메뉴 가격</string>
+  <string name="input_cafe_name">카페 이름을 입력해주세요.</string>
+  <string name="input_cafe_name_hint">매장 이름</string>
+  <string name="input_cafe_address">카페 주소를 입력해주세요.</string>
+  <string name="input_cafe_address_sub">매장 주소를 입력하면 매장 정보 제공 및 노출에 동의하는 것으로 간주합니다.</string>
+  <string name="input_cafe_address_hint">매장 주소</string>
+  <string name="ic_register_cafe_complete">ic_register_cafe_complete</string>
+  <string name="register_cafe_complete_title">카페 등록 신청을\n완료 했어요.</string>
+  <string name="update_menu_complete_title">메뉴 수정을 완료했어요.</string>
+  <string name="register_cafe_complete_subtitle">심사 후에 카페가 확인되면 지도에 등록할게요.</string>
+  <string name="update_menu_complete_subtitle">이끔을 개선하는데 도움을 주셔서 감사합니다.</string>
+  <string name="complete">완료</string>
+  <string name="input_corrections">수정하려는 내용을 입력해주세요.</string>
+  <string name="input_cafe_info_hint">30m</string>
+  <string name="input_cafe_area">면적</string>
+  <string name="input_cafe_meeting_room">회의실</string>
+  <string name="input_cafe_multi_seat">다인석</string>
+  <string name="input_cafe_single_seat">1인석</string>
+  <string name="input_cafe_business_hours">영업시간</string>
+  <string name="input_cafe_menu">메뉴</string>
+  <string name="input_cafe_menu_hint">초콜릿 케이크</string>
+  <string name="input_cafe_menu_price">가격</string>
+  <string name="input_cafe_menu_price_hint">6,800</string>
+  <string name="input_won">₩</string>
+  <string name="edit">수정하기</string>
+  <string name="delete">삭제하기</string>
+</resources>

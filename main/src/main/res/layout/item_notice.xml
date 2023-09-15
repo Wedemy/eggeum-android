@@ -5,48 +5,38 @@
   ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
   -->
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
+  android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_marginStart="16dp"
-  app:cardBackgroundColor="@color/gray_900"
-  app:cardCornerRadius="8dp">
+  android:paddingVertical="16dp"
+  tools:ignore="HardcodedText">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+  <TextView
+    android:id="@+id/tv_notice_title"
+    style="@style/TextLMedium"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="@color/gray_900"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="[공지] 공부하기 좋은 카페 찾는 방법" />
 
-    <TextView
-      android:id="@+id/tv_home_notice_title"
-      style="@style/TextLSemiBold"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginHorizontal="16dp"
-      android:layout_marginTop="12dp"
-      android:maxLines="2"
-      android:textColor="@color/white"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="일이삼사오육칠팔\n구십일이삼사오육" />
+  <ImageView
+    android:id="@+id/iv_notice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:contentDescription="Search Keyword Delete"
+    android:src="@drawable/ic_arrow_down_outlined_16"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-      android:id="@+id/tv_notification_date"
-      style="@style/TextSRegular"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginHorizontal="16dp"
-      android:layout_marginTop="54dp"
-      android:layout_marginBottom="12dp"
-      android:textColor="@color/gray_400"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_home_notice_title"
-      tools:text="23.03.01" />
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

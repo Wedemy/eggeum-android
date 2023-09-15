@@ -27,7 +27,7 @@ class NewCafeAdapter(
     with(holder) {
       bind(cafe)
       binding.root.setOnClickListener {
-        clickListener(adapterPosition)
+        clickListener(bindingAdapterPosition)
       }
     }
   }

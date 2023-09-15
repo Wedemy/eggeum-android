@@ -28,7 +28,7 @@ class CafeImageAdapter(
     with(holder) {
       bind(imageUrl)
       binding.root.setOnClickListener {
-        clickListener(adapterPosition)
+        clickListener(bindingAdapterPosition)
       }
     }
   }

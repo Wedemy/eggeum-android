@@ -6,18 +6,15 @@
   -->
 
 <resources>
+<!--  home-->
+
+
+<!--  search-->
   <string name="my_account">내 계정</string>
   <string name="search">검색</string>
   <string name="home">홈</string>
   <string name="new_cafe">신규 카페</string>
   <string name="check_new_cafe">새롭게 추가된 카페를 확인해보세요.</string>
-  <string name="notice">공지사항</string>
-  <string name="edit_my_info">내 정보 수정</string>
-  <string name="customer_support">고객지원</string>
-  <string name="privacy_policy">개인정보 처리 방침</string>
-  <string name="terms_of_service">서비스 이용약관</string>
-  <string name="version_info">버전 정보</string>
-  <string name="setting">설정</string>
   <string name="search_cafe">카페 검색</string>
   <string name="cafe">카페</string>
   <string name="study_cafe">스터디 카페</string>
@@ -46,4 +43,35 @@
   <string name="share">share</string>
   <string name="options">options</string>
   <string name="image_index"><font color="#ffffff">5</font><font color="#6b7280">/25</font></string>
+
+<!--  myaccount-->
+  <string name="edit_my_info">내 정보 수정</string>
+  <string name="notice">공지사항</string>
+  <string name="customer_support">고객지원</string>
+  <string name="privacy_policy">개인정보 처리 방침</string>
+  <string name="terms_of_service">서비스 이용약관</string>
+  <string name="version_info">버전 정보</string>
+  <string name="setting">설정</string>
+  <string name="nickname">닉네임 <font color="#14b8a6">*</font></string>
+  <string name="nickname_hint">닉네임</string>
+  <string name="email">이메일</string>
+  <string name="edit">수정하기</string>
+  <string name="temp">최소 2자 이상 입력해주세요.</string>
+  <string name="empty_text_error">닉네임을 입력해주세요.</string>
+  <string name="too_short_text_error">최소 2자 이상 입력해주세요.</string>
+  <string name="default_email">eggeum@gamil.com</string>
+  <string name="logout">로그아웃</string>
+  <string name="withdraw">회원탈퇴</string>
+  <string name="delete_id">ID가 삭제됩니다.</string>
+  <string name="delete_privacy_and_setting">개인정보와 설정이 삭제됩니다.</string>
+  <string name="delete_linked_social_account_info">연결된 소설 계정 정보가 삭제됩니다.</string>
+  <string name="unsubscribe">탈퇴하기</string>
+  <string name="delete_activity_history">활동 이력이 삭제됩니다.</string>
+  <string name="agree_to_notification">안내 사항을 확인하고 회원탈퇴에 동의합니다.</string>
+  <string name="inquiry">문의</string>
+  <string name="inquiry_title">제목 <font color="#14b8a6">*</font></string>
+  <string name="inquiry_content">문의 내용 <font color="#14b8a6">*</font></string>
+  <string name="input_inquiry_content">문의 내용을 입력해주세요.</string>
+  <string name="input_inquiry_title">제목을 입력해주세요.</string>
+  <string name="search_keyword">검색어를 입력해주세요.</string>
 </resources>

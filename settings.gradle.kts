@@ -36,7 +36,6 @@ include(
   ":onboard",
   ":main",
   ":register-cafe",
-  ":setting",
   ":common",
   ":design-resource",
 )

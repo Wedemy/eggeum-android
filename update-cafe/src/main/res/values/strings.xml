@@ -50,4 +50,5 @@
   <string name="input_won">₩</string>
   <string name="edit">수정하기</string>
   <string name="delete">삭제하기</string>
+  <string name="ic_menu_gray400_24">ic_menu_gray400_24</string>
 </resources>

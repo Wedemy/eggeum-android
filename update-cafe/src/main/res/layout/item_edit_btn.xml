@@ -24,22 +24,22 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:text="@string/edit"
-      android:layout_marginRight="4dp"
+      android:layout_marginEnd="4dp"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/tv_edit_btn"
+      app:layout_constraintEnd_toStartOf="@+id/iv_edit_btn"
       />
 
-    <TextView
-      android:id="@+id/tv_edit_btn"
+    <ImageView
+      android:id="@+id/iv_edit_btn"
       android:layout_width="20dp"
       android:layout_height="match_parent"
-      android:text="버"
+      android:src="@drawable/ic_edit_outlined_20"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      />
+      android:contentDescription="@string/ic_edit_outlined_20" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,22 +57,22 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:text="@string/delete"
-      android:layout_marginRight="4dp"
+      android:layout_marginEnd="4dp"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/tv_delete_btn"
+      app:layout_constraintEnd_toStartOf="@+id/iv_trash_btn"
       />
 
-    <TextView
-      android:id="@+id/tv_delete_btn"
+    <ImageView
+      android:id="@+id/iv_trash_btn"
       android:layout_width="20dp"
       android:layout_height="match_parent"
-      android:text="버"
+      android:src="@drawable/ic_trash_20"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      />
+      android:contentDescription="@string/ic_trash_20" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

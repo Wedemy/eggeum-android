@@ -51,4 +51,6 @@
   <string name="edit">수정하기</string>
   <string name="delete">삭제하기</string>
   <string name="ic_menu_gray400_24">ic_menu_gray400_24</string>
+  <string name="ic_edit_outlined_20">ic_edit_outlined_20</string>
+  <string name="ic_trash_20">ic_trash_20</string>
 </resources>

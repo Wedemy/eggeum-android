@@ -14,7 +14,7 @@
     android:id="@+id/tb_select_input_cafe_address"
     style="@style/Widget.Eggeum.Toolbar.WithArrow"
     android:layout_width="0dp"
-    android:layout_height="100dp"
+    android:layout_height="56dp"
     android:elevation="0dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

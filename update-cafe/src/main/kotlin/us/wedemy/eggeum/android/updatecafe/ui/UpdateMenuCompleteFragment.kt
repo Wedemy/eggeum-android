@@ -15,7 +15,6 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentUpdateMenuCompleteBinding
-import us.wedemy.eggeum.android.updatecafe.viewmodel.UpdateMenuCompleteViewModel
 
 @AndroidEntryPoint
 class UpdateMenuCompleteFragment : BaseFragment<FragmentUpdateMenuCompleteBinding>() {

@@ -21,7 +21,6 @@ plugins {
   alias(libs.plugins.google.secrets) apply false
   alias(libs.plugins.android.hilt) apply false
   alias(libs.plugins.ksp) apply false
-  id("org.jetbrains.kotlin.android") version "1.8.20" apply false
 }
 
 buildscript {

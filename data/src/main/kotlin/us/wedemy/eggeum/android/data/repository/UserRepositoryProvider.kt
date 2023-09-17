@@ -16,6 +16,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.put
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.client.jsonBody
 import us.wedemy.eggeum.android.data.mapper.toData
@@ -28,14 +29,17 @@ import us.wedemy.eggeum.android.domain.repository.UserRepository
 
 @Singleton
 public class UserRepositoryProvider @Inject constructor(
-  private val client: HttpClient,
+  @Named("HttpClient")
+  private val httpClient: HttpClient,
+  @Named("AuthHttpClient")
+  private val authHttpClient: HttpClient,
   moshi: Moshi,
 ) : UserRepository {
   private val userInfoBodayAdapter = moshi.adapter<UserInfoBodyResponse>()
   private val profileImageAdapter = moshi.adapter<ProfileImage>()
   override suspend fun getUserInfo(): UserInfoBody? {
     val responseText =
-      client
+      authHttpClient
         .get("app/users/me")
         .bodyAsText()
     val response = userInfoBodayAdapter.fromJson(responseText)
@@ -43,7 +47,7 @@ public class UserRepositoryProvider @Inject constructor(
   }
 
   override suspend fun updateUserInfo(updateUserInfoBody: UpdateUserInfoBody) {
-    client
+    authHttpClient
       .put("app/users/me") {
         jsonBody {
           "nickname" withString updateUserInfoBody.nickname
@@ -53,12 +57,12 @@ public class UserRepositoryProvider @Inject constructor(
   }
 
   override suspend fun withdraw() {
-    client
+    authHttpClient
       .delete("app/users/me")
   }
 
   override suspend fun updateUserNickname(nickname: String) {
-    client
+    authHttpClient
       .put("app/users/me/nickname") {
         jsonBody {
           "nickname" withString nickname
@@ -68,7 +72,7 @@ public class UserRepositoryProvider @Inject constructor(
 
   override suspend fun checkNicknameExist(nickname: String): Boolean {
     val responseText =
-      client
+      httpClient
         .get("app/users/nickname/exists") {
           parameter("nickname", nickname)
         }

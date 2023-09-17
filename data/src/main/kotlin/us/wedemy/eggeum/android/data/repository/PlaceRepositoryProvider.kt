@@ -14,6 +14,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
+import javax.inject.Named
 import us.wedemy.eggeum.android.data.client.jsonBody
 import us.wedemy.eggeum.android.data.mapper.toData
 import us.wedemy.eggeum.android.data.mapper.toDomain
@@ -28,6 +29,7 @@ import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
 public class PlaceRepositoryProvider @Inject constructor(
+  @Named("AuthHttpClient")
   private val client: HttpClient,
   moshi: Moshi,
 ) : PlaceRepository {

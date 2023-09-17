@@ -103,7 +103,6 @@
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_address"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
-          android:layout_margin="8dp"
           android:ellipsize="end"
           android:hint="@string/input_cafe_address_hint"
           android:inputType="text"

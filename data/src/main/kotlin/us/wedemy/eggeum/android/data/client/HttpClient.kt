@@ -98,14 +98,6 @@ internal object NetworkModule {
   }
 }
 
-//@Suppress("unused")
-//@Module
-//@InstallIn(SingletonComponent::class)
-//public object HttpClientProvider {
-//  @Provides
-//  public fun ktorClient(): HttpClient = KtorClient
-//}
-
 internal fun HttpRequestBuilder.jsonBody(pretty: Boolean = true, builder: JsonBuilder.() -> Unit) {
   setBody(buildJson(pretty, builder))
 }

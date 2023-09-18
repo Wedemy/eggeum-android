@@ -62,7 +62,6 @@
     app:layout_constraintTop_toBottomOf="@+id/tv_input_cafe_menu"
     app:layout_constraintBottom_toTopOf="@+id/line_input_cafe_menu"
     android:layout_marginTop="24dp"
-    android:layout_marginBottom="154dp"
     android:layout_marginHorizontal="16dp"
     tools:listitem="@layout/item_cafe_menu"/>
 

@@ -9,9 +9,11 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.extension.addDivider
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
 
@@ -25,5 +27,9 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
       setHasFixedSize(true)
       addDivider(R.color.gray_300)
     }
+
+    // temp
+    val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
+    findNavController().safeNavigate(action)
   }
 }

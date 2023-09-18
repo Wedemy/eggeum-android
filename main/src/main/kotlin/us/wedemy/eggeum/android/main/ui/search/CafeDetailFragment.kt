@@ -14,6 +14,7 @@
 
 package us.wedemy.eggeum.android.main.ui.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.google.android.material.tabs.TabLayout
@@ -44,12 +45,13 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
     })
   }
 
+  @SuppressLint("CommitTransaction")
   private fun showFragment(fragmentTag: String) {
     val existingFragment = childFragmentManager.findFragmentByTag(fragmentTag)
     childFragmentManager.beginTransaction().apply {
       childFragmentManager.fragments.forEach { hide(it) }
       if (existingFragment == null) {
-        val newFragment = when (tag) {
+        val newFragment = when (fragmentTag) {
           TAG_CAFE_INFO_FRAGMENT -> CafeInfoFragment()
           TAG_CAFE_IMAGE_FRAGMENT -> CafeImageFragment()
           TAG_CAFE_MENU_FRAGMENT -> CafeMenuFragment()

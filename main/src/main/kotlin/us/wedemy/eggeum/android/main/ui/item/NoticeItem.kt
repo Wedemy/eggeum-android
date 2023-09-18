@@ -9,5 +9,7 @@ package us.wedemy.eggeum.android.main.ui.item
 
 data class NoticeItem(
   val title: String,
-  val content: String,
+  val date: String,
+  val description: String,
+  var isExpanded: Boolean = false,
 )

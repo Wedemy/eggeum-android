@@ -124,7 +124,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!--<androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:paddingTop="16dp"
@@ -154,7 +154,7 @@
             app:layout_constraintStart_toEndOf="@+id/cb_sujest_cafe"
             app:layout_constraintTop_toTopOf="@id/cb_sujest_cafe" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>

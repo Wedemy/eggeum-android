@@ -58,7 +58,7 @@ abstract class BaseBottomSheetFragment<VB : ViewBinding> : BottomSheetDialogFrag
     val shapeAppearanceModel = ShapeAppearanceModel.builder(
       context,
       0,
-      com.google.android.material.R.style.ShapeAppearance_MaterialComponents_SmallComponent
+      com.google.android.material.R.style.ShapeAppearance_MaterialComponents_SmallComponent,
     ).build()
 
     val currentMaterialShapeDrawable = bottomSheet.background as? MaterialShapeDrawable ?: MaterialShapeDrawable()

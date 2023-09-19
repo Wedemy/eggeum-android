@@ -84,7 +84,7 @@ internal object NetworkModule {
         }
         url(BuildConfig.SERVER_BASE_URL)
         contentType(ContentType.Application.Json)
-        header("AccessToken", accessToken)
+        header("Authorization", "Bearer $accessToken")
       }
       install(Logging) {
         logger = object : Logger {

@@ -36,7 +36,7 @@ class CafeImageAdapter(private val clickListener: (Int) -> Unit) :
 
   private companion object {
     private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageItem>() {
-      override fun areItemsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem.url == newItem.url
+      override fun areItemsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem === newItem
       override fun areContentsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem == newItem
     }
   }

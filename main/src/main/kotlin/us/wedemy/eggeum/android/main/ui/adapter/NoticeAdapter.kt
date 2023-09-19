@@ -9,6 +9,8 @@ package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeEmptyBinding
@@ -22,10 +24,8 @@ import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeTitleViewHolder
 import us.wedemy.eggeum.android.main.ui.myaccount.NoticeItemClickListener
 import us.wedemy.eggeum.android.main.ui.myaccount.NoticeUiModel
 
-class NoticeAdapter(
-  private var noticeList: List<NoticeUiModel> = emptyList(),
-  private var clickListener: NoticeItemClickListener,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NoticeAdapter(private var clickListener: NoticeItemClickListener) :
+  ListAdapter<NoticeUiModel, RecyclerView.ViewHolder>(NoticeItemDiffCallback) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
     return when (viewType) {
       R.layout.item_notice_empty -> NoticeEmptyViewHolder(
@@ -45,7 +45,7 @@ class NoticeAdapter(
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-    when (val uiModel = noticeList[position]) {
+    when (val uiModel = getItem(position)) {
       is NoticeUiModel.NoticeEmptyItem -> (holder as NoticeEmptyViewHolder)
       is NoticeUiModel.NoticeTitleItem -> (holder as NoticeTitleViewHolder)
       is NoticeUiModel.NoticeSearchItem -> (holder as NoticeSearchViewHolder).apply {
@@ -57,14 +57,19 @@ class NoticeAdapter(
     }
   }
 
-  override fun getItemCount() = noticeList.size
-
   override fun getItemViewType(position: Int): Int {
-    return when (noticeList[position]) {
+    return when (getItem(position)) {
       is NoticeUiModel.NoticeEmptyItem -> R.layout.item_notice_empty
       is NoticeUiModel.NoticeTitleItem -> R.layout.item_notice_title
       is NoticeUiModel.NoticeSearchItem -> R.layout.item_notice_search
       is NoticeUiModel.NoticeListItem -> R.layout.item_notice_list
+    }
+  }
+
+  private companion object {
+    private val NoticeItemDiffCallback = object : DiffUtil.ItemCallback<NoticeUiModel>() {
+      override fun areItemsTheSame(oldItem:NoticeUiModel, newItem: NoticeUiModel) = oldItem === newItem
+      override fun areContentsTheSame(oldItem: NoticeUiModel, newItem: NoticeUiModel) = oldItem == newItem
     }
   }
 }

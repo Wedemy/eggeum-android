@@ -31,7 +31,9 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
     },
   )
 
-  private lateinit var noticeAdapter: NoticeAdapter
+  private val noticeAdapter by lazy {
+    NoticeAdapter(noticeItemClickListener)
+  }
 
   private val notices = listOf(
     NoticeUiModel.NoticeTitleItem,
@@ -81,14 +83,11 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
   }
 
   private fun initView() {
-    noticeAdapter = NoticeAdapter(
-      notices.ifEmpty { listOf(NoticeUiModel.NoticeEmptyItem) },
-      noticeItemClickListener,
-    )
     binding.rvNotice.apply {
       setHasFixedSize(true)
       adapter = noticeAdapter
     }
+    noticeAdapter.submitList(notices.ifEmpty { listOf(NoticeUiModel.NoticeEmptyItem) })
   }
 
   private fun initListener() {

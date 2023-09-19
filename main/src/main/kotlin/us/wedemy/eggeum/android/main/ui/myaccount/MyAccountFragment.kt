@@ -9,15 +9,22 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
+import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
 
 @AndroidEntryPoint
 class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   override fun getViewBinding() = FragmentMyAccountBinding.inflate(layoutInflater)
+
+  private val viewModel by viewModels<MyAccountViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -45,6 +52,12 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
   }
 
   private fun initObserver() {
-    // TODO 프로필 정보 및 버전 정보 가져오기
+    repeatOnStarted {
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+      }
+    }
   }
 }

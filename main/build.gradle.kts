@@ -37,6 +37,7 @@ dependencies {
     libs.naver.map,
     projects.common,
     projects.designResource,
+    projects.domain,
   )
 }
 

@@ -14,6 +14,7 @@ import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import javax.inject.Inject
+import javax.inject.Named
 import us.wedemy.eggeum.android.data.client.jsonBody
 import us.wedemy.eggeum.android.data.mapper.toDomain
 import us.wedemy.eggeum.android.data.model.login.LoginBodyResponse
@@ -24,6 +25,7 @@ import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 import us.wedemy.eggeum.android.domain.util.LoginApiResponseUnknownError
 
 public class LoginRemoteDataSourceProvider @Inject constructor(
+  @Named("HttpClient")
   private val client: HttpClient,
   moshi: Moshi,
 ) : LoginRemoteDataSource {

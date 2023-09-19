@@ -23,13 +23,13 @@ public data class UserInfoBodyResponse(
   public val id: Int,
 
   @Json(name = "name")
-  public val name: String,
+  public val name: String?,
 
   @Json(name = "nickname")
   public val nickname: String,
 
   @Json(name = "profileImage")
-  public val profileImage: ProfileImage,
+  public val profileImage: ProfileImage?,
 
   @Json(name = "roles")
   public val roles: List<String>,

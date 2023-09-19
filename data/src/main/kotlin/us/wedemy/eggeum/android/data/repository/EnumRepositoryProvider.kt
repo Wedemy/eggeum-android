@@ -13,6 +13,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.mapper.toDomain
 import us.wedemy.eggeum.android.data.model.enums.EnumListResponse
@@ -21,6 +22,7 @@ import us.wedemy.eggeum.android.domain.repository.EnumRepository
 
 @Singleton
 public class EnumRepositoryProvider @Inject constructor(
+  @Named("AuthHttpClient")
   private val client: HttpClient,
   moshi: Moshi,
 ) : EnumRepository {

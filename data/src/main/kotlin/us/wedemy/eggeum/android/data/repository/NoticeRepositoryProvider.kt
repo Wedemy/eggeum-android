@@ -14,6 +14,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.mapper.toDomain
 import us.wedemy.eggeum.android.data.model.notice.NoticeBodyResponse
@@ -24,6 +25,7 @@ import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
 @Singleton
 public class NoticeRepositoryProvider @Inject constructor(
+  @Named("AuthHttpClient")
   private val client: HttpClient,
   moshi: Moshi,
 ) : NoticeRepository {

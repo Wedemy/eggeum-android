@@ -16,6 +16,7 @@ import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
+import javax.inject.Named
 import us.wedemy.eggeum.android.data.client.jsonBody
 import us.wedemy.eggeum.android.data.mapper.toDomain
 import us.wedemy.eggeum.android.data.model.report.ReportBodyResponse
@@ -25,6 +26,7 @@ import us.wedemy.eggeum.android.domain.model.report.ReportList
 import us.wedemy.eggeum.android.domain.repository.ReportRepository
 
 public class ReportRepositoryProvider @Inject constructor(
+  @Named("AuthHttpClient")
   private val client: HttpClient,
   moshi: Moshi,
 ) : ReportRepository {

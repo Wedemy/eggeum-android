@@ -13,9 +13,9 @@ public data class UserInfoBody(
   public val agreeMarketing: Boolean,
   public val email: String,
   public val id: Int,
-  public val name: String,
+  public val name: String?,
   public val nickname: String,
-  public val profileImage: ProfileImage,
+  public val profileImage: ProfileImage?,
   public val roles: List<String>,
   public val status: String,
 )

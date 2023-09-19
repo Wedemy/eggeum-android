@@ -19,26 +19,28 @@ import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeEmptyViewHolder
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeListItemViewHolder
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeSearchViewHolder
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeTitleViewHolder
+import us.wedemy.eggeum.android.main.ui.myaccount.NoticeItemClickListener
 import us.wedemy.eggeum.android.main.ui.myaccount.NoticeUiModel
 
 class NoticeAdapter(
   private var noticeList: List<NoticeUiModel> = emptyList(),
+  private var clickListener: NoticeItemClickListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
     return when (viewType) {
       R.layout.item_notice_empty -> NoticeEmptyViewHolder(
-        ItemNoticeEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemNoticeEmptyBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
       R.layout.item_notice_title -> NoticeTitleViewHolder(
-        ItemNoticeTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemNoticeTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
       R.layout.item_notice_search -> NoticeSearchViewHolder(
-        ItemNoticeSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemNoticeSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
       R.layout.item_notice_list -> NoticeListItemViewHolder(
-        ItemNoticeListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemNoticeListBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
-      else -> throw IllegalStateException("Unknown viewType $viewType")
+      else -> error("Unknown viewType $viewType")
     }
   }
 
@@ -46,7 +48,11 @@ class NoticeAdapter(
     when (val uiModel = noticeList[position]) {
       is NoticeUiModel.NoticeEmptyItem -> (holder as NoticeEmptyViewHolder)
       is NoticeUiModel.NoticeTitleItem -> (holder as NoticeTitleViewHolder)
-      is NoticeUiModel.NoticeSearchItem -> (holder as NoticeSearchViewHolder)
+      is NoticeUiModel.NoticeSearchItem -> (holder as NoticeSearchViewHolder).apply {
+        binding.root.setOnClickListener {
+          clickListener.onSearchTextfieldClick(binding.tietNotice.text.toString())
+        }
+      }
       is NoticeUiModel.NoticeListItem -> (holder as NoticeListItemViewHolder).bind(uiModel.notice)
     }
   }

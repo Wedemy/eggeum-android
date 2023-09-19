@@ -9,6 +9,5 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 @Suppress("unused")
 data class NoticeItemClickListener(
-  val onSearchTextfieldClick: () -> Unit,
-  val onNoticeItemClick: () -> Unit,
+  val onSearchTextfieldClick: (String) -> Unit,
 )

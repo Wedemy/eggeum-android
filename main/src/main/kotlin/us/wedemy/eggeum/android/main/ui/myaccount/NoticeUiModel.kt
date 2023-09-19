@@ -12,7 +12,7 @@ import us.wedemy.eggeum.android.main.ui.item.NoticeItem
 sealed class NoticeUiModel {
   object NoticeEmptyItem : NoticeUiModel()
 
-  object NoticeTitleItem: NoticeUiModel()
+  object NoticeTitleItem : NoticeUiModel()
 
   object NoticeSearchItem : NoticeUiModel()
 

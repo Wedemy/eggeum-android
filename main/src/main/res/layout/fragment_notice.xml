@@ -32,6 +32,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tb_notice"
-    tools:listitem="@layout/item_notice" />
+    tools:listitem="@layout/item_notice_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

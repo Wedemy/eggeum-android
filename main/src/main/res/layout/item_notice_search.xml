@@ -27,7 +27,8 @@
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/til_notice"
       style="@style/Widget.Eggeum.TextInputLayout.SearchBox"
-      app:boxStrokeColor="@drawable/selector_box_stroke_color_white">
+      app:boxStrokeColor="@drawable/selector_box_stroke_color_white"
+      app:startIconDrawable="@drawable/ic_search_filled_16">
 
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tiet_notice"

@@ -55,9 +55,9 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
           TAG_CAFE_INFO_FRAGMENT -> CafeInfoFragment()
           TAG_CAFE_IMAGE_FRAGMENT -> CafeImageFragment()
           TAG_CAFE_MENU_FRAGMENT -> CafeMenuFragment()
-          else -> throw IllegalArgumentException("Unknown fragment tag: $tag")
+          else -> error("Unknown fragment tag: $fragmentTag")
         }
-        add(R.id.child_fragment_container, newFragment, tag)
+        add(R.id.child_fragment_container, newFragment, fragmentTag)
       } else {
         show(existingFragment)
       }

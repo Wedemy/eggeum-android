@@ -56,7 +56,11 @@
     android:id="@+id/fragment_search_cafe"
     android:name="us.wedemy.eggeum.android.main.ui.search.SearchCafeFragment"
     android:label="SearchCafeFragment"
-    tools:layout="@layout/fragment_search_cafe" />
+    tools:layout="@layout/fragment_search_cafe" >
+    <action
+      android:id="@+id/action_fragment_search_cafe_to_fragment_cafe_detail"
+      app:destination="@id/fragment_cafe_detail" />
+  </fragment>
 
   <fragment
     android:id="@+id/fragment_edit_myinfo"
@@ -91,5 +95,11 @@
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.InquiryFragment"
     android:label="InquiryFragment"
     tools:layout="@layout/fragment_inquiry"/>
+
+  <dialog
+    android:id="@+id/fragment_cafe_detail"
+    android:name="us.wedemy.eggeum.android.main.ui.search.CafeDetailFragment"
+    android:label="CafeDetailFragment"
+    tools:layout="@layout/fragment_cafe_detail"/>
 
 </navigation>

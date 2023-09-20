@@ -30,7 +30,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:text="일이삼사오육칠팔\n구십일이삼사오육" />
+      tools:text="일이삼사오육칠팔구십일이삼사오육" />
 
     <TextView
       android:id="@+id/tv_notification_date"

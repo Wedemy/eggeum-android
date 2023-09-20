@@ -37,8 +37,6 @@ class SelectOpinionFragment : BaseFragment<FragmentSelectOpinionBinding>() {
         findNavController().safeNavigate(action)
       }
     }
-
-
   }
 
   private fun initObserver() {

@@ -83,10 +83,7 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
   }
 
   private fun initView() {
-    binding.rvNotice.apply {
-      setHasFixedSize(true)
-      adapter = noticeAdapter
-    }
+    binding.rvNotice.adapter = noticeAdapter
     noticeAdapter.submitList(notices.ifEmpty { listOf(NoticeUiModel.NoticeEmptyItem) })
   }
 

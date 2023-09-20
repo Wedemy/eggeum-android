@@ -12,7 +12,9 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.viewmodel.SelectCafeMenuViewModel
@@ -29,7 +31,12 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
   }
 
   private fun initListener() {
-    // TODO
+    with(binding) {
+      btnInputCafeMenu.setOnClickListener {
+        val action = SelectCafeMenuFragmentDirections.actionSelectCafeMenuFragmentToInputCafeMenuFragment()
+        findNavController().safeNavigate(action)
+      }
+    }
   }
 
   private fun initObserver() {

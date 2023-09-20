@@ -67,7 +67,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_cafe_menu"
       android:layout_width="match_parent"
-      android:layout_height="77dp"
+      android:layout_height="wrap_content"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@+id/cl_input_cafe_info">
@@ -109,7 +109,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_cafe_menu_price"
       android:layout_width="match_parent"
-      android:layout_height="77dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@id/cl_cafe_menu">
@@ -121,7 +122,6 @@
         android:layout_height="wrap_content"
         android:text="@string/input_cafe_menu_price"
         android:textColor="@color/gray_800"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cl_cafe_menu_price"/>
@@ -131,44 +131,19 @@
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
+        app:prefixText="@string/input_won"
         android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/tv_cafe_menu_price"
-        app:layout_constraintBottom_toBottomOf="@+id/cl_cafe_menu_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/cl_cafe_menu_price_input"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_marginVertical="14dp"
-          android:layout_marginHorizontal="12dp">
-
-          <TextView
-            android:id="@+id/tv_input_won"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@color/gray_400"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cl_cafe_menu_price_input"
-            app:layout_constraintBottom_toBottomOf="@+id/cl_cafe_menu_price_input"
-            android:text="@string/input_won"/>
 
           <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_input_cafe_meeting_price"
             style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
             android:ellipsize="end"
-            app:layout_constraintTop_toTopOf="@+id/tv_input_won"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_input_won"
-            app:layout_constraintStart_toEndOf="@+id/tv_input_won"
-            app:layout_constraintEnd_toEndOf="parent"
             android:hint="@string/input_cafe_menu_price_hint"
             android:inputType="text"
             android:maxLines="1" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,12 +157,12 @@
     android:layout_height="1dp"
     android:layout_marginBottom="16dp"
     android:background="@color/gray_200"
-    app:layout_constraintBottom_toTopOf="@id/btn_next"
+    app:layout_constraintBottom_toTopOf="@id/btn_update_menu_complete"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
   <Button
-    android:id="@+id/btn_next"
+    android:id="@+id/btn_update_menu_complete"
     style="@style/Widget.Eggeum.Button"
     android:layout_width="0dp"
     android:layout_marginHorizontal="16dp"

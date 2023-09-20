@@ -12,7 +12,9 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectInfoCategoriesBinding
 import us.wedemy.eggeum.android.updatecafe.viewmodel.SelectInfoCategoriesViewModel
@@ -29,7 +31,13 @@ class SelectInfoCategoriesFragment : BaseFragment<FragmentSelectInfoCategoriesBi
   }
 
   private fun initListener() {
-    // TODO
+    with(binding) {
+      // check box에 따른 fragment 이동 필요
+      btnSelectCafeMenu.setOnClickListener {
+        val action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToSelectCafeMenuFragment()
+        findNavController().safeNavigate(action)
+      }
+    }
   }
 
   private fun initObserver() {

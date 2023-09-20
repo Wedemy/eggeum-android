@@ -173,12 +173,12 @@
     android:layout_height="1dp"
     android:layout_marginBottom="16dp"
     android:background="@color/gray_200"
-    app:layout_constraintBottom_toTopOf="@id/btn_next"
+    app:layout_constraintBottom_toTopOf="@id/btn_select_info_categories"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
   <Button
-    android:id="@+id/btn_next"
+    android:id="@+id/btn_select_info_categories"
     style="@style/Widget.Eggeum.Button"
     android:layout_width="0dp"
     android:layout_marginHorizontal="16dp"

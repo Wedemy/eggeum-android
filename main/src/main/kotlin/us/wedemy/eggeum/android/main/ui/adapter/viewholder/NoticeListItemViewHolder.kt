@@ -20,8 +20,8 @@ class NoticeListItemViewHolder(val binding: ItemNoticeListBinding) : RecyclerVie
       tvNoticeTitle.text = notice.title
       tvNoticeDate.text = notice.date
       tvNoticeDescription.text = notice.description
-      root.setOnClickListener {
-        val show = toggleLayout(!notice.isExpanded, ivNotice, llLayoutExpand)
+      clNotice.setOnClickListener {
+        val show = toggleLayout(!notice.isExpanded, ivNoticeExpand, llLayoutExpand)
         notice.isExpanded = show
       }
     }

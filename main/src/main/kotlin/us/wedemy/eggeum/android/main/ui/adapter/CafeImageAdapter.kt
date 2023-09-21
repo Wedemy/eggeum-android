@@ -8,30 +8,16 @@
 package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.common.extension.layoutInflater
+import us.wedemy.eggeum.android.common.ui.BaseAdapter
+import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageViewHolder
+import us.wedemy.eggeum.android.main.ui.search.CafeImageClickListener
 
-class CafeImageAdapter(
-  private var imageUrlList: List<String> = emptyList(),
-  private val clickListener: (Int) -> Unit,
-) : RecyclerView.Adapter<CafeImageViewHolder>() {
-
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+class CafeImageAdapter(private val clickListener: CafeImageClickListener) : BaseAdapter<String, ItemCafeImageBinding>() {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<String, ItemCafeImageBinding> =
     CafeImageViewHolder(
-      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false),
+      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener
     )
-
-  override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
-    val imageUrl = imageUrlList[position]
-    with(holder) {
-      bind(imageUrl)
-      binding.root.setOnClickListener {
-        clickListener(bindingAdapterPosition)
-      }
-    }
-  }
-
-  override fun getItemCount() = imageUrlList.size
 }

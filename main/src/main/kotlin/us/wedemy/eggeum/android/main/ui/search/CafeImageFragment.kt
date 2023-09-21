@@ -14,11 +14,21 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 
+interface CafeImageClickListener {
+  fun onItemClick(position: Int)
+}
+
 @AndroidEntryPoint
 class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
 
   private val cafeImageAdapter by lazy {
-    CafeImageAdapter { _ -> run {} }
+    CafeImageAdapter(
+      object : CafeImageClickListener {
+        override fun onItemClick(position: Int) {
+          TODO("Not yet implemented")
+        }
+      },
+    )
   }
 
   override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)

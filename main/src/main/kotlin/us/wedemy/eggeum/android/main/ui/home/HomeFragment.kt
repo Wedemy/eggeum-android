@@ -11,20 +11,45 @@ import android.os.Bundle
 import android.view.View
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.extension.addDivider
+import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
 import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
 
+interface NewCafeClickListener {
+  fun onItemClick(position: Int)
+}
+
+interface NoticeCardClickListener {
+  fun onItemClick(position: Int)
+}
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-  private lateinit var newCafeAdapter: NewCafeAdapter
-  private lateinit var noticeAdapter: NoticeCardAdapter
+  private val newCafeAdapter by lazy {
+    NewCafeAdapter(
+      object : NewCafeClickListener {
+        override fun onItemClick(position: Int) {
+          TODO("Not yet implemented")
+        }
+      },
+    )
+  }
+
+  private val noticeCardAdapter by lazy {
+    NoticeCardAdapter(
+      object : NoticeCardClickListener {
+        override fun onItemClick(position: Int) {
+          TODO("Not yet implemented")
+        }
+      },
+    )
+  }
 
   private val newCafes = listOf(
     NewCafeItem("스타벅스 강남역신분당역사점", "서울특별시 강남구 강남대로 396"),
@@ -51,6 +76,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeCardItem("일이삼사오육칠팔구십일이삼사오육", "23.03.01"),
   )
 
+  val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
@@ -59,12 +86,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   }
 
   private fun initView() {
-    newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
-    noticeAdapter = NoticeCardAdapter(notices) { _ -> run {} }
     with(binding) {
-      newCafeAdapter = NewCafeAdapter(newCafes) { _ -> run {} }
-      noticeAdapter = NoticeCardAdapter(notices) { _ -> run {} }
-
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter
@@ -73,19 +95,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
       rvHomeNotice.apply {
         setHasFixedSize(true)
-        adapter = noticeAdapter
+        adapter = noticeCardAdapter
       }
-      binding.tlHomeNewCafe.apply {
-        val cafeLists = listOf(newCafes, newStudyCafes, newStudyRooms)
-        addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-          override fun onTabSelected(tab: TabLayout.Tab) {
-            newCafeAdapter = NewCafeAdapter(cafeLists[tab.position]) { _ -> run {} }
-          }
+      noticeCardAdapter.replaceAll(notices)
 
-          override fun onTabUnselected(tab: TabLayout.Tab) = Unit
-          override fun onTabReselected(tab: TabLayout.Tab) = Unit
-        })
-      }
+      tlHomeNewCafe.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab) {
+          newCafeAdapter.replaceAll(cafeLists[tab.position])
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+        override fun onTabReselected(tab: TabLayout.Tab) = Unit
+      })
     }
   }
 

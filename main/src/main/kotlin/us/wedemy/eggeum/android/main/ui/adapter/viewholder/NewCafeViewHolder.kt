@@ -7,13 +7,26 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
-import androidx.recyclerview.widget.RecyclerView
+import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
+import us.wedemy.eggeum.android.main.ui.home.NewCafeClickListener
 import us.wedemy.eggeum.android.main.ui.item.NewCafeItem
 
-class NewCafeViewHolder(val binding: ItemNewCafeBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(newCafe: NewCafeItem) {
-    binding.tvNewCafeName.text = newCafe.name
-    binding.tvNewCafeAddress.text = newCafe.address
+class NewCafeViewHolder(
+  binding: ItemNewCafeBinding,
+  clickListener: NewCafeClickListener,
+) : BaseViewHolder<NewCafeItem, ItemNewCafeBinding>(binding) {
+
+  init {
+    binding.root.setOnClickListener {
+      clickListener.onItemClick(adapterPosition)
+    }
+  }
+
+  override fun bind(item: NewCafeItem) {
+    binding.apply {
+      tvNewCafeName.text = item.name
+      tvNewCafeAddress.text = item.address
+    }
   }
 }

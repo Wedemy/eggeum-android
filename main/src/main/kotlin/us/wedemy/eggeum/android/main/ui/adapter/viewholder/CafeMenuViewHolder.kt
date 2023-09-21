@@ -7,16 +7,19 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
-import androidx.recyclerview.widget.RecyclerView
 import java.text.NumberFormat
 import java.util.Locale
+import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
 import us.wedemy.eggeum.android.main.ui.item.CafeMenuItem
 
-class CafeMenuViewHolder(val binding: ItemCafeMenuBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(cafeMenu: CafeMenuItem) {
-    binding.tvCafeMenuName.text = cafeMenu.name
-    binding.tvCafeMenuPrice.text = formatPrice(cafeMenu.price)
+class CafeMenuViewHolder(binding: ItemCafeMenuBinding) : BaseViewHolder<CafeMenuItem, ItemCafeMenuBinding>(binding) {
+
+  override fun bind(item: CafeMenuItem) {
+    binding.apply {
+      tvCafeMenuName.text = item.name
+      tvCafeMenuPrice.text = formatPrice(item.price)
+    }
   }
 
   private fun formatPrice(price: Int): String {

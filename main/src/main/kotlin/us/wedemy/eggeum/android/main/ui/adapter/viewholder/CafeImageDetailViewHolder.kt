@@ -7,12 +7,14 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageDetailBinding
 
-class CafeImageDetailViewHolder(val binding: ItemCafeImageDetailBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(imageUrl: String) {
-    binding.ivCafeImageDetail.load(imageUrl)
+class CafeImageDetailViewHolder(binding: ItemCafeImageDetailBinding) :
+  BaseViewHolder<String, ItemCafeImageDetailBinding>(binding) {
+
+  override fun bind(item: String) {
+    binding.ivCafeImageDetail.load(item)
   }
 }

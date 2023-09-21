@@ -7,15 +7,26 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
-import androidx.recyclerview.widget.RecyclerView
+import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeCardBinding
+import us.wedemy.eggeum.android.main.ui.home.NoticeCardClickListener
 import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
 
-class NoticeCardViewHolder(val binding: ItemNoticeCardBinding) : RecyclerView.ViewHolder(binding.root) {
-  fun bind(notice: NoticeCardItem) {
+class NoticeCardViewHolder(
+  binding: ItemNoticeCardBinding,
+  clickListener: NoticeCardClickListener,
+) : BaseViewHolder<NoticeCardItem, ItemNoticeCardBinding>(binding) {
+
+  init {
+    binding.root.setOnClickListener {
+      clickListener.onItemClick(adapterPosition)
+    }
+  }
+
+  override fun bind(item: NoticeCardItem) {
     binding.apply {
-      tvHomeNoticeTitle.text = notice.title
-      tvNotificationDate.text = notice.date
+      tvHomeNoticeTitle.text = item.title
+      tvNotificationDate.text = item.date
     }
   }
 }

@@ -14,24 +14,16 @@ import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHol
 import us.wedemy.eggeum.android.registercafe.databinding.ItemCafeImageBinding
 import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.android.common.extension.layoutInflater
+import us.wedemy.eggeum.android.registercafe.ui.CafeImageClickListener
 
-class CafeImageAdapter(private val clickListener: (Int) -> Unit) :
+class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
   ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    CafeImageViewHolder(ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false))
+    CafeImageViewHolder(ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
 
   override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
-    val cafeImageItem = getItem(position)
-
-    with(holder) {
-      cafeImageItem?.let { cafeImage ->
-        bind(cafeImage)
-        binding.ivCafeImageClose.setOnClickListener {
-          clickListener(adapterPosition)
-        }
-      } ?: binding.ivCafeImageClose.setOnClickListener(null)
-    }
+    holder.bind(getItem(position))
   }
 
   private companion object {

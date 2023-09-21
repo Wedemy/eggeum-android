@@ -30,6 +30,10 @@ import us.wedemy.eggeum.android.registercafe.databinding.FragmentRegisterCafeBin
 import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.android.registercafe.viewmodel.RegisterCafeViewModel
 
+interface CafeImageClickListener {
+  fun onItemClick(position: Int)
+}
+
 @AndroidEntryPoint
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeBinding.inflate(layoutInflater)
@@ -46,7 +50,11 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   }
 
   private val cafeImageAdapter by lazy {
-    CafeImageAdapter { position -> viewModel.deleteCafeImage(position) }
+    CafeImageAdapter(object : CafeImageClickListener {
+      override fun onItemClick(position: Int) {
+        viewModel.deleteCafeImage(position)
+      }
+    })
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

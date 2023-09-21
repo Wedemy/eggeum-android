@@ -27,7 +27,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
         override fun onItemClick(position: Int) {
           TODO("Not yet implemented")
         }
-      }
+      },
     )
   }
 

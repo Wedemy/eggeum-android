@@ -19,6 +19,7 @@ class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageViewHolder(
-      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener
+      ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false),
+      clickListener,
     )
 }

@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         override fun onItemClick(position: Int) {
           TODO("Not yet implemented")
         }
-      }
+      },
     )
   }
 
@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         override fun onItemClick(position: Int) {
           TODO("Not yet implemented")
         }
-      }
+      },
     )
   }
 

@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.common.ui
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseRecyclerViewAdapter<T, VB : ViewBinding>() : RecyclerView.Adapter<BaseViewHolder<T, VB>>() {
+abstract class BaseRecyclerViewAdapter<T, VB : ViewBinding> : RecyclerView.Adapter<BaseViewHolder<T, VB>>() {
   private val items = mutableListOf<T>()
 
   override fun onBindViewHolder(holder: BaseViewHolder<T, VB>, position: Int) {
@@ -21,7 +21,7 @@ abstract class BaseRecyclerViewAdapter<T, VB : ViewBinding>() : RecyclerView.Ada
 
   @Suppress("unused")
   open fun replaceAll(newItems: List<T>?) {
-    items.apply{
+    items.apply {
       clear()
       newItems?.let { addAll(it) }
     }

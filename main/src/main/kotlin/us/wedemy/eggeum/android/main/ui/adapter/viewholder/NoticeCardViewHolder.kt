@@ -13,7 +13,9 @@ import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
 
 class NoticeCardViewHolder(val binding: ItemNoticeCardBinding) : RecyclerView.ViewHolder(binding.root) {
   fun bind(notice: NoticeCardItem) {
-    binding.tvHomeNoticeTitle.text = notice.title
-    binding.tvNotificationDate.text = notice.date
+    binding.apply {
+      tvHomeNoticeTitle.text = notice.title
+      tvNotificationDate.text = notice.date
+    }
   }
 }

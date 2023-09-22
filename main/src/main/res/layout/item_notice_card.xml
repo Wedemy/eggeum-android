@@ -8,7 +8,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
+  android:layout_width="150dp"
   android:layout_height="wrap_content"
   android:layout_marginStart="16dp"
   app:cardBackgroundColor="@color/gray_900"
@@ -21,7 +21,7 @@
     <TextView
       android:id="@+id/tv_home_notice_title"
       style="@style/TextLSemiBold"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginHorizontal="16dp"
       android:layout_marginTop="12dp"

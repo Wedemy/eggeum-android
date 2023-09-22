@@ -25,7 +25,7 @@ import us.wedemy.eggeum.android.domain.usecase.GetUserInfoUseCase
 data class MyAccountUiState (
   val nickname: String = "",
   val email: String = "",
-  val profileUrl: String? = null,
+  val profileImageUrl: String? = null,
   val isLoading: Boolean = false,
   val error: Throwable? = null,
 )
@@ -54,7 +54,7 @@ class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: Get
             uiState.copy(
               nickname = userInfoBody.nickname,
               email = userInfoBody.email,
-              profileUrl = userInfoBody.profileImage?.let { it.files[0].url }
+              profileImageUrl = userInfoBody.profileImage?.let { it.files[0].url }
             )
           }
         }

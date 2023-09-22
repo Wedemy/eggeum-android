@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
@@ -19,6 +20,7 @@ import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
 import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
+import us.wedemy.eggeum.android.design.R
 
 @AndroidEntryPoint
 class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
@@ -53,6 +55,17 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
 
   private fun initObserver() {
     repeatOnStarted {
+      launch {
+        viewModel.uiState.collect {
+          binding.apply {
+            tvMyAccountNickname.text = it.nickname
+            tvMyAccountEmail.text = it.email
+            if (it.profileUrl != null) ivMyAccountProfileImage.load(it.profileUrl)
+            else ivMyAccountProfileImage.load(R.drawable.ic_profile_filled_48)
+          }
+        }
+      }
+
       launch {
         viewModel.showToastEvent.collect { message ->
           Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

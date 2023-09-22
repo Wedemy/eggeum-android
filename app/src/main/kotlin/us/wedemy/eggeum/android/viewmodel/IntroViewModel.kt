@@ -37,8 +37,7 @@ class IntroViewModel @Inject constructor(
       val accessToken = getAccessTokenUseCase.execute()
       if (accessToken.isEmpty()) {
         _navigateToLoginEvent.emit(Unit)
-      }
-      else {
+      } else {
         _navigateToMainEvent.emit(Unit)
       }
     }

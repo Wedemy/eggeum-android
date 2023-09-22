@@ -30,6 +30,7 @@ dependencies {
     libs.android.play.services.location,
     libs.androidx.core,
     libs.androidx.constraintlayout,
+    libs.androidx.paging3,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     libs.coil,

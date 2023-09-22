@@ -52,7 +52,7 @@ public class LoginRepositoryProvider @Inject constructor(
     return localDataSource.getRefreshToken()
   }
 
-  override suspend fun clearLoginToken() {
-    localDataSource.clearLoginToken()
+  override suspend fun deleteAuthToken() {
+    localDataSource.deleteAuthToken()
   }
 }

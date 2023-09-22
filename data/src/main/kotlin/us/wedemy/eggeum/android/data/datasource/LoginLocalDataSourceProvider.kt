@@ -30,7 +30,7 @@ public class LoginLocalDataSourceProvider @Inject constructor(
     return dataStore.getRefreshToken()
   }
 
-  override suspend fun clearLoginToken() {
-    dataStore.clearDataStore()
+  override suspend fun deleteAuthToken() {
+    dataStore.clear()
   }
 }

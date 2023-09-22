@@ -45,7 +45,7 @@ public class TokenDataStoreProvider @Inject constructor(
       else throw exception
     }.first()[KEY_REFRESH_TOKEN] ?: ""
 
-  override suspend fun clearDataStore() {
+  override suspend fun clear() {
     dataStore.edit { it.clear() }
   }
 }

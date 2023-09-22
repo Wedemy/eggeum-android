@@ -83,10 +83,10 @@ public class GetRefreshTokenUseCase @Inject constructor(
 }
 
 @Singleton
-public class ClearDataStoreUseCase @Inject constructor(
+public class DeleteAuthTokenUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
   public suspend fun execute() {
-    repository.clearLoginToken()
+    repository.deleteAuthToken()
   }
 }

@@ -16,5 +16,5 @@ public interface TokenDataStore {
 
   public suspend fun getRefreshToken(): String
 
-  public suspend fun clearDataStore()
+  public suspend fun clear()
 }

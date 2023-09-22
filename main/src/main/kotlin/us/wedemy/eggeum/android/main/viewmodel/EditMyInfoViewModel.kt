@@ -21,6 +21,7 @@ import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
 import us.wedemy.eggeum.android.main.ui.item.UserInfo
 
+@Suppress("unused")
 @HiltViewModel
 class EditMyInfoViewModel @Inject constructor(
   private val updateUserInfoUseCase: UpdateUserInfoUseCase,

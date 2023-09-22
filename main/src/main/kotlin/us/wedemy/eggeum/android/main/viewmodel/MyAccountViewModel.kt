@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetUserInfoUseCase
 
-data class MyAccountUiState (
+data class MyAccountUiState(
   val nickname: String = "",
   val email: String = "",
   val profileImageUrl: String? = null,
@@ -54,7 +54,7 @@ class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: Get
             uiState.copy(
               nickname = userInfoBody.nickname,
               email = userInfoBody.email,
-              profileImageUrl = userInfoBody.profileImage?.let { it.files[0].url }
+              profileImageUrl = userInfoBody.profileImage?.let { it.files[0].url },
             )
           }
         }

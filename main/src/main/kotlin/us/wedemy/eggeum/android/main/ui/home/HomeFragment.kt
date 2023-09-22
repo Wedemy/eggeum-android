@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NewCafeAdapter(
       object : NewCafeClickListener {
         override fun onItemClick(position: Int) {
-          TODO("Not yet implemented")
+          // TODO
         }
       },
     )
@@ -45,7 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeCardAdapter(
       object : NoticeCardClickListener {
         override fun onItemClick(position: Int) {
-          TODO("Not yet implemented")
+          // TODO
         }
       },
     )
@@ -107,6 +107,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         override fun onTabUnselected(tab: TabLayout.Tab) = Unit
         override fun onTabReselected(tab: TabLayout.Tab) = Unit
       })
+      tlHomeNewCafe.getTabAt(0)?.select()
+      newCafeAdapter.replaceAll(cafeLists[0])
     }
   }
 

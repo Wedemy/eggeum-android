@@ -38,41 +38,64 @@
     android:id="@+id/fragment_my_account"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.MyAccountFragment"
     android:label="MyAccountFragment"
-    tools:layout="@layout/fragment_my_account" >
+    tools:layout="@layout/fragment_my_account">
     <action
       android:id="@+id/action_fragment_my_account_to_fragment_setting"
-      app:destination="@id/fragment_setting" />
+      app:destination="@id/fragment_setting"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <action
       android:id="@+id/action_fragment_my_account_to_fragment_notice"
-      app:destination="@id/fragment_notice" />
+      app:destination="@id/fragment_notice"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <action
       android:id="@+id/action_fragment_my_account_to_fragment_inquiry"
-      app:destination="@id/fragment_inquiry" />
+      app:destination="@id/fragment_inquiry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/action_fragment_my_account_to_fragment_edit_my_info"
+      app:destination="@id/fragment_edit_my_info"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
 
   <fragment
     android:id="@+id/fragment_search_cafe"
     android:name="us.wedemy.eggeum.android.main.ui.search.SearchCafeFragment"
     android:label="SearchCafeFragment"
-    tools:layout="@layout/fragment_search_cafe" >
+    tools:layout="@layout/fragment_search_cafe">
     <action
       android:id="@+id/action_fragment_search_cafe_to_fragment_cafe_detail"
       app:destination="@id/fragment_cafe_detail" />
   </fragment>
 
   <fragment
-    android:id="@+id/fragment_edit_myinfo"
+    android:id="@+id/fragment_edit_my_info"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.EditMyInfoFragment"
     android:label="EditMyInfoFragment"
-    tools:layout="@layout/fragment_edit_my_info"/>
+    tools:layout="@layout/fragment_edit_my_info">
+    <argument
+      android:name="user_info"
+      app:argType="us.wedemy.eggeum.android.main.ui.item.UserInfo" />
+  </fragment>
 
   <fragment
     android:id="@+id/fragment_notice"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.NoticeFragment"
     android:label="NoticeFragment"
-    tools:layout="@layout/fragment_notice"/>
+    tools:layout="@layout/fragment_notice" />
 
   <fragment
     android:id="@+id/fragment_setting"
@@ -88,18 +111,18 @@
     android:id="@+id/fragment_withdraw"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.WithdrawFragment"
     android:label="WithdrawFragment"
-    tools:layout="@layout/fragment_withdraw"/>
+    tools:layout="@layout/fragment_withdraw" />
 
   <fragment
     android:id="@+id/fragment_inquiry"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.InquiryFragment"
     android:label="InquiryFragment"
-    tools:layout="@layout/fragment_inquiry"/>
+    tools:layout="@layout/fragment_inquiry" />
 
   <dialog
     android:id="@+id/fragment_cafe_detail"
     android:name="us.wedemy.eggeum.android.main.ui.search.CafeDetailFragment"
     android:label="CafeDetailFragment"
-    tools:layout="@layout/fragment_cafe_detail"/>
+    tools:layout="@layout/fragment_cafe_detail" />
 
 </navigation>

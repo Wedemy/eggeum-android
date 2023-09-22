@@ -18,9 +18,10 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
-import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
 import us.wedemy.eggeum.android.design.R
+import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
+import us.wedemy.eggeum.android.main.ui.item.UserInfo
+import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
 
 @AndroidEntryPoint
 class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
@@ -36,6 +37,13 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
 
   private fun initListener() {
     with(binding) {
+      tvMyAccountEditMyInfo.setOnClickListener {
+        val uiState = viewModel.uiState.value
+        val userInfo = UserInfo(uiState.nickname, uiState.email, uiState.profileImageUrl)
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentEditMyInfo(userInfo)
+        findNavController().safeNavigate(action)
+      }
+
       clMyAccountSetting.setOnClickListener {
         val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
         findNavController().safeNavigate(action)
@@ -60,7 +68,7 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
           binding.apply {
             tvMyAccountNickname.text = it.nickname
             tvMyAccountEmail.text = it.email
-            if (it.profileUrl != null) ivMyAccountProfileImage.load(it.profileUrl)
+            if (it.profileImageUrl != null) ivMyAccountProfileImage.load(it.profileImageUrl)
             else ivMyAccountProfileImage.load(R.drawable.ic_profile_filled_48)
           }
         }

@@ -12,6 +12,7 @@ plugins {
   eggeum("android-hilt")
   alias(libs.plugins.google.secrets)
   alias(libs.plugins.androidx.navigation.safeargs)
+  `kotlin-parcelize`
 }
 
 android {

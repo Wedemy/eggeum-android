@@ -60,12 +60,23 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     }
 
     binding.btnEditMyInfo.setOnClickListener {
-      requireActivity().finish()
+      viewModel.updateUserInfo()
     }
   }
 
   private fun initObserver() {
     repeatOnStarted {
+      launch {
+        viewModel.userInfo.collect {
+          binding.apply {
+            tietEditNickname.hint = it.nickname
+            tvEmail.text = it.email
+            if (it.profileImageUrl != null) ivEditMyInfoProfile.load(it.profileImageUrl)
+            else ivEditMyInfoProfile.load(us.wedemy.eggeum.android.design.R.drawable.ic_profile_filled_48)
+          }
+        }
+      }
+
       launch {
         viewModel.profileImageUri.collect { uri ->
           if (uri.isNotEmpty()) {

@@ -29,6 +29,7 @@ androidx-lifecycle = "2.6.2"
 androidx-navigation = "2.7.3"
 androidx-hilt-navigation = "1.0.0"
 androidx-paging3 = "3.2.1"
+androidx-room = "2.5.2"
 
 ktor-client-core = "2.3.4"
 
@@ -102,6 +103,9 @@ androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", ver
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "androidx-hilt-navigation" }
 androidx-paging3 = { module = "androidx.paging:paging-runtime", version.ref = "androidx.paging3"}
+androidx-room = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room"}
+androidx-room-compile = { module = "androidx.room:room-compiler", version.ref = "androidx.room"}
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-client-core" }

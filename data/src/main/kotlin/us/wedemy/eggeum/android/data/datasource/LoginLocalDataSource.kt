@@ -16,5 +16,5 @@ public interface LoginLocalDataSource {
 
   public suspend fun getRefreshToken(): String
 
-  public suspend fun clearLoginToken()
+  public suspend fun deleteAuthToken()
 }

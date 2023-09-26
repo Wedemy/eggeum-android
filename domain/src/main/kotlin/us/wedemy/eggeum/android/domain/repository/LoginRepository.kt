@@ -49,5 +49,5 @@ public interface LoginRepository {
   public suspend fun getRefreshToken(): String
 
   /** 로그인 토큰 초기화*/
-  public suspend fun clearLoginToken()
+  public suspend fun deleteAuthToken()
 }

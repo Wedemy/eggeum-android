@@ -12,8 +12,11 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectInfoCategoriesBinding
@@ -32,15 +35,53 @@ class SelectInfoCategoriesFragment : BaseFragment<FragmentSelectInfoCategoriesBi
 
   private fun initListener() {
     with(binding) {
-      // check box에 따른 fragment 이동 필요
+      tbSelectInfoCategories.setNavigationOnClickListener {
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
+      }
+
+      clInfo.setOnClickListener {
+        viewModel.setCbAgreeToInfo()
+      }
+
+      clMenu.setOnClickListener {
+        viewModel.setCbAgreeToMenu()
+      }
+
       btnSelectCafeMenu.setOnClickListener {
-        val action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToSelectCafeMenuFragment()
+        lateinit var action: NavDirections
+        if (cbInfo.isChecked) {
+          action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToInputCafeInfoFragment()
+        }
+        if (cbMenu.isChecked) {
+          action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToSelectCafeMenuFragment()
+        }
         findNavController().safeNavigate(action)
       }
     }
   }
 
   private fun initObserver() {
-    // TODO
+    repeatOnStarted {
+      launch {
+        viewModel.agreeToInfo.collect { isChecked ->
+          binding.cbInfo.isChecked = isChecked
+
+          if (binding.cbMenu.isChecked) binding.cbMenu.isChecked = !isChecked
+
+          binding.btnSelectCafeMenu.isEnabled = binding.cbInfo.isChecked || binding.cbMenu.isChecked
+        }
+      }
+      launch {
+        viewModel.agreeToMenu.collect { isChecked ->
+          binding.cbMenu.isChecked = isChecked
+
+          if (binding.cbInfo.isChecked) binding.cbInfo.isChecked = !isChecked
+
+          binding.btnSelectCafeMenu.isEnabled = binding.cbInfo.isChecked || binding.cbMenu.isChecked
+        }
+      }
+    }
   }
 }

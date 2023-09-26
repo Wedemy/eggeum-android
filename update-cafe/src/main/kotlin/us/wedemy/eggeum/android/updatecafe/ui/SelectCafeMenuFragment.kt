@@ -32,6 +32,12 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
 
   private fun initListener() {
     with(binding) {
+      tbSelectInputCafeMenu.setNavigationOnClickListener {
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
+      }
+
       btnInputCafeMenu.setOnClickListener {
         val action = SelectCafeMenuFragmentDirections.actionSelectCafeMenuFragmentToInputCafeMenuFragment()
         findNavController().safeNavigate(action)

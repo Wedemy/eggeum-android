@@ -14,6 +14,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectOpinionBinding
@@ -32,6 +34,16 @@ class SelectOpinionFragment : BaseFragment<FragmentSelectOpinionBinding>() {
 
   private fun initListener() {
     with(binding) {
+      tbSelectOpinion.setNavigationOnClickListener {
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
+      }
+
+      clRequestCorrectionOfInfo.setOnClickListener {
+        viewModel.setCbAgreeToRequestCorrectionOfInfo()
+      }
+
       btnSelectInfoCategories.setOnClickListener {
         val action = SelectOpinionFragmentDirections.actionSelectOpinionFragmentToSelectInfoCategoriesFragment()
         findNavController().safeNavigate(action)
@@ -40,6 +52,13 @@ class SelectOpinionFragment : BaseFragment<FragmentSelectOpinionBinding>() {
   }
 
   private fun initObserver() {
-    // TODO
+    repeatOnStarted {
+      launch {
+        viewModel.agreeToRequestCorrectionOfInfo.collect { isChecked ->
+          binding.cbRequestCorrectionOfInfo.isChecked = isChecked
+          binding.btnSelectInfoCategories.isEnabled = isChecked
+        }
+      }
+    }
   }
 }

@@ -12,6 +12,7 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
@@ -29,7 +30,13 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   }
 
   private fun initListener() {
-    // TODO
+    with(binding) {
+      tbSelectInputCafeInfo.setNavigationOnClickListener {
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
+      }
+    }
   }
 
   private fun initObserver() {

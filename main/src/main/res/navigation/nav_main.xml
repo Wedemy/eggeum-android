@@ -78,7 +78,10 @@
     tools:layout="@layout/fragment_search_cafe">
     <action
       android:id="@+id/action_fragment_search_cafe_to_fragment_cafe_detail"
-      app:destination="@id/fragment_cafe_detail" />
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
 
   <fragment
@@ -104,7 +107,11 @@
     tools:layout="@layout/fragment_setting">
     <action
       android:id="@+id/action_fragment_setting_to_fragment_withdraw"
-      app:destination="@id/fragment_withdraw" />
+      app:destination="@id/fragment_withdraw"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
 
   <fragment

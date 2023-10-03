@@ -9,27 +9,27 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_register_cafe"
-  app:startDestination="@id/register_cafe_fragment">
+  app:startDestination="@id/fragment_register_cafe">
 
   <fragment
-    android:id="@+id/register_cafe_fragment"
+    android:id="@+id/fragment_register_cafe"
     android:name="us.wedemy.eggeum.android.registercafe.ui.RegisterCafeFragment"
     android:label="RegisterCafeFragment"
     tools:layout="@layout/fragment_register_cafe">
     <action
-      android:id="@+id/action_registerCafeFragment_to_registerCafeCompleteFragment"
-      app:destination="@id/register_cafe_complete_fragment"
+      android:id="@+id/action_fragment_register_cafe_to_fragment_register_cafe_complete"
+      app:destination="@id/fragment_register_cafe_complete"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim"
-      app:popUpTo="@id/register_cafe_fragment"
+      app:popUpTo="@id/fragment_register_cafe"
       app:popUpToInclusive="true"/>
 
   </fragment>
 
   <fragment
-    android:id="@+id/register_cafe_complete_fragment"
+    android:id="@+id/fragment_register_cafe_complete"
     android:name="us.wedemy.eggeum.android.registercafe.ui.RegisterCafeCompleteFragment"
     android:label="RegisterCafeCompleteFragment"
     tools:layout="@layout/fragment_register_cafe_complete" />

@@ -45,7 +45,7 @@ class SelectOpinionFragment : BaseFragment<FragmentSelectOpinionBinding>() {
       }
 
       btnSelectInfoCategories.setOnClickListener {
-        val action = SelectOpinionFragmentDirections.actionSelectOpinionFragmentToSelectInfoCategoriesFragment()
+        val action = SelectOpinionFragmentDirections.actionFragmentSelectOpinionToFragmentSelectInfoCategories()
         findNavController().safeNavigate(action)
       }
     }

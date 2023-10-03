@@ -83,7 +83,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
       }
 
       btnRegisterCafe.setOnClickListener {
-        val action = RegisterCafeFragmentDirections.actionRegisterCafeFragmentToRegisterCafeCompleteFragment()
+        val action = RegisterCafeFragmentDirections.actionFragmentRegisterCafeToFragmentRegisterCafeComplete()
         findNavController().safeNavigate(action)
       }
     }

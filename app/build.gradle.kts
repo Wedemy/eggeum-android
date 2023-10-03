@@ -44,6 +44,7 @@ dependencies {
     projects.registerCafe,
     projects.designResource,
     projects.common,
+    projects.updateCafe,
   )
 }
 

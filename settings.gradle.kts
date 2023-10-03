@@ -38,4 +38,5 @@ include(
   ":register-cafe",
   ":common",
   ":design-resource",
+  ":update-cafe",
 )

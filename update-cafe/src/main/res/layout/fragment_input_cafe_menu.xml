@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tb_select_input_cafe_menu"
+    style="@style/Widget.Eggeum.Toolbar.WithArrow"
+    android:layout_width="0dp"
+    android:layout_height="56dp"
+    android:elevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/update_cafe"
+      android:textColor="@color/gray_900" />
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:layout_marginEnd="16dp"
+      android:text="@string/cancel"
+      android:textColor="@color/gray_300" />
+
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <TextView
+    android:id="@+id/tv_input_cafe_menu"
+    style="@style/H3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/input_corrections"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintTop_toBottomOf="@id/tb_select_input_cafe_menu" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_input_cafe_info"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="208dp"
+    android:layout_marginHorizontal="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_input_cafe_menu"
+    app:layout_constraintBottom_toBottomOf="@+id/line_input_cafe_menu">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_cafe_menu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/cl_input_cafe_info">
+
+      <TextView
+        android:id="@+id/tv_cafe_menu"
+        style="@style/TextSMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_cafe_menu"
+        android:textColor="@color/gray_800"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_menu"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cafe_menu"
+        app:layout_constraintBottom_toBottomOf="@id/cl_cafe_menu">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_name"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_menu_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_cafe_menu_price"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/cl_cafe_menu">
+
+      <TextView
+        android:id="@+id/tv_cafe_menu_price"
+        style="@style/TextSMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_cafe_menu_price"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_cafe_menu_price"/>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_menu_price"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:prefixText="@string/input_won"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_menu_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+          <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_input_cafe_meeting_price"
+            style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+            android:ellipsize="end"
+            android:hint="@string/input_cafe_menu_price_hint"
+            android:inputType="text"
+            android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <View
+    android:id="@+id/line_input_cafe_menu"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_update_menu_complete"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_update_menu_complete"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:text="@string/edit"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

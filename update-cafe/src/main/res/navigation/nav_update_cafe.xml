@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_setting"
+  app:startDestination="@id/select_opinion_fragment">
+
+  <fragment
+    android:id="@+id/select_opinion_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectOpinionFragment"
+    android:label="SelectOpinionFragment"
+    tools:layout="@layout/fragment_select_opinion" >
+<!-- 카페 제안하기 -->
+<!--    <action-->
+<!--      android:id="@+id/action_selectOpinionFragment_to_selectCafeCategoriesFragment"-->
+<!--      app:destination="@id/select_cafe_categories_fragment" />-->
+    <action
+      android:id="@+id/action_select_opinion_fragment_to_selectInfoCategoriesFragment"
+      app:destination="@id/select_info_categories_fragment" />
+  </fragment>
+
+<!-- 카페 제안하기 -->
+<!--  <fragment-->
+<!--    android:id="@+id/select_cafe_categories_fragment"-->
+<!--    android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectCafeCategoriesFragment"-->
+<!--    android:label="SelectCafeCategoriesFragment"-->
+<!--    tools:layout="@layout/fragment_select_cafe_categories" >-->
+<!--    <action-->
+<!--      android:id="@+id/action_select_cafe_categories_fragment_to_inputCafeNameFragment"-->
+<!--      app:destination="@id/input_cafe_name_fragment" />-->
+<!--  </fragment>-->
+
+<!--  <fragment-->
+<!--    android:id="@+id/input_cafe_name_fragment"-->
+<!--    android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeNameFragment"-->
+<!--    android:label="InputCafeNameFragment"-->
+<!--    tools:layout="@layout/fragment_input_cafe_name">-->
+<!--    <action-->
+<!--      android:id="@+id/action_inputCafeNameFragment_to_inputCafeAddressFragment"-->
+<!--      app:destination="@id/input_cafe_address_fragment" />-->
+<!--  </fragment>-->
+
+<!--  <fragment-->
+<!--    android:id="@+id/input_cafe_address_fragment"-->
+<!--    android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeAddressFragment"-->
+<!--    android:label="InputCafeAddressFragment"-->
+<!--    tools:layout="@layout/fragment_input_cafe_address">-->
+<!--    <action-->
+<!--      android:id="@+id/action_inputCafeAddressFragment_to_updateCafeCompleteFragment"-->
+<!--      app:destination="@id/update_cafe_complete_fragment" />-->
+<!--  </fragment>-->
+
+<!--  <fragment-->
+<!--    android:id="@+id/update_cafe_complete_fragment"-->
+<!--    android:name="us.wedemy.eggeum.android.updatecafe.ui.UpdateCafeCompleteFragment"-->
+<!--    android:label="UpdateCafeCompleteFragment"-->
+<!--    tools:layout="@layout/fragment_update_cafe_complete"/>-->
+
+  <fragment
+    android:id="@+id/select_info_categories_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectInfoCategoriesFragment"
+    android:label="SelectInfoCategoriesFragment"
+    tools:layout="@layout/fragment_select_info_categories">
+    <action
+      android:id="@+id/action_select_info_categories_fragment_to_selectCafeMenuFragment"
+      app:destination="@id/select_cafe_menu_fragment" />
+    <action
+      android:id="@+id/action_select_info_categories_fragment_to_inputCafeInfoFragment"
+      app:destination="@id/input_cafe_info_fragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/select_cafe_menu_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectCafeMenuFragment"
+    android:label="SelectCafeMenuFragment"
+    tools:layout="@layout/fragment_select_cafe_menu">
+    <action
+      android:id="@+id/action_select_cafe_menu_fragment_to_inputCafeMenuFragment"
+      app:destination="@id/input_cafe_menu_fragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/input_cafe_menu_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeMenuFragment"
+    android:label="InputCafeMenuFragment"
+    tools:layout="@layout/fragment_input_cafe_menu">
+    <action
+      android:id="@+id/action_inputCafeMenuFragment_to_updateMenuCompleteFragment"
+      app:destination="@id/update_menu_complete_fragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/update_menu_complete_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.UpdateMenuCompleteFragment"
+    android:label="UpdateMenuCompleteFragment"
+    tools:layout="@layout/fragment_update_menu_complete"/>
+
+  <fragment
+    android:id="@+id/input_cafe_info_fragment"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeInfoFragment"
+    android:label="InputCafeInfoFragment"
+    tools:layout="@layout/fragment_input_cafe_info">
+    <action
+      android:id="@+id/action_inputCafeInfoFragment_to_update_menu_complete_fragment"
+      app:destination="@id/update_menu_complete_fragment" />
+  </fragment>
+
+</navigation>

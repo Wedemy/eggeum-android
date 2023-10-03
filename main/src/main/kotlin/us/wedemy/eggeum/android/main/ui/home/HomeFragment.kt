@@ -13,6 +13,8 @@ import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.util.HorizontalSpacingItemDecoration
+import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
@@ -35,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NewCafeAdapter(
       object : NewCafeClickListener {
         override fun onItemClick(position: Int) {
-          TODO("Not yet implemented")
+          // TODO
         }
       },
     )
@@ -45,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeCardAdapter(
       object : NoticeCardClickListener {
         override fun onItemClick(position: Int) {
-          TODO("Not yet implemented")
+          // TODO
         }
       },
     )
@@ -90,12 +92,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
       rvHomeNewCafe.apply {
         setHasFixedSize(true)
         adapter = newCafeAdapter
-        addDivider(us.wedemy.eggeum.android.design.R.color.gray_300)
+        addDivider(R.color.gray_300)
       }
+      val spacing = resources.getDimensionPixelSize(R.dimen.spacing_16dp)
 
       rvHomeNotice.apply {
         setHasFixedSize(true)
         adapter = noticeCardAdapter
+        addItemDecoration(HorizontalSpacingItemDecoration(spacing))
       }
       noticeCardAdapter.replaceAll(notices)
 
@@ -107,6 +111,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         override fun onTabUnselected(tab: TabLayout.Tab) = Unit
         override fun onTabReselected(tab: TabLayout.Tab) = Unit
       })
+      tlHomeNewCafe.getTabAt(0)?.select()
+      newCafeAdapter.replaceAll(cafeLists[0])
     }
   }
 

@@ -10,7 +10,10 @@
 package us.wedemy.eggeum.android.common.ui
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsetsController
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +30,15 @@ abstract class BaseActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge(statusBarStyle = statusBarStyle, navigationBarStyle = navigationBarStyle)
     super.onCreate(savedInstanceState)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      window.insetsController?.setSystemBarsAppearance(
+        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+      )
+    } else {
+      @Suppress("DEPRECATION")
+      window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
     setContentView(binding.root)
     binding.root.applyInsetter {
       type(statusBars = true, f = InsetterApplyTypeDsl::padding)

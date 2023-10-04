@@ -9,25 +9,25 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_onboarding"
-  app:startDestination="@id/register_account_fragment">
+  app:startDestination="@id/fragment_register_account">
 
   <fragment
-    android:id="@+id/register_account_fragment"
+    android:id="@+id/fragment_register_account"
     android:name="us.wedemy.eggeum.android.onboard.ui.RegisterAccountFragment"
     android:label="RegisterAccountFragment"
     tools:layout="@layout/fragment_register_account">
 
     <action
-      android:id="@+id/action_registerAccountFragment_to_serviceTermsFragment"
-      app:destination="@id/service_terms_fragment"
+      android:id="@+id/action_fragment_register_account_to_fragment_service_terms"
+      app:destination="@id/fragment_service_terms"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <action
-      android:id="@+id/action_registerAccountFragment_to_registerNicknameFragment"
-      app:destination="@id/register_nickname_fragment"
+      android:id="@+id/action_fragment_register_account_to_fragment_register_nickname"
+      app:destination="@id/fragment_register_nickname"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -36,13 +36,13 @@
   </fragment>
 
   <fragment
-    android:id="@+id/service_terms_fragment"
+    android:id="@+id/fragment_service_terms"
     android:name="us.wedemy.eggeum.android.onboard.ui.ServiceTermsFragment"
     android:label="ServiceTermsFragment"
     tools:layout="@layout/fragment_service_terms" />
 
   <fragment
-    android:id="@+id/register_nickname_fragment"
+    android:id="@+id/fragment_register_nickname"
     android:name="us.wedemy.eggeum.android.onboard.ui.RegisterNicknameFragment"
     android:label="RegisterNicknameFragment"
     tools:layout="@layout/fragment_register_nickname" />

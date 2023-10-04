@@ -39,7 +39,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
       }
 
       btnInputCafeMenu.setOnClickListener {
-        val action = SelectCafeMenuFragmentDirections.actionSelectCafeMenuFragmentToInputCafeMenuFragment()
+        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
         findNavController().safeNavigate(action)
       }
     }

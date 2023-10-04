@@ -52,10 +52,10 @@ class SelectInfoCategoriesFragment : BaseFragment<FragmentSelectInfoCategoriesBi
       btnSelectCafeMenu.setOnClickListener {
         lateinit var action: NavDirections
         if (cbInfo.isChecked) {
-          action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToInputCafeInfoFragment()
+          action = SelectInfoCategoriesFragmentDirections.actionFragmentSelectInfoCategoriesToFragmentInputCafeInfo()
         }
         if (cbMenu.isChecked) {
-          action = SelectInfoCategoriesFragmentDirections.actionSelectInfoCategoriesFragmentToSelectCafeMenuFragment()
+          action = SelectInfoCategoriesFragmentDirections.actionFragmentSelectInfoCategoriesToFragmentSelectCafeMenu()
         }
         findNavController().safeNavigate(action)
       }

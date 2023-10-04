@@ -40,7 +40,7 @@ internal object NetworkModule {
   @Singleton
   @Named("HttpClient")
   @Provides
-  internal fun provideHttpClient(dataStoreProvider: TokenDataStoreProvider): HttpClient {
+  internal fun provideHttpClient(): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -49,12 +49,8 @@ internal object NetworkModule {
         }
       }
       defaultRequest {
-        val accessToken = runBlocking {
-          dataStoreProvider.getAccessToken()
-        }
         url(BuildConfig.SERVER_BASE_URL)
         contentType(ContentType.Application.Json)
-        header("AccessToken", accessToken)
       }
       install(Logging) {
         logger = object : Logger {

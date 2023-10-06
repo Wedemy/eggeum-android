@@ -31,7 +31,7 @@ androidx-hilt-navigation = "1.0.0"
 androidx-paging3 = "3.2.1"
 androidx-room = "2.5.2"
 
-ktor-client-core = "2.3.4"
+ktor-client-core = "2.3.5"
 
 moshi = "1.15.0"
 moshix-ir = "0.22.1"

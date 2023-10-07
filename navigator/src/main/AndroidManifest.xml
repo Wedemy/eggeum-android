@@ -5,6 +5,11 @@
   ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
   -->
 
-<resources>
-  <string name="app_name">이끔</string>
-</resources>
+<!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<manifest />

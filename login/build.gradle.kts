@@ -10,31 +10,39 @@
 plugins {
   eggeum("android-library")
   eggeum("android-hilt")
-  alias(libs.plugins.androidx.navigation.safeargs)
-  `kotlin-parcelize`
+  id(libs.plugins.google.gms.get().pluginId)
+  alias(libs.plugins.google.secrets)
 }
 
 android {
-  namespace = "us.wedemy.eggeum.android.onboard"
+  namespace = "us.wedemy.eggeum.android.login"
 
   buildFeatures {
-    buildConfig = true
     viewBinding = true
+    buildConfig = true
   }
 }
 
 dependencies {
   implementations(
-    libs.kotlinx.coroutines.android,
+    platform(libs.firebase.bom),
     libs.android.material,
-    libs.androidx.core,
+    libs.androidx.activity,
+    libs.androidx.appcompat,
     libs.androidx.constraintlayout,
-    libs.timber,
     libs.bundles.androidx.lifecycle,
-    libs.bundles.androidx.navigation,
-    projects.common,
-    projects.designResource,
+    libs.firebase.auth,
+    libs.google.gms.play.services.auth,
+    libs.insetter,
+    libs.timber,
+    projects.data,
     projects.domain,
+    projects.designResource,
+    projects.common,
     projects.navigator,
   )
+}
+
+secrets {
+  defaultPropertiesFileName = "secrets.properties"
 }

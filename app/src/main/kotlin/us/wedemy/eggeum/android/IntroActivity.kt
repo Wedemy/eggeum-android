@@ -5,7 +5,14 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.ui
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
+package us.wedemy.eggeum.android
 
 import android.animation.ObjectAnimator
 import android.graphics.Color
@@ -18,14 +25,17 @@ import androidx.activity.viewModels
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.android.common.extension.changeActivityWithAnimation
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.startActivityWithAnimation
 import us.wedemy.eggeum.android.common.ui.BaseActivity
 import us.wedemy.eggeum.android.databinding.ActivityIntroBinding
+import us.wedemy.eggeum.android.login.LoginActivity
 import us.wedemy.eggeum.android.main.ui.MainActivity
-import us.wedemy.eggeum.android.viewmodel.IntroViewModel
+import us.wedemy.eggeum.android.navigator.LoginNavigator
+import us.wedemy.eggeum.android.navigator.MainNavigator
 
 @AndroidEntryPoint
 class IntroActivity : BaseActivity() {
@@ -35,6 +45,12 @@ class IntroActivity : BaseActivity() {
   override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   private val viewModel by viewModels<IntroViewModel>()
+
+  @Inject
+  lateinit var loginNavigator: LoginNavigator
+
+  @Inject
+  lateinit var mainNavigator: MainNavigator
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
@@ -72,13 +88,13 @@ class IntroActivity : BaseActivity() {
       launch {
         viewModel.navigateToLoginEvent.collect {
           delay(200L)
-          changeActivityWithAnimation<LoginActivity>()
+          startActivityWithAnimation<LoginActivity>()
         }
       }
       launch {
         viewModel.navigateToMainEvent.collect {
           delay(200L)
-          changeActivityWithAnimation<MainActivity>()
+          startActivityWithAnimation<MainActivity>()
         }
       }
     }

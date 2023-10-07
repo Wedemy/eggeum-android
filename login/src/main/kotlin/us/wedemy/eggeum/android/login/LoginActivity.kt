@@ -5,10 +5,9 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.ui
+package us.wedemy.eggeum.android.login
 
 import android.app.Activity
-import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Color
 import android.os.Bundle
@@ -25,15 +24,14 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import us.wedemy.eggeum.android.BuildConfig
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseActivity
-import us.wedemy.eggeum.android.databinding.ActivityLoginBinding
-import us.wedemy.eggeum.android.main.ui.MainActivity
-import us.wedemy.eggeum.android.onboard.ui.OnboardActivity
-import us.wedemy.eggeum.android.viewmodel.LoginViewModel
+import us.wedemy.eggeum.android.login.databinding.ActivityLoginBinding
+import us.wedemy.eggeum.android.navigator.MainNavigator
+import us.wedemy.eggeum.android.navigator.OnboardNavigator
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
@@ -43,6 +41,12 @@ class LoginActivity : BaseActivity() {
   override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
 
   private val viewModel by viewModels<LoginViewModel>()
+
+  @Inject
+  lateinit var mainNavigator: MainNavigator
+
+  @Inject
+  lateinit var onboardNavigator: OnboardNavigator
 
   private lateinit var oneTapClient: SignInClient
   private lateinit var signInRequest: BeginSignInRequest
@@ -131,17 +135,22 @@ class LoginActivity : BaseActivity() {
     repeatOnStarted {
       launch {
         viewModel.navigateToMainEvent.collect {
-          startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-          finish()
+          mainNavigator.navigateFrom(
+            activity = this@LoginActivity,
+            withFinish = true,
+          )
         }
       }
 
       launch {
         viewModel.navigateToOnBoardingEvent.collect {
-          val intent = Intent(this@LoginActivity, OnboardActivity::class.java)
-          intent.putExtra("id_token", idToken)
-          startActivity(intent)
-          finish()
+          onboardNavigator.navigateFrom(
+            activity = this@LoginActivity,
+            intentBuilder = {
+              putExtra("id_token", idToken)
+            },
+            withFinish = true,
+          )
         }
       }
 

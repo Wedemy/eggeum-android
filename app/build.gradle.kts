@@ -39,12 +39,14 @@ dependencies {
     libs.timber,
     projects.data,
     projects.domain,
-    projects.main,
+    projects.login,
     projects.onboard,
+    projects.main,
     projects.registerCafe,
     projects.designResource,
     projects.common,
     projects.updateCafe,
+    projects.navigator,
   )
 }
 

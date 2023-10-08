@@ -28,6 +28,7 @@ dependencies {
     platform(libs.firebase.bom),
     libs.android.material,
     libs.androidx.splash,
+    libs.androidx.startup,
     libs.androidx.activity,
     libs.androidx.appcompat,
     libs.androidx.constraintlayout,

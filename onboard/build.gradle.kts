@@ -18,6 +18,7 @@ android {
   namespace = "us.wedemy.eggeum.android.onboard"
 
   buildFeatures {
+    buildConfig = true
     viewBinding = true
   }
 }
@@ -34,5 +35,6 @@ dependencies {
     projects.common,
     projects.designResource,
     projects.domain,
+    projects.navigator,
   )
 }

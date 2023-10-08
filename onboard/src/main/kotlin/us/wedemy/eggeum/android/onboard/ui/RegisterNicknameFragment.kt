@@ -9,7 +9,6 @@
 
 package us.wedemy.eggeum.android.onboard.ui
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
@@ -78,8 +77,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
 
       launch {
         viewModel.navigateToMainEvent.collect {
-          startActivity(Intent(requireContext(), OnboardActivity::class.java))
-          requireActivity().finish()
+          (activity as OnboardActivity).navigateToMain()
         }
       }
 

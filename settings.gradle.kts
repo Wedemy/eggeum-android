@@ -7,7 +7,6 @@
 
 @file:Suppress("UnstableApiUsage")
 
-
 rootProject.name = "eggeum-android"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -33,10 +32,12 @@ include(
   ":app",
   ":data",
   ":domain",
+  ":login",
   ":onboard",
   ":main",
   ":register-cafe",
   ":common",
   ":design-resource",
   ":update-cafe",
+  ":navigator",
 )

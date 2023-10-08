@@ -6,5 +6,6 @@
   -->
 
 <resources>
-  <string name="app_name">이끔</string>
+
+  <style name="Theme.Eggeum.Login" parent="Theme.MaterialComponents.Light.NoActionBar" />
 </resources>

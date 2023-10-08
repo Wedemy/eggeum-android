@@ -14,9 +14,12 @@ import androidx.activity.SystemBarStyle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
 import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.navigator.LoginNavigator
+import us.wedemy.eggeum.android.navigator.UpdateCafeNavigator
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -24,6 +27,12 @@ class MainActivity : BaseActivity() {
 
   override var statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
   override var navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
+
+  @Inject
+  lateinit var loginNavigator: LoginNavigator
+
+  @Inject
+  lateinit var updateCafeNavigator: UpdateCafeNavigator
 
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
@@ -47,4 +56,18 @@ class MainActivity : BaseActivity() {
   }
 
   override fun onSupportNavigateUp() = navController?.navigateUp() ?: false
+
+  fun navigateToLogin() {
+    loginNavigator.navigateFrom(
+      activity = this,
+      withFinish = true,
+    )
+  }
+
+  fun navigateToUpdateCafe() {
+    updateCafeNavigator.navigateFrom(
+      activity = this,
+      withFinish = false,
+    )
+  }
 }

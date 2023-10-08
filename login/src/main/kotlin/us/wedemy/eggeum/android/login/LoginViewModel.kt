@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.viewmodel
+package us.wedemy.eggeum.android.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

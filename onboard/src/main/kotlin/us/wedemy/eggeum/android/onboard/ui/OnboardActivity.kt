@@ -10,7 +10,9 @@ package us.wedemy.eggeum.android.onboard.ui
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.navigator.MainNavigator
 import us.wedemy.eggeum.android.onboard.R
 import us.wedemy.eggeum.android.onboard.databinding.ActivityOnboardBinding
 
@@ -20,5 +22,15 @@ class OnboardActivity : BaseActivity() {
   private val navController: NavController?
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
+  @Inject
+  lateinit var mainNavigator: MainNavigator
+
   override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
+
+  fun navigateToMain() {
+    mainNavigator.navigateFrom(
+      activity = this,
+      withFinish = true,
+    )
+  }
 }

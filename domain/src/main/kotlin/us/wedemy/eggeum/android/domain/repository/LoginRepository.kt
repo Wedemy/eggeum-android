@@ -48,6 +48,6 @@ public interface LoginRepository {
   /** RefreshToken 조회*/
   public suspend fun getRefreshToken(): String
 
-  /** 로그인 토큰 초기화*/
+  /** 로그인 토큰 제거*/
   public suspend fun deleteAuthToken()
 }

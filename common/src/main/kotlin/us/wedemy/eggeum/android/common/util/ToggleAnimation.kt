@@ -13,6 +13,7 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 
 object ToggleAnimation {
+
   fun toggleArrow(view: View, isExpanded: Boolean): Boolean {
     return if (isExpanded) {
       view.animate().setDuration(200).rotation(180f)
@@ -37,34 +38,37 @@ object ToggleAnimation {
 
     val animation = object : Animation() {
       override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-        view.apply {
-          layoutParams.height = if (interpolatedTime == 1f) ViewGroup.LayoutParams.WRAP_CONTENT
-          else (actualHeight * interpolatedTime).toInt()
-          requestLayout()
+        view.layoutParams.height = if (interpolatedTime == 1f) {
+          ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+          (actualHeight * interpolatedTime).toInt()
         }
+        view.requestLayout()
       }
     }
     animation.duration = (actualHeight / view.context.resources.displayMetrics.density).toLong()
-    view.startAnimation(animation)
-
     return animation
   }
 
   fun collapse(view: View) {
+    val animation = collapseAction(view)
+    view.startAnimation(animation)
+  }
+
+  private fun collapseAction(view: View): Animation {
     val actualHeight = view.measuredHeight
+
     val animation = object : Animation() {
       override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
         if (interpolatedTime == 1f) {
           view.visibility = View.GONE
         } else {
-          view.apply {
-            layoutParams.height = (actualHeight - (actualHeight * interpolatedTime)).toInt()
-            requestLayout()
-          }
+          view.layoutParams.height = (actualHeight - (actualHeight * interpolatedTime)).toInt()
+          view.requestLayout()
         }
       }
     }
     animation.duration = (actualHeight / view.context.resources.displayMetrics.density).toLong()
-    view.startAnimation(animation)
+    return animation
   }
 }

@@ -15,7 +15,7 @@ kotlin-ktlint-source = "0.48.2"
 
 kotlinx-coroutines = "1.7.2"
 
-android-material = "1.9.0"
+android-material = "1.10.0"
 android-hilt = "2.48"
 android-play-services-location = "21.0.1"
 
@@ -23,16 +23,16 @@ androidx-splash = "1.0.1"
 androidx-startup = "1.1.1"
 androidx-core = "1.12.0"
 androidx-appcompat = "1.6.1"
-androidx-activity = "1.8.0-rc01"
+androidx-activity = "1.8.0"
 androidx-constraintlayout = "2.1.4"
 androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.6.2"
-androidx-navigation = "2.7.3"
+androidx-navigation = "2.7.4"
 androidx-hilt-navigation = "1.0.0"
 androidx-paging3 = "3.2.1"
 androidx-room = "2.5.2"
 
-ktor-client-core = "2.3.4"
+ktor-client-core = "2.3.5"
 
 moshi = "1.15.0"
 moshix-ir = "0.22.1"

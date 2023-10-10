@@ -23,3 +23,7 @@ public val NoticeApiResponseIsNull: IOException = IOException("The Notice API re
 // UserApi
 public val GetUserInfoApiResponseIsNull: IOException = IOException("GetUserInfo API response is null.")
 public val CheckNicknameExistResponseIsNull: IOException = IOException("CheckNicknameExist API response is null.")
+
+// PlaceApi
+public val GetPlaceListApiResponseIsNull: IOException = IOException("GetPlaceList API response is null.")
+public val GetPlaceBodyApiResponseIsNull: IOException = IOException("GetPlaceBody API response is null.")

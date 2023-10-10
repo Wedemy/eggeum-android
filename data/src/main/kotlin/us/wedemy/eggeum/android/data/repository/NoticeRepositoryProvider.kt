@@ -7,38 +7,25 @@
 
 package us.wedemy.eggeum.android.data.repository
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.mapper.toDomain
-import us.wedemy.eggeum.android.data.model.notice.NoticeBodyResponse
-import us.wedemy.eggeum.android.data.model.notice.NoticeListResponse
+import us.wedemy.eggeum.android.data.paging.NoticePagingSource
+import us.wedemy.eggeum.android.data.service.ApiService
+import us.wedemy.eggeum.android.data.util.Constants
 import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.android.domain.model.notice.NoticeList
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
 @Singleton
 public class NoticeRepositoryProvider @Inject constructor(
-  @Named("AuthHttpClient")
-  private val client: HttpClient,
-  moshi: Moshi,
+  private val apiService: ApiService,
 ) : NoticeRepository {
-  private val noticeBodyAdapter = moshi.adapter<NoticeBodyResponse>()
-  private val noticeListAdapter = moshi.adapter<NoticeListResponse>()
-
   override suspend fun getNoticeBody(noticeId: Int): NoticeBody? {
-    val responseText =
-      client
-        .get("notice/$noticeId")
-        .bodyAsText()
-    val response = noticeBodyAdapter.fromJson(responseText)
-    return response?.toDomain()
+    return apiService.getNoticeBody(noticeId)?.toDomain()
   }
 
   override suspend fun getNoticeList(
@@ -48,19 +35,26 @@ public class NoticeRepositoryProvider @Inject constructor(
     sort: String?,
     startDate: String?,
     endDate: String?,
-  ): NoticeList? {
-    val responseText =
-      client
-        .get("notice/all") {
-          parameter("search", search)
-          parameter("page", page)
-          parameter("size", size)
-          parameter("sort", sort)
-          parameter("startDate", startDate)
-          parameter("endDate", endDate)
-        }
-        .bodyAsText()
-    val response = noticeListAdapter.fromJson(responseText)
-    return response?.toDomain()
+  ): Flow<PagingData<NoticeBody>> {
+    val pagingSourceFactory = { NoticePagingSource(apiService) }
+
+    return Pager(
+      // pager 를 구현하기 위해서는
+      // pagingConfig 를 통해 parameter 를 전달 해줘야함
+      config = PagingConfig(
+        // 어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
+        pageSize = Constants.PAGING_SIZE,
+        // true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어 놓음
+        // 화면에 표시 되지 않는 항목은 null로 표시
+        // 필요할 때 필요한 만큼만 로딩 하려면 false
+        enablePlaceholders = false,
+        // 페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
+        maxSize = Constants.PAGING_SIZE * 3
+      ),
+      // api 호출 결과를 팩토리에 전달
+      pagingSourceFactory = pagingSourceFactory
+      // 결과를 flow 로 변환
+    ).flow
   }
 }
+

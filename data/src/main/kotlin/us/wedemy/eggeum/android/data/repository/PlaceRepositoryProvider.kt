@@ -7,47 +7,24 @@
 
 package us.wedemy.eggeum.android.data.repository
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.bodyAsText
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import javax.inject.Inject
-import javax.inject.Named
-import us.wedemy.eggeum.android.data.client.jsonBody
-import us.wedemy.eggeum.android.data.mapper.toData
+import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.mapper.toDomain
-import us.wedemy.eggeum.android.data.model.place.Image
-import us.wedemy.eggeum.android.data.model.place.Info
-import us.wedemy.eggeum.android.data.model.place.Menu
-import us.wedemy.eggeum.android.data.model.place.PlaceBodyResponse
-import us.wedemy.eggeum.android.data.model.place.PlaceListResponse
+import us.wedemy.eggeum.android.data.paging.PlacePagingSource
+import us.wedemy.eggeum.android.data.service.ApiService
+import us.wedemy.eggeum.android.data.util.Constants
 import us.wedemy.eggeum.android.domain.model.place.PlaceBody
-import us.wedemy.eggeum.android.domain.model.place.PlaceList
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
 public class PlaceRepositoryProvider @Inject constructor(
-  @Named("AuthHttpClient")
-  private val client: HttpClient,
-  moshi: Moshi,
+  private val apiService: ApiService,
 ) : PlaceRepository {
-  private val placeBodyAdapter = moshi.adapter<PlaceBodyResponse>()
-  private val placeListAdapter = moshi.adapter<PlaceListResponse>()
-  private val imageAdapter = moshi.adapter<Image>()
-  private val infoAdapater = moshi.adapter<Info>()
-  private val menuAdapter = moshi.adapter<Menu>()
-
   override suspend fun getPlaceBody(placeId: Int): PlaceBody? {
-    val responseText =
-      client
-        .get("app/place/$placeId") {
-          parameter("placeId", placeId)
-        }
-        .bodyAsText()
-    val response = placeBodyAdapter.fromJson(responseText)
-    return response?.toDomain()
+    return apiService.getPlaceBody(placeId)?.toDomain()
   }
 
   override suspend fun getPlaceList(
@@ -61,42 +38,29 @@ public class PlaceRepositoryProvider @Inject constructor(
     sort: String?,
     startDate: String?,
     type: String?,
-  ): PlaceList? {
-    val responseText =
-      client
-        .get("app/place") {
-          parameter("distance", distance)
-          parameter("endDate", endDate)
-          parameter("latitude", latitude)
-          parameter("longitude", longitude)
-          parameter("page", page)
-          parameter("search", search)
-          parameter("size", size)
-          parameter("sort", sort)
-          parameter("startDate", startDate)
-          parameter("type", type)
-        }
-        .bodyAsText()
-    val response = placeListAdapter.fromJson(responseText)
-    return response?.toDomain()
+  ): Flow<PagingData<PlaceBody>> {
+    val pagingSourceFactory = { PlacePagingSource(apiService) }
+
+    return Pager(
+      // pager 를 구현하기 위해서는
+      // pagingConfig 를 통해 parameter 를 전달 해줘야함
+      config = PagingConfig(
+        // 어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
+        pageSize = Constants.PAGING_SIZE,
+        // true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어 놓음
+        // 화면에 표시 되지 않는 항목은 null로 표시
+        // 필요할 때 필요한 만큼만 로딩 하려면 false
+        enablePlaceholders = false,
+        // 페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
+        maxSize = Constants.PAGING_SIZE * 3
+      ),
+      // api 호출 결과를 팩토리에 전달
+      pagingSourceFactory = pagingSourceFactory
+      // 결과를 flow 로 변환
+    ).flow
   }
 
   override suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody) {
-    client
-      .get("app/place/edits") {
-        jsonBody {
-          "address1" withString upsertPlaceBody.address1
-          "address2" withString upsertPlaceBody.address2
-          "image".withPojo(imageAdapter, upsertPlaceBody.image.toData())
-          "info".withPojo(infoAdapater, upsertPlaceBody.info.toData())
-          "latitude" withDouble upsertPlaceBody.latitude
-          "longitude" withDouble upsertPlaceBody.longitude
-          "menu".withPojo(menuAdapter, upsertPlaceBody.menu.toData())
-          "name" withString upsertPlaceBody.name
-          "placeId" withInt upsertPlaceBody.placeId
-          "remarks" withString upsertPlaceBody.remarks
-          "type" withString upsertPlaceBody.type
-        }
-      }
+    apiService.upsertPlace(upsertPlaceBody)
   }
 }

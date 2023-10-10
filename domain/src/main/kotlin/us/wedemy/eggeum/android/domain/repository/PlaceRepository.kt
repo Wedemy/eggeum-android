@@ -7,8 +7,9 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.domain.model.place.PlaceBody
-import us.wedemy.eggeum.android.domain.model.place.PlaceList
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 
 /** 장소 API */
@@ -28,17 +29,17 @@ public interface PlaceRepository {
    * @param type 타입(PlaceType)
    */
   public suspend fun getPlaceList(
-    distance: Int?,
-    endDate: String?,
-    latitude: Int?,
-    longitude: Int?,
-    page: Int?,
-    search: String?,
-    size: Int?,
-    sort: String?,
-    startDate: String?,
-    type: String?,
-  ): PlaceList?
+    distance: Int? = null,
+    endDate: String? = null,
+    latitude: Int? = null,
+    longitude: Int? = null,
+    page: Int? = null,
+    search: String? = null,
+    size: Int? = null,
+    sort: String? = null,
+    startDate: String? = null,
+    type: String? = null,
+  ): Flow<PagingData<PlaceBody>>
 
   /**
    * 장소 단건 조회

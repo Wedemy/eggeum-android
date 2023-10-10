@@ -7,10 +7,11 @@
 
 package us.wedemy.eggeum.android.domain.usecase
 
+import androidx.paging.PagingData
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.android.domain.model.notice.NoticeList
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 import us.wedemy.eggeum.android.domain.util.NoticeApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
@@ -29,23 +30,8 @@ public class GetNoticeBodyUseCase @Inject constructor(
 public class GetNoticeListUseCase @Inject constructor(
   private val repository: NoticeRepository,
 ) {
-  public suspend fun execute(
-    search: String? = null,
-    page: Int? = null,
-    size: Int? = null,
-    sort: String? = null,
-    startDate: String? = null,
-    endDate: String? = null,
-  ): Result<NoticeList> =
-    runSuspendCatching {
-      repository
-        .getNoticeList(
-          search = search,
-          page = page,
-          size = size,
-          sort = sort,
-          startDate = startDate,
-          endDate = endDate,
-        ) ?: throw NoticeApiResponseIsNull
-    }
+  public suspend fun execute(): Flow<PagingData<NoticeBody>> {
+    return repository.getNoticeList()
+  }
 }
+

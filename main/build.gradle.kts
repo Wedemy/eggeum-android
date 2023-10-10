@@ -33,7 +33,7 @@ dependencies {
     libs.android.play.services.location,
     libs.androidx.core,
     libs.androidx.constraintlayout,
-    libs.androidx.paging3,
+    libs.androidx.paging.runtime,
     libs.androidx.room,
     libs.androidx.room.paging,
     libs.bundles.androidx.lifecycle,

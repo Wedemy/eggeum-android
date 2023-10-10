@@ -33,6 +33,7 @@ dependencies {
     libs.moshi.core,
     libs.moshi.kotlin,
     libs.bundles.ktor.client,
+    libs.androidx.paging.runtime,
     projects.domain,
   )
   testImplementation(libs.test.ktor.client.mock)

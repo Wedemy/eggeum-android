@@ -13,7 +13,7 @@ kotlin-detekt = "1.23.1"
 kotlin-ktlint-gradle = "11.6.0"
 kotlin-ktlint-source = "0.48.2"
 
-kotlinx-coroutines = "1.7.2"
+kotlinx-coroutines = "1.7.3"
 
 android-material = "1.10.0"
 android-hilt = "2.48"
@@ -84,6 +84,7 @@ firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
 # This isn't strictly used but allows Renovate to see us using the ktlint artifact
 kotlin-ktlint = { module = "com.pinterest:ktlint", version.ref = "kotlin-ktlint-source" }
 
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
 android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
@@ -104,7 +105,8 @@ androidx-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmod
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "androidx-hilt-navigation" }
-androidx-paging3 = { module = "androidx.paging:paging-runtime", version.ref = "androidx.paging3"}
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "androidx.paging3"}
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx.paging3"}
 androidx-room = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room"}
 androidx-room-compile = { module = "androidx.room:room-compiler", version.ref = "androidx.room"}

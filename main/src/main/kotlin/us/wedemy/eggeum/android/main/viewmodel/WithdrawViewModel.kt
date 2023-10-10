@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.usecase.WithdrawUseCase
 
@@ -30,15 +31,26 @@ class WithdrawViewModel @Inject constructor(
   private val _navigateToLoginEvent = MutableSharedFlow<Unit>(replay = 1)
   val navigateToLoginEvent: SharedFlow<Unit> = _navigateToLoginEvent.asSharedFlow()
 
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+
   fun setAgreeToWithdraw() {
     _agreeToWithdraw.value = !agreeToWithdraw.value
   }
 
   fun withdraw() {
     viewModelScope.launch {
-      withdrawUseCase.execute()
-      // TODO API 호출이 성공적으로 수행되었을때 화면 이동 이벤트 방출
-      _navigateToLoginEvent.emit(Unit)
+      val result = withdrawUseCase.execute()
+      when {
+        result.isSuccess -> {
+          _navigateToLoginEvent.emit(Unit)
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+        }
+      }
     }
   }
 

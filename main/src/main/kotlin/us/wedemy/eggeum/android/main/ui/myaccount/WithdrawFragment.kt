@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +62,12 @@ class WithdrawFragment : BaseFragment<FragmentWithdrawBinding>() {
       launch {
         viewModel.navigateToLoginEvent.collect {
           (activity as MainActivity).navigateToLogin()
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
     }

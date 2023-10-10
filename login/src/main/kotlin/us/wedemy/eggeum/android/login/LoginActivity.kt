@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.util.setOnSingleClickListener
 import us.wedemy.eggeum.android.login.databinding.ActivityLoginBinding
 import us.wedemy.eggeum.android.navigator.MainNavigator
 import us.wedemy.eggeum.android.navigator.OnboardNavigator
@@ -115,7 +116,7 @@ class LoginActivity : BaseActivity() {
   }
 
   private fun initListener() {
-    binding.cvGoogleLogin.setOnClickListener {
+    binding.cvGoogleLogin.setOnSingleClickListener {
       oneTapClient
         .beginSignIn(signInRequest)
         .addOnSuccessListener(this) { result ->

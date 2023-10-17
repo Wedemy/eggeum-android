@@ -8,6 +8,7 @@
 package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -53,7 +54,16 @@ class NoticeAdapter(private var clickListener: NoticeItemClickListener) :
           clickListener.onSearchTextfieldClick(binding.tietNotice.text.toString())
         }
       }
-      is NoticeUiModel.NoticeListItem -> (holder as NoticeListItemViewHolder).bind(uiModel.notice)
+      is NoticeUiModel.NoticeListItem -> (holder as NoticeListItemViewHolder).apply {
+        bind(uiModel.notice)
+        with(binding) {
+          clNotice.setOnClickListener {
+            uiModel.notice.isExpanded = !uiModel.notice.isExpanded
+            toggleLayout(uiModel.notice.isExpanded, ivNoticeExpand)
+            notifyItemChanged(position)
+          }
+        }
+      }
     }
   }
 
@@ -63,6 +73,14 @@ class NoticeAdapter(private var clickListener: NoticeItemClickListener) :
       is NoticeUiModel.NoticeTitleItem -> R.layout.item_notice_title
       is NoticeUiModel.NoticeSearchItem -> R.layout.item_notice_search
       is NoticeUiModel.NoticeListItem -> R.layout.item_notice_list
+    }
+  }
+
+  private fun toggleLayout(isExpanded: Boolean, view: View) {
+    if (isExpanded) {
+      view.animate().setDuration(200).rotation(180f)
+    } else {
+      view.animate().setDuration(200).rotation(0f)
     }
   }
 

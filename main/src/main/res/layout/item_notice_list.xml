@@ -32,6 +32,7 @@
       android:maxLines="1"
       android:textColor="@color/gray_900"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@id/iv_notice_expand"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="[공지] 공부하기 좋은 카페 찾는 방법" />

@@ -6,7 +6,7 @@
   -->
 
 <resources>
-  <string name="update_cafe">정보 수정 및 신고</string>
+  <string name="update_cafe">정보 수정 제안</string>
   <string name="cancel">취소</string>
   <string name="next">다음</string>
   <string name="ask_options">어떤 의견이 있으신가요?</string>

@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectOpinionBinding
 import us.wedemy.eggeum.android.updatecafe.viewmodel.SelectOpinionViewModel
@@ -44,10 +43,10 @@ class SelectOpinionFragment : BaseFragment<FragmentSelectOpinionBinding>() {
         viewModel.setCbAgreeToRequestCorrectionOfInfo()
       }
 
-      btnSelectInfoCategories.setOnClickListener {
+      /*btnSelectInfoCategories.setOnClickListener {
         val action = SelectOpinionFragmentDirections.actionFragmentSelectOpinionToFragmentSelectInfoCategories()
         findNavController().safeNavigate(action)
-      }
+      }*/
     }
   }
 

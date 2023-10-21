@@ -9,17 +9,18 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_setting"
-  app:startDestination="@id/fragment_select_opinion">
+  app:startDestination="@id/fragment_select_info_categories">
 
-  <fragment
+  <!-- 정보 수정 제안에 따른 첫 페이지 삭제 -->
+  <!--<fragment
     android:id="@+id/fragment_select_opinion"
     android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectOpinionFragment"
     android:label="SelectOpinionFragment"
     tools:layout="@layout/fragment_select_opinion">
-    <!-- 카페 제안하기 -->
-    <!--    <action-->
-    <!--      android:id="@+id/action_fragment_select_opinion_to_fragment_select_cafe_categories"-->
-    <!--      app:destination="@id/fragment_select_cafe_categories" />-->
+    &lt;!&ndash; 카페 제안하기 &ndash;&gt;
+    &lt;!&ndash;    <action&ndash;&gt;
+    &lt;!&ndash;      android:id="@+id/action_fragment_select_opinion_to_fragment_select_cafe_categories"&ndash;&gt;
+    &lt;!&ndash;      app:destination="@id/fragment_select_cafe_categories" />&ndash;&gt;
     <action
       android:id="@+id/action_fragment_select_opinion_to_fragment_select_info_categories"
       app:destination="@id/fragment_select_info_categories"
@@ -27,7 +28,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-  </fragment>
+  </fragment>-->
 
   <!-- 카페 제안하기 -->
   <!--  <fragment-->

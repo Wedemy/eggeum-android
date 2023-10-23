@@ -10,4 +10,13 @@ package us.wedemy.eggeum.android.domain.model.place
 public data class Product(
   val name: String,
   val price: Int,
-)
+) {
+  public companion object {
+    public fun fixture(): Product {
+      return Product(
+        name = "",
+        price = 0,
+      )
+    }
+  }
+}

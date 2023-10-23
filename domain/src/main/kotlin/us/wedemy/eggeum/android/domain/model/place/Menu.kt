@@ -9,4 +9,12 @@ package us.wedemy.eggeum.android.domain.model.place
 
 public data class Menu(
   val products: List<Product>,
-)
+) {
+  public companion object {
+    public fun fixture(): Menu {
+      return Menu(
+        products = listOf(Product.fixture()),
+      )
+    }
+  }
+}

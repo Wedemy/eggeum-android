@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+  implementation(project(mapOf("path" to ":domain")))
   implementations(
     libs.kotlinx.coroutines.android,
     libs.android.material,

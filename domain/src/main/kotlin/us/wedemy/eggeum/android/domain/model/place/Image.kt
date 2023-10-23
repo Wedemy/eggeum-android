@@ -11,4 +11,12 @@ import us.wedemy.eggeum.android.domain.model.File
 
 public data class Image(
   val files: List<File>,
-)
+) {
+  public companion object {
+    public fun fixture(): Image {
+      return Image(
+        files = listOf(File.fixture()),
+      )
+    }
+  }
+}

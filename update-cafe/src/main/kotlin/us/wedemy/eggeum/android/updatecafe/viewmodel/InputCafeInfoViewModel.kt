@@ -21,24 +21,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import us.wedemy.eggeum.android.domain.model.place.ProposePlaceInfoCommand
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceBodyUsecase
 import us.wedemy.eggeum.android.domain.usecase.ProposeCafeInfoUsecase
-
-// data class ProposalList(
-//   val areaSize: String = "",
-//   val meetingRoomCount: Int = 0,
-//   val multiSeatCount: Int = 0,
-//   val singleSeatCount: Int = 0,
-//   val businessHours: List<String> = emptyList(),
-// )
 
 @HiltViewModel
 class InputCafeInfoViewModel @Inject constructor(
   private val getPlaceBodyUsecase: GetPlaceBodyUsecase,
   private val proposeCafeInfoUsecase: ProposeCafeInfoUsecase,
 ) : ViewModel() {
-  private val _cafeInfo = MutableStateFlow(UpsertPlaceBody.fixture())
+  private val _cafeInfo = MutableStateFlow(ProposePlaceInfoCommand.fixture())
   val cafeInfo = _cafeInfo.asStateFlow()
 
   private val _showToastEvent = MutableSharedFlow<String>()
@@ -52,17 +45,8 @@ class InputCafeInfoViewModel @Inject constructor(
           Timber.d("$placeBody")
           _cafeInfo.update { cafeInfo ->
             cafeInfo.copy(
-              address1 = placeBody.address1,
-              address2 = placeBody.address2,
-              image = placeBody.image,
               info = placeBody.info,
-              latitude = placeBody.latitude,
-              longitude = placeBody.longitude,
-              menu = placeBody.menu,
-              name = placeBody.name,
               placeId = placeId,
-              remarks = "what it is?",
-              type = placeBody.type,
             )
           }
         }

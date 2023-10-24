@@ -43,6 +43,15 @@
   <string name="input_cafe_multi_seat">다인석</string>
   <string name="input_cafe_single_seat">1인석</string>
   <string name="input_cafe_business_hours">영업시간</string>
+  <string name="input_parking">주차</string>
+  <string name="input_exists_smoking_area">흡연</string>
+  <string name="input_exists_wifi">와이파이</string>
+  <string name="input_rest_room">화장실</string>
+  <string name="input_mobile_charging">모바일 충전</string>
+  <string name="input_instagram_uri">인스타그램</string>
+  <string name="input_website_uri">웹사이트</string>
+  <string name="input_blog_uri">블로그</string>
+  <string name="input_phone">휴대폰</string>
   <string name="input_cafe_menu">메뉴</string>
   <string name="input_cafe_menu_hint">초콜릿 케이크</string>
   <string name="input_cafe_menu_price">가격</string>

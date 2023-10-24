@@ -10,13 +10,4 @@ package us.wedemy.eggeum.android.domain.model
 public data class File(
   public val uploadFileId: Int,
   val url: String,
-) {
-  public companion object {
-    public fun fixture(): File {
-      return File(
-        uploadFileId = 0,
-        url = "",
-      )
-    }
-  }
-}
+)

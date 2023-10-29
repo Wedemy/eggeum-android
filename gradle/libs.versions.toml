@@ -50,7 +50,7 @@ test-kotest = "5.7.2"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.0"
 test-roborazzi = "1.6.0"
-test-robolectric = "4.10.3"
+test-robolectric = "4.11"
 
 [plugins]
 gradle-android-application = { id = "com.android.application", version.ref = "gradle-android" }

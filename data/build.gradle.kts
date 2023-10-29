@@ -32,8 +32,10 @@ dependencies {
     libs.timber,
     libs.moshi.core,
     libs.moshi.kotlin,
-    libs.bundles.ktor.client,
+    libs.kotlinx.serialization.json,
     libs.androidx.paging.runtime,
+    libs.bundles.ktor.client,
+    libs.bundles.retrofit,
     projects.domain,
   )
   testImplementation(libs.test.ktor.client.mock)

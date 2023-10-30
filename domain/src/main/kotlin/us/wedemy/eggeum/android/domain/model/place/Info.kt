@@ -8,20 +8,20 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class Info(
-  var areaSize: String,
-  val blogUri: String,
-  var businessHours: List<String>,
-  val existsSmokingArea: Boolean,
-  val existsWifi: Boolean,
-  val instagramUri: String,
-  var meetingRoomCount: Int,
-  val mobileCharging: String,
-  var multiSeatCount: Int,
-  val parking: String,
-  val phone: String,
-  val restRoom: String,
-  var singleSeatCount: Int,
-  val websiteUri: String,
+  var areaSize: String?,
+  val blogUri: String?,
+  var businessHours: List<String?>,
+  val existsSmokingArea: Boolean?,
+  val existsWifi: Boolean?,
+  val instagramUri: String?,
+  var meetingRoomCount: Int?,
+  val mobileCharging: String?,
+  var multiSeatCount: Int?,
+  val parking: String?,
+  val phone: String?,
+  val restRoom: String?,
+  var singleSeatCount: Int?,
+  val websiteUri: String?,
 ) {
   public companion object {
     public fun fixture(): Info {

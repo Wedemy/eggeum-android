@@ -13,44 +13,44 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 public data class Info(
   @Json(name = "areaSize")
-  val areaSize: String,
+  val areaSize: String? = null,
 
   @Json(name = "blogUri")
-  val blogUri: String,
+  val blogUri: String? = null,
 
   @Json(name = "businessHours")
-  val businessHours: List<String>,
+  val businessHours: List<String?> = emptyList(),
 
   @Json(name = "existsSmokingArea")
-  val existsSmokingArea: Boolean,
+  val existsSmokingArea: Boolean? = null,
 
   @Json(name = "existsWifi")
-  val existsWifi: Boolean,
+  val existsWifi: Boolean? = null,
 
   @Json(name = "instagramUri")
-  val instagramUri: String,
+  val instagramUri: String? = null,
 
   @Json(name = "meetingRoomCount")
-  val meetingRoomCount: Int,
+  val meetingRoomCount: Int? = null,
 
   @Json(name = "mobileCharging")
-  val mobileCharging: String,
+  val mobileCharging: String? = null,
 
   @Json(name = "multiSeatCount")
-  val multiSeatCount: Int,
+  val multiSeatCount: Int? = null,
 
   @Json(name = "parking")
-  val parking: String,
+  val parking: String? = null,
 
   @Json(name = "phone")
-  val phone: String,
+  val phone: String? = null,
 
   @Json(name = "restRoom")
-  val restRoom: String,
+  val restRoom: String? = null,
 
   @Json(name = "singleSeatCount")
-  val singleSeatCount: Int,
+  val singleSeatCount: Int? = null,
 
   @Json(name = "websiteUri")
-  val websiteUri: String,
+  val websiteUri: String? = null,
 )

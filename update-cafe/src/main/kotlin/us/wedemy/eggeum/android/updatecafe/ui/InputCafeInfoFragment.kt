@@ -120,21 +120,21 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
         viewModel.cafeInfo.collect { cafeInfo ->
           proposePlaceInfoCommand = cafeInfo
           with(binding) {
-            tietInputCafeArea.hint = cafeInfo.info.areaSize.toString()
-            tietInputCafeMeetingRoom.hint = cafeInfo.info.meetingRoomCount.toString()
-            tietInputCafeMultiSeat.hint = cafeInfo.info.multiSeatCount.toString()
-            tietInputCafeSingleSeat.hint = cafeInfo.info.singleSeatCount.toString()
+            tietInputCafeArea.hint = cafeInfo.info.areaSize?.toString()
+            tietInputCafeMeetingRoom.hint = cafeInfo.info.meetingRoomCount?.toString()
+            tietInputCafeMultiSeat.hint = cafeInfo.info.multiSeatCount?.toString()
+            tietInputCafeSingleSeat.hint = cafeInfo.info.singleSeatCount?.toString()
             tietInputCafeBusinessHours.hint = cafeInfo.info.businessHours
               .joinToString(" ~ ", "", "", -1)
-            tietInputParking.hint = cafeInfo.info.parking.toString()
-            tietInputExistsSmokingArea.hint = cafeInfo.info.existsSmokingArea.toString()
-            tietInputExistsWifi.hint = cafeInfo.info.existsWifi.toString()
-            tietInputRestRoom.hint = cafeInfo.info.restRoom.toString()
-            tietInputMobileCharging.hint = cafeInfo.info.mobileCharging.toString()
-            tietInputInstagramUri.hint = cafeInfo.info.instagramUri.toString()
-            tietInputWebsiteUri.hint = cafeInfo.info.websiteUri.toString()
-            tietInputBlogUri.hint = cafeInfo.info.blogUri.toString()
-            tietInputPhone.hint = cafeInfo.info.phone.toString()
+            tietInputParking.hint = cafeInfo.info.parking?.toString()
+            tietInputExistsSmokingArea.hint = cafeInfo.info.existsSmokingArea?.toString()
+            tietInputExistsWifi.hint = cafeInfo.info.existsWifi?.toString()
+            tietInputRestRoom.hint = cafeInfo.info.restRoom?.toString()
+            tietInputMobileCharging.hint = cafeInfo.info.mobileCharging?.toString()
+            tietInputInstagramUri.hint = cafeInfo.info.instagramUri?.toString()
+            tietInputWebsiteUri.hint = cafeInfo.info.websiteUri?.toString()
+            tietInputBlogUri.hint = cafeInfo.info.blogUri?.toString()
+            tietInputPhone.hint = cafeInfo.info.phone?.toString()
           }
         }
       }

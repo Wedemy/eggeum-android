@@ -13,10 +13,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 public data class PlaceBodyResponse(
   @Json(name = "address1")
-  val address1: String,
+  val address1: String? = null,
 
   @Json(name = "address2")
-  val address2: String,
+  val address2: String? = null,
 
   @Json(name = "id")
   val id: Int,
@@ -37,8 +37,8 @@ public data class PlaceBodyResponse(
   val menu: Menu,
 
   @Json(name = "name")
-  val name: String,
+  val name: String? = null,
 
   @Json(name = "type")
-  val type: String,
+  val type: String? = null,
 )

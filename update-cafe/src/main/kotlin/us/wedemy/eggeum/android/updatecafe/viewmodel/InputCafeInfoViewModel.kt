@@ -42,7 +42,7 @@ class InputCafeInfoViewModel @Inject constructor(
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val placeBody = result.getOrNull()!!
-          Timber.d("$placeBody")
+          Timber.d("plcaeBody >>> $placeBody")
           _cafeInfo.update { cafeInfo ->
             cafeInfo.copy(
               info = placeBody.info,

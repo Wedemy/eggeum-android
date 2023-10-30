@@ -16,5 +16,5 @@ public data class File(
   val uploadFileId: Int,
 
   @Json(name = "url")
-  val url: String,
+  val url: String? = null,
 )

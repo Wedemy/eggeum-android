@@ -28,7 +28,13 @@ public class FileDataSourceImpl @Inject constructor(
     val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
 
     return safeRequest {
-      service.uploadImageFile(MultipartBody.Part.createFormData("profileImage", imageFile.name, imageRequestBody))
+      service.uploadImageFile(
+        MultipartBody.Part.createFormData(
+          name = "file",
+          filename = imageFile.name,
+          body = imageRequestBody,
+        )
+      )
     }
   }
 }

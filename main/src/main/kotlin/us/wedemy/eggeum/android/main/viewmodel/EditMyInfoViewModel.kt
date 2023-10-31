@@ -49,9 +49,9 @@ class EditMyInfoViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
-  fun getUploadFileId(uri: String) {
+  fun getUploadFileId(profileImageUri: String) {
     viewModelScope.launch {
-      val result = uploadImageFileUseCase(uri)
+      val result = uploadImageFileUseCase(profileImageUri)
       when {
         result.isSuccess && result.getOrNull() != null -> {
           Timber.d("${result.getOrNull()}")

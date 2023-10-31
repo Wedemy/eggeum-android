@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.model.file.FileResponse
 public interface FileService {
 
   @Multipart
-  @POST("/files/images")
+  @POST("files/images")
   public suspend fun uploadImageFile(
     @Part file: MultipartBody.Part,
   ): Response<FileResponse>

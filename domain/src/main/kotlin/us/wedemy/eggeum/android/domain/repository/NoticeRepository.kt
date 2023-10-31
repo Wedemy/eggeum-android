@@ -9,7 +9,7 @@ package us.wedemy.eggeum.android.domain.repository
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
+import us.wedemy.eggeum.android.domain.model.notice.NoticeEntity
 
 /** 공지사항 API */
 public interface NoticeRepository {
@@ -18,7 +18,7 @@ public interface NoticeRepository {
    *
    * @param noticeId 조회할 공지 아이디
    */
-  public suspend fun getNoticeBody(noticeId: Int): NoticeBody?
+  public suspend fun getNotice(noticeId: Int): NoticeEntity?
 
   /**
    * 조건에 맞는 공지 목록 조회
@@ -37,5 +37,5 @@ public interface NoticeRepository {
     sort: String? = null,
     startDate: String? = null,
     endDate: String? = null,
-  ): Flow<PagingData<NoticeBody>>
+  ): Flow<PagingData<NoticeEntity>>
 }

@@ -9,11 +9,20 @@ package us.wedemy.eggeum.android.domain.repository
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import us.wedemy.eggeum.android.domain.model.place.PlaceBody
-import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
+import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 
 /** 장소 API */
 public interface PlaceRepository {
+  /**
+   * 장소 단건 조회
+   *
+   * @param placeId 조회할 장소 아아디
+   */
+  public suspend fun getPlace(
+    placeId: Int,
+  ): PlaceEntity?
+
   /**
    * 장소 목록 조회
    *
@@ -39,21 +48,12 @@ public interface PlaceRepository {
     sort: String? = null,
     startDate: String? = null,
     type: String? = null,
-  ): Flow<PagingData<PlaceBody>>
-
-  /**
-   * 장소 단건 조회
-   *
-   * @param placeId 조회할 장소 아아디
-   */
-  public suspend fun getPlaceBody(
-    placeId: Int,
-  ): PlaceBody?
+  ): Flow<PagingData<PlaceEntity>>
 
   /**
    * 장소 추가/수정 요청
    *
-   * @param upsertPlaceBody
+   * @param upsertPlaceEntity
    */
-  public suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody)
+  public suspend fun upsertPlace(upsertPlaceEntity: UpsertPlaceEntity)
 }

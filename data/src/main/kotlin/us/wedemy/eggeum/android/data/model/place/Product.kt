@@ -7,14 +7,23 @@
 
 package us.wedemy.eggeum.android.data.model.place
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class Product(
+//   @Json(name = "name")
+//   val name: String,
+//
+//   @Json(name = "price")
+//   val price: Int,
+// )
+
+@Serializable
 public data class Product(
-  @Json(name = "name")
+  @SerialName("name")
   val name: String,
 
-  @Json(name = "price")
+  @SerialName("price")
   val price: Int,
 )

@@ -7,11 +7,17 @@
 
 package us.wedemy.eggeum.android.data.model.place
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class Menu(
+//   @Json(name = "products")
+//   val products: List<Product>,
+// )
+
+@Serializable
 public data class Menu(
-  @Json(name = "products")
+  @SerialName("products")
   val products: List<Product>,
 )

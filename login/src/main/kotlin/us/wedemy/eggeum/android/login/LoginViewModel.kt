@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import us.wedemy.eggeum.android.domain.model.login.LoginRequestEntity
 import us.wedemy.eggeum.android.domain.usecase.LoginUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetAccessTokenUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetRefreshTokenUseCase
@@ -39,12 +40,12 @@ class LoginViewModel @Inject constructor(
 
   fun login(idToken: String) {
     viewModelScope.launch {
-      val result = loginUseCase.execute(idToken)
+      val result = loginUseCase(LoginRequestEntity(idToken = idToken))
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val loginBody = result.getOrNull()
-          setAccessTokenUseCase.execute(loginBody!!.accessToken)
-          setRefreshTokenUseCase.execute(loginBody.refreshToken)
+          setAccessTokenUseCase(loginBody!!.accessToken)
+          setRefreshTokenUseCase(loginBody.refreshToken)
           _navigateToMainEvent.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {

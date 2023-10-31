@@ -9,10 +9,10 @@ package us.wedemy.eggeum.android.data.mapper
 
 import us.wedemy.eggeum.android.data.model.enums.EnumListResponse
 import us.wedemy.eggeum.android.domain.model.enums.AdditionalProperty
-import us.wedemy.eggeum.android.domain.model.enums.EnumList
+import us.wedemy.eggeum.android.domain.model.enums.EnumListEntity
 
-internal fun EnumListResponse.toDomain() =
-  EnumList(
+internal fun EnumListResponse.toEntity() =
+  EnumListEntity(
     additionalProp1 = additionalProp1.map { AdditionalProperty() },
     additionalProp2 = additionalProp2.map { AdditionalProperty() },
     additionalProp3 = additionalProp3.map { AdditionalProperty() },

@@ -7,50 +7,95 @@
 
 package us.wedemy.eggeum.android.data.model.place
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class Info(
+//   @Json(name = "areaSize")
+//   val areaSize: String,
+//
+//   @Json(name = "blogUri")
+//   val blogUri: String,
+//
+//   @Json(name = "businessHours")
+//   val businessHours: List<String>,
+//
+//   @Json(name = "existsSmokingArea")
+//   val existsSmokingArea: Boolean,
+//
+//   @Json(name = "existsWifi")
+//   val existsWifi: Boolean,
+//
+//   @Json(name = "instagramUri")
+//   val instagramUri: String,
+//
+//   @Json(name = "meetingRoomCount")
+//   val meetingRoomCount: Int,
+//
+//   @Json(name = "mobileCharging")
+//   val mobileCharging: String,
+//
+//   @Json(name = "multiSeatCount")
+//   val multiSeatCount: Int,
+//
+//   @Json(name = "parking")
+//   val parking: String,
+//
+//   @Json(name = "phone")
+//   val phone: String,
+//
+//   @Json(name = "restRoom")
+//   val restRoom: String,
+//
+//   @Json(name = "singleSeatCount")
+//   val singleSeatCount: Int,
+//
+//   @Json(name = "websiteUri")
+//   val websiteUri: String,
+// )
+
+@Serializable
 public data class Info(
-  @Json(name = "areaSize")
+  @SerialName("areaSize")
   val areaSize: String,
 
-  @Json(name = "blogUri")
+  @SerialName("blogUri")
   val blogUri: String,
 
-  @Json(name = "businessHours")
+  @SerialName("businessHours")
   val businessHours: List<String>,
 
-  @Json(name = "existsSmokingArea")
+  @SerialName("existsSmokingArea")
   val existsSmokingArea: Boolean,
 
-  @Json(name = "existsWifi")
+  @SerialName("existsWifi")
   val existsWifi: Boolean,
 
-  @Json(name = "instagramUri")
+  @SerialName("instagramUri")
   val instagramUri: String,
 
-  @Json(name = "meetingRoomCount")
+  @SerialName("meetingRoomCount")
   val meetingRoomCount: Int,
 
-  @Json(name = "mobileCharging")
+  @SerialName("mobileCharging")
   val mobileCharging: String,
 
-  @Json(name = "multiSeatCount")
+  @SerialName("multiSeatCount")
   val multiSeatCount: Int,
 
-  @Json(name = "parking")
+  @SerialName("parking")
   val parking: String,
 
-  @Json(name = "phone")
+  @SerialName("phone")
   val phone: String,
 
-  @Json(name = "restRoom")
+  @SerialName("restRoom")
   val restRoom: String,
 
-  @Json(name = "singleSeatCount")
+  @SerialName("singleSeatCount")
   val singleSeatCount: Int,
 
-  @Json(name = "websiteUri")
+  @SerialName("websiteUri")
   val websiteUri: String,
 )

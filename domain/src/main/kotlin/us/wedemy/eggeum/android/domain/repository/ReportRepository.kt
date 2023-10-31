@@ -7,15 +7,18 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
-import us.wedemy.eggeum.android.domain.model.report.ReportBody
-import us.wedemy.eggeum.android.domain.model.report.ReportList
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
+import us.wedemy.eggeum.android.domain.model.report.ReportEntity
+import us.wedemy.eggeum.android.domain.model.report.UpdateReportEntity
 
 /** 문의 하기 API */
 public interface ReportRepository {
   /**
    * 사용자 문의 단건 조회
    */
-  public suspend fun getReportBody(reportId: Int): ReportBody?
+  public suspend fun getReport(reportId: Int): ReportEntity?
 
   /**
    * 사용자 문의 목록 조회
@@ -28,7 +31,7 @@ public interface ReportRepository {
     page: Int?,
     size: Int?,
     sort: String?,
-  ): ReportList?
+  ): Flow<PagingData<ReportEntity>>
 
   /**
    * 사용자 문의 하기
@@ -36,10 +39,7 @@ public interface ReportRepository {
    * @param content 문의 내용
    * @param title 문의 제목
    */
-  public suspend fun createReport(
-    content: String,
-    title: String,
-  )
+  public suspend fun createReport(createReportEntity: CreateReportEntity)
 
   /**
    * 유저 문의하기 수정
@@ -50,7 +50,6 @@ public interface ReportRepository {
    */
   public suspend fun updateReport(
     reportId: Int,
-    content: String,
-    title: String,
+    updateReportEntity: UpdateReportEntity,
   )
 }

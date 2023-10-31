@@ -15,6 +15,7 @@ plugins {
   eggeum("kotlin-explicit-api")
   eggeum("test-kotest")
   alias(libs.plugins.google.secrets)
+  alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.moshix.ir)
 }
 

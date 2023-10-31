@@ -12,12 +12,12 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import us.wedemy.eggeum.android.data.repository.EnumRepositoryProvider
-import us.wedemy.eggeum.android.data.repository.LoginRepositoryProvider
-import us.wedemy.eggeum.android.data.repository.NoticeRepositoryProvider
-import us.wedemy.eggeum.android.data.repository.PlaceRepositoryProvider
-import us.wedemy.eggeum.android.data.repository.ReportRepositoryProvider
-import us.wedemy.eggeum.android.data.repository.UserRepositoryProvider
+import us.wedemy.eggeum.android.data.repository.EnumRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.LoginRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.NoticeRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.PlaceRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.ReportRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.UserRepositoryImpl
 import us.wedemy.eggeum.android.domain.repository.EnumRepository
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
@@ -30,25 +30,25 @@ import us.wedemy.eggeum.android.domain.repository.UserRepository
 internal abstract class RepositoryModule {
   @Binds
   @Singleton
-  abstract fun provideLoginRepository(loginRepositoryProvider: LoginRepositoryProvider): LoginRepository
+  abstract fun bindLoginRepository(loginRepositoryImpl: LoginRepositoryImpl): LoginRepository
 
   @Binds
   @Singleton
-  abstract fun provideEnumRepository(enumRepositoryProvider: EnumRepositoryProvider): EnumRepository
+  abstract fun bindEnumRepository(enumRepositoryImpl: EnumRepositoryImpl): EnumRepository
 
   @Binds
   @Singleton
-  abstract fun provideNoticeRepository(noticeRepositoryProvider: NoticeRepositoryProvider): NoticeRepository
+  abstract fun bindNoticeRepository(noticeRepositoryImpl: NoticeRepositoryImpl): NoticeRepository
 
   @Binds
   @Singleton
-  abstract fun providePlaceRepository(placeRepositoryProvider: PlaceRepositoryProvider): PlaceRepository
+  abstract fun bindPlaceRepository(placeRepositoryImpl: PlaceRepositoryImpl): PlaceRepository
 
   @Binds
   @Singleton
-  abstract fun provideReportRepository(reportRepositoryProvider: ReportRepositoryProvider): ReportRepository
+  abstract fun bindReportRepository(reportRepositoryImpl: ReportRepositoryImpl): ReportRepository
 
   @Binds
   @Singleton
-  abstract fun provideUserRepository(userRepositoryProvider: UserRepositoryProvider): UserRepository
+  abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 }

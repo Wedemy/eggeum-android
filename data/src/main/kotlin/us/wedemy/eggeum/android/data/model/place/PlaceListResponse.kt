@@ -7,17 +7,29 @@
 
 package us.wedemy.eggeum.android.data.model.place
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class PlaceListResponse(
+//   @Json(name = "list")
+//   val list: List<PlaceResponse>,
+//
+//   @Json(name = "totalElements")
+//   val totalElements: Int,
+//
+//   @Json(name = "totalPages")
+//   val totalPages: Int,
+// )
+
+@Serializable
 public data class PlaceListResponse(
-  @Json(name = "list")
-  val list: List<PlaceBodyResponse>,
+  @SerialName("list")
+  val list: List<PlaceResponse>,
 
-  @Json(name = "totalElements")
+  @SerialName("totalElements")
   val totalElements: Int,
 
-  @Json(name = "totalPages")
+  @SerialName("totalPages")
   val totalPages: Int,
 )

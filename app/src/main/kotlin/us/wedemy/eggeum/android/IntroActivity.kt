@@ -60,7 +60,7 @@ class IntroActivity : BaseActivity() {
       splashScreen.setOnExitAnimationListener { splashScreenView ->
         ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f).run {
           interpolator = LinearInterpolator()
-          duration = 200L
+          duration = 500L
           doOnEnd { splashScreenView.remove() }
           start()
         }
@@ -87,13 +87,13 @@ class IntroActivity : BaseActivity() {
     repeatOnStarted {
       launch {
         viewModel.navigateToLoginEvent.collect {
-          delay(200L)
+          delay(500L)
           startActivityWithAnimation<LoginActivity>()
         }
       }
       launch {
         viewModel.navigateToMainEvent.collect {
-          delay(200L)
+          delay(500L)
           startActivityWithAnimation<MainActivity>()
         }
       }

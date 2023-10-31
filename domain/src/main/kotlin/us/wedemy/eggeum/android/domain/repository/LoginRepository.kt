@@ -7,8 +7,10 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
-import us.wedemy.eggeum.android.domain.model.login.LoginBody
-import us.wedemy.eggeum.android.domain.model.login.SignUpBody
+import us.wedemy.eggeum.android.domain.model.login.LoginRequestEntity
+import us.wedemy.eggeum.android.domain.model.login.LoginResponseEntity
+import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
+import us.wedemy.eggeum.android.domain.model.login.SignUpResponseEntity
 
 /** 로그인 API */
 public interface LoginRepository {
@@ -16,7 +18,7 @@ public interface LoginRepository {
    *
    * @param idToken 사용자 인증 토큰
    */
-  public suspend fun getLoginBody(idToken: String?): LoginBody?
+  public suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity?
 
   /** 회원가입 API
    *
@@ -24,11 +26,7 @@ public interface LoginRepository {
    * @param idToken 사용자 인증 토큰
    * @param nickname 유저에 앱에서 사용할 닉네임
    */
-  public suspend fun getSignUpBody(
-    agreemMarketing: Boolean?,
-    idToken: String?,
-    nickname: String?,
-  ): SignUpBody?
+  public suspend fun signUp(signUpRequestEntity: SignUpRequestEntity): SignUpResponseEntity?
 
   /** AccessToken 저장
    *

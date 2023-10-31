@@ -45,7 +45,7 @@ class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: Get
 
   private fun getUserInfo() {
     viewModelScope.launch {
-      val result = getUserInfoUseCase.execute()
+      val result = getUserInfoUseCase()
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val userInfoBody = result.getOrNull()!!
@@ -54,7 +54,7 @@ class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: Get
             uiState.copy(
               nickname = userInfoBody.nickname,
               email = userInfoBody.email,
-              profileImageUrl = userInfoBody.profileImage?.let { it.files[0].url },
+              profileImageUrl = userInfoBody.profileImageEntity?.let { it.files[0].url },
             )
           }
         }

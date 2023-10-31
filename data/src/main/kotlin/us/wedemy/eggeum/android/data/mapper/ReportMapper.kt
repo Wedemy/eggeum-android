@@ -7,48 +7,38 @@
 
 package us.wedemy.eggeum.android.data.mapper
 
-import us.wedemy.eggeum.android.data.model.ProfileImage
-import us.wedemy.eggeum.android.data.model.report.ReportBodyResponse
+import us.wedemy.eggeum.android.data.model.report.CreateReportRequest
+import us.wedemy.eggeum.android.data.model.report.UpdateReportRequest
 import us.wedemy.eggeum.android.data.model.report.ReportListResponse
-import us.wedemy.eggeum.android.data.model.report.User
-import us.wedemy.eggeum.android.domain.model.report.ReportBody
-import us.wedemy.eggeum.android.domain.model.report.ReportList
+import us.wedemy.eggeum.android.data.model.report.ReportResponse
+import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
+import us.wedemy.eggeum.android.domain.model.report.ReportEntity
+import us.wedemy.eggeum.android.domain.model.report.ReportListEntity
+import us.wedemy.eggeum.android.domain.model.report.UpdateReportEntity
 
-internal fun ReportBodyResponse.toDomain() =
-  ReportBody(
+internal fun ReportResponse.toEntity() =
+  ReportEntity(
     content = content,
     status = status,
     title = title,
-    user = user.toDomain(),
+    user = user.toEntity(),
   )
 
-internal fun ReportListResponse.toDomain() =
-  ReportList(
-    elements = list.map(ReportBodyResponse::toDomain),
+internal fun ReportListResponse.toEntity() =
+  ReportListEntity(
+    elements = list.map(ReportResponse::toEntity),
     totalPages = totalPages,
     totalElements = totalElements,
   )
 
-internal fun User.toDomain() =
-  us.wedemy.eggeum.android.domain.model.report.User(
-    agreeMarketing = agreeMarketing,
-    createdBy = createdBy,
-    createdDate = createdDate,
-    email = email,
-    id = id,
-    modifiedBy = modifiedBy,
-    modifiedDate = modifiedDate,
-    name = name,
-    nickname = nickname,
-    password = password,
-    phoneNumber = phoneNumber,
-    profileImage = profileImage.toDomain(),
-    roles = roles,
-    snsId = snsId,
-    status = status,
+internal fun CreateReportEntity.toModel(): CreateReportRequest =
+  CreateReportRequest(
+    title = title,
+    content = content,
   )
 
-internal fun ProfileImage.toDomain() =
-  us.wedemy.eggeum.android.domain.model.ProfileImage(
-    files = files.map { it.toDomain() },
+internal fun UpdateReportEntity.toModel(): UpdateReportRequest =
+  UpdateReportRequest(
+    title = title,
+    content = content,
   )

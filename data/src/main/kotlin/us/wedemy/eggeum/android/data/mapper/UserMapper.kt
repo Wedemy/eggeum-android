@@ -7,30 +7,46 @@
 
 package us.wedemy.eggeum.android.data.mapper
 
-import us.wedemy.eggeum.android.data.model.File
-import us.wedemy.eggeum.android.data.model.ProfileImage
-import us.wedemy.eggeum.android.data.model.user.UserInfoBodyResponse
-import us.wedemy.eggeum.android.domain.model.user.UserInfoBody
+import us.wedemy.eggeum.android.data.model.user.User
+import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
+import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
+import us.wedemy.eggeum.android.domain.model.report.UserEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 
-internal fun UserInfoBodyResponse.toDomain() =
-  UserInfoBody(
+internal fun UserInfoResponse.toEntity() =
+  UserInfoEntity(
     agreeMarketing = agreeMarketing,
     email = email,
     id = id,
     name = name,
     nickname = nickname,
-    profileImage = profileImage,
+    profileImageEntity = profileImage?.toEntity(),
     roles = roles,
     status = status,
   )
 
-internal fun us.wedemy.eggeum.android.domain.model.ProfileImage.toData() =
-  ProfileImage(
-    files = files.map { it.toData() },
+internal fun UpdateUserInfoEntity.toModel() =
+  UpdateUserInfoRequest(
+    nickname = nickname,
+    profileImage = profileImage.toModel(),
   )
 
-internal fun us.wedemy.eggeum.android.domain.model.File.toData() =
-  File(
-    uploadFileId = uploadFileId,
-    url = url,
+internal fun User.toEntity() =
+  UserEntity(
+    agreeMarketing = agreeMarketing,
+    createdBy = createdBy,
+    createdDate = createdDate,
+    email = email,
+    id = id,
+    modifiedBy = modifiedBy,
+    modifiedDate = modifiedDate,
+    name = name,
+    nickname = nickname,
+    password = password,
+    phoneNumber = phoneNumber,
+    profileImage = profileImage.toEntity(),
+    roles = roles,
+    snsId = snsId,
+    status = status,
   )

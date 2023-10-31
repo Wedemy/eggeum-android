@@ -40,7 +40,7 @@ class WithdrawViewModel @Inject constructor(
 
   fun withdraw() {
     viewModelScope.launch {
-      val result = withdrawUseCase.execute()
+      val result = withdrawUseCase()
       when {
         result.isSuccess -> {
           _navigateToLoginEvent.emit(Unit)

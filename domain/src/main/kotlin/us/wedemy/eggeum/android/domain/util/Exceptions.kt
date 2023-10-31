@@ -9,21 +9,24 @@ package us.wedemy.eggeum.android.domain.util
 
 import java.io.IOException
 
-// LoginApi
-public val LoginApiResponseIsNull: IOException = IOException("The Login API response is null.")
+// Login
+public val LoginApiResponseIsNull: IOException = IOException("Login API response is null.")
 public val LoginApiResponseNotFound: IOException = IOException("Login API returned Not Found.")
 public val LoginApiResponseUnknownError: IOException = IOException("Login API returned an unknown error.")
+public val SignUpApiResponseIsNull: IOException = IOException("SignUp API response is null.")
 
-// EnumApi
+// Enum
 public val EnumApiResponseIsNull: IOException = IOException("The Enum API response is null.")
 
-// NoticeApi
+// Notice
 public val NoticeApiResponseIsNull: IOException = IOException("The Notice API response is null.")
 
-// UserApi
+// User
 public val GetUserInfoApiResponseIsNull: IOException = IOException("GetUserInfo API response is null.")
 public val CheckNicknameExistResponseIsNull: IOException = IOException("CheckNicknameExist API response is null.")
 
-// PlaceApi
-public val GetPlaceListApiResponseIsNull: IOException = IOException("GetPlaceList API response is null.")
-public val GetPlaceBodyApiResponseIsNull: IOException = IOException("GetPlaceBody API response is null.")
+// Place
+public val PlaceApiResponseIsNull: IOException = IOException("Place API response is null.")
+
+// Report
+public val ReportApiResponseIsNull: IOException = IOException("Report API response is null.")

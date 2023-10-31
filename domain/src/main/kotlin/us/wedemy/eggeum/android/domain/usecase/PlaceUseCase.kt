@@ -13,7 +13,7 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
-import us.wedemy.eggeum.android.domain.util.GetPlaceBodyApiResponseIsNull
+import us.wedemy.eggeum.android.domain.util.PlaceApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -22,7 +22,7 @@ public class GetPlaceUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(placeId: Int): Result<PlaceEntity> =
     runSuspendCatching {
-      repository.getPlace(placeId) ?: throw GetPlaceBodyApiResponseIsNull
+      repository.getPlace(placeId) ?: throw PlaceApiResponseIsNull
     }
 }
 

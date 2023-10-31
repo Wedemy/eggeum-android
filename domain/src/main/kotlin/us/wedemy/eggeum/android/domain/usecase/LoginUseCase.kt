@@ -7,7 +7,6 @@
 
 package us.wedemy.eggeum.android.domain.usecase
 
-import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.login.LoginRequestEntity
@@ -15,10 +14,9 @@ import us.wedemy.eggeum.android.domain.model.login.LoginResponseEntity
 import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
 import us.wedemy.eggeum.android.domain.model.login.SignUpResponseEntity
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
+import us.wedemy.eggeum.android.domain.util.LoginApiResponseIsNull
+import us.wedemy.eggeum.android.domain.util.SignUpApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
-
-private val LoginApiResponseIsNull = IOException("Login API response is null.")
-private val SignUpApiResponseIsNull = IOException("SignUp API response is null.")
 
 @Singleton
 public class LoginUseCase @Inject constructor(

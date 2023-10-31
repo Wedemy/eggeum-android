@@ -25,7 +25,7 @@ public class LoginUseCase @Inject constructor(
   private val repository: LoginRepository,
 ) {
   public suspend operator fun invoke(
-    loginRequestEntity: LoginRequestEntity
+    loginRequestEntity: LoginRequestEntity,
   ): Result<LoginResponseEntity> =
     runSuspendCatching {
       repository.login(loginRequestEntity) ?: throw LoginApiResponseIsNull

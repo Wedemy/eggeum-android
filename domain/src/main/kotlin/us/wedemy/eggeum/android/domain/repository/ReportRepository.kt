@@ -28,9 +28,9 @@ public interface ReportRepository {
    * @param sort 문의 목록 정렬 정책
    */
   public suspend fun getReportList(
-    page: Int?,
-    size: Int?,
-    sort: String?,
+    page: Int? = null,
+    size: Int? = null,
+    sort: String? = null,
   ): Flow<PagingData<ReportEntity>>
 
   /**

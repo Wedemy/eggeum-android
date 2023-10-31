@@ -33,7 +33,7 @@ public class FileDataSourceImpl @Inject constructor(
           name = "file",
           filename = imageFile.name,
           body = imageRequestBody,
-        )
+        ),
       )
     }
   }

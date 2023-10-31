@@ -34,7 +34,7 @@ class IntroViewModel @Inject constructor(
 
   private fun getAccessToken() {
     viewModelScope.launch {
-      val accessToken = getAccessTokenUseCase.execute()
+      val accessToken = getAccessTokenUseCase()
       if (accessToken.isEmpty()) {
         _navigateToLoginEvent.emit(Unit)
       } else {

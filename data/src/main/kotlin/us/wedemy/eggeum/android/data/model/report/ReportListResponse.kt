@@ -7,17 +7,29 @@
 
 package us.wedemy.eggeum.android.data.model.report
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class ReportListResponse(
+//   @Json(name = "list")
+//   val list: List<ReportResponse>,
+//
+//   @Json(name = "totalElements")
+//   val totalElements: Int,
+//
+//   @Json(name = "totalPages")
+//   val totalPages: Int,
+// )
+
+@Serializable
 public data class ReportListResponse(
-  @Json(name = "list")
-  val list: List<ReportBodyResponse>,
+  @SerialName("list")
+  val list: List<ReportResponse>,
 
-  @Json(name = "totalElements")
+  @SerialName("totalElements")
   val totalElements: Int,
 
-  @Json(name = "totalPages")
+  @SerialName("totalPages")
   val totalPages: Int,
 )

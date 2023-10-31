@@ -7,22 +7,22 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
-import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoBody
-import us.wedemy.eggeum.android.domain.model.user.UserInfoBody
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 
 /** 사용자 API */
 public interface UserRepository {
   /**
    * 내 정보 조회
    */
-  public suspend fun getUserInfo(): UserInfoBody?
+  public suspend fun getUserInfo(): UserInfoEntity?
 
   /**
    * 내 정보 수정
    *
-   * @param updateUserInfoBody
+   * @param updateUserInfoEntity
    */
-  public suspend fun updateUserInfo(updateUserInfoBody: UpdateUserInfoBody)
+  public suspend fun updateUserInfo(updateUserInfoEntity: UpdateUserInfoEntity)
 
   /**
    * 회원 탈퇴

@@ -24,6 +24,7 @@ import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
 import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetAccessTokenUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetRefreshTokenUseCase
@@ -130,7 +131,7 @@ class OnBoardViewModel @Inject constructor(
       }
       else -> {
         viewModelScope.launch {
-          val result = checkNicknameExistUseCase.execute(nickname)
+          val result = checkNicknameExistUseCase(nickname)
           when {
             result.isSuccess && result.getOrNull() != null -> {
               if (result.getOrNull() == false) {
@@ -155,16 +156,18 @@ class OnBoardViewModel @Inject constructor(
 
   fun signUp() {
     viewModelScope.launch {
-      val result = signUpUseCase.execute(
-        _agreeMarketing.value,
-        idToken,
-        _nickname.value,
+      val result = signUpUseCase(
+        SignUpRequestEntity(
+          agreemMarketing = _agreeMarketing.value,
+          idToken = idToken,
+          nickname = _nickname.value,
+        ),
       )
       when {
         result.isSuccess && result.getOrNull() != null -> {
           val signUpBody = result.getOrNull()
-          setAccessTokenUseCase.execute(signUpBody!!.accessToken)
-          setRefreshTokenUseCase.execute(signUpBody.refreshToken)
+          setAccessTokenUseCase(signUpBody!!.accessToken)
+          setRefreshTokenUseCase(signUpBody.refreshToken)
           _navigateToMainEvent.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {

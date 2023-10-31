@@ -7,13 +7,20 @@
 
 package us.wedemy.eggeum.android.data.mapper
 
-import us.wedemy.eggeum.android.data.model.login.LoginBodyResponse
-import us.wedemy.eggeum.android.data.model.login.SignUpBodyResponse
-import us.wedemy.eggeum.android.domain.model.login.LoginBody
-import us.wedemy.eggeum.android.domain.model.login.SignUpBody
+import us.wedemy.eggeum.android.data.model.login.LoginRequest
+import us.wedemy.eggeum.android.data.model.login.LoginResponse
+import us.wedemy.eggeum.android.data.model.login.SignUpRequest
+import us.wedemy.eggeum.android.data.model.login.SignUpResponse
+import us.wedemy.eggeum.android.domain.model.login.LoginRequestEntity
+import us.wedemy.eggeum.android.domain.model.login.LoginResponseEntity
+import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
+import us.wedemy.eggeum.android.domain.model.login.SignUpResponseEntity
 
-internal fun LoginBodyResponse.toDomain() =
-  LoginBody(
+internal fun LoginRequestEntity.toModel() =
+  LoginRequest(idToken = idToken)
+
+internal fun LoginResponse.toEntity() =
+  LoginResponseEntity(
     accessToken = accessToken,
     expiresIn = expiresIn,
     refreshToken = refreshToken,
@@ -21,11 +28,18 @@ internal fun LoginBodyResponse.toDomain() =
     userRoles = userRoles,
   )
 
-internal fun SignUpBodyResponse.toDomain() =
-  SignUpBody(
+internal fun SignUpResponse.toEntity() =
+  SignUpResponseEntity(
     accessToken = accessToken,
     expiresIn = expiresIn,
     refreshToken = refreshToken,
     refreshExpiresIn = refreshExpiresIn,
     userRoles = userRoles,
+  )
+
+internal fun SignUpRequestEntity.toModel() =
+  SignUpRequest(
+    agreemMarketing = agreemMarketing,
+    idToken = idToken,
+    nickname = nickname,
   )

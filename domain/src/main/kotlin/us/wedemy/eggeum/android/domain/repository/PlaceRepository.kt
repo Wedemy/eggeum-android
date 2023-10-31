@@ -7,12 +7,22 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
-import us.wedemy.eggeum.android.domain.model.place.PlaceBody
-import us.wedemy.eggeum.android.domain.model.place.PlaceList
-import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
+import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 
 /** 장소 API */
 public interface PlaceRepository {
+  /**
+   * 장소 단건 조회
+   *
+   * @param placeId 조회할 장소 아아디
+   */
+  public suspend fun getPlace(
+    placeId: Int,
+  ): PlaceEntity?
+
   /**
    * 장소 목록 조회
    *
@@ -28,31 +38,22 @@ public interface PlaceRepository {
    * @param type 타입(PlaceType)
    */
   public suspend fun getPlaceList(
-    distance: Int?,
-    endDate: String?,
-    latitude: Int?,
-    longitude: Int?,
-    page: Int?,
-    search: String?,
-    size: Int?,
-    sort: String?,
-    startDate: String?,
-    type: String?,
-  ): PlaceList?
-
-  /**
-   * 장소 단건 조회
-   *
-   * @param placeId 조회할 장소 아아디
-   */
-  public suspend fun getPlaceBody(
-    placeId: Int,
-  ): PlaceBody?
+    distance: Int? = null,
+    endDate: String? = null,
+    latitude: Int? = null,
+    longitude: Int? = null,
+    page: Int? = null,
+    search: String? = null,
+    size: Int? = null,
+    sort: String? = null,
+    startDate: String? = null,
+    type: String? = null,
+  ): Flow<PagingData<PlaceEntity>>
 
   /**
    * 장소 추가/수정 요청
    *
-   * @param upsertPlaceBody
+   * @param upsertPlaceEntity
    */
-  public suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody)
+  public suspend fun upsertPlace(upsertPlaceEntity: UpsertPlaceEntity)
 }

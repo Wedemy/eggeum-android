@@ -7,17 +7,29 @@
 
 package us.wedemy.eggeum.android.data.model.notice
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class NoticeListResponse(
+//   @Json(name = "list")
+//   public val list: List<NoticeResponse>,
+//
+//   @Json(name = "totalElements")
+//   public val totalElements: Int,
+//
+//   @Json(name = "totalPages")
+//   public val totalPages: Int,
+// )
+
+@Serializable
 public data class NoticeListResponse(
-  @Json(name = "list")
-  public val list: List<NoticeBodyResponse>,
+  @SerialName("list")
+  public val list: List<NoticeResponse>,
 
-  @Json(name = "totalElements")
+  @SerialName("totalElements")
   public val totalElements: Int,
 
-  @Json(name = "totalPages")
+  @SerialName("totalPages")
   public val totalPages: Int,
 )

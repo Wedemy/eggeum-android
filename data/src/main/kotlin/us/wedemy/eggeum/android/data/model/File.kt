@@ -7,14 +7,23 @@
 
 package us.wedemy.eggeum.android.data.model
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+// @JsonClass(generateAdapter = true)
+// public data class File(
+//   @Json(name = "uploadFileId")
+//   val uploadFileId: Int,
+//
+//   @Json(name = "url")
+//   val url: String,
+// )
+
+@Serializable
 public data class File(
-  @Json(name = "uploadFileId")
+  @SerialName("uploadFileId")
   val uploadFileId: Int,
 
-  @Json(name = "url")
+  @SerialName("url")
   val url: String,
 )

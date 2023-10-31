@@ -15,6 +15,7 @@ plugins {
   eggeum("kotlin-explicit-api")
   eggeum("test-kotest")
   alias(libs.plugins.google.secrets)
+  alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.moshix.ir)
 }
 
@@ -32,7 +33,10 @@ dependencies {
     libs.timber,
     libs.moshi.core,
     libs.moshi.kotlin,
+    libs.kotlinx.serialization.json,
+    libs.androidx.paging.runtime,
     libs.bundles.ktor.client,
+    libs.bundles.retrofit,
     projects.domain,
   )
   testImplementation(libs.test.ktor.client.mock)

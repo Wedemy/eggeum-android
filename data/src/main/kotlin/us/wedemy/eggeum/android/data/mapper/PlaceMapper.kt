@@ -7,55 +7,57 @@
 
 package us.wedemy.eggeum.android.data.mapper
 
-import us.wedemy.eggeum.android.data.model.File
-import us.wedemy.eggeum.android.data.model.place.Image
 import us.wedemy.eggeum.android.data.model.place.Info
 import us.wedemy.eggeum.android.data.model.place.Menu
-import us.wedemy.eggeum.android.data.model.place.PlaceBodyResponse
 import us.wedemy.eggeum.android.data.model.place.PlaceListResponse
+import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.Product
-import us.wedemy.eggeum.android.domain.model.place.PlaceBody
-import us.wedemy.eggeum.android.domain.model.place.PlaceList
+import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
+import us.wedemy.eggeum.android.domain.model.place.InfoEntity
+import us.wedemy.eggeum.android.domain.model.place.MenuEntity
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
+import us.wedemy.eggeum.android.domain.model.place.PlaceListEntity
+import us.wedemy.eggeum.android.domain.model.place.ProductEntity
+import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 
-internal fun PlaceBodyResponse.toDomain() =
-  PlaceBody(
+internal fun PlaceResponse.toEntity() =
+  PlaceEntity(
     address1 = address1,
     address2 = address2,
     id = id,
-    image = image.toDomain(),
-    info = info.toDomain(),
+    image = image.toEntity(),
+    info = info.toEntity(),
     latitude = latitude,
     longitude = longitude,
-    menu = menu.toDomain(),
+    menu = menu.toEntity(),
     name = name,
     type = type,
   )
 
-internal fun PlaceListResponse.toDomain() =
-  PlaceList(
-    elements = list.map(PlaceBodyResponse::toDomain),
+internal fun PlaceListResponse.toEntity() =
+  PlaceListEntity(
+    elements = list.map(PlaceResponse::toEntity),
     totalPages = totalPages,
     totalElements = totalElements,
   )
 
-public fun Image.toDomain(): us.wedemy.eggeum.android.domain.model.place.Image =
-  us.wedemy.eggeum.android.domain.model.place.Image(
-    files = files.map { it.toDomain() },
+internal fun UpsertPlaceEntity.toModel() =
+  UpsertPlaceRequest(
+    address1 = address1,
+    address2 = address2,
+    image = image.toModel(),
+    info = info.toModel(),
+    latitude = latitude,
+    longitude = longitude,
+    menu = menu.toModel(),
+    name = name,
+    placeId = placeId,
+    remarks = remarks,
+    type = type,
   )
 
-public fun us.wedemy.eggeum.android.domain.model.place.Image.toData(): Image =
-  Image(
-    files = files.map { it.toData() },
-  )
-
-public fun File.toDomain(): us.wedemy.eggeum.android.domain.model.File =
-  us.wedemy.eggeum.android.domain.model.File(
-    uploadFileId = uploadFileId,
-    url = url,
-  )
-
-public fun Info.toDomain(): us.wedemy.eggeum.android.domain.model.place.Info =
-  us.wedemy.eggeum.android.domain.model.place.Info(
+public fun Info.toEntity(): InfoEntity =
+  InfoEntity(
     areaSize = areaSize,
     blogUri = blogUri,
     businessHours = businessHours,
@@ -72,7 +74,7 @@ public fun Info.toDomain(): us.wedemy.eggeum.android.domain.model.place.Info =
     websiteUri = websiteUri,
   )
 
-public fun us.wedemy.eggeum.android.domain.model.place.Info.toData(): Info =
+public fun InfoEntity.toModel(): Info =
   Info(
     areaSize = areaSize,
     blogUri = blogUri,
@@ -90,23 +92,23 @@ public fun us.wedemy.eggeum.android.domain.model.place.Info.toData(): Info =
     websiteUri = websiteUri,
   )
 
-public fun Menu.toDomain(): us.wedemy.eggeum.android.domain.model.place.Menu =
-  us.wedemy.eggeum.android.domain.model.place.Menu(
-    products = products.map { it.toDomain() },
+public fun Menu.toEntity(): MenuEntity =
+  MenuEntity(
+    products = products.map { it.toEntity() },
   )
 
-public fun us.wedemy.eggeum.android.domain.model.place.Menu.toData(): Menu =
+public fun MenuEntity.toModel(): Menu =
   Menu(
-    products = products.map { it.toData() },
+    products = products.map { it.toModel() },
   )
 
-public fun Product.toDomain(): us.wedemy.eggeum.android.domain.model.place.Product =
-  us.wedemy.eggeum.android.domain.model.place.Product(
+public fun Product.toEntity(): ProductEntity =
+  ProductEntity(
     name = name,
     price = price,
   )
 
-public fun us.wedemy.eggeum.android.domain.model.place.Product.toData(): Product =
+public fun ProductEntity.toModel(): Product =
   Product(
     name = name,
     price = price,

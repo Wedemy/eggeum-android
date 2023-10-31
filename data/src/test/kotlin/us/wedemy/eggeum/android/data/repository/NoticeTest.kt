@@ -16,8 +16,8 @@ import io.ktor.client.engine.mock.respondOk
 import io.ktor.http.fullPath
 import org.intellij.lang.annotations.Language
 import us.wedemy.eggeum.android.data.client.MoshiProvider
-import us.wedemy.eggeum.android.domain.model.notice.NoticeBody
-import us.wedemy.eggeum.android.domain.model.notice.NoticeList
+import us.wedemy.eggeum.android.domain.model.notice.NoticeEntity
+import us.wedemy.eggeum.android.domain.model.notice.NoticeListEntity
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
 private object DummyResponse {
@@ -70,7 +70,7 @@ class NoticeTest : StringSpec() {
       }
     }
   private val repository: NoticeRepository =
-    NoticeRepositoryProvider(
+    NoticeRepositoryImpl(
       client = HttpClient(mockEngine),
       moshi = MoshiProvider.defaultMoshi(),
     )
@@ -79,9 +79,9 @@ class NoticeTest : StringSpec() {
     coroutineTestScope = true
 
     "single" {
-      val actual = repository.getNoticeBody(testSingleNoticeId)
+      val actual = repository.getNotice(testSingleNoticeId)
       val expect =
-        NoticeBody(
+        NoticeEntity(
           id = 0,
           content = "공지사항 내용",
           title = "공지사항 제목",
@@ -103,15 +103,15 @@ class NoticeTest : StringSpec() {
             endDate = null,
           )
       val expect =
-        NoticeList(
+        NoticeListEntity(
           elements = listOf(
-            NoticeBody(
+            NoticeEntity(
               id = 0,
               title = "공지사항 제목",
               content = "공지사항 내용",
               viewCount = 0,
             ),
-            NoticeBody(
+            NoticeEntity(
               id = 1,
               title = "공지사항 제목2",
               content = "공지사항 내용2",

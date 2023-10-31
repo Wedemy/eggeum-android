@@ -27,7 +27,7 @@ class SettingViewModel @Inject constructor(
 
   fun logout() {
     viewModelScope.launch {
-      logoutUseCase.execute()
+      logoutUseCase()
       _navigateToLogoinEvent.emit(Unit)
     }
   }

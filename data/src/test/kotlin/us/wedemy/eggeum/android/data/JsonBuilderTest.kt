@@ -13,7 +13,7 @@ import com.squareup.moshi.Types
 import com.squareup.moshi.adapter
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import us.wedemy.eggeum.android.data.client.buildJson
+import us.wedemy.eggeum.android.data.util.buildJson
 
 @JsonClass(generateAdapter = true)
 data class Pojo(

@@ -7,12 +7,12 @@
 
 package us.wedemy.eggeum.android.domain.repository
 
-import us.wedemy.eggeum.android.domain.model.enums.EnumList
+import us.wedemy.eggeum.android.domain.model.enums.EnumListEntity
 
 /** Enum 조회 API */
 public interface EnumRepository {
   /**
    * 전체 Enum 목록 조회
    */
-  public suspend fun getEnumList(): EnumList?
+  public suspend fun getEnumList(): EnumListEntity?
 }

@@ -64,7 +64,7 @@ class EditMyInfoViewModel @Inject constructor(
 
   fun updateUserInfo() {
     viewModelScope.launch {
-      // val result = updateUserInfoUseCase.execute()
+      // val result = updateUserInfoUseCase()
     }
   }
 

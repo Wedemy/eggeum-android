@@ -10,6 +10,7 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -36,7 +37,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
 
   private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
     if (uri != null) {
-      viewModel.setProfileImageUri(uri.toString())
+      viewModel.getUploadFileId(uri.toString())
     } else {
       Timber.tag("PhotoPicker").d("No media selected")
     }
@@ -106,6 +107,12 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
             is EditTextState.Error -> setError(state.error)
           }
           binding.btnEditMyInfo.isEnabled = state == EditTextState.Success
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
     }

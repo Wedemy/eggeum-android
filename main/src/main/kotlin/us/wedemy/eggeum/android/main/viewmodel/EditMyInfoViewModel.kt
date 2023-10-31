@@ -12,18 +12,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
+import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
 import us.wedemy.eggeum.android.main.ui.item.UserInfo
 
+// 프로필 사진과 닉네임 둘다 변경해야만 버튼이 활성화 되는 것은 아님
 @Suppress("unused")
 @HiltViewModel
 class EditMyInfoViewModel @Inject constructor(
+  private val uploadImageFileUseCase: UploadImageFileUseCase,
   private val updateUserInfoUseCase: UpdateUserInfoUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -38,6 +45,28 @@ class EditMyInfoViewModel @Inject constructor(
   private val _nicknameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_NICKNAME_STATE, EditTextState.Idle)
   val nicknameState = _nicknameState.asStateFlow()
+
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+
+  fun getUploadFileId(uri: String) {
+    viewModelScope.launch {
+      val result = uploadImageFileUseCase(uri)
+      when {
+        result.isSuccess && result.getOrNull() != null -> {
+          Timber.d("${result.getOrNull()}")
+        }
+        result.isSuccess && result.getOrNull() == null -> {
+          Timber.e("Request succeeded but data validation failed.")
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+        }
+      }
+    }
+  }
 
   fun setProfileImageUri(uri: String) {
     _profileImageUri.value = uri

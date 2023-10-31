@@ -185,6 +185,31 @@ internal object NetworkModule {
       .build()
   }
 
+  @Singleton
+  @Provides
+  @Named("RetrofitFileHttpClient")
+  internal fun provideRetrofitFileHttpClient(
+    httpLoggingInterceptor: HttpLoggingInterceptor,
+    tokenAuthenticator: TokenAuthenticator,
+    tokenInterceptor: TokenInterceptor,
+  ): Retrofit {
+    val contentType = "multipart/form-data".toMediaType()
+    val httpClient = OkHttpClient.Builder()
+      .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
+      .addInterceptor(httpLoggingInterceptor)
+      // To update the token when it gets HTTP unauthorized error
+      .authenticator(tokenAuthenticator)
+      // To set the token in the header
+      .addInterceptor(tokenInterceptor)
+      .build()
+
+    return Retrofit.Builder()
+      .baseUrl(BuildConfig.SERVER_BASE_URL)
+      .client(httpClient)
+      .addConverterFactory(jsonRule.asConverterFactory(contentType))
+      .build()
+  }
+
   @Suppress("unused")
   internal fun HttpRequestBuilder.jsonBody(pretty: Boolean = true, builder: JsonBuilder.() -> Unit) {
     setBody(buildJson(pretty, builder))

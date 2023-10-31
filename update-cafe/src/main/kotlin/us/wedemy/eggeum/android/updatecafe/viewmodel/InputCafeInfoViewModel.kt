@@ -63,9 +63,9 @@ class InputCafeInfoViewModel @Inject constructor(
   }
 
   suspend fun proposeCafeInfo(
-    updatePlaceBody: UpsertPlaceBody,
+    proposePlaceInfoCommand: ProposePlaceInfoCommand,
   ) {
-    proposeCafeInfoUsecase.execute(updatePlaceBody)
+    proposeCafeInfoUsecase.execute(proposePlaceInfoCommand)
   }
 
   private companion object {

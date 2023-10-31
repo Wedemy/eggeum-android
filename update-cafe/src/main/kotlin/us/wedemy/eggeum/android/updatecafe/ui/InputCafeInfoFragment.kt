@@ -108,7 +108,25 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
          * Suspend function 'proposeCafeInfo'
          * should be called only from a coroutine or another suspend function
          */
-        // viewModel.proposeCafeInfo(upsertPlaceBody)
+          proposePlaceInfoCommand.info.setProposeBody(
+            cafeArea = cafeArea,
+            cafeMeetingRoom = cafeMeetingRoom,
+            cafeMultiSeat = cafeMultiSeat,
+            cafeSingleSeat = cafeSingleSeat,
+            cafeBusinessHours = cafeBusinessHours,
+            cafeParking = cafeParking,
+            cafeExistsSmokingArea = cafeExistsSmokingArea,
+            cafeExistsWifi = cafeExistsWifi,
+            cafeRestRoom = cafeRestRoom,
+            cafeMobileCharging = cafeMobileCharging,
+            cafeInstagramUri = cafeInstagramUri,
+            cafeWebsiteUri = cafeWebsiteUri,
+            cafeBlogUri = cafeBlogUri,
+            cafePhone = cafePhone,
+          )
+
+          //viewModel.proposeCafeInfo(proposePlaceInfoCommand)
+
       }
     }
   }

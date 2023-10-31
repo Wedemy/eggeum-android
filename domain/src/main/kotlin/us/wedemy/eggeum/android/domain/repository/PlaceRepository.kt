@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.domain.repository
 
 import us.wedemy.eggeum.android.domain.model.place.PlaceBody
 import us.wedemy.eggeum.android.domain.model.place.PlaceList
+import us.wedemy.eggeum.android.domain.model.place.ProposePlaceInfoCommand
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 
 /** 장소 API */
@@ -54,5 +55,5 @@ public interface PlaceRepository {
    *
    * @param upsertPlaceBody
    */
-  public suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody)
+  public suspend fun upsertPlace(proposePlaceInfoCommand: ProposePlaceInfoCommand)
 }

@@ -11,6 +11,7 @@ package us.wedemy.eggeum.android.domain.usecase
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.place.PlaceBody
+import us.wedemy.eggeum.android.domain.model.place.ProposePlaceInfoCommand
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 import us.wedemy.eggeum.android.domain.util.GetPlaceBodyResponseIsNull
@@ -20,8 +21,8 @@ import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 public class ProposeCafeInfoUsecase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
-  public suspend fun execute(proposeCafeInfo: UpsertPlaceBody) {
-    repository.upsertPlace(proposeCafeInfo)
+  public suspend fun execute(proposePlaceInfoCommand: ProposePlaceInfoCommand) {
+    repository.upsertPlace(proposePlaceInfoCommand)
   }
 }
 

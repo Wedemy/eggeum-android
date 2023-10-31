@@ -12,6 +12,7 @@ import com.squareup.moshi.adapter
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
 import javax.inject.Inject
 import javax.inject.Named
@@ -25,6 +26,7 @@ import us.wedemy.eggeum.android.data.model.place.PlaceBodyResponse
 import us.wedemy.eggeum.android.data.model.place.PlaceListResponse
 import us.wedemy.eggeum.android.domain.model.place.PlaceBody
 import us.wedemy.eggeum.android.domain.model.place.PlaceList
+import us.wedemy.eggeum.android.domain.model.place.ProposePlaceInfoCommand
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceBody
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
@@ -81,21 +83,21 @@ public class PlaceRepositoryProvider @Inject constructor(
     return response?.toDomain()
   }
 
-  override suspend fun upsertPlace(upsertPlaceBody: UpsertPlaceBody) {
+  override suspend fun upsertPlace(proposePlaceInfoCommand: ProposePlaceInfoCommand) {
     client
-      .get("app/place/edits") {
+      .post("app/place/edits") {
         jsonBody {
-          "address1" withString upsertPlaceBody.address1
-          "address2" withString upsertPlaceBody.address2
-          "image".withPojo(imageAdapter, upsertPlaceBody.image.toData())
-          "info".withPojo(infoAdapater, upsertPlaceBody.info.toData())
-          "latitude" withDouble upsertPlaceBody.latitude
-          "longitude" withDouble upsertPlaceBody.longitude
-          "menu".withPojo(menuAdapter, upsertPlaceBody.menu.toData())
-          "name" withString upsertPlaceBody.name
-          "placeId" withInt upsertPlaceBody.placeId
-          "remarks" withString upsertPlaceBody.remarks
-          "type" withString upsertPlaceBody.type
+//          "address1" withString upsertPlaceBody.address1
+//          "address2" withString upsertPlaceBody.address2
+//          "image".withPojo(imageAdapter, upsertPlaceBody.image.toData())
+          "info".withPojo(infoAdapater, proposePlaceInfoCommand.info.toData())
+//          "latitude" withDouble upsertPlaceBody.latitude
+//          "longitude" withDouble upsertPlaceBody.longitude
+//          "menu".withPojo(menuAdapter, upsertPlaceBody.menu.toData())
+//          "name" withString upsertPlaceBody.name
+          "placeId" withInt proposePlaceInfoCommand.placeId
+//          "remarks" withString upsertPlaceBody.remarks
+//          "type" withString upsertPlaceBody.type
         }
       }
   }

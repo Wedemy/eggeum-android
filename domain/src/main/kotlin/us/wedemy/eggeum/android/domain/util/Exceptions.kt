@@ -30,3 +30,6 @@ public val PlaceApiResponseIsNull: IOException = IOException("Place API response
 
 // Report
 public val ReportApiResponseIsNull: IOException = IOException("Report API response is null.")
+
+// File
+public val FileApiResponseIsNull: IOException = IOException("File API response is null.")

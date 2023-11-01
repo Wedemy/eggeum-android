@@ -14,6 +14,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
 import retrofit2.Retrofit
+import us.wedemy.eggeum.android.data.service.FileService
 import us.wedemy.eggeum.android.data.service.LoginService
 import us.wedemy.eggeum.android.data.service.NoticeService
 import us.wedemy.eggeum.android.data.service.PlaceService
@@ -67,5 +68,15 @@ internal object ServiceModule {
     retrofit: Retrofit,
   ): UserService {
     return retrofit.create(UserService::class.java)
+  }
+
+  @Singleton
+  @Provides
+  internal fun provideFileService(
+    // @Named("RetrofitHttpClient")
+    @Named("RetrofitFileHttpClient")
+    retrofit: Retrofit,
+  ): FileService {
+    return retrofit.create(FileService::class.java)
   }
 }

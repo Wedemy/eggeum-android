@@ -31,7 +31,7 @@ androidx-constraintlayout = "2.1.4"
 androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.6.2"
 androidx-navigation = "2.7.5"
-androidx-hilt-navigation = "1.0.0"
+androidx-hilt-navigation = "1.1.0"
 androidx-paging3 = "3.2.1"
 androidx-room = "2.5.2"
 

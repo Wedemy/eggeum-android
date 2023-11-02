@@ -29,6 +29,8 @@ class UpdateCafeCompleteFragment : BaseFragment<FragmentUpdateCafeCompleteBindin
   }
 
   private fun initObserver() {
-    // TODO
+    binding.btnRegisterCafeComplete.setOnClickListener {
+      requireActivity().finish()
+    }
   }
 }

@@ -25,5 +25,5 @@ public data class File(
   val uploadFileId: Int,
 
   @SerialName("url")
-  val url: String,
+  val url: String?,
 )

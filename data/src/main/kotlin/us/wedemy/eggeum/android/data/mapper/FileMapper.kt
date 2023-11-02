@@ -28,12 +28,12 @@ public fun FileEntity.toModel(): File =
 
 public fun Image.toEntity(): ImageEntity =
   ImageEntity(
-    files = files.map { it.toEntity() },
+    files = files?.map { it.toEntity() },
   )
 
 public fun ImageEntity.toModel(): Image =
   Image(
-    files = files.map { it.toModel() },
+    files = files?.map { it.toModel() },
   )
 
 internal fun ProfileImage.toEntity() =

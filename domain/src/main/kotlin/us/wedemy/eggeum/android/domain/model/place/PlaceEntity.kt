@@ -8,14 +8,14 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class PlaceEntity(
-  val address1: String,
-  val address2: String,
+  val address1: String?,
+  val address2: String?,
   val id: Int,
   val image: ImageEntity,
   val info: InfoEntity,
-  val latitude: Double,
-  val longitude: Double,
+  val latitude: Double?,
+  val longitude: Double?,
   val menu: MenuEntity,
   val name: String,
-  val type: String,
+  val type: String?,
 )

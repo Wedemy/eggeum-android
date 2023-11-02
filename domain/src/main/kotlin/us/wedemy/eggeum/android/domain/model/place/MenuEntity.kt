@@ -8,5 +8,5 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class MenuEntity(
-  val products: List<ProductEntity>,
+  val products: List<ProductEntity>?,
 )

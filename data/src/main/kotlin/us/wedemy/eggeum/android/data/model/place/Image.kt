@@ -20,5 +20,5 @@ import us.wedemy.eggeum.android.data.model.File
 @Serializable
 public data class Image(
   @SerialName("files")
-  val files: List<File>,
+  val files: List<File>?,
 )

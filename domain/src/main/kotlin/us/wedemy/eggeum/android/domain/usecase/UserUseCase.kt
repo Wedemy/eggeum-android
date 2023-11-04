@@ -30,9 +30,9 @@ public class GetUserInfoUseCase @Inject constructor(
 public class UpdateUserInfoUseCase @Inject constructor(
   private val repository: UserRepository,
 ) {
-  public suspend operator fun invoke(updateUserInfoBody: UpdateUserInfoEntity): Result<Unit> =
+  public suspend operator fun invoke(updateUserInfoEntity: UpdateUserInfoEntity): Result<Unit> =
     runSuspendCatching {
-      repository.updateUserInfo(updateUserInfoBody)
+      repository.updateUserInfo(updateUserInfoEntity)
     }
 }
 

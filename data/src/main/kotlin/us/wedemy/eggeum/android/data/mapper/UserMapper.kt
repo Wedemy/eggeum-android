@@ -29,7 +29,7 @@ internal fun UserInfoResponse.toEntity() =
 internal fun UpdateUserInfoEntity.toModel() =
   UpdateUserInfoRequest(
     nickname = nickname,
-    profileImage = profileImage.toModel(),
+    profileImage = profileImage?.toModel(),
   )
 
 internal fun User.toEntity() =

@@ -22,6 +22,7 @@ import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
 import us.wedemy.eggeum.android.main.ui.item.UserInfo
@@ -45,6 +46,9 @@ class EditMyInfoViewModel @Inject constructor(
   private val _nicknameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_NICKNAME_STATE, EditTextState.Idle)
   val nicknameState = _nicknameState.asStateFlow()
+
+  private val _userInfoUpdateSuccessEvent = MutableSharedFlow<Unit>(replay = 1)
+  val userInfoUpdateSuccessEvent: SharedFlow<Unit> = _userInfoUpdateSuccessEvent.asSharedFlow()
 
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
@@ -93,7 +97,22 @@ class EditMyInfoViewModel @Inject constructor(
 
   fun updateUserInfo() {
     viewModelScope.launch {
-      // val result = updateUserInfoUseCase()
+      val result = updateUserInfoUseCase(
+        UpdateUserInfoEntity(nickname = _nickname.value)
+      )
+      when {
+        result.isSuccess && result.getOrNull() != null -> {
+          _userInfoUpdateSuccessEvent.emit(Unit)
+        }
+        result.isSuccess && result.getOrNull() == null -> {
+          Timber.e("Request succeeded but data validation failed.")
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+        }
+      }
     }
   }
 

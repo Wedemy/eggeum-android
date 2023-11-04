@@ -111,6 +111,14 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
       }
 
       launch {
+        viewModel.userInfoUpdateSuccessEvent.collect {
+          if (!findNavController().navigateUp()) {
+            requireActivity().finish()
+          }
+        }
+      }
+
+      launch {
         viewModel.showToastEvent.collect { message ->
           Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }

@@ -41,11 +41,7 @@ class MyAccountViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
-  init {
-    getUserInfo()
-  }
-
-  private fun getUserInfo() {
+  fun getUserInfo() {
     viewModelScope.launch {
       val result = getUserInfoUseCase()
       when {

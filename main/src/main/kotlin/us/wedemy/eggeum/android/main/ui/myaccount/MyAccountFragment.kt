@@ -31,6 +31,8 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    viewModel.getUserInfo()
+
     initListener()
     initObserver()
   }

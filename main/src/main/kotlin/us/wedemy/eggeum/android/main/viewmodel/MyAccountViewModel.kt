@@ -31,7 +31,9 @@ data class MyAccountUiState(
 )
 
 @HiltViewModel
-class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: GetUserInfoUseCase) : ViewModel() {
+class MyAccountViewModel @Inject constructor(
+  private val getUserInfoUseCase: GetUserInfoUseCase,
+) : ViewModel() {
 
   private val _uiState = MutableStateFlow(MyAccountUiState())
   val uiState: StateFlow<MyAccountUiState> = _uiState.asStateFlow()

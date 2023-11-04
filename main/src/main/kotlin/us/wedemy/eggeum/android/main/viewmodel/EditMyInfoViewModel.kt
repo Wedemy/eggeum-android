@@ -22,6 +22,8 @@ import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.model.FileEntity
+import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
@@ -53,12 +55,18 @@ class EditMyInfoViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
-  fun getUploadFileId(profileImageUri: String) {
+  private fun getUploadFileId(profileImageUri: String) {
     viewModelScope.launch {
       val result = uploadImageFileUseCase(profileImageUri)
       when {
         result.isSuccess && result.getOrNull() != null -> {
-          Timber.d("${result.getOrNull()}")
+          val profileImageFile = result.getOrNull()!!
+          updateUserProfileAndNickname(
+            FileEntity(
+              uploadFileId = profileImageFile.uploadFileId,
+              url = profileImageFile.url,
+            )
+          )
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")
@@ -95,10 +103,36 @@ class EditMyInfoViewModel @Inject constructor(
     }
   }
 
-  fun updateUserInfo() {
+  fun updateUserNickname() {
+    viewModelScope.launch {
+      if (profileImageUri.value.isNotEmpty()) {
+        getUploadFileId(profileImageUri.value)
+      } else {
+        val result = updateUserInfoUseCase(UpdateUserInfoEntity(nickname = _nickname.value))
+        when {
+          result.isSuccess && result.getOrNull() != null -> {
+            _userInfoUpdateSuccessEvent.emit(Unit)
+          }
+          result.isSuccess && result.getOrNull() == null -> {
+            Timber.e("Request succeeded but data validation failed.")
+          }
+          result.isFailure -> {
+            val exception = result.exceptionOrNull()
+            Timber.d(exception)
+            _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+          }
+        }
+      }
+    }
+  }
+
+  private fun updateUserProfileAndNickname(file: FileEntity) {
     viewModelScope.launch {
       val result = updateUserInfoUseCase(
-        UpdateUserInfoEntity(nickname = _nickname.value)
+        UpdateUserInfoEntity(
+          nickname = _nickname.value,
+          profileImageEntity = ProfileImageEntity(files = listOf(file))
+        )
       )
       when {
         result.isSuccess && result.getOrNull() != null -> {
@@ -114,6 +148,7 @@ class EditMyInfoViewModel @Inject constructor(
         }
       }
     }
+
   }
 
   private companion object {

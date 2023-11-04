@@ -37,7 +37,8 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
 
   private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
     if (uri != null) {
-      viewModel.getUploadFileId(uri.toString())
+      viewModel.setProfileImageUri(uri.toString())
+      binding.ivEditMyInfoProfile.load(uri.toString())
     } else {
       Timber.tag("PhotoPicker").d("No media selected")
     }
@@ -61,7 +62,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     }
 
     binding.btnEditMyInfo.setOnClickListener {
-      viewModel.updateUserInfo()
+      viewModel.updateUserNickname()
     }
   }
 

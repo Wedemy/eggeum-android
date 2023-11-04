@@ -52,7 +52,7 @@ ksp = "1.8.22-1.0.11"
 
 javax-inject = "1"
 
-test-kotest = "5.7.2"
+test-kotest = "5.8.0"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.0"
 test-roborazzi = "1.6.0"

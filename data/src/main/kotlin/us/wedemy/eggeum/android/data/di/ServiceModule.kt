@@ -73,7 +73,6 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideFileService(
-    // @Named("RetrofitHttpClient")
     @Named("RetrofitFileHttpClient")
     retrofit: Retrofit,
   ): FileService {

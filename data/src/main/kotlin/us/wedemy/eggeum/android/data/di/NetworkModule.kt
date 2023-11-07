@@ -41,7 +41,7 @@ import us.wedemy.eggeum.android.data.service.TokenInterceptor
 import us.wedemy.eggeum.android.data.util.JsonBuilder
 import us.wedemy.eggeum.android.data.util.buildJson
 
-private const val MaxTimeoutMillis = 10_000L
+private const val MaxTimeoutMillis = 15_000L
 private const val MaxRetryCount = 3
 
 private val jsonRule = Json {
@@ -164,18 +164,18 @@ internal object NetworkModule {
   @Provides
   @Named("RetrofitHttpClient")
   internal fun provideRetrofitHttpClient(
-    httpLoggingInterceptor: HttpLoggingInterceptor,
-    tokenAuthenticator: TokenAuthenticator,
     tokenInterceptor: TokenInterceptor,
+    tokenAuthenticator: TokenAuthenticator,
+    httpLoggingInterceptor: HttpLoggingInterceptor,
   ): Retrofit {
     val contentType = "application/json".toMediaType()
     val httpClient = OkHttpClient.Builder()
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      .addInterceptor(httpLoggingInterceptor)
-      // To update the token when it gets HTTP unauthorized error
-      .authenticator(tokenAuthenticator)
       // To set the token in the header
       .addInterceptor(tokenInterceptor)
+      // To update the token when it gets HTTP unauthorized error
+      .authenticator(tokenAuthenticator)
+      .addInterceptor(httpLoggingInterceptor)
       .build()
 
     return Retrofit.Builder()
@@ -189,18 +189,18 @@ internal object NetworkModule {
   @Provides
   @Named("RetrofitFileHttpClient")
   internal fun provideRetrofitFileHttpClient(
-    httpLoggingInterceptor: HttpLoggingInterceptor,
     tokenAuthenticator: TokenAuthenticator,
     tokenInterceptor: TokenInterceptor,
+    httpLoggingInterceptor: HttpLoggingInterceptor,
   ): Retrofit {
     val contentType = "multipart/form-data".toMediaType()
     val httpClient = OkHttpClient.Builder()
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      .addInterceptor(httpLoggingInterceptor)
-      // To update the token when it gets HTTP unauthorized error
-      .authenticator(tokenAuthenticator)
       // To set the token in the header
       .addInterceptor(tokenInterceptor)
+      // To update the token when it gets HTTP unauthorized error
+      .authenticator(tokenAuthenticator)
+      .addInterceptor(httpLoggingInterceptor)
       .build()
 
     return Retrofit.Builder()

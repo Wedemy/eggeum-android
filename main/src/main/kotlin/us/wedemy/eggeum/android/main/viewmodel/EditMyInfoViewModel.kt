@@ -83,7 +83,7 @@ class EditMyInfoViewModel @Inject constructor(
             FileEntity(
               uploadFileId = profileImageFile.uploadFileId,
               url = profileImageFile.url,
-            )
+            ),
           )
         }
         result.isSuccess && result.getOrNull() == null -> {
@@ -148,8 +148,8 @@ class EditMyInfoViewModel @Inject constructor(
         val result = updateUserInfoUseCase(
           UpdateUserInfoEntity(
             nickname = _nickname.value,
-            profileImageEntity = userInfo.value.profileImageModel?.toEntity()
-          )
+            profileImageEntity = userInfo.value.profileImageModel?.toEntity(),
+          ),
         )
         when {
           result.isSuccess && result.getOrNull() != null -> {
@@ -173,8 +173,8 @@ class EditMyInfoViewModel @Inject constructor(
       val result = updateUserInfoUseCase(
         UpdateUserInfoEntity(
           nickname = _nickname.value,
-          profileImageEntity = ProfileImageEntity(files = listOf(file))
-        )
+          profileImageEntity = ProfileImageEntity(files = listOf(file)),
+        ),
       )
       when {
         result.isSuccess && result.getOrNull() != null -> {
@@ -190,7 +190,6 @@ class EditMyInfoViewModel @Inject constructor(
         }
       }
     }
-
   }
 
   private companion object {

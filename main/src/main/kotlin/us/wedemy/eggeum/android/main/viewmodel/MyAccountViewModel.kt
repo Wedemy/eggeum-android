@@ -53,11 +53,9 @@ class MyAccountViewModel @Inject constructor(
             uiState.copy(
               nickname = userInfo.nickname,
               email = userInfo.email,
-              // profileImageUrl = userInfoBody.profileImageEntity?.let { it.files[0].url },
-              profileImageModel = userInfo.profileImageEntity?.toUiModel()
+              profileImageModel = userInfo.profileImageEntity?.toUiModel(),
             )
           }
-          // Timber.d("${userInfo.profileImageEntity?.files?.get(0)?.url}")
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")

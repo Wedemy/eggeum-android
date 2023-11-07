@@ -13,4 +13,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ProfileImageModel(
   val files: List<FileModel>,
-): Parcelable
+) : Parcelable

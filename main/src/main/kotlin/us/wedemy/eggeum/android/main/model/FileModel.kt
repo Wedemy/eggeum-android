@@ -14,4 +14,4 @@ import kotlinx.parcelize.Parcelize
 data class FileModel(
   val uploadFileId: Int,
   val url: String,
-): Parcelable
+) : Parcelable

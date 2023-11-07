@@ -21,6 +21,7 @@ import us.wedemy.eggeum.android.data.util.ExceptionWrapper
 import us.wedemy.eggeum.android.data.util.safeRequest
 import us.wedemy.eggeum.android.domain.util.LoginApiResponseNotFound
 
+@Suppress("TooGenericExceptionCaught")
 public class LoginRemoteDataSourceImpl @Inject constructor(
   private val service: LoginService,
 ) : LoginRemoteDataSource {
@@ -29,11 +30,9 @@ public class LoginRemoteDataSourceImpl @Inject constructor(
       val response = service.login(loginRequest)
       if (response.isSuccessful) {
         return response.body()
-      }
-      else if (response.code() == 404) {
+      } else if (response.code() == 404) {
         throw LoginApiResponseNotFound
-      }
-      else {
+      } else {
         val errorBody = response.errorBody()?.string() ?: "Unknown error"
         Timber.d(Exception(errorBody))
         throw ExceptionWrapper(
@@ -53,13 +52,13 @@ public class LoginRemoteDataSourceImpl @Inject constructor(
       Timber.d(exception)
       throw ExceptionWrapper(
         message = exception.toAlertMessage(),
-        cause = exception
+        cause = exception,
       )
     } catch (exception: Exception) {
       Timber.d(exception)
       throw ExceptionWrapper(
         message = exception.toAlertMessage(),
-        cause = exception
+        cause = exception,
       )
     }
   }

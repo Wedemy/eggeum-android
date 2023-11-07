@@ -11,5 +11,5 @@ import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 
 public data class UpdateUserInfoEntity(
   public val nickname: String,
-  public val profileImage: ProfileImageEntity,
+  public val profileImageEntity: ProfileImageEntity? = null,
 )

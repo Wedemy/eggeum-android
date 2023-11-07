@@ -11,7 +11,8 @@
     <activity
       android:name=".ui.MainActivity"
       android:exported="true"
-      android:theme="@style/Theme.Eggeum.Main" />
+      android:theme="@style/Theme.Eggeum.Main"
+      android:windowSoftInputMode="adjustPan" />
 
     <meta-data
       android:name="com.naver.maps.map.CLIENT_ID"

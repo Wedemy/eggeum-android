@@ -91,7 +91,7 @@
     tools:layout="@layout/fragment_edit_my_info">
     <argument
       android:name="user_info"
-      app:argType="us.wedemy.eggeum.android.main.ui.item.UserInfo" />
+      app:argType="us.wedemy.eggeum.android.main.model.UserInfoModel" />
   </fragment>
 
   <fragment

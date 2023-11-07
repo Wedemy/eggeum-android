@@ -5,14 +5,12 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.main.ui.item
+package us.wedemy.eggeum.android.main.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserInfo(
-  val nickname: String = "",
-  val email: String = "",
-  val profileImageUrl: String? = null,
+data class ProfileImageModel(
+  val files: List<FileModel>,
 ) : Parcelable

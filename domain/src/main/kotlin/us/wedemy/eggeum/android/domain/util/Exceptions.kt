@@ -12,7 +12,6 @@ import java.io.IOException
 // Login
 public val LoginApiResponseIsNull: IOException = IOException("Login API response is null.")
 public val LoginApiResponseNotFound: IOException = IOException("Login API returned Not Found.")
-public val LoginApiResponseUnknownError: IOException = IOException("Login API returned an unknown error.")
 public val SignUpApiResponseIsNull: IOException = IOException("SignUp API response is null.")
 
 // Enum

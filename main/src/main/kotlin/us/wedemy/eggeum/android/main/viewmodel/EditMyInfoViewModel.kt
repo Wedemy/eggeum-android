@@ -14,8 +14,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.EditTextState
@@ -27,23 +30,23 @@ import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
-import us.wedemy.eggeum.android.main.ui.item.UserInfo
+import us.wedemy.eggeum.android.main.mapper.toEntity
+import us.wedemy.eggeum.android.main.model.UserInfoModel
 
-// 프로필 사진과 닉네임 둘다 변경해야만 버튼이 활성화 되는 것은 아님
-@Suppress("unused")
 @HiltViewModel
 class EditMyInfoViewModel @Inject constructor(
   private val uploadImageFileUseCase: UploadImageFileUseCase,
   private val updateUserInfoUseCase: UpdateUserInfoUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-  private val _userInfo = savedStateHandle.getMutableStateFlow(KEY_USER_INFO, UserInfo())
-  val userInfo: StateFlow<UserInfo> = _userInfo.asStateFlow()
+  private val _userInfo = savedStateHandle.getMutableStateFlow(KEY_USER_INFO, UserInfoModel())
+  val userInfo: StateFlow<UserInfoModel> = _userInfo.asStateFlow()
 
-  private val _profileImageUri = savedStateHandle.getMutableStateFlow(KEY_PROFILE_IMAGE_URL, "")
-  val profileImageUri = _profileImageUri.asStateFlow()
+  private val _newProfileImageUri =
+    savedStateHandle.getMutableStateFlow(KEY_PROFILE_IMAGE_URL, userInfo.value.profileImageModel?.files?.get(0)?.url)
+  val newProfileImageUri = _newProfileImageUri.asStateFlow()
 
-  private val _nickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, "")
+  private val _nickname = savedStateHandle.getMutableStateFlow(KEY_NICKNAME, userInfo.value.nickname)
 
   private val _nicknameState: SaveableMutableStateFlow<EditTextState> =
     savedStateHandle.getMutableStateFlow(KEY_NICKNAME_STATE, EditTextState.Idle)
@@ -54,6 +57,19 @@ class EditMyInfoViewModel @Inject constructor(
 
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+
+  val enableUpdateUserInfo =
+    combine(
+      nicknameState,
+      newProfileImageUri,
+    ) { nickname, uri ->
+      nickname == EditTextState.Success || uri != (userInfo.value.profileImageModel?.files?.get(0)?.url)
+    }
+      .stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false,
+      )
 
   private fun getUploadFileId(profileImageUri: String) {
     viewModelScope.launch {
@@ -81,7 +97,7 @@ class EditMyInfoViewModel @Inject constructor(
   }
 
   fun setProfileImageUri(uri: String) {
-    _profileImageUri.value = uri
+    _newProfileImageUri.value = uri
   }
 
   fun setNickname(nickname: String) {
@@ -105,10 +121,15 @@ class EditMyInfoViewModel @Inject constructor(
 
   fun updateUserNickname() {
     viewModelScope.launch {
-      if (profileImageUri.value.isNotEmpty()) {
-        getUploadFileId(profileImageUri.value)
+      if (newProfileImageUri.value != null && newProfileImageUri.value != userInfo.value.profileImageModel?.files?.get(0)?.url) {
+        getUploadFileId(newProfileImageUri.value!!)
       } else {
-        val result = updateUserInfoUseCase(UpdateUserInfoEntity(nickname = _nickname.value))
+        val result = updateUserInfoUseCase(
+          UpdateUserInfoEntity(
+            nickname = _nickname.value,
+            profileImageEntity = userInfo.value.profileImageModel?.toEntity()
+          )
+        )
         when {
           result.isSuccess && result.getOrNull() != null -> {
             _userInfoUpdateSuccessEvent.emit(Unit)

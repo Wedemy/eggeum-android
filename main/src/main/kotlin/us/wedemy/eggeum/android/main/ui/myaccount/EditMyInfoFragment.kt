@@ -73,15 +73,16 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
           binding.apply {
             tietEditNickname.hint = it.nickname
             tvEmail.text = it.email
-            if (it.profileImageUrl != null) ivEditMyInfoProfile.load(it.profileImageUrl)
+            val profileImageUrl = it.profileImageModel?.run { files.getOrNull(0)?.url }
+            if (profileImageUrl != null) ivEditMyInfoProfile.load(profileImageUrl)
             else ivEditMyInfoProfile.load(us.wedemy.eggeum.android.design.R.drawable.ic_profile_filled_48)
           }
         }
       }
 
       launch {
-        viewModel.profileImageUri.collect { uri ->
-          if (uri.isNotEmpty()) {
+        viewModel.newProfileImageUri.collect { uri ->
+          if (uri != null) {
             binding.ivEditMyInfoProfile.load(uri) {
               crossfade(true)
               placeholder(us.wedemy.eggeum.android.design.R.drawable.ic_profile_filled_80)
@@ -107,7 +108,12 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
             is EditTextState.Success -> setValid()
             is EditTextState.Error -> setError(state.error)
           }
-          binding.btnEditMyInfo.isEnabled = state == EditTextState.Success
+        }
+      }
+
+      launch {
+        viewModel.enableUpdateUserInfo.collect { flag ->
+          binding.btnEditMyInfo.isEnabled = flag
         }
       }
 

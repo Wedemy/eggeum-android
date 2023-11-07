@@ -21,11 +21,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetUserInfoUseCase
+import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.model.ProfileImageModel
 
 data class MyAccountUiState(
   val nickname: String = "",
   val email: String = "",
-  val profileImageUrl: String? = null,
+  val profileImageModel: ProfileImageModel? = null,
   val isLoading: Boolean = false,
   val error: Throwable? = null,
 )
@@ -46,15 +48,16 @@ class MyAccountViewModel @Inject constructor(
       val result = getUserInfoUseCase()
       when {
         result.isSuccess && result.getOrNull() != null -> {
-          val userInfoBody = result.getOrNull()!!
-          Timber.d("$userInfoBody")
+          val userInfo = result.getOrNull()!!
           _uiState.update { uiState ->
             uiState.copy(
-              nickname = userInfoBody.nickname,
-              email = userInfoBody.email,
-              profileImageUrl = userInfoBody.profileImageEntity?.let { it.files[0].url },
+              nickname = userInfo.nickname,
+              email = userInfo.email,
+              // profileImageUrl = userInfoBody.profileImageEntity?.let { it.files[0].url },
+              profileImageModel = userInfo.profileImageEntity?.toUiModel()
             )
           }
+          // Timber.d("${userInfo.profileImageEntity?.files?.get(0)?.url}")
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")

@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
-import us.wedemy.eggeum.android.main.ui.item.UserInfo
+import us.wedemy.eggeum.android.main.model.UserInfoModel
 import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
 
 @AndroidEntryPoint
@@ -41,7 +41,7 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
     with(binding) {
       tvMyAccountEditMyInfo.setOnClickListener {
         val uiState = viewModel.uiState.value
-        val userInfo = UserInfo(uiState.nickname, uiState.email, uiState.profileImageUrl)
+        val userInfo = UserInfoModel(uiState.nickname, uiState.email, uiState.profileImageModel)
         val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentEditMyInfo(userInfo)
         findNavController().safeNavigate(action)
       }
@@ -70,7 +70,8 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
           binding.apply {
             tvMyAccountNickname.text = it.nickname
             tvMyAccountEmail.text = it.email
-            if (it.profileImageUrl != null) ivMyAccountProfileImage.load(it.profileImageUrl)
+            val profileImageUrl = it.profileImageModel?.run { files.getOrNull(0)?.url }
+            if (profileImageUrl != null) ivMyAccountProfileImage.load(profileImageUrl)
             else ivMyAccountProfileImage.load(R.drawable.ic_profile_filled_48)
           }
         }

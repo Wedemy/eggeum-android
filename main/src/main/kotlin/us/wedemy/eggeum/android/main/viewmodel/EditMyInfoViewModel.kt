@@ -28,6 +28,7 @@ import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
 import us.wedemy.eggeum.android.main.mapper.toEntity
@@ -37,6 +38,7 @@ import us.wedemy.eggeum.android.main.model.UserInfoModel
 class EditMyInfoViewModel @Inject constructor(
   private val uploadImageFileUseCase: UploadImageFileUseCase,
   private val updateUserInfoUseCase: UpdateUserInfoUseCase,
+  private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   private val _userInfo = savedStateHandle.getMutableStateFlow(KEY_USER_INFO, UserInfoModel())
@@ -114,7 +116,26 @@ class EditMyInfoViewModel @Inject constructor(
         _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
       }
       else -> {
-        _nicknameState.value = EditTextState.Success
+        viewModelScope.launch {
+          val result = checkNicknameExistUseCase(nickname)
+          when {
+            result.isSuccess && result.getOrNull() != null -> {
+              if (result.getOrNull() == false) {
+                _nicknameState.value = EditTextState.Success
+              } else {
+                _nicknameState.value = EditTextState.Error(TextInputError.ALREADY_EXIST)
+              }
+            }
+            result.isSuccess && result.getOrNull() == null -> {
+              Timber.e("Request succeeded but data validation failed.")
+            }
+            result.isFailure -> {
+              val exception = result.exceptionOrNull()
+              Timber.d(exception)
+              _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+            }
+          }
+        }
       }
     }
   }

@@ -143,7 +143,8 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   private fun setError(error: TextInputError) {
     when (error) {
       TextInputError.EMPTY -> setEmptyTextError()
-      else -> setTooShortTextError()
+      TextInputError.TOO_SHORT -> setTooShortTextError()
+      TextInputError.ALREADY_EXIST -> setAlreadyExistTextError()
     }
   }
 
@@ -158,6 +159,19 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     binding.tilEditNickname.apply {
       error = getString(R.string.too_short_text_error)
       setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
+      val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
+      setEndIconTintList(ColorStateList.valueOf(color))
+      setEndIconOnClickListener {
+        binding.tietEditNickname.text?.clear()
+        viewModel.setNickname("")
+      }
+    }
+  }
+
+  private fun setAlreadyExistTextError() {
+    binding.tilEditNickname.apply {
+      error = getString(R.string.already_exist_text_error)
+      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))
       setEndIconOnClickListener {

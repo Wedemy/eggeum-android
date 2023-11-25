@@ -32,21 +32,18 @@
     android:textColor="@color/gray_900"
     android:layout_marginEnd="16dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/img_btn"
+    app:layout_constraintEnd_toStartOf="@+id/spinner_btn"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="₩3,000" />
 
-  <ImageView
-    android:id="@+id/img_btn"
-    style="@style/TextMMedium"
+  <Spinner
+    android:id="@+id/spinner_btn"
+    style="@style/spinner_img"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/ic_menu_gray400_24"
-    android:textColor="@color/gray_400"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:contentDescription="@string/ic_menu_gray400_24" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <View
     android:id="@+id/line_notice_bottom"

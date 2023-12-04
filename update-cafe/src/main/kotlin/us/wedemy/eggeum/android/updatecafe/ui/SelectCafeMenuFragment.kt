@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectCafeMenuBinding
@@ -61,11 +60,11 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
           requireActivity().finish()
         }
       }
-
-      btnInputCafeMenu.setOnClickListener {
-        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
-        findNavController().safeNavigate(action)
-      }
+      // 드롭다운버튼 선택에 따라 다음 이동
+//      btnInputCafeMenu.setOnClickListener {
+//        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
+//        findNavController().safeNavigate(action)
+//      }
     }
   }
 

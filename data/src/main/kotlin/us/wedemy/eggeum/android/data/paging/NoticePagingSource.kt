@@ -14,7 +14,8 @@ import retrofit2.HttpException
 import timber.log.Timber
 import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 import us.wedemy.eggeum.android.data.service.NoticeService
-import us.wedemy.eggeum.android.data.util.Constants
+import us.wedemy.eggeum.android.data.util.Constants.PAGING_SIZE
+import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 
 public class NoticePagingSource(
   private val service: NoticeService,
@@ -29,22 +30,23 @@ public class NoticePagingSource(
 
   public override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NoticeResponse> {
     return try {
-      val pageNumber = params.key ?: Constants.STARTING_PAGE_INDEX
-      val response = service.getNoticeList()
+      val pageNumber = params.key ?: STARTING_PAGE_INDEX
+      val response = service.getNoticeList(page = pageNumber, size = params.loadSize)
+
       val endOfPaginationReached = response.list.isEmpty()
-      val data = response.list
-      val prevKey = if (pageNumber == Constants.STARTING_PAGE_INDEX)
-        null else pageNumber - 1
-      val nextKey = if (endOfPaginationReached) {
-        null
-      } else {
-        pageNumber + (params.loadSize / Constants.PAGING_SIZE)
-      }
+
       LoadResult.Page(
-        data = data,
-        prevKey = prevKey,
-        nextKey = nextKey,
+        data = response.list,
+        prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1,
+        nextKey = if (endOfPaginationReached) {
+          null
+        } else {
+          // initial load size = 3 * NETWORK_PAGE_SIZE
+          // ensure we're not requesting duplicating items, at the 2nd request
+          pageNumber + (params.loadSize / PAGING_SIZE)
+        },
       )
+
     } catch (exception: IOException) {
       Timber.e(exception)
       LoadResult.Error(exception)

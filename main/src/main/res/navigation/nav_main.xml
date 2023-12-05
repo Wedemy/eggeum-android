@@ -39,6 +39,7 @@
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.MyAccountFragment"
     android:label="MyAccountFragment"
     tools:layout="@layout/fragment_my_account">
+
     <action
       android:id="@+id/action_fragment_my_account_to_fragment_setting"
       app:destination="@id/fragment_setting"
@@ -62,6 +63,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     <action
       android:id="@+id/action_fragment_my_account_to_fragment_edit_my_info"
       app:destination="@id/fragment_edit_my_info"
@@ -69,6 +71,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -76,12 +79,14 @@
     android:name="us.wedemy.eggeum.android.main.ui.search.SearchCafeFragment"
     android:label="SearchCafeFragment"
     tools:layout="@layout/fragment_search_cafe">
+
     <action
       android:id="@+id/action_fragment_search_cafe_to_fragment_cafe_detail"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -89,9 +94,11 @@
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.EditMyInfoFragment"
     android:label="EditMyInfoFragment"
     tools:layout="@layout/fragment_edit_my_info">
+
     <argument
       android:name="user_info"
       app:argType="us.wedemy.eggeum.android.main.model.UserInfoModel" />
+
   </fragment>
 
   <fragment
@@ -105,6 +112,7 @@
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.SettingFragment"
     android:label="SettingFragment"
     tools:layout="@layout/fragment_setting">
+
     <action
       android:id="@+id/action_fragment_setting_to_fragment_withdraw"
       app:destination="@id/fragment_withdraw"
@@ -112,6 +120,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment

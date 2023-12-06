@@ -11,11 +11,20 @@ import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.ItemUpdateCafeMenuBinding
+import us.wedemy.eggeum.android.updatecafe.ui.DeleteOnClickListener
+import us.wedemy.eggeum.android.updatecafe.ui.EditOnClickListener
 import us.wedemy.eggeum.android.updatecafe.ui.adapter.viewholder.CafeMenuViewHolder
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
-class CafeMenuAdapter : BaseRecyclerViewAdapter<CafeMenuItem, ItemUpdateCafeMenuBinding>() {
+class CafeMenuAdapter(
+  private val editOnClickListener: EditOnClickListener,
+  private val deleteOnClickListener: DeleteOnClickListener,
+) : BaseRecyclerViewAdapter<CafeMenuItem, ItemUpdateCafeMenuBinding>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    CafeMenuViewHolder(ItemUpdateCafeMenuBinding.inflate(parent.context.layoutInflater, parent, false))
+    CafeMenuViewHolder(
+      ItemUpdateCafeMenuBinding.inflate(parent.context.layoutInflater, parent, false),
+      editOnClickListener,
+      deleteOnClickListener,
+    )
 }

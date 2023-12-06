@@ -26,11 +26,13 @@ import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
 data class UiState(
+  val id: Int? = null,
   val name: String? = null,
   val price: Int? = null,
 ) {
   fun toMain(): CafeMenuItem {
     return CafeMenuItem(
+      placeId = id!!,
       name = name!!,
       price = price!!,
     )
@@ -62,7 +64,7 @@ class SelectCafeMenuViewModel @Inject constructor(
           placeBody.menu.products?.let {
             val productList = mutableListOf<UiState>()
             it.forEach { product ->
-              productList.add(UiState(name = product.name, price = product.price))
+              productList.add(UiState(id = placeId, name = product.name, price = product.price))
             }
             _cafeMenuList.update { uiStates ->
               uiStates.copy(uiStateList = productList)

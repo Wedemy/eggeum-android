@@ -10,6 +10,7 @@
 package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,11 +21,35 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectCafeMenuBinding
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.SelectCafeMenuViewModel
+
+interface EditOnClickListener {
+  fun editBtnClickListener(cafeMenu: CafeMenuItem)
+}
+
+interface DeleteOnClickListener {
+  fun deleteBtnClickListener(cafeMenu: CafeMenuItem)
+}
 
 @AndroidEntryPoint
 class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
-  private val cafeMenuAdapter by lazy { CafeMenuAdapter() }
+  private val cafeMenuAdapter by lazy {
+    CafeMenuAdapter(
+      object : EditOnClickListener {
+        override fun editBtnClickListener(cafeMenu: CafeMenuItem) {
+          // 구현
+          Log.d("tlqkf", "수정하기 클릭!!!!")
+        }
+      },
+      object : DeleteOnClickListener {
+        override fun deleteBtnClickListener(cafeMenu: CafeMenuItem) {
+          // 구현
+          Log.d("tlqkf", "삭제하기 클릭!!!!")
+        }
+      },
+    )
+  }
 
   override fun getViewBinding() = FragmentSelectCafeMenuBinding.inflate(layoutInflater)
 

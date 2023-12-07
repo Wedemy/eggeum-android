@@ -9,15 +9,19 @@
 
 package us.wedemy.eggeum.android.updatecafe.ui
 
+import android.content.DialogInterface
+import android.content.DialogInterface.OnClickListener
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectCafeMenuBinding
@@ -38,14 +42,14 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     CafeMenuAdapter(
       object : EditOnClickListener {
         override fun editBtnClickListener(cafeMenu: CafeMenuItem) {
-          // 구현
-          Log.d("tlqkf", "수정하기 클릭!!!!")
+          // TODO: cafeMenu 데이터 넘겨주기
+          val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
+          findNavController().safeNavigate(action)
         }
       },
       object : DeleteOnClickListener {
         override fun deleteBtnClickListener(cafeMenu: CafeMenuItem) {
-          // 구현
-          Log.d("tlqkf", "삭제하기 클릭!!!!")
+          showEditOrDeleteDialog()
         }
       },
     )
@@ -61,12 +65,28 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     initObserver()
   }
 
+  private fun showEditOrDeleteDialog() {
+    val dialog = AlertDialog.Builder(requireContext())
+      .setMessage("삭제 하시겠어요?")
+      .setPositiveButton("삭제", object : OnClickListener {
+        override fun onClick(p0: DialogInterface?, p1: Int) {
+          // TODO: 삭제 API 호출
+        }
+      })
+      .setNegativeButton("취소", null) // 취소 시에는 동작 없음.
+      .show()
+    dialog.apply {
+      getButton(DialogInterface.BUTTON_POSITIVE)
+        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
+      getButton(DialogInterface.BUTTON_NEGATIVE)
+        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
+    }
+  }
+
   private fun initView() {
     repeatOnStarted {
       launch {
-        /**
-         * Intent에서 placeId 가져오기
-         */
+        // TODO: 지도에서 placdId 받아와서 인자 넣기
         viewModel.getCafeMenuList(1)
       }
     }
@@ -85,11 +105,9 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
           requireActivity().finish()
         }
       }
-      // 드롭다운버튼 선택에 따라 다음 이동
-//      btnInputCafeMenu.setOnClickListener {
-//        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
-//        findNavController().safeNavigate(action)
-//      }
+      btnInputCafeMenu.setOnClickListener {
+        // TODO: 그냥 다음으로 넘어가면, 어떤 동작을 해야 하나?
+      }
     }
   }
 

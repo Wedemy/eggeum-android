@@ -6,7 +6,7 @@ google-secrets = "2.0.1"
 google-gms-google-services = "4.4.0"
 google-gms-play-services-auth = "20.7.0"
 
-firebase-bom = "32.6.0"
+firebase-bom = "32.7.0"
 
 kotlin-core = "1.8.22"
 kotlin-detekt = "1.23.4"

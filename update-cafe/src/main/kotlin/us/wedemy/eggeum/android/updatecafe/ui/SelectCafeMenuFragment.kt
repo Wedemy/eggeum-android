@@ -23,6 +23,7 @@ import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.updatecafe.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentSelectCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
@@ -49,7 +50,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
       },
       object : DeleteOnClickListener {
         override fun deleteBtnClickListener(cafeMenu: CafeMenuItem) {
-          showEditOrDeleteDialog()
+          showEditOrDeleteDialog(item = cafeMenu)
         }
       },
     )
@@ -65,12 +66,23 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     initObserver()
   }
 
-  private fun showEditOrDeleteDialog() {
+  private fun showEditOrDeleteDialog(item: CafeMenuItem) {
     val dialog = AlertDialog.Builder(requireContext())
       .setMessage("삭제 하시겠어요?")
       .setPositiveButton("삭제", object : OnClickListener {
         override fun onClick(p0: DialogInterface?, p1: Int) {
           // TODO: 삭제 API 호출
+          val cafeMenuList = viewModel.cafeMenuList.value.uiStateList
+          val newCafeMenuList = mutableListOf<ProductEntity>()
+          cafeMenuList?.forEach {
+            if (!(it.name == item.name && it.price == item.price)) {
+              newCafeMenuList.add(it.toEntity())
+            }
+          }
+          viewModel.placeBody.menu?.products = newCafeMenuList
+          val newPlaceBody = (viewModel.placeBody.menu?.products as MutableList<ProductEntity>)
+          val changedUiState = viewModel.initializeUiState(products = newPlaceBody)
+          viewModel.uiStateUpdateCafeMenuList(productList = changedUiState)
         }
       })
       .setNegativeButton("취소", null) // 취소 시에는 동작 없음.
@@ -106,7 +118,10 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
         }
       }
       btnInputCafeMenu.setOnClickListener {
-        // TODO: 그냥 다음으로 넘어가면, 어떤 동작을 해야 하나?
+        // TODO: 새로운 placeBody -> UpsertPlaceBody -> db update -> 수정 완료 페이지
+        viewModel.getUpdateCafeMenu()
+        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentUpdateMenuComplete()
+        findNavController().safeNavigate(action)
       }
     }
   }

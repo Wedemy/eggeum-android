@@ -1,3 +1,4 @@
+
 /*
  * Designed and developed by Wedemy 2023.
  *
@@ -8,7 +9,6 @@
 package us.wedemy.eggeum.android.updatecafe.ui.item
 
 data class CafeMenuItem(
-  val placeId: Int,
   val name: String,
   val price: Int,
 )

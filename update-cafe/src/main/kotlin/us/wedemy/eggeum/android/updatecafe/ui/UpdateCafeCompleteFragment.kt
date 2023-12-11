@@ -11,6 +11,7 @@ package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentUpdateCafeCompleteBinding
@@ -30,7 +31,9 @@ class UpdateCafeCompleteFragment : BaseFragment<FragmentUpdateCafeCompleteBindin
 
   private fun initObserver() {
     binding.btnRegisterCafeComplete.setOnClickListener {
-      requireActivity().finish()
+      if (!findNavController().navigateUp()) {
+        requireActivity().finish()
+      }
     }
   }
 }

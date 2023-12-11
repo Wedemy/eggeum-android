@@ -67,23 +67,23 @@ class InputCafeInfoViewModel @Inject constructor(
           Timber.d("plcaeBody >>> $placeBody")
           _uiState.update { uiState ->
             uiState.copy(
-              areaSize = placeBody.info.areaSize,
-              blogUri = placeBody.info.blogUri,
-              businessHours = placeBody.info.businessHours,
-              existsSmokingArea = placeBody.info.existsSmokingArea,
-              existsWifi = placeBody.info.existsWifi,
-              instagramUri = placeBody.info.instagramUri,
-              meetingRoomCount = placeBody.info.meetingRoomCount,
-              mobileCharging = placeBody.info.mobileCharging,
-              multiSeatCount = placeBody.info.multiSeatCount,
-              parking = placeBody.info.parking,
-              phone = placeBody.info.phone,
-              restRoom = placeBody.info.restRoom,
-              singleSeatCount = placeBody.info.singleSeatCount,
-              websiteUri = placeBody.info.websiteUri,
+              areaSize = placeBody.info?.areaSize,
+              blogUri = placeBody.info?.blogUri,
+              businessHours = placeBody.info?.businessHours,
+              existsSmokingArea = placeBody.info?.existsSmokingArea,
+              existsWifi = placeBody.info?.existsWifi,
+              instagramUri = placeBody.info?.instagramUri,
+              meetingRoomCount = placeBody.info?.meetingRoomCount,
+              mobileCharging = placeBody.info?.mobileCharging,
+              multiSeatCount = placeBody.info?.multiSeatCount,
+              parking = placeBody.info?.parking,
+              phone = placeBody.info?.phone,
+              restRoom = placeBody.info?.restRoom,
+              singleSeatCount = placeBody.info?.singleSeatCount,
+              websiteUri = placeBody.info?.websiteUri,
             )
           }
-          _placeName.emit(placeBody.name)
+          _placeName.emit(placeBody.name!!)
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")

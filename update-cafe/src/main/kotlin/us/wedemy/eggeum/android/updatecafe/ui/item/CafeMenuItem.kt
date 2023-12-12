@@ -8,7 +8,17 @@
 
 package us.wedemy.eggeum.android.updatecafe.ui.item
 
+import kotlinx.parcelize.Parcelize
+import android.os.Parcelable
+import us.wedemy.eggeum.android.domain.model.place.ProductEntity
+
+@Parcelize
 data class CafeMenuItem(
   val name: String,
   val price: Int,
-)
+): Parcelable {
+  fun toEntity(): ProductEntity = ProductEntity(
+    name = name,
+    price = price,
+  )
+}

@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -27,35 +26,13 @@ import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
-data class UiState(
-  val name: String? = null,
-  val price: Int? = null,
-) {
-  fun toMain(): CafeMenuItem {
-    return CafeMenuItem(
-      name = name!!,
-      price = price!!,
-    )
-  }
-  fun toEntity(): ProductEntity {
-    return ProductEntity(
-      name = name!!,
-      price = price!!,
-    )
-  }
-}
-
-data class UiStateList(
-  val uiStateList: List<UiState>? = emptyList(),
-)
-
 @HiltViewModel
 class SelectCafeMenuViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
   private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
 ) : ViewModel() {
 
-  private val _cafeMenuList = MutableStateFlow(UiStateList())
+  private val _cafeMenuList = MutableStateFlow(emptyList<CafeMenuItem>())
   val cafeMenuList = _cafeMenuList.asStateFlow()
 
   lateinit var placeBody: PlaceEntity
@@ -71,8 +48,8 @@ class SelectCafeMenuViewModel @Inject constructor(
           placeBody = result.getOrNull()!!
           Timber.d("plcaeBody >>> $placeBody")
           placeBody.menu?.products?.let {
-            val productList: MutableList<UiState> = initializeUiState(products = it)
-            uiStateUpdateCafeMenuList(productList = productList)
+            val productList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+            updateCafeMenuList(productList = productList)
           }
         }
         result.isSuccess && result.getOrNull() == null -> {
@@ -87,21 +64,19 @@ class SelectCafeMenuViewModel @Inject constructor(
     }
   }
 
-  fun initializeUiState(products: List<ProductEntity>): MutableList<UiState> {
-    val productList = mutableListOf<UiState>()
+  fun initializeCafeMenuItem(products: List<ProductEntity>): MutableList<CafeMenuItem> {
+    val productList = mutableListOf<CafeMenuItem>()
     products.forEach { product ->
-      productList.add(UiState(name = product.name, price = product.price))
+      productList.add(CafeMenuItem(name = product.name, price = product.price))
     }
     return productList
   }
 
-  fun uiStateUpdateCafeMenuList(productList: MutableList<UiState>) {
-    _cafeMenuList.update { uiStates ->
-      uiStates.copy(uiStateList = productList)
-    }
+  fun updateCafeMenuList(productList: MutableList<CafeMenuItem>) {
+    _cafeMenuList.value = productList
   }
 
-  fun getUpdateCafeMenu() {
+  fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
       val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
       when {

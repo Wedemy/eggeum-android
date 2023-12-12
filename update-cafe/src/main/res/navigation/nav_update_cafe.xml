@@ -113,7 +113,9 @@
     android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeMenuFragment"
     android:label="InputCafeMenuFragment"
     tools:layout="@layout/fragment_input_cafe_menu">
-
+    <argument
+      android:name="cafeMenuItem"
+      app:argType="us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem" />
   </fragment>
 
   <fragment

@@ -12,6 +12,7 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeMenuBinding
@@ -23,9 +24,19 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
 
   private val viewModel by viewModels<InputCafeMenuViewModel>()
 
+  private val args by navArgs<InputCafeMenuFragmentArgs>()
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initListener()
     initObserver()
+  }
+
+  override fun onStart() {
+    super.onStart()
+    with(binding) {
+      tietInputCafeName.hint = args.cafeMenuItem.name
+      tietInputCafePrice.hint = args.cafeMenuItem.price.toString()
+    }
   }
 
   private fun initListener() {

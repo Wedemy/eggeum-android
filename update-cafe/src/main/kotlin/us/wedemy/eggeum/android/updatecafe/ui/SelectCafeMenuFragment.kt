@@ -44,7 +44,12 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
       object : EditOnClickListener {
         override fun editBtnClickListener(cafeMenu: CafeMenuItem) {
           // TODO: cafeMenu 데이터 넘겨주기
-          val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu()
+          val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentInputCafeMenu(
+            CafeMenuItem(
+              name = cafeMenu.name,
+              price = cafeMenu.price,
+            )
+          )
           findNavController().safeNavigate(action)
         }
       },
@@ -66,23 +71,29 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     initObserver()
   }
 
+  override fun onStart() {
+    super.onStart()
+    // TODO: 지도에서 placdId 받아와서 인자 넣기
+    viewModel.getCafeMenuList(1)
+  }
+
   private fun showEditOrDeleteDialog(item: CafeMenuItem) {
     val dialog = AlertDialog.Builder(requireContext())
       .setMessage("삭제 하시겠어요?")
       .setPositiveButton("삭제", object : OnClickListener {
         override fun onClick(p0: DialogInterface?, p1: Int) {
           // TODO: 삭제 API 호출
-          val cafeMenuList = viewModel.cafeMenuList.value.uiStateList
+          val cafeMenuList = viewModel.cafeMenuList.value
           val newCafeMenuList = mutableListOf<ProductEntity>()
-          cafeMenuList?.forEach {
+          cafeMenuList.forEach {
             if (!(it.name == item.name && it.price == item.price)) {
               newCafeMenuList.add(it.toEntity())
             }
           }
           viewModel.placeBody.menu?.products = newCafeMenuList
           val newPlaceBody = (viewModel.placeBody.menu?.products as MutableList<ProductEntity>)
-          val changedUiState = viewModel.initializeUiState(products = newPlaceBody)
-          viewModel.uiStateUpdateCafeMenuList(productList = changedUiState)
+          val changedUiState = viewModel.initializeCafeMenuItem(products = newPlaceBody)
+          viewModel.updateCafeMenuList(productList = changedUiState)
         }
       })
       .setNegativeButton("취소", null) // 취소 시에는 동작 없음.
@@ -96,12 +107,6 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
   }
 
   private fun initView() {
-    repeatOnStarted {
-      launch {
-        // TODO: 지도에서 placdId 받아와서 인자 넣기
-        viewModel.getCafeMenuList(1)
-      }
-    }
     with(binding) {
       rvCafeMenuList.apply {
         setHasFixedSize(true)
@@ -119,7 +124,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
       }
       btnInputCafeMenu.setOnClickListener {
         // TODO: 새로운 placeBody -> UpsertPlaceBody -> db update -> 수정 완료 페이지
-        viewModel.getUpdateCafeMenu()
+        viewModel.updatePlaceBodyUseCase()
         val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentUpdateMenuComplete()
         findNavController().safeNavigate(action)
       }
@@ -130,7 +135,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeMenuList.collect { cafeMenuList ->
-          val cafeMenu = cafeMenuList.uiStateList?.map { it.toMain() }!!
+          val cafeMenu = cafeMenuList.map { it }
           Timber.d("" + cafeMenu)
           cafeMenuAdapter.replaceAll(cafeMenu)
         }

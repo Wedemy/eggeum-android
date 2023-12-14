@@ -16,7 +16,7 @@ import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 data class CafeMenuItem(
   val name: String,
   val price: Int,
-): Parcelable {
+) : Parcelable {
   fun toEntity(): ProductEntity = ProductEntity(
     name = name,
     price = price,

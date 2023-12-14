@@ -27,7 +27,7 @@ import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
 @HiltViewModel
-class SelectCafeMenuViewModel @Inject constructor(
+class ProposeCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
   private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
 ) : ViewModel() {
@@ -40,6 +40,13 @@ class SelectCafeMenuViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
+  private val _cafeMenuItemMap = MutableStateFlow(emptyMap<String, CafeMenuItem>())
+  private val cafeMenuItemMap = _cafeMenuItemMap.asStateFlow()
+
+  fun setCafeMenuItemMap(cafeMenuItemMap: MutableMap<String, CafeMenuItem>) {
+    _cafeMenuItemMap.value = cafeMenuItemMap
+  }
+
   fun getCafeMenuList(placeId: Int) {
     viewModelScope.launch {
       val result = getPlaceUseCase(placeId)
@@ -48,8 +55,8 @@ class SelectCafeMenuViewModel @Inject constructor(
           placeBody = result.getOrNull()!!
           Timber.d("plcaeBody >>> $placeBody")
           placeBody.menu?.products?.let {
-            val productList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
-            updateCafeMenuList(productList = productList)
+            val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+            updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
           }
         }
         result.isSuccess && result.getOrNull() == null -> {
@@ -72,8 +79,27 @@ class SelectCafeMenuViewModel @Inject constructor(
     return productList
   }
 
-  fun updateCafeMenuList(productList: MutableList<CafeMenuItem>) {
-    _cafeMenuList.value = productList
+  fun updateCafeMenuList(cafeMenuItemList: MutableList<CafeMenuItem>) {
+    _cafeMenuList.value = cafeMenuItemList
+  }
+
+  fun editCafeMenuItem() {
+    val before = cafeMenuItemMap.value["before"]
+    val after = cafeMenuItemMap.value["after"]
+
+    placeBody.menu?.products.let { productEntities ->
+      productEntities?.forEach {
+        if (it.name == before?.name && it.price == before.price) {
+          it.name = after?.name!!
+          it.price = after.price
+        }
+      }
+    }
+
+    placeBody.menu?.products?.let {
+      val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+      updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
+    }
   }
 
   fun updatePlaceBodyUseCase() {

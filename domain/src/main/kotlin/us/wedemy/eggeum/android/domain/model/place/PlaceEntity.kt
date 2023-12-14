@@ -12,7 +12,7 @@ public data class PlaceEntity(
   val address2: String?,
   val id: Int?,
   val image: ImageEntity?,
-  val info: InfoEntity?,
+  var info: InfoEntity?,
   val latitude: Double?,
   val longitude: Double?,
   val menu: MenuEntity?,

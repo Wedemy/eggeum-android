@@ -142,7 +142,7 @@
             style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
             android:ellipsize="end"
             android:hint="@string/input_cafe_menu_price_hint"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>

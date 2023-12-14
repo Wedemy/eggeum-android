@@ -21,37 +21,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
-
-data class CafeInfoUiState(
-  val areaSize: String? = null,
-  val blogUri: String? = null,
-  val businessHours: List<String>? = null,
-  val existsSmokingArea: Boolean? = null,
-  val existsWifi: Boolean? = null,
-  val instagramUri: String? = null,
-  val meetingRoomCount: Int? = null,
-  val mobileCharging: String? = null,
-  val multiSeatCount: Int? = null,
-  val parking: String? = null,
-  val phone: String? = null,
-  val restRoom: String? = null,
-  val singleSeatCount: Int? = null,
-  val websiteUri: String? = null,
-)
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 
 @HiltViewModel
 class InputCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
   private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
 ) : ViewModel() {
-  private val _uiState = MutableStateFlow(CafeInfoUiState())
-  val uiState = _uiState.asStateFlow()
+  private val _cafeInfo = MutableStateFlow(CafeInfoItem())
+  val cafeInfo = _cafeInfo.asStateFlow()
 
-  private val _placeName = MutableStateFlow<String>("")
-  val placeName = _placeName.asStateFlow()
+  lateinit var placeBody: PlaceEntity
 
   private val _navigateToUpsertEvent = MutableSharedFlow<Boolean>(0)
   val navigateToUpsertEvent: SharedFlow<Boolean> = _navigateToUpsertEvent.asSharedFlow()
@@ -63,10 +46,10 @@ class InputCafeInfoViewModel @Inject constructor(
       val result = getPlaceUseCase(placeId)
       when {
         result.isSuccess && result.getOrNull() != null -> {
-          val placeBody = result.getOrNull()!!
+          placeBody = result.getOrNull()!!
           Timber.d("plcaeBody >>> $placeBody")
-          _uiState.update { uiState ->
-            uiState.copy(
+          _cafeInfo.update { cafeInfo ->
+            cafeInfo.copy(
               areaSize = placeBody.info?.areaSize,
               blogUri = placeBody.info?.blogUri,
               businessHours = placeBody.info?.businessHours,
@@ -83,7 +66,6 @@ class InputCafeInfoViewModel @Inject constructor(
               websiteUri = placeBody.info?.websiteUri,
             )
           }
-          _placeName.emit(placeBody.name!!)
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")
@@ -97,9 +79,9 @@ class InputCafeInfoViewModel @Inject constructor(
     }
   }
 
-  fun upsertPlaceBody(upsertPlaceEntity: UpsertPlaceEntity) {
+  fun upsertPlaceBody() {
     viewModelScope.launch {
-      val result = upsertlaceBodyUseCase(upsertPlaceEntity)
+      val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
       when {
         result.isSuccess -> {
           _navigateToUpsertEvent.emit(true)

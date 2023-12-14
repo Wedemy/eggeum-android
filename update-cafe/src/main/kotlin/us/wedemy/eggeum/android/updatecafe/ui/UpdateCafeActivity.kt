@@ -7,6 +7,7 @@
 
 package us.wedemy.eggeum.android.updatecafe.ui
 
+import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -14,10 +15,14 @@ import us.wedemy.eggeum.android.common.ui.BaseActivity
 import us.wedemy.eggeum.android.navigator.MainNavigator
 import us.wedemy.eggeum.android.updatecafe.R
 import us.wedemy.eggeum.android.updatecafe.databinding.ActivityUpdateCafeBinding
+import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
 
 @AndroidEntryPoint
 class UpdateCafeActivity : BaseActivity() {
   override val binding by lazy { ActivityUpdateCafeBinding.inflate(layoutInflater) }
+
+  val viewModel by viewModels<ProposeCafeInfoViewModel>()
+
   private val navController
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 

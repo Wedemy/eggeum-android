@@ -21,7 +21,6 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.InfoEntity
-import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
 import us.wedemy.eggeum.android.updatecafe.viewmodel.InputCafeInfoViewModel
 
@@ -56,14 +55,10 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   }
 
   private fun initView() {
-    repeatOnStarted {
-      launch {
-        /**
-         * Intent에서 placeId 가져오기
-         */
-        viewModel.getPlaceBody(1)
-      }
-    }
+    /**
+     * Intent에서 placeId 가져오기
+     */
+    viewModel.getPlaceBody(1)
   }
 
   private fun initListener() {
@@ -135,19 +130,15 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           singleSeatCount = stringToIntOrElseNull(cafeSingleSeat),
           websiteUri = stringOrElseNull(cafeWebsiteUri),
         )
+        viewModel.placeBody.info = infoEntity
 
-        val upsertPlaceEntity = UpsertPlaceEntity.of(
-          info = infoEntity,
-          placeId = 1,
-          name = if (cafeName != "") cafeName else null,
-        )
-
-        viewModel.upsertPlaceBody(upsertPlaceEntity = upsertPlaceEntity)
+        viewModel.upsertPlaceBody()
       }
     }
   }
-  private fun stringToBoolean(str: String): Boolean {
-    return str == "O"
+  private fun stringToBoolean(str: String): Boolean? {
+    return if (str == "") null
+    else str == "O"
   }
 
   private fun stringOrElseNull(str: String): String? {
@@ -163,31 +154,43 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.uiState.collect { uiState ->
+        viewModel.cafeInfo.collect { cafeInfo ->
           with(binding) {
-            tietInputCafeArea.hint = stringOrElseGuideMessage(uiState.areaSize)
-            tietInputCafeMeetingRoom.hint = intToStringOrElseGuideMessage(uiState.meetingRoomCount)
-            tietInputCafeMultiSeat.hint = intToStringOrElseGuideMessage(uiState.multiSeatCount)
-            tietInputCafeSingleSeat.hint = intToStringOrElseGuideMessage(uiState.singleSeatCount)
-            tietInputCafeBusinessHours.hint = uiState.businessHours
+            tietInputCafeArea.hint = stringOrElseGuideMessage(cafeInfo.areaSize)
+            tietInputCafeMeetingRoom.hint = intToStringOrElseGuideMessage(cafeInfo.meetingRoomCount)
+            tietInputCafeMultiSeat.hint = intToStringOrElseGuideMessage(cafeInfo.multiSeatCount)
+            tietInputCafeSingleSeat.hint = intToStringOrElseGuideMessage(cafeInfo.singleSeatCount)
+            tietInputCafeBusinessHours.hint = cafeInfo.businessHours
               ?.joinToString(" ~ ", "", "", -1) ?: guideMessage
-            tietInputParking.hint = stringOrElseGuideMessage(uiState.parking)
-            tietInputExistsSmokingArea.hint = boolToStringOrElseGuideMessage(uiState.existsSmokingArea)
-            tietInputExistsWifi.hint = boolToStringOrElseGuideMessage(uiState.existsWifi)
-            tietInputRestRoom.hint = stringOrElseGuideMessage(uiState.restRoom)
-            tietInputMobileCharging.hint = stringOrElseGuideMessage(uiState.mobileCharging)
-            tietInputInstagramUri.hint = stringOrElseGuideMessage(uiState.instagramUri)
-            tietInputWebsiteUri.hint = stringOrElseGuideMessage(uiState.websiteUri)
-            tietInputBlogUri.hint = stringOrElseGuideMessage(uiState.blogUri)
-            tietInputPhone.hint = stringOrElseGuideMessage(uiState.phone)
+            tietInputParking.hint = stringOrElseGuideMessage(cafeInfo.parking)
+            tietInputExistsSmokingArea.hint = boolToStringOrElseGuideMessage(cafeInfo.existsSmokingArea)
+            tietInputExistsWifi.hint = boolToStringOrElseGuideMessage(cafeInfo.existsWifi)
+            tietInputRestRoom.hint = stringOrElseGuideMessage(cafeInfo.restRoom)
+            tietInputMobileCharging.hint = stringOrElseGuideMessage(cafeInfo.mobileCharging)
+            tietInputInstagramUri.hint = stringOrElseGuideMessage(cafeInfo.instagramUri)
+            tietInputWebsiteUri.hint = stringOrElseGuideMessage(cafeInfo.websiteUri)
+            tietInputBlogUri.hint = stringOrElseGuideMessage(cafeInfo.blogUri)
+            tietInputPhone.hint = stringOrElseGuideMessage(cafeInfo.phone)
+
+            cafeArea = stringOrElseDefault(cafeInfo.areaSize)
+            cafeMeetingRoom = intToStringOrElseDefault(cafeInfo.meetingRoomCount)
+            cafeMultiSeat = intToStringOrElseDefault(cafeInfo.multiSeatCount)
+            cafeSingleSeat = intToStringOrElseDefault(cafeInfo.singleSeatCount)
+            cafeBusinessHours = cafeInfo.businessHours
+              ?.joinToString(" ~ ", "", "", -1) ?: ""
+            cafeParking = stringOrElseDefault(cafeInfo.parking)
+            cafeExistsSmokingArea = boolToStringOrElseDefault(cafeInfo.existsSmokingArea)
+            cafeExistsWifi = boolToStringOrElseDefault(cafeInfo.existsWifi)
+            cafeRestRoom = stringOrElseDefault(cafeInfo.restRoom)
+            cafeMobileCharging = stringOrElseDefault(cafeInfo.mobileCharging)
+            cafeWebsiteUri = stringOrElseDefault(cafeInfo.websiteUri)
+            cafeInstagramUri = stringOrElseDefault(cafeInfo.instagramUri)
+            cafeBlogUri = stringOrElseDefault(cafeInfo.blogUri)
+            cafePhone = stringOrElseDefault(cafeInfo.phone)
           }
         }
       }
-      launch {
-        viewModel.placeName.collect {
-          cafeName = it
-        }
-      }
+
       launch {
         binding.apply {
           viewModel.navigateToUpsertEvent.collect {
@@ -204,6 +207,20 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
         }
       }
     }
+  }
+
+  private fun stringOrElseDefault(str: String?): String {
+    return str ?: ""
+  }
+
+  private fun intToStringOrElseDefault(int: Int?): String {
+    return int?.toString() ?: ""
+  }
+
+  private fun boolToStringOrElseDefault(bool: Boolean?): String {
+    return if (bool == null) ""
+    else if (bool) "O"
+    else "X"
   }
 
   private fun stringOrElseGuideMessage(str: String?): String {

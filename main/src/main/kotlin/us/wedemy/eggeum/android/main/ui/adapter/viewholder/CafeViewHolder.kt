@@ -14,12 +14,12 @@ import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
 
 class CafeViewHolder(
   binding: ItemNewCafeBinding,
-  clickListener: NewCafeClickListener,
+  clickListener: NewCafeClickListener? = null,
 ) : BaseViewHolder<PlaceEntity, ItemNewCafeBinding>(binding) {
 
   init {
     binding.root.setOnClickListener {
-      clickListener.onItemClick(adapterPosition)
+      clickListener?.onItemClick(adapterPosition)
     }
   }
 

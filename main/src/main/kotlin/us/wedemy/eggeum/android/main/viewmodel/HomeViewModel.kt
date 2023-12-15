@@ -26,8 +26,8 @@ import us.wedemy.eggeum.android.main.mapper.toUiModel
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-  private val getPlaceListUseCase: GetPlaceListUseCase,
-  private val getNoticeListUseCase: GetNoticeListUseCase,
+  getPlaceListUseCase: GetPlaceListUseCase,
+  getNoticeListUseCase: GetNoticeListUseCase,
 ) : ViewModel() {
 
   private val _cafesList = MutableStateFlow<List<List<PlaceEntity>>>(listOf(listOf(), listOf(), listOf()))
@@ -54,17 +54,24 @@ class HomeViewModel @Inject constructor(
 
   fun getNewCafeList(snapshot: ItemSnapshotList<PlaceEntity>) {
     val newCafeList = mutableListOf<PlaceEntity>()
-    snapshot.toList().forEach {
-      if (it != null) {
-        newCafeList.add(it)
+    val newStudyCafeList = mutableListOf<PlaceEntity>()
+    val newStudyRoomList = mutableListOf<PlaceEntity>()
+
+    snapshot.toList().forEach { place ->
+      place?.let {
+        when (it.type) {
+          CAFE_TYPE -> newCafeList.add(it)
+          STUDY_CAFE_TYPE -> newStudyCafeList.add(it)
+          STUDY_ROOM_TYPE -> newStudyRoomList.add(it)
+        }
       }
     }
-    Timber.tag("newCafeList").d("$newCafeList")
     _newCafes.value = newCafeList.take(3)
-    _newStudyCafes.value = newCafeList.take(3)
-    _newStudyRooms.value = newCafeList.take(3)
+    _newStudyCafes.value = newStudyCafeList.take(3)
+    _newStudyRooms.value = newStudyRoomList.take(3)
 
     _cafesList.value = listOf(newCafes.value, newStudyCafes.value, newStudyRooms.value)
+    Timber.tag("cafesList").d("${cafesList.value}")
   }
 
   private companion object {

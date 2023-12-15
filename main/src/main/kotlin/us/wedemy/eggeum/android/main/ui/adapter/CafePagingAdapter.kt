@@ -13,32 +13,20 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
-import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeViewHolder
 
-class CafePagingAdapter(
-  private val clickListener: NewCafeClickListener,
-) : PagingDataAdapter<PlaceEntity, CafeViewHolder>(PlaceEntityDiffCallback) {
+class CafePagingAdapter : PagingDataAdapter<PlaceEntity, CafeViewHolder>(PlaceEntityDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeViewHolder(
-      ItemNewCafeBinding.inflate(LayoutInflater.from(parent.context), parent, false), clickListener
+      ItemNewCafeBinding.inflate(LayoutInflater.from(parent.context), parent, false), null
     )
 
   override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {
     val newCafeItem = getItem(position)
     newCafeItem?.let { cafe ->
       holder.bind(cafe)
-      holder.itemView.setOnClickListener {
-        onItemClickListener?.let { it(cafe.id) }
-      }
     }
-  }
-
-  private var onItemClickListener: ((Int) -> Unit)? = null
-
-  fun setOnItemClickListener(listener: (Int) -> Unit) {
-    onItemClickListener = listener
   }
 
   companion object {

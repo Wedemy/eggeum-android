@@ -40,7 +40,6 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
-import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
@@ -48,15 +47,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
 
   private val viewModel by viewModels<SearchViewModel>()
 
-  private val cafePagingAdapter by lazy {
-    CafePagingAdapter(
-      object : NewCafeClickListener {
-        override fun onItemClick(position: Int) {
-          // TODO
-        }
-      },
-    )
-  }
+  private val cafePagingAdapter by lazy { CafePagingAdapter() }
 
   private lateinit var naverMap: NaverMap
   private val markers = mutableListOf<Marker>()

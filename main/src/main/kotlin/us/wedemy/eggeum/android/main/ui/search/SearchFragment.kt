@@ -16,7 +16,9 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ItemSnapshotList
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
@@ -25,18 +27,39 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import timber.log.Timber
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
+import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
+  private val viewModel by viewModels<SearchViewModel>()
+
+  private val cafePagingAdapter by lazy {
+    CafePagingAdapter(
+      object : NewCafeClickListener {
+        override fun onItemClick(position: Int) {
+          // TODO
+        }
+      },
+    )
+  }
+
   private lateinit var naverMap: NaverMap
+  private val markers = mutableListOf<Marker>()
   private lateinit var fusedLocationClient: FusedLocationProviderClient
   private val locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
   private val permissions =
@@ -99,7 +122,34 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initObserver() {
-    // TODO 현재 보여지는 지도 내에 등록된 카페 목록 가져오기
+    repeatOnStarted {
+      // TODO 현재 보여지는 지도 내에 등록된 카페 목록 가져오기
+      launch {
+        viewModel.placeList.collectLatest { pagingData ->
+          cafePagingAdapter.submitData(pagingData)
+          addMarkersToMap(cafePagingAdapter.snapshot())
+        }
+      }
+    }
+  }
+
+  private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
+    snapshot.toList().forEach {
+      if (it != null) {
+        createAndAddMarker(it)
+      }
+    }
+    Timber.tag("markers").d("$markers")
+    markers.forEach {
+      it.map = naverMap
+    }
+  }
+
+  private fun createAndAddMarker(data: PlaceEntity) {
+    val marker = Marker()
+    marker.position = LatLng(data.latitude, data.longitude)
+    markers.add(marker)
+    marker.map = naverMap
   }
 
   private fun initNaverMap() {

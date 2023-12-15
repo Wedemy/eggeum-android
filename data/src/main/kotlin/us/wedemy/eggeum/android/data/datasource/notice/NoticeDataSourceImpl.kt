@@ -27,7 +27,7 @@ public class NoticeDataSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getNoticeList(
+  override fun getNoticeList(
     search: String?,
     page: Int?,
     size: Int?,

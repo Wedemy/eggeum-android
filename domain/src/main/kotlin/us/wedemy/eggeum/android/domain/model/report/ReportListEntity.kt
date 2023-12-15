@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.domain.model.report
 
 public data class ReportListEntity(
-  val elements: List<ReportEntity>,
+  val list: List<ReportEntity>,
   val totalElements: Int,
   val totalPages: Int,
 )

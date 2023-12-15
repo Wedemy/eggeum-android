@@ -29,6 +29,7 @@ dependencies {
   ksp(libs.androidx.room.compile)
   implementations(
     libs.kotlinx.coroutines.android,
+    libs.kotlinx.datetime,
     libs.android.material,
     libs.android.play.services.location,
     libs.androidx.core,

@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class PlaceListEntity(
-  val elements: List<PlaceEntity>,
+  val list: List<PlaceEntity>,
   val totalElements: Int,
   val totalPages: Int,
 )

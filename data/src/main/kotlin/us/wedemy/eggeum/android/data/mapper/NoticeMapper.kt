@@ -22,7 +22,7 @@ internal fun NoticeResponse.toEntity() =
 
 internal fun NoticeListResponse.toEntity() =
   NoticeListEntity(
-    elements = list.map(NoticeResponse::toEntity),
+    list = list.map(NoticeResponse::toEntity),
     totalPages = totalPages,
     totalElements = totalElements,
   )

@@ -14,7 +14,7 @@ import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 public interface NoticeDataSource {
   public suspend fun getNotice(noticeId: Int): NoticeResponse?
 
-  public suspend fun getNoticeList(
+  public fun getNoticeList(
     search: String?,
     page: Int?,
     size: Int?,

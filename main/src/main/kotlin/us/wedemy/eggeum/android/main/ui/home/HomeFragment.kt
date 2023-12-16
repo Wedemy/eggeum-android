@@ -10,9 +10,11 @@ package us.wedemy.eggeum.android.main.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
@@ -39,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NewCafeAdapter(
       object : NewCafeClickListener {
         override fun onItemClick(position: Int) {
-          // TODO
+          // TODO 화면 전환 클릭 이벤트 리스터 구현
         }
       },
     )
@@ -49,7 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeCardAdapter(
       object : NoticeCardClickListener {
         override fun onItemClick(position: Int) {
-          // TODO
+          // TODO 화면 전환 클릭 이벤트 리스터 구현
         }
       },
     )
@@ -58,7 +60,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
-    initListener()
     initObserver()
   }
 
@@ -89,21 +90,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
   }
 
-  private fun initListener() {
-    // TODO 화면 전환 클릭 이벤트 리스터 구현
-  }
-
   private fun initObserver() {
     repeatOnStarted {
       launch {
         viewModel.cafeList.collectLatest { cafes ->
           cafePagingAdapter.submitData(cafes)
-          viewModel.getNewCafeList(cafePagingAdapter.snapshot())
         }
       }
 
       launch {
-        viewModel.cafesList.collectLatest { cafesList ->
+        cafePagingAdapter.loadStateFlow
+          .distinctUntilChangedBy { it.refresh }
+          .collect { loadStates ->
+            if (loadStates.source.refresh is LoadState.NotLoading) {
+              viewModel.getNewCafeList(cafePagingAdapter.snapshot())
+            }
+          }
+      }
+
+      launch {
+        viewModel.cafesList.collect { cafesList ->
           newCafeAdapter.replaceAll(cafesList[0])
         }
       }

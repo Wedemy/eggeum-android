@@ -27,7 +27,7 @@ public interface ReportRepository {
    * @param size 한 페이지당 불러올 문의 개수
    * @param sort 문의 목록 정렬 정책
    */
-  public suspend fun getReportList(
+  public fun getReportList(
     page: Int? = null,
     size: Int? = null,
     sort: String? = null,

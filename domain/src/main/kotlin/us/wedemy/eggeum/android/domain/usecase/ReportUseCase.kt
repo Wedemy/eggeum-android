@@ -30,7 +30,7 @@ public class GetReportUseCase @Inject constructor(
 public class GetReportListUseCase @Inject constructor(
   private val repository: ReportRepository,
 ) {
-  public suspend operator fun invoke(): Flow<PagingData<ReportEntity>> {
+  public operator fun invoke(): Flow<PagingData<ReportEntity>> {
     return repository.getReportList()
   }
 }

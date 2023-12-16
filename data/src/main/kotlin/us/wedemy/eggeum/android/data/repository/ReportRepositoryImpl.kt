@@ -27,7 +27,7 @@ public class ReportRepositoryImpl @Inject constructor(
     return dataSource.getReport(reportId)?.toEntity()
   }
 
-  override suspend fun getReportList(
+  override fun getReportList(
     page: Int?,
     size: Int?,
     sort: String?,

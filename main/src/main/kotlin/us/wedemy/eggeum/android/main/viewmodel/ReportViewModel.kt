@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 
 @HiltViewModel
-class InquiryViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+class ReportViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
   private val _inquiryTitle = savedStateHandle.getMutableStateFlow(KEY_INQUIRY_TITLE, "")
   val inquiryTitle = _inquiryTitle.asStateFlow()
 
@@ -39,12 +39,11 @@ class InquiryViewModel @Inject constructor(savedStateHandle: SavedStateHandle) :
       inquiryContent,
     ) { title, content ->
       title.isNotEmpty() && content.isNotEmpty()
-    }
-      .stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = false,
-      )
+    }.stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(5000),
+      initialValue = false,
+    )
 
   private companion object {
     private const val KEY_INQUIRY_TITLE = "inquiry_title"

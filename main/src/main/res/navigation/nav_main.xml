@@ -122,7 +122,7 @@
 
   <fragment
     android:id="@+id/fragment_inquiry"
-    android:name="us.wedemy.eggeum.android.main.ui.myaccount.InquiryFragment"
+    android:name="us.wedemy.eggeum.android.main.ui.myaccount.ReportFragment"
     android:label="InquiryFragment"
     tools:layout="@layout/fragment_inquiry" />
 

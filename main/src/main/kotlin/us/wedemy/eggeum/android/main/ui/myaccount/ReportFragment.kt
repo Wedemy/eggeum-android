@@ -18,13 +18,13 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentInquiryBinding
-import us.wedemy.eggeum.android.main.viewmodel.InquiryViewModel
+import us.wedemy.eggeum.android.main.viewmodel.ReportViewModel
 
 @AndroidEntryPoint
-class InquiryFragment : BaseFragment<FragmentInquiryBinding>() {
+class ReportFragment : BaseFragment<FragmentInquiryBinding>() {
   override fun getViewBinding() = FragmentInquiryBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<InquiryViewModel>()
+  private val viewModel by viewModels<ReportViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

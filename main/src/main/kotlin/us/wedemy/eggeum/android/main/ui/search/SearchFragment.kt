@@ -98,8 +98,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun checkPermission() {
     if (shouldShowPermissionRationale()) {
       showLocationPermissionRationaleDialog()
-    }
-    else {
+    } else {
       requestPermissions()
     }
   }

@@ -46,7 +46,6 @@ public class ReportPagingSource(
           pageNumber + (params.loadSize / PAGING_SIZE)
         },
       )
-
     } catch (exception: IOException) {
       Timber.e(exception)
       LoadResult.Error(exception)

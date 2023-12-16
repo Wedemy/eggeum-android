@@ -14,5 +14,5 @@ internal fun NoticeEntity.toUiModel() =
   NoticeCardModel(
     id = id,
     title = title,
-    date = kotlinx.datetime.LocalTime.toString()
+    date = kotlinx.datetime.LocalTime.toString(),
   )

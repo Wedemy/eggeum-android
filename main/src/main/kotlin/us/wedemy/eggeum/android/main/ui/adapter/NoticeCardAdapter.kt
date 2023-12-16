@@ -22,7 +22,8 @@ class NoticeCardAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     NoticeCardViewHolder(
-      ItemNoticeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false), clickListener
+      ItemNoticeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      clickListener,
     )
 
   override fun onBindViewHolder(holder: NoticeCardViewHolder, position: Int) {

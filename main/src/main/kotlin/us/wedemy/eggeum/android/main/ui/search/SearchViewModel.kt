@@ -16,7 +16,7 @@ import us.wedemy.eggeum.android.domain.usecase.GetPlaceListUseCase
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-  private val getPlaceListUseCase: GetPlaceListUseCase,
+  getPlaceListUseCase: GetPlaceListUseCase,
 ) : ViewModel() {
 
   val placeList = getPlaceListUseCase().cachedIn(viewModelScope)

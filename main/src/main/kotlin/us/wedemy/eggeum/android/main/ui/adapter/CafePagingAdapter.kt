@@ -19,7 +19,8 @@ class CafePagingAdapter : PagingDataAdapter<PlaceEntity, CafeViewHolder>(PlaceEn
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeViewHolder(
-      ItemNewCafeBinding.inflate(LayoutInflater.from(parent.context), parent, false), null
+      ItemNewCafeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      null,
     )
 
   override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {

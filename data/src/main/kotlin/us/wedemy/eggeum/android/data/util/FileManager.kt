@@ -144,15 +144,7 @@ public object FileManager {
 
       val bitmap = BitmapFactory.decodeFile(file.absolutePath, BitmapFactory.Options())
 
-      val rotatedBitmap = Bitmap.createBitmap(
-        /* source = */ bitmap,
-        /* x = */ 0,
-        /* y = */ 0,
-        /* width = */ bitmap.width,
-        /* height = */ bitmap.height,
-        /* m = */ matrix,
-        /* filter = */ true,
-      )
+      val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 
       val out = FileOutputStream(file)
       rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)

@@ -16,8 +16,8 @@ plugins {
   alias(libs.plugins.kotlin.ktlint)
   alias(libs.plugins.gradle.dependency.handler.extensions)
   alias(libs.plugins.google.gms) apply false
-  alias(libs.plugins.gradle.android.application) apply false
-  alias(libs.plugins.gradle.android.library) apply false
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
   alias(libs.plugins.google.secrets) apply false
   alias(libs.plugins.kotlinx.serialization) apply false
   alias(libs.plugins.android.hilt) apply false
@@ -75,4 +75,19 @@ allprojects {
 
 tasks.register("cleanAll", type = Delete::class) {
   allprojects.map(Project::getBuildDir).forEach(::delete)
+}
+
+tasks.register("clean", type = Delete::class) {
+  rootProject.buildDir.delete()
+}
+
+tasks.register("bundleRelease", type = Exec::class) {
+  commandLine(project.rootDir.resolve("gradlew"), "bundle")
+  workingDir = project.rootDir
+}
+
+tasks.register("release") {
+  dependsOn(tasks["clean"])
+  dependsOn(tasks["bundleRelease"])
+  mustRunAfter(tasks["clean"])
 }

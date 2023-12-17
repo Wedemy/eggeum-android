@@ -67,7 +67,7 @@ class ReportViewModel @Inject constructor(
         CreateReportEntity(
           title = reportTitle.value,
           content = reportContent.value,
-        )
+        ),
       )
       when {
         result.isSuccess -> {

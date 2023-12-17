@@ -5,9 +5,8 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.main.ui.item
+package us.wedemy.eggeum.android.main.ui.adapter.listener
 
-data class NoticeCardItem(
-  val title: String,
-  val date: String,
-)
+interface NewCafeClickListener {
+  fun onItemClick(position: Int)
+}

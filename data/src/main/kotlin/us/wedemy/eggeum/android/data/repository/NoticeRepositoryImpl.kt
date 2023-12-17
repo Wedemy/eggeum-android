@@ -24,7 +24,7 @@ public class NoticeRepositoryImpl @Inject constructor(
     return dataSource.getNotice(noticeId)?.toEntity()
   }
 
-  override suspend fun getNoticeList(
+  override fun getNoticeList(
     search: String?,
     page: Int?,
     size: Int?,

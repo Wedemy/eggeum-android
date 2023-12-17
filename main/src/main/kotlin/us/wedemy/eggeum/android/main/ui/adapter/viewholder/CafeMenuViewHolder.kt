@@ -11,11 +11,11 @@ import java.text.NumberFormat
 import java.util.Locale
 import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
-import us.wedemy.eggeum.android.main.ui.item.CafeMenuItem
+import us.wedemy.eggeum.android.main.model.CafeMenuModel
 
-class CafeMenuViewHolder(binding: ItemCafeMenuBinding) : BaseViewHolder<CafeMenuItem, ItemCafeMenuBinding>(binding) {
+class CafeMenuViewHolder(binding: ItemCafeMenuBinding) : BaseViewHolder<CafeMenuModel, ItemCafeMenuBinding>(binding) {
 
-  override fun bind(item: CafeMenuItem) {
+  override fun bind(item: CafeMenuModel) {
     binding.apply {
       tvCafeMenuName.text = item.name
       tvCafeMenuPrice.text = formatPrice(item.price)

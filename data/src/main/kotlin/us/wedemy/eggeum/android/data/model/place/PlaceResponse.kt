@@ -46,10 +46,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class PlaceResponse(
   @SerialName("address1")
-  val address1: String,
+  val address1: String?,
 
   @SerialName("address2")
-  val address2: String,
+  val address2: String?,
 
   @SerialName("id")
   val id: Int,
@@ -73,5 +73,5 @@ public data class PlaceResponse(
   val name: String,
 
   @SerialName("type")
-  val type: String,
+  val type: String?,
 )

@@ -104,7 +104,7 @@ class NoticeTest : StringSpec() {
           )
       val expect =
         NoticeListEntity(
-          elements = listOf(
+          list = listOf(
             NoticeEntity(
               id = 0,
               title = "공지사항 제목",

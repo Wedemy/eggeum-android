@@ -7,18 +7,56 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import us.wedemy.eggeum.android.common.extension.layoutInflater
-import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeCardBinding
+import us.wedemy.eggeum.android.main.model.NoticeCardModel
+import us.wedemy.eggeum.android.main.ui.adapter.listener.NoticeCardClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeCardViewHolder
-import us.wedemy.eggeum.android.main.ui.home.NoticeCardClickListener
-import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
 
 class NoticeCardAdapter(
   private val clickListener: NoticeCardClickListener,
-) : BaseRecyclerViewAdapter<NoticeCardItem, ItemNoticeCardBinding>() {
+) : PagingDataAdapter<NoticeCardModel, NoticeCardViewHolder>(NoticeCardModelDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    NoticeCardViewHolder(ItemNoticeCardBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
+    NoticeCardViewHolder(
+      ItemNoticeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      clickListener,
+    )
+
+  override fun onBindViewHolder(holder: NoticeCardViewHolder, position: Int) {
+    val noticeItem = getItem(position)
+    noticeItem?.let { notice ->
+      holder.bind(notice)
+      holder.itemView.setOnClickListener {
+        onItemClickListener?.let { it(notice.id) }
+      }
+    }
+  }
+
+  private var onItemClickListener: ((Int) -> Unit)? = null
+
+  fun setOnItemClickListener(listener: (Int) -> Unit) {
+    onItemClickListener = listener
+  }
+
+  companion object {
+    private val NoticeCardModelDiffCallback = object : DiffUtil.ItemCallback<NoticeCardModel>() {
+      override fun areItemsTheSame(
+        oldItem: NoticeCardModel,
+        newItem: NoticeCardModel,
+      ): Boolean {
+        return oldItem.id == newItem.id
+      }
+
+      override fun areContentsTheSame(
+        oldItem: NoticeCardModel,
+        newItem: NoticeCardModel,
+      ): Boolean {
+        return oldItem == newItem
+      }
+    }
+  }
 }

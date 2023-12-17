@@ -26,7 +26,7 @@ public class PlaceRepositoryImpl @Inject constructor(
     return dataSource.getPlace(placeId)?.toEntity()
   }
 
-  override suspend fun getPlaceList(
+  override fun getPlaceList(
     distance: Int?,
     endDate: String?,
     latitude: Int?,

@@ -12,31 +12,47 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
+import us.wedemy.eggeum.android.domain.usecase.CreateReportUseCase
 
 @HiltViewModel
-class ReportViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
-  private val _inquiryTitle = savedStateHandle.getMutableStateFlow(KEY_INQUIRY_TITLE, "")
-  val inquiryTitle = _inquiryTitle.asStateFlow()
+class ReportViewModel @Inject constructor(
+  private val createReportUseCase: CreateReportUseCase,
+  savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+  private val _reportTitle = savedStateHandle.getMutableStateFlow(KEY_REPORT_TITLE, "")
+  val reportTitle = _reportTitle.asStateFlow()
 
-  private val _inquiryContent = savedStateHandle.getMutableStateFlow(KEY_INQUIRY_CONTENT, "")
-  val inquiryContent = _inquiryContent.asStateFlow()
+  private val _reportContent = savedStateHandle.getMutableStateFlow(KEY_REPORT_CONTENT, "")
+  val reportContent = _reportContent.asStateFlow()
 
-  fun setInquiryTitle(inquiryTitle: String) {
-    _inquiryTitle.value = inquiryTitle
+  private val _navigateToReportCompleteEvent = MutableSharedFlow<Unit>(replay = 1)
+  val navigateToReportCompleteEvent: SharedFlow<Unit> = _navigateToReportCompleteEvent.asSharedFlow()
+
+  private val _showToastEvent = MutableSharedFlow<String>()
+  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+
+  fun setReportTitle(reportTitle: String) {
+    _reportTitle.value = reportTitle
   }
 
-  fun setInquiryContent(inquiryContent: String) {
-    _inquiryContent.value = inquiryContent
+  fun setReportContent(reportContent: String) {
+    _reportContent.value = reportContent
   }
 
-  val enableSendInquiry =
+  val enableSendReport =
     combine(
-      inquiryTitle,
-      inquiryContent,
+      reportTitle,
+      reportContent,
     ) { title, content ->
       title.isNotEmpty() && content.isNotEmpty()
     }.stateIn(
@@ -45,8 +61,29 @@ class ReportViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : 
       initialValue = false,
     )
 
+  fun createReport() {
+    viewModelScope.launch {
+      val result = createReportUseCase(
+        CreateReportEntity(
+          title = reportTitle.value,
+          content = reportContent.value,
+        )
+      )
+      when {
+        result.isSuccess -> {
+          _navigateToReportCompleteEvent.emit(Unit)
+        }
+        result.isFailure -> {
+          val exception = result.exceptionOrNull()
+          Timber.d(exception)
+          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+        }
+      }
+    }
+  }
+
   private companion object {
-    private const val KEY_INQUIRY_TITLE = "inquiry_title"
-    private const val KEY_INQUIRY_CONTENT = "inquiry_content"
+    private const val KEY_REPORT_TITLE = "report_title"
+    private const val KEY_REPORT_CONTENT = "report_content"
   }
 }

@@ -11,6 +11,7 @@ import androidx.paging.PagingData
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
+import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
 import us.wedemy.eggeum.android.domain.model.report.ReportEntity
 import us.wedemy.eggeum.android.domain.repository.ReportRepository
 import us.wedemy.eggeum.android.domain.util.ReportApiResponseIsNull
@@ -33,4 +34,14 @@ public class GetReportListUseCase @Inject constructor(
   public operator fun invoke(): Flow<PagingData<ReportEntity>> {
     return repository.getReportList()
   }
+}
+
+@Singleton
+public class CreateReportUseCase @Inject constructor(
+  private val repository: ReportRepository,
+) {
+  public suspend operator fun invoke(createReportEntity: CreateReportEntity): Result<Unit> =
+    runSuspendCatching {
+      repository.createReport(createReportEntity)
+    }
 }

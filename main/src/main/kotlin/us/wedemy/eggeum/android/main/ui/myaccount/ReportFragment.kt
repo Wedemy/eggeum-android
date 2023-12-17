@@ -9,20 +9,21 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.databinding.FragmentInquiryBinding
+import us.wedemy.eggeum.android.main.databinding.FragmentReportBinding
 import us.wedemy.eggeum.android.main.viewmodel.ReportViewModel
 
 @AndroidEntryPoint
-class ReportFragment : BaseFragment<FragmentInquiryBinding>() {
-  override fun getViewBinding() = FragmentInquiryBinding.inflate(layoutInflater)
+class ReportFragment : BaseFragment<FragmentReportBinding>() {
+  override fun getViewBinding() = FragmentReportBinding.inflate(layoutInflater)
 
   private val viewModel by viewModels<ReportViewModel>()
 
@@ -34,14 +35,14 @@ class ReportFragment : BaseFragment<FragmentInquiryBinding>() {
 
   private fun initListener() {
     with(binding) {
-      ivInquiryClose.setOnClickListener {
+      ivReportClose.setOnClickListener {
         if (!findNavController().navigateUp()) {
           requireActivity().finish()
         }
       }
 
-      btnSendInquiry.setOnClickListener {
-        // TODO 문의하기 구현
+      btnSendReport.setOnClickListener {
+        viewModel.createReport()
       }
     }
   }
@@ -49,25 +50,37 @@ class ReportFragment : BaseFragment<FragmentInquiryBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        val inquiryTitleEditTextFlow = binding.tietInquiryTitle.textChangesAsFlow()
-        inquiryTitleEditTextFlow.collect { text ->
-          val inquiryTitle = text.toString().trim()
-          viewModel.setInquiryTitle(inquiryTitle)
+        val reportTitleEditTextFlow = binding.tietReportTitle.textChangesAsFlow()
+        reportTitleEditTextFlow.collect { text ->
+          val reportTitle = text.toString().trim()
+          viewModel.setReportTitle(reportTitle)
         }
       }
 
       launch {
-        val inquiryContentEditTextFlow = binding.tietInquiryContent.textChangesAsFlow()
-        inquiryContentEditTextFlow.collect { text ->
-          val inquiryContent = text.toString().trim()
-          viewModel.setInquiryContent(inquiryContent)
+        val reportContentEditTextFlow = binding.tietReportContent.textChangesAsFlow()
+        reportContentEditTextFlow.collect { text ->
+          val reportContent = text.toString().trim()
+          viewModel.setReportContent(reportContent)
         }
       }
 
       launch {
-        viewModel.enableSendInquiry.collect { flag ->
-          Timber.tag("InquiryFragment").d("$flag")
-          binding.btnSendInquiry.isEnabled = flag
+        viewModel.enableSendReport.collect { flag ->
+          binding.btnSendReport.isEnabled = flag
+        }
+      }
+
+      launch {
+        viewModel.navigateToReportCompleteEvent.collect {
+          val action = ReportFragmentDirections.actionFragmentReportToFragmentReportComplete()
+          findNavController().safeNavigate(action)
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
     }

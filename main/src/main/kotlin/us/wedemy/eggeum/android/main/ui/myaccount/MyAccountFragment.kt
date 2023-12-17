@@ -52,7 +52,7 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
       }
 
       clMyAccountCustomerSupport.setOnClickListener {
-        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentInquiry()
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentReport()
         findNavController().safeNavigate(action)
       }
 

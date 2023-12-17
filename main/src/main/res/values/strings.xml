@@ -68,12 +68,17 @@
   <string name="unsubscribe">탈퇴하기</string>
   <string name="delete_activity_history">활동 이력이 삭제됩니다.</string>
   <string name="agree_to_notification">안내 사항을 확인하고 회원탈퇴에 동의합니다.</string>
-  <string name="inquiry">문의</string>
-  <string name="inquiry_title">제목 <font color="#14b8a6">*</font></string>
-  <string name="inquiry_content">문의 내용 <font color="#14b8a6">*</font></string>
-  <string name="input_inquiry_content">문의 내용을 입력해주세요.</string>
-  <string name="input_inquiry_title">제목을 입력해주세요.</string>
+  <string name="report">문의</string>
+  <string name="report_title">제목 <font color="#14b8a6">*</font></string>
+  <string name="report_content">문의 내용 <font color="#14b8a6">*</font></string>
+  <string name="input_report_content">문의 내용을 입력해주세요.</string>
+  <string name="input_report_title">제목을 입력해주세요.</string>
   <string name="search_keyword">검색어를 입력해주세요.</string>
+  <string name="ic_report_complete">ic_register_cafe_complete</string>
+  <string name="report_complete_title">문의가 접수되었습니다.</string>
+  <string name="report_complete_subtitle">이메일로 답변을 알려드려요.</string>
+  <string name="send_report">문의 보내기</string>
+  <string name="complete">완료</string>
 
 <!--  EditMyInfo-->
   <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>

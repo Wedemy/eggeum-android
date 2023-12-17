@@ -16,7 +16,7 @@ import us.wedemy.eggeum.android.data.model.report.ReportResponse
 public interface ReportDataSource {
   public suspend fun getReport(reportId: Int): ReportResponse?
 
-  public suspend fun getReportList(
+  public fun getReportList(
     page: Int?,
     size: Int?,
     sort: String?,

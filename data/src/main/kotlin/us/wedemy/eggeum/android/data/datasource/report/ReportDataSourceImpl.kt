@@ -30,7 +30,7 @@ public class ReportDataSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getReportList(
+  override fun getReportList(
     page: Int?,
     size: Int?,
     sort: String?,

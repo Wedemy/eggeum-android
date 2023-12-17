@@ -57,8 +57,8 @@
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <action
-      android:id="@+id/action_fragment_my_account_to_fragment_inquiry"
-      app:destination="@id/fragment_inquiry"
+      android:id="@+id/action_fragment_my_account_to_fragment_report"
+      app:destination="@id/fragment_report"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -130,10 +130,38 @@
     tools:layout="@layout/fragment_withdraw" />
 
   <fragment
-    android:id="@+id/fragment_inquiry"
-    android:name="us.wedemy.eggeum.android.main.ui.myaccount.InquiryFragment"
-    android:label="InquiryFragment"
-    tools:layout="@layout/fragment_inquiry" />
+    android:id="@+id/fragment_report"
+    android:name="us.wedemy.eggeum.android.main.ui.myaccount.ReportFragment"
+    android:label="ReportFragment"
+    tools:layout="@layout/fragment_report" >
+
+    <action
+      android:id="@+id/action_fragment_report_to_fragment_report_complete"
+      app:destination="@id/fragment_report_complete"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/fragment_report_complete"
+    android:name="us.wedemy.eggeum.android.main.ui.myaccount.ReportCompleteFragment"
+    android:label="ReportCompleteFragment"
+    tools:layout="@layout/fragment_report_complete">
+
+    <action
+      android:id="@+id/action_fragment_report_complete_to_fragment_my_account"
+      app:destination="@id/fragment_my_account"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim"
+      app:popUpTo="@id/fragment_my_account"
+      app:popUpToInclusive="true" />
+
+  </fragment>
 
   <dialog
     android:id="@+id/fragment_cafe_detail"

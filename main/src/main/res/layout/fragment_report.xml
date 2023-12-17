@@ -13,7 +13,7 @@
   tools:ignore="HardcodedText">
 
   <com.google.android.material.appbar.MaterialToolbar
-    android:id="@+id/tb_inquiry"
+    android:id="@+id/tb_report"
     android:layout_width="0dp"
     android:layout_height="56dp"
     android:elevation="0dp"
@@ -26,7 +26,7 @@
       android:layout_height="match_parent">
 
       <ImageView
-        android:id="@+id/iv_inquiry_close"
+        android:id="@+id/iv_report_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -41,31 +41,31 @@
   </com.google.android.material.appbar.MaterialToolbar>
 
   <TextView
-    android:id="@+id/tv_inquiry_header"
+    android:id="@+id/tv_report_header"
     style="@style/H5"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginTop="16dp"
-    android:text="@string/inquiry"
+    android:text="@string/report"
     android:textColor="@color/gray_900"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_inquiry" />
+    app:layout_constraintTop_toBottomOf="@id/tb_report" />
 
   <TextView
-    android:id="@+id/tv_inquiry_title"
+    android:id="@+id/tv_report_title"
     style="@style/TextSMedium"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="24dp"
-    android:text="@string/inquiry_title"
+    android:text="@string/report_title"
     android:textColor="@color/gray_800"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_inquiry_header" />
+    app:layout_constraintTop_toBottomOf="@id/tv_report_header" />
 
   <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/til_inquiry_title"
+    android:id="@+id/til_report_title"
     style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="4dp"
@@ -73,32 +73,32 @@
     app:errorTextAppearance="@style/ErrorAppearance"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_inquiry_title">
+    app:layout_constraintTop_toBottomOf="@id/tv_report_title">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/tiet_inquiry_title"
+      android:id="@+id/tiet_report_title"
       style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
       android:ellipsize="end"
-      android:hint="@string/input_inquiry_title"
+      android:hint="@string/input_report_title"
       android:inputType="text"
       android:maxLines="1" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
   <TextView
-    android:id="@+id/tv_inquiry_content"
+    android:id="@+id/tv_report_content"
     style="@style/TextSMedium"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
-    android:text="@string/inquiry_content"
+    android:text="@string/report_content"
     android:textColor="@color/gray_800"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/til_inquiry_title" />
+    app:layout_constraintTop_toBottomOf="@id/til_report_title" />
 
   <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/til_inquiry_content"
+    android:id="@+id/til_report_content"
     style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
     android:layout_height="0dp"
     android:layout_marginHorizontal="16dp"
@@ -106,39 +106,39 @@
     android:layout_marginBottom="58dp"
     app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
     app:errorTextAppearance="@style/ErrorAppearance"
-    app:layout_constraintBottom_toTopOf="@id/line_inquiry"
+    app:layout_constraintBottom_toTopOf="@id/line_report"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_inquiry_content">
+    app:layout_constraintTop_toBottomOf="@id/tv_report_content">
 
     <com.google.android.material.textfield.TextInputEditText
-      android:id="@+id/tiet_inquiry_content"
+      android:id="@+id/tiet_report_content"
       style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
       android:ellipsize="end"
       android:gravity="top"
-      android:hint="@string/input_inquiry_content"
+      android:hint="@string/input_report_content"
       android:imeOptions="actionDone"
       android:inputType="text" />
 
   </com.google.android.material.textfield.TextInputLayout>
 
   <View
-    android:id="@+id/line_inquiry"
+    android:id="@+id/line_report"
     android:layout_width="0dp"
     android:layout_height="1dp"
     android:layout_marginBottom="16dp"
     android:background="@color/gray_200"
-    app:layout_constraintBottom_toTopOf="@id/btn_send_inquiry"
+    app:layout_constraintBottom_toTopOf="@id/btn_send_report"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
   <Button
-    android:id="@+id/btn_send_inquiry"
+    android:id="@+id/btn_send_report"
     style="@style/Widget.Eggeum.Button"
     android:layout_width="0dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
-    android:text="@string/unsubscribe"
+    android:text="@string/send_report"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />

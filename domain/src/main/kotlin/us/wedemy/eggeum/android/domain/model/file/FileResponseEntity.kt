@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.domain.model.file
 
 public data class FileResponseEntity(
-  val name: String,
-  val uploadFileId: Int,
-  val url: String,
+  val name: String?,
+  val uploadFileId: Int?,
+  val url: String?,
 )

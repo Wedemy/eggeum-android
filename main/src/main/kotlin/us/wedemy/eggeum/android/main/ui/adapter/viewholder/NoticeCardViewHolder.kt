@@ -9,13 +9,13 @@ package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
 import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeCardBinding
-import us.wedemy.eggeum.android.main.ui.home.NoticeCardClickListener
-import us.wedemy.eggeum.android.main.ui.item.NoticeCardItem
+import us.wedemy.eggeum.android.main.model.NoticeCardModel
+import us.wedemy.eggeum.android.main.ui.adapter.listener.NoticeCardClickListener
 
 class NoticeCardViewHolder(
   binding: ItemNoticeCardBinding,
   clickListener: NoticeCardClickListener,
-) : BaseViewHolder<NoticeCardItem, ItemNoticeCardBinding>(binding) {
+) : BaseViewHolder<NoticeCardModel, ItemNoticeCardBinding>(binding) {
 
   init {
     binding.root.setOnClickListener {
@@ -23,7 +23,7 @@ class NoticeCardViewHolder(
     }
   }
 
-  override fun bind(item: NoticeCardItem) {
+  override fun bind(item: NoticeCardModel) {
     binding.apply {
       tvHomeNoticeTitle.text = item.title
       tvNotificationDate.text = item.date

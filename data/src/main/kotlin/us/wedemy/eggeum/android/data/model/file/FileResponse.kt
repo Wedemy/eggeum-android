@@ -13,11 +13,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class FileResponse(
   @SerialName("name")
-  val name: String,
+  val name: String?,
 
   @SerialName("uploadFileId")
-  val uploadFileId: Int,
+  val uploadFileId: Int?,
 
   @SerialName("url")
-  val url: String,
+  val url: String?,
 )

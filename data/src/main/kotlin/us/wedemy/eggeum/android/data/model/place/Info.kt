@@ -61,41 +61,41 @@ public data class Info(
   val areaSize: String,
 
   @SerialName("blogUri")
-  val blogUri: String,
+  val blogUri: String?,
 
   @SerialName("businessHours")
-  val businessHours: List<String>,
+  val businessHours: List<String>?,
 
   @SerialName("existsSmokingArea")
-  val existsSmokingArea: Boolean,
+  val existsSmokingArea: Boolean?,
 
   @SerialName("existsWifi")
   val existsWifi: Boolean,
 
   @SerialName("instagramUri")
-  val instagramUri: String,
+  val instagramUri: String?,
 
   @SerialName("meetingRoomCount")
   val meetingRoomCount: Int,
 
   @SerialName("mobileCharging")
-  val mobileCharging: String,
+  val mobileCharging: String?,
 
   @SerialName("multiSeatCount")
-  val multiSeatCount: Int,
+  val multiSeatCount: Int?,
 
   @SerialName("parking")
-  val parking: String,
+  val parking: String?,
 
   @SerialName("phone")
-  val phone: String,
+  val phone: String?,
 
   @SerialName("restRoom")
-  val restRoom: String,
+  val restRoom: String?,
 
   @SerialName("singleSeatCount")
-  val singleSeatCount: Int,
+  val singleSeatCount: Int?,
 
   @SerialName("websiteUri")
-  val websiteUri: String,
+  val websiteUri: String?,
 )

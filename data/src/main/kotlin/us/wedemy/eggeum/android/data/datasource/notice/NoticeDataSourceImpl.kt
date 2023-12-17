@@ -27,7 +27,7 @@ public class NoticeDataSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getNoticeList(
+  override fun getNoticeList(
     search: String?,
     page: Int?,
     size: Int?,
@@ -41,7 +41,6 @@ public class NoticeDataSourceImpl @Inject constructor(
       config = PagingConfig(
         pageSize = Constants.PAGING_SIZE,
         enablePlaceholders = false,
-        maxSize = Constants.PAGING_SIZE * 3,
       ),
       pagingSourceFactory = pagingSourceFactory,
     ).flow

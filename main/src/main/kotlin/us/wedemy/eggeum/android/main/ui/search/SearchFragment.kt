@@ -16,7 +16,10 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ItemSnapshotList
+import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
@@ -25,18 +28,31 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
+import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
-  private lateinit var naverMap: NaverMap
+  private val viewModel by viewModels<SearchViewModel>()
+
+  private val cafePagingAdapter by lazy { CafePagingAdapter() }
+
+  private var naverMap: NaverMap? = null
+  private val markers = mutableListOf<Marker>()
   private lateinit var fusedLocationClient: FusedLocationProviderClient
   private val locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
   private val permissions =
@@ -48,7 +64,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       if (isPermissionsGranted()) {
         permissionsGranted = true
       } else {
-        naverMap.locationTrackingMode = LocationTrackingMode.None
+        naverMap?.locationTrackingMode = LocationTrackingMode.None
       }
     }
 
@@ -70,6 +86,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       naverMap.locationTrackingMode = LocationTrackingMode.Follow
     }
     initNaverMap()
+    addMarkersToMap(cafePagingAdapter.snapshot())
   }
 
   private fun isPermissionsGranted(): Boolean {
@@ -79,13 +96,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun checkPermission() {
-    if (shouldShowPermissionRationale()) showLocationPermissionRationaleDialog()
-    else requestPermissions()
+    if (shouldShowPermissionRationale()) {
+      showLocationPermissionRationaleDialog()
+    } else {
+      requestPermissions()
+    }
   }
 
   private fun initListener() {
+    // TODO 마커 클릭 화면 전환 클릭 이벤트 리스터 구현
     binding.fabSearchTracking.setOnClickListener {
-      naverMap.locationTrackingMode = LocationTrackingMode.Follow
+      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
     }
 
     binding.tietSearchCafe.setOnClickListener {
@@ -99,15 +120,50 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initObserver() {
-    // TODO 현재 보여지는 지도 내에 등록된 카페 목록 가져오기
+    repeatOnStarted {
+      launch {
+        viewModel.placeList.collectLatest { pagingData ->
+          cafePagingAdapter.submitData(pagingData)
+        }
+      }
+
+      launch {
+        cafePagingAdapter.loadStateFlow
+          .distinctUntilChangedBy { it.refresh }
+          .collect { loadStates ->
+            if (loadStates.source.refresh is LoadState.NotLoading) {
+              addMarkersToMap(cafePagingAdapter.snapshot())
+            }
+          }
+      }
+    }
+  }
+
+  private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
+    snapshot.toList().forEach { place ->
+      if (place != null) {
+        createAndAddMarker(place)
+      }
+    }
+    markers.forEach { marker ->
+      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+      marker.map = naverMap
+    }
+  }
+
+  private fun createAndAddMarker(data: PlaceEntity) {
+    val marker = Marker()
+    marker.position = LatLng(data.latitude, data.longitude)
+    markers.add(marker)
+    marker.map = naverMap
   }
 
   private fun initNaverMap() {
-    naverMap.apply {
+    naverMap?.apply {
       locationSource = this@SearchFragment.locationSource
       uiSettings.isZoomControlEnabled = false
       cameraPosition = CameraPosition(
-        LatLng(naverMap.cameraPosition.target.latitude, naverMap.cameraPosition.target.longitude),
+        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
         ZOOM_LEVEL,
       )
       setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
@@ -119,7 +175,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun moveToCameraToUserLocation() {
     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
       val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
-      naverMap.moveCamera(cameraUpdate)
+      naverMap?.moveCamera(cameraUpdate)
     }
   }
 
@@ -174,13 +230,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onDestroyView() {
+    markers.forEach { marker ->
+      marker.map = null
+    }
+    markers.clear()
     binding.mvSearch.onDestroy()
+    naverMap = null
     super.onDestroyView()
   }
 
   override fun onLowMemory() {
-    binding.mvSearch.onLowMemory()
     super.onLowMemory()
+    binding.mvSearch.onLowMemory()
   }
 
   private companion object {

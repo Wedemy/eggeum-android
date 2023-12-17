@@ -28,7 +28,7 @@ public class PlaceDataSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getPlaceList(
+  override fun getPlaceList(
     distance: Int?,
     endDate: String?,
     latitude: Int?,
@@ -46,7 +46,6 @@ public class PlaceDataSourceImpl @Inject constructor(
       config = PagingConfig(
         pageSize = Constants.PAGING_SIZE,
         enablePlaceholders = false,
-        maxSize = Constants.PAGING_SIZE * 3,
       ),
       pagingSourceFactory = pagingSourceFactory,
     ).flow

@@ -13,6 +13,9 @@ ktlint_standard_annotation = disabled
 ktlint_standard_wrapping = disabled
 ktlint_standard_argument-list-wrapping = disabled
 ktlint_standard_multiline-if-else = disabled
+ktlint_standard_trailing-comma-on-call-site = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+ktlint_standard_no_blank_line_in_list = disabled
 
 [*.{kt,kts}]
 ij_kotlin_allow_trailing_comma = true

@@ -30,7 +30,7 @@ public interface NoticeRepository {
    * @param startDate 공지 등록일 포함 시작 날짜
    * @param endDate 공지 등록일 포함 마지막 날짜
    */
-  public suspend fun getNoticeList(
+  public fun getNoticeList(
     search: String? = null,
     page: Int? = null,
     size: Int? = null,

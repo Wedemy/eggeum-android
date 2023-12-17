@@ -30,7 +30,7 @@ public class GetNoticeUseCase @Inject constructor(
 public class GetNoticeListUseCase @Inject constructor(
   private val repository: NoticeRepository,
 ) {
-  public suspend operator fun invoke(): Flow<PagingData<NoticeEntity>> {
+  public operator fun invoke(): Flow<PagingData<NoticeEntity>> {
     return repository.getNoticeList()
   }
 }

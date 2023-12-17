@@ -7,7 +7,7 @@
 
 package us.wedemy.eggeum.android.main.ui.myaccount
 
-import us.wedemy.eggeum.android.main.ui.item.NoticeItem
+import us.wedemy.eggeum.android.main.model.NoticeModel
 
 sealed class NoticeUiModel {
   object NoticeEmptyItem : NoticeUiModel()
@@ -16,5 +16,5 @@ sealed class NoticeUiModel {
 
   object NoticeSearchItem : NoticeUiModel()
 
-  data class NoticeListItem(val notice: NoticeItem) : NoticeUiModel()
+  data class NoticeListItem(val notice: NoticeModel) : NoticeUiModel()
 }

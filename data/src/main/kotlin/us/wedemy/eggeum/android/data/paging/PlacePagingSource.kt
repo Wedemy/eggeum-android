@@ -31,20 +31,20 @@ public class PlacePagingSource(
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PlaceResponse> {
     return try {
       val pageNumber = params.key ?: STARTING_PAGE_INDEX
-      val response = service.getPlaceList()
+      val response = service.getPlaceList(page = pageNumber, size = params.loadSize)
+
       val endOfPaginationReached = response.list.isEmpty()
-      val data = response.list
-      val prevKey = if (pageNumber == STARTING_PAGE_INDEX)
-        null else pageNumber - 1
-      val nextKey = if (endOfPaginationReached) {
-        null
-      } else {
-        pageNumber + (params.loadSize / PAGING_SIZE)
-      }
+
       LoadResult.Page(
-        data = data,
-        prevKey = prevKey,
-        nextKey = nextKey,
+        data = response.list,
+        prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1,
+        nextKey = if (endOfPaginationReached) {
+          null
+        } else {
+          // initial load size = 3 * NETWORK_PAGE_SIZE
+          // ensure we're not requesting duplicating items, at the 2nd request
+          pageNumber + (params.loadSize / PAGING_SIZE)
+        },
       )
     } catch (exception: IOException) {
       Timber.e(exception)

@@ -10,6 +10,7 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -37,6 +38,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
     if (uri != null) {
       viewModel.setProfileImageUri(uri.toString())
+      binding.ivEditMyInfoProfile.load(uri.toString())
     } else {
       Timber.tag("PhotoPicker").d("No media selected")
     }
@@ -60,7 +62,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     }
 
     binding.btnEditMyInfo.setOnClickListener {
-      viewModel.updateUserInfo()
+      viewModel.updateUserNickname()
     }
   }
 
@@ -71,15 +73,16 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
           binding.apply {
             tietEditNickname.hint = it.nickname
             tvEmail.text = it.email
-            if (it.profileImageUrl != null) ivEditMyInfoProfile.load(it.profileImageUrl)
+            val profileImageUrl = it.profileImageModel?.run { files.getOrNull(0)?.url }
+            if (profileImageUrl != null) ivEditMyInfoProfile.load(profileImageUrl)
             else ivEditMyInfoProfile.load(us.wedemy.eggeum.android.design.R.drawable.ic_profile_filled_48)
           }
         }
       }
 
       launch {
-        viewModel.profileImageUri.collect { uri ->
-          if (uri.isNotEmpty()) {
+        viewModel.newProfileImageUri.collect { uri ->
+          if (uri != null) {
             binding.ivEditMyInfoProfile.load(uri) {
               crossfade(true)
               placeholder(us.wedemy.eggeum.android.design.R.drawable.ic_profile_filled_80)
@@ -105,7 +108,26 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
             is EditTextState.Success -> setValid()
             is EditTextState.Error -> setError(state.error)
           }
-          binding.btnEditMyInfo.isEnabled = state == EditTextState.Success
+        }
+      }
+
+      launch {
+        viewModel.enableUpdateUserInfo.collect { flag ->
+          binding.btnEditMyInfo.isEnabled = flag
+        }
+      }
+
+      launch {
+        viewModel.userInfoUpdateSuccessEvent.collect {
+          if (!findNavController().navigateUp()) {
+            requireActivity().finish()
+          }
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
     }
@@ -121,7 +143,8 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   private fun setError(error: TextInputError) {
     when (error) {
       TextInputError.EMPTY -> setEmptyTextError()
-      else -> setTooShortTextError()
+      TextInputError.TOO_SHORT -> setTooShortTextError()
+      TextInputError.ALREADY_EXIST -> setAlreadyExistTextError()
     }
   }
 
@@ -136,6 +159,19 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     binding.tilEditNickname.apply {
       error = getString(R.string.too_short_text_error)
       setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
+      val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
+      setEndIconTintList(ColorStateList.valueOf(color))
+      setEndIconOnClickListener {
+        binding.tietEditNickname.text?.clear()
+        viewModel.setNickname("")
+      }
+    }
+  }
+
+  private fun setAlreadyExistTextError() {
+    binding.tilEditNickname.apply {
+      error = getString(R.string.already_exist_text_error)
+      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))
       setEndIconOnClickListener {

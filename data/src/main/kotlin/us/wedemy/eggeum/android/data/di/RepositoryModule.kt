@@ -13,12 +13,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.repository.EnumRepositoryImpl
+import us.wedemy.eggeum.android.data.repository.FileRepositoryImpl
 import us.wedemy.eggeum.android.data.repository.LoginRepositoryImpl
 import us.wedemy.eggeum.android.data.repository.NoticeRepositoryImpl
 import us.wedemy.eggeum.android.data.repository.PlaceRepositoryImpl
 import us.wedemy.eggeum.android.data.repository.ReportRepositoryImpl
 import us.wedemy.eggeum.android.data.repository.UserRepositoryImpl
 import us.wedemy.eggeum.android.domain.repository.EnumRepository
+import us.wedemy.eggeum.android.domain.repository.FileRepository
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
@@ -51,4 +53,8 @@ internal abstract class RepositoryModule {
   @Binds
   @Singleton
   abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+  @Binds
+  @Singleton
+  abstract fun bindFileRepository(fileRepositoryImpl: FileRepositoryImpl): FileRepository
 }

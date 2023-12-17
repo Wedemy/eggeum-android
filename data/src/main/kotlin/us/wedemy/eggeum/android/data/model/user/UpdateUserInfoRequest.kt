@@ -26,5 +26,5 @@ public data class UpdateUserInfoRequest(
   public val nickname: String,
 
   @SerialName("profileImage")
-  public val profileImage: ProfileImage,
+  public val profileImage: ProfileImage?,
 )

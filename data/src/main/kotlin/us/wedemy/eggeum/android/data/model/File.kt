@@ -22,7 +22,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class File(
   @SerialName("uploadFileId")
-  val uploadFileId: Int,
+  val uploadFileId: Int?,
 
   @SerialName("url")
   val url: String?,

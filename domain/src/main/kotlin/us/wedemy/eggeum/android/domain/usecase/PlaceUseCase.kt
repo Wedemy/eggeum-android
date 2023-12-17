@@ -41,7 +41,7 @@ public class UpsertlaceBodyUseCase @Inject constructor(
 public class GetPlaceListUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
-  public suspend operator fun invoke(): Flow<PagingData<PlaceEntity>> {
+  public operator fun invoke(type: String? = null): Flow<PagingData<PlaceEntity>> {
     return repository.getPlaceList()
   }
 }

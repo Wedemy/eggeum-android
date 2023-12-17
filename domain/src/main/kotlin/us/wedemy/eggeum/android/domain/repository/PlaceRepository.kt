@@ -37,7 +37,7 @@ public interface PlaceRepository {
    * @param startDate 시작일
    * @param type 타입(PlaceType)
    */
-  public suspend fun getPlaceList(
+  public fun getPlaceList(
     distance: Int? = null,
     endDate: String? = null,
     latitude: Int? = null,

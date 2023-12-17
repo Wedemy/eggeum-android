@@ -12,6 +12,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import us.wedemy.eggeum.android.data.datasource.file.FileDataSource
+import us.wedemy.eggeum.android.data.datasource.file.FileDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.login.LoginLocalDataSource
 import us.wedemy.eggeum.android.data.datasource.login.LoginLocalDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.login.LoginRemoteDataSource
@@ -51,4 +53,8 @@ internal abstract class DataSourceModule {
   @Binds
   @Singleton
   abstract fun bindUserDataSource(userDataSourceImpl: UserDataSourceImpl): UserDataSource
+
+  @Binds
+  @Singleton
+  abstract fun bindFileDataSource(fileDataSourceImpl: FileDataSourceImpl): FileDataSource
 }

@@ -30,7 +30,7 @@ public class ReportDataSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getReportList(
+  override fun getReportList(
     page: Int?,
     size: Int?,
     sort: String?,
@@ -41,7 +41,6 @@ public class ReportDataSourceImpl @Inject constructor(
       config = PagingConfig(
         pageSize = Constants.PAGING_SIZE,
         enablePlaceholders = false,
-        maxSize = Constants.PAGING_SIZE * 3,
       ),
       pagingSourceFactory = pagingSourceFactory,
     ).flow

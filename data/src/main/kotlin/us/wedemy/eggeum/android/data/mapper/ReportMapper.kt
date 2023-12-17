@@ -26,7 +26,7 @@ internal fun ReportResponse.toEntity() =
 
 internal fun ReportListResponse.toEntity() =
   ReportListEntity(
-    elements = list.map(ReportResponse::toEntity),
+    list = list.map(ReportResponse::toEntity),
     totalPages = totalPages,
     totalElements = totalElements,
   )

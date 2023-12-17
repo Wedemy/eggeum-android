@@ -36,7 +36,7 @@ internal fun PlaceResponse.toEntity() =
 
 internal fun PlaceListResponse.toEntity() =
   PlaceListEntity(
-    elements = list.map(PlaceResponse::toEntity),
+    list = list.map(PlaceResponse::toEntity),
     totalPages = totalPages,
     totalElements = totalElements,
   )

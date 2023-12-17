@@ -15,7 +15,7 @@ import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 public interface PlaceDataSource {
   public suspend fun getPlace(placeId: Int): PlaceResponse?
 
-  public suspend fun getPlaceList(
+  public fun getPlaceList(
     distance: Int?,
     endDate: String?,
     latitude: Int?,

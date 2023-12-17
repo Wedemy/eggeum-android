@@ -5,9 +5,10 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.main.ui.item
+package us.wedemy.eggeum.android.domain.model.file
 
-data class NoticeCardItem(
-  val title: String,
-  val date: String,
+public data class FileResponseEntity(
+  val name: String?,
+  val uploadFileId: Int?,
+  val url: String?,
 )

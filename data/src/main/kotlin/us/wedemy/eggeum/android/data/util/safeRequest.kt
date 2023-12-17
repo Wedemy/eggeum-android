@@ -37,9 +37,15 @@ internal suspend fun <T> safeRequest(request: suspend () -> Response<T>): T? {
     )
   } catch (exception: UnknownHostException) {
     Timber.d(exception)
-    throw ExceptionWrapper(message = exception.toAlertMessage(), cause = exception)
+    throw ExceptionWrapper(
+      message = exception.toAlertMessage(),
+      cause = exception,
+    )
   } catch (exception: Exception) {
     Timber.d(exception)
-    throw ExceptionWrapper(message = exception.toAlertMessage(), cause = exception)
+    throw ExceptionWrapper(
+      message = exception.toAlertMessage(),
+      cause = exception,
+    )
   }
 }

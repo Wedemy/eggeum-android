@@ -28,10 +28,10 @@ public data class PlaceResponse(
   val info: Info,
 
   @SerialName("latitude")
-  val latitude: Double?,
+  val latitude: Double,
 
   @SerialName("longitude")
-  val longitude: Double?,
+  val longitude: Double,
 
   @SerialName("menu")
   val menu: Menu,

@@ -21,17 +21,21 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetUserInfoUseCase
+import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.model.ProfileImageModel
 
 data class MyAccountUiState(
   val nickname: String = "",
   val email: String = "",
-  val profileImageUrl: String? = null,
+  val profileImageModel: ProfileImageModel? = null,
   val isLoading: Boolean = false,
   val error: Throwable? = null,
 )
 
 @HiltViewModel
-class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: GetUserInfoUseCase) : ViewModel() {
+class MyAccountViewModel @Inject constructor(
+  private val getUserInfoUseCase: GetUserInfoUseCase,
+) : ViewModel() {
 
   private val _uiState = MutableStateFlow(MyAccountUiState())
   val uiState: StateFlow<MyAccountUiState> = _uiState.asStateFlow()
@@ -39,22 +43,17 @@ class MyAccountViewModel @Inject constructor(private val getUserInfoUseCase: Get
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
-  init {
-    getUserInfo()
-  }
-
-  private fun getUserInfo() {
+  fun getUserInfo() {
     viewModelScope.launch {
       val result = getUserInfoUseCase()
       when {
         result.isSuccess && result.getOrNull() != null -> {
-          val userInfoBody = result.getOrNull()!!
-          Timber.d("$userInfoBody")
+          val userInfo = result.getOrNull()!!
           _uiState.update { uiState ->
             uiState.copy(
-              nickname = userInfoBody.nickname,
-              email = userInfoBody.email,
-              profileImageUrl = userInfoBody.profileImageEntity?.let { it.files[0].url },
+              nickname = userInfo.nickname,
+              email = userInfo.email,
+              profileImageModel = userInfo.profileImageEntity?.toUiModel(),
             )
           }
         }

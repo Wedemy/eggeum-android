@@ -9,10 +9,19 @@ package us.wedemy.eggeum.android.data.mapper
 
 import us.wedemy.eggeum.android.data.model.File
 import us.wedemy.eggeum.android.data.model.ProfileImage
+import us.wedemy.eggeum.android.data.model.file.FileResponse
 import us.wedemy.eggeum.android.data.model.place.Image
-import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
+import us.wedemy.eggeum.android.domain.model.FileEntity
+import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 import us.wedemy.eggeum.android.domain.model.place.ImageEntity
+
+public fun FileResponse.toEntity(): FileResponseEntity =
+  FileResponseEntity(
+    name = name,
+    uploadFileId = uploadFileId,
+    url = url,
+  )
 
 public fun File.toEntity(): FileEntity =
   FileEntity(

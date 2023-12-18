@@ -9,10 +9,13 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 interface CafeImageClickListener {
   fun onItemClick(position: Int)
@@ -20,6 +23,9 @@ interface CafeImageClickListener {
 
 @AndroidEntryPoint
 class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
+  override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)
+
+  private val viewModel: CafeDetailViewModel by hiltNavGraphViewModels(R.id.nav_main)
 
   private val cafeImageAdapter by lazy {
     CafeImageAdapter(
@@ -30,8 +36,6 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
       },
     )
   }
-
-  override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

@@ -122,7 +122,11 @@
     android:id="@+id/fragment_update_menu_complete"
     android:name="us.wedemy.eggeum.android.updatecafe.ui.UpdateMenuCompleteFragment"
     android:label="UpdateMenuCompleteFragment"
-    tools:layout="@layout/fragment_update_menu_complete" />
+    tools:layout="@layout/fragment_update_menu_complete" >
+    <action
+      android:id="@+id/action_fragment_update_menu_complete_to_fragment_select_info_categories"
+      app:destination="@id/fragment_select_info_categories" />
+  </fragment>
 
   <fragment
     android:id="@+id/fragment_input_cafe_info"

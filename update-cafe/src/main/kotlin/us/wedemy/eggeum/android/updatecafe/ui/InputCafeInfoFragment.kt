@@ -46,7 +46,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   private var cafePhone = ""
 
   private var cafeName: String = ""
-  private val guideMessage = "정보를 입력해주세요!"
+  private val guideMessage = "정보를 입력해주세요!" // resources.getString(R.string.guide_message) // 에러발생
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initView()
@@ -155,7 +155,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeInfo.collect { cafeInfo ->
-          with(binding) {
+          binding.apply {
             tietInputCafeArea.hint = stringOrElseGuideMessage(cafeInfo.areaSize)
             tietInputCafeMeetingRoom.hint = intToStringOrElseGuideMessage(cafeInfo.meetingRoomCount)
             tietInputCafeMultiSeat.hint = intToStringOrElseGuideMessage(cafeInfo.multiSeatCount)

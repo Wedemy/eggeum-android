@@ -53,7 +53,6 @@ class ProposeCafeInfoViewModel @Inject constructor(
       when {
         result.isSuccess && result.getOrNull() != null -> {
           placeBody = result.getOrNull()!!
-          Timber.d("plcaeBody >>> $placeBody")
           placeBody.menu?.products?.let {
             val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
             updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)

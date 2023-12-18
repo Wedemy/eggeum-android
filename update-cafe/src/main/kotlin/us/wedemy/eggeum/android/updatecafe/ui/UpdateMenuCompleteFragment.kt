@@ -11,7 +11,9 @@ package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentUpdateMenuCompleteBinding
 
@@ -26,6 +28,10 @@ class UpdateMenuCompleteFragment : BaseFragment<FragmentUpdateMenuCompleteBindin
 
   private fun initListener() {
     // TODO
+    binding.btnRegisterCafeComplete.setOnClickListener {
+      val action = UpdateMenuCompleteFragmentDirections.actionFragmentUpdateMenuCompleteToFragmentSelectInfoCategories()
+      findNavController().safeNavigate(action)
+    }
   }
 
   private fun initObserver() {

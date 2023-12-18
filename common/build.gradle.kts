@@ -30,5 +30,6 @@ dependencies {
     libs.insetter,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
+    projects.designResource,
   )
 }

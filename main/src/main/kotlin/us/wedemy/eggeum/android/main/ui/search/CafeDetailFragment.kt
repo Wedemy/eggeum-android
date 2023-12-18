@@ -17,20 +17,35 @@ package us.wedemy.eggeum.android.main.ui.search
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseBottomSheetFragment
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeDetailBinding
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 @AndroidEntryPoint
 class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() {
   override fun getViewBinding() = FragmentCafeDetailBinding.inflate(layoutInflater)
 
+  private val viewModel: CafeDetailViewModel by hiltNavGraphViewModels(R.id.nav_main)
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    showFragment(TAG_CAFE_INFO_FRAGMENT)
+    initView()
+    initListener()
+  }
 
+  private fun initView() {
+    showFragment(TAG_CAFE_INFO_FRAGMENT)
+    binding.apply {
+      tvCafeDetailName.text = "스타벅스 강남역신분당역사점"
+      tvCafeDetailAddress.text = "서울특별시 강남구 강남대로 396"
+    }
+  }
+
+  private fun initListener() {
     binding.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         when (tab?.position) {

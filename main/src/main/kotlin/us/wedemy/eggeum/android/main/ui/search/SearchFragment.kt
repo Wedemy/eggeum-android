@@ -35,13 +35,22 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
+import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.mapper.toUilModel
+import us.wedemy.eggeum.android.main.model.CafeDetailModel
+import us.wedemy.eggeum.android.main.model.ImageModel
+import us.wedemy.eggeum.android.main.model.InfoModel
+import us.wedemy.eggeum.android.main.model.MenuModel
+import us.wedemy.eggeum.android.main.model.ProductModel
 import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
@@ -114,8 +123,60 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
 
     binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToSearchCafeFragment()
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(
+        CafeDetailModel(
+          address1 = "서울특별시 강남구 강남대로 396",
+          address2 = "",
+          id = 1,
+          image = ImageModel(
+            listOf()
+          ),
+          info = InfoModel(
+            areaSize = "30",
+            meetingRoomCount = 3,
+            multiSeatCount = 24,
+            singleSeatCount = 1,
+            businessHours = listOf("매일 09:00 - 21:00"),
+            existsSmokingArea = false,
+            existsWifi = true,
+            mobileCharging = "카운터에서 가능",
+            parking = "가능 / 기본 1시간 / 시간당 3,000원",
+            phone = "02-123-4567",
+            restRoom = "내부 / 남녀분리 / 장애인 화장실 있음",
+            websiteUri = "",
+            instagramUri = "",
+            blogUri = "",
+          ),
+          menu = MenuModel(
+            listOf(ProductModel("아메리카노", 3000), ProductModel("카페라테", 5000),)
+          ),
+          name = "스타벅스 강남역신분당역사점"
+        )
+      )
       findNavController().safeNavigate(action)
+    }
+
+    // https://navermaps.github.io/android-map-sdk/guide-ko/4-1.html
+    for (i in 0..< markers.size) {
+      // TODO 클릭 리스너가 동작하지 않는 문제 해결
+      // TODO 클릭한 마커 이미지 변경
+      markers[i].setOnClickListener {
+        Timber.d("marker $i clicked")
+        val placeModel = viewModel.placeSnapshotList.value[i]
+        val cafeDetailModel = CafeDetailModel(
+          address1 = placeModel.address1,
+          address2 = placeModel.address2,
+          id = placeModel.id,
+          image = placeModel.image.toUiModel(),
+          info = placeModel.info.toUilModel(),
+          menu = placeModel.menu.toUiModel(),
+          name = placeModel.name,
+        )
+        Timber.d("$cafeDetailModel")
+        val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(cafeDetailModel)
+        findNavController().safeNavigate(action)
+        false
+      }
     }
   }
 
@@ -132,6 +193,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
+              viewModel.updatePlaceSnapshotList(cafePagingAdapter.snapshot())
               addMarkersToMap(cafePagingAdapter.snapshot())
             }
           }

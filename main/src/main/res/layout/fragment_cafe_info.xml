@@ -18,7 +18,7 @@
 
     <TextView
       android:id="@+id/tv_cafe_info_area_value"
-      style="@style/Logo"
+      style="@style/H2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
@@ -127,7 +127,6 @@
       android:src="@drawable/ic_clock_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_multi_seat" />
-
 
     <TextView
       android:id="@+id/tv_cafe_info_business_hours"
@@ -461,7 +460,7 @@
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_phone" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_phone_value"
+      android:id="@+id/tv_cafe_info_phone_number"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

@@ -95,4 +95,20 @@
     <item name="android:textSize">0sp</item>
   </style>
 
+  <style name="EggeumBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/EggeumBottomSheet</item>
+  </style>
+
+  <style name="EggeumBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+    <item name="shapeAppearanceOverlay">@style/EggeumShapeAppearanceBottomSheetDialog</item>
+  </style>
+
+  <style name="EggeumShapeAppearanceBottomSheetDialog" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">32dp</item>
+    <item name="cornerSizeTopLeft">32dp</item>
+    <item name="cornerSizeBottomRight">0dp</item>
+    <item name="cornerSizeBottomLeft">0dp</item>
+  </style>
+
 </resources>

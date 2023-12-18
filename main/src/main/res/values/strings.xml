@@ -82,4 +82,5 @@
 
 <!--  EditMyInfo-->
   <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>
+  <string name="ic_bottom_sheet_handle">ic_bottom_sheet_handle</string>
 </resources>

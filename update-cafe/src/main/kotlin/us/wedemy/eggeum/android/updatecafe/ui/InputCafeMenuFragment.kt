@@ -60,6 +60,7 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
       tietInputCafeName.doAfterTextChanged {
         newCafeMenuName = it.toString()
       }
+
       tietInputCafePrice.doAfterTextChanged {
         newCafeMenuPrice = it.toString()
       }
@@ -73,6 +74,7 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
           requireActivity().finish()
         }
       }
+
       tbSelectInputCafeMenu.setNavigationOnClickListener {
         if (!findNavController().navigateUp()) {
           requireActivity().finish()

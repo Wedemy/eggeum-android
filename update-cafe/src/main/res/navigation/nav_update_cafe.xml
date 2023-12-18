@@ -72,6 +72,7 @@
     android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectInfoCategoriesFragment"
     android:label="SelectInfoCategoriesFragment"
     tools:layout="@layout/fragment_select_info_categories">
+
     <action
       android:id="@+id/action_fragment_select_info_categories_to_fragment_select_cafe_menu"
       app:destination="@id/fragment_select_cafe_menu"
@@ -79,6 +80,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     <action
       android:id="@+id/action_fragment_select_info_categories_to_fragment_input_cafe_info"
       app:destination="@id/fragment_input_cafe_info"
@@ -86,6 +88,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -93,6 +96,7 @@
     android:name="us.wedemy.eggeum.android.updatecafe.ui.SelectCafeMenuFragment"
     android:label="SelectCafeMenuFragment"
     tools:layout="@layout/fragment_select_cafe_menu">
+
 <!--    <action-->
 <!--      android:id="@+id/action_fragment_select_cafe_menu_to_fragment_input_cafe_menu"-->
 <!--      app:destination="@id/fragment_input_cafe_menu"-->
@@ -100,12 +104,23 @@
 <!--      app:exitAnim="@anim/nav_default_exit_anim"-->
 <!--      app:popEnterAnim="@anim/nav_default_pop_enter_anim"-->
 <!--      app:popExitAnim="@anim/nav_default_pop_exit_anim" />-->
+
     <action
       android:id="@+id/action_fragment_select_cafe_menu_to_fragment_update_menu_complete"
-      app:destination="@id/fragment_update_menu_complete" />
+      app:destination="@id/fragment_update_menu_complete"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     <action
       android:id="@+id/action_fragment_select_cafe_menu_to_fragment_input_cafe_menu"
-      app:destination="@id/fragment_input_cafe_menu" />
+      app:destination="@id/fragment_input_cafe_menu"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
   </fragment>
 
   <fragment
@@ -113,9 +128,11 @@
     android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeMenuFragment"
     android:label="InputCafeMenuFragment"
     tools:layout="@layout/fragment_input_cafe_menu">
+
     <argument
       android:name="cafeMenuItem"
       app:argType="us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem" />
+
   </fragment>
 
   <fragment
@@ -133,6 +150,7 @@
     android:name="us.wedemy.eggeum.android.updatecafe.ui.InputCafeInfoFragment"
     android:label="InputCafeInfoFragment"
     tools:layout="@layout/fragment_input_cafe_info">
+
     <action
       android:id="@+id/action_fragment_input_cafe_info_to_fragment_update_menu_complete"
       app:destination="@id/fragment_update_menu_complete"
@@ -140,6 +158,7 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
 </navigation>

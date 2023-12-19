@@ -181,7 +181,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )
-      if(selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
+      if (selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude!!, selectedPlaceModel.longitude!!))
           .animate(CameraAnimation.Easing)
         naverMap?.moveCamera(cameraUpdate)

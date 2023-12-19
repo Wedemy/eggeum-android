@@ -15,7 +15,7 @@
   <string name="ic_register_cafe_image">ic_register_cafe_image</string>
   <string name="input_cafe_name">카페 이름을 입력해주세요.</string>
   <string name="input_cafe_address">카페 주소를 입력해주세요.</string>
-  <string name="select_cafe_area">카페 면적을 선택해주세요.</string>
+  <string name="input_cafe_area">카페 면적을 입력해주세요.</string>
   <string name="register">등록하기</string>
   <string name="ic_register_cafe_complete">ic_register_cafe_complete</string>
   <string name="register_cafe_complete_title">카페 등록 신청을\n완료 했어요.</string>
@@ -23,5 +23,27 @@
   <string name="complete">완료</string>
   <string name="cafe_image_close">cafe_image_close</string>
   <string name="cafe_image_limit">최소 1장 이상 등록해주세요.</string>
+  <string name="input_cafe_meeting_room">회의실 개수를 입력해주세요.</string>
   <string name="please_input_to_all_required_items">필수 항목을 모두 입력 해주세요.</string>
+  <string name="cafe_meeting_room">회의실(개)</string>
+  <string name="cafe_multi_seat">다인석(개)</string>
+  <string name="input_cafe_multi_seat">다인석 개수를 입력해주세요.</string>
+  <string name="cafe_single_seat">1인석(개)</string>
+  <string name="input_cafe_single_seat">1인석 개수를 입력해주세요.</string>
+  <string name="cafe_business_hours">영업 시간</string>
+  <string name="input_cafe_business_hours">영업 시간을 입력해주세요.</string>
+  <string name="cafe_rest_room">화장실(O/X)</string>
+  <string name="input_cafe_rest_room">화장실의 유무를 입력해주세요.</string>
+  <string name="input_cafe_parking">주차 가능 여부를 입력해주세요.</string>
+  <string name="cafe_parking">주차(O/X)</string>
+  <string name="cafe_smoke">흡연 구역(O/X)</string>
+  <string name="input_cafe_smoke">흡연구역 여부를 입력해주세요.</string>
+  <string name="cafe_outlet">콘센트(O/X)</string>
+  <string name="input_cafe_outlet">콘센트 여부를 입력해주세요.</string>
+  <string name="cafe_mobile_charging">휴대폰 충전</string>
+  <string name="input_cafe_mobile_charging">휴대폰 충전 가능 여부를 입력해주세요.</string>
+  <string name="cafe_phone">전화</string>
+  <string name="input_cafe_phone">전화 번호를 입력해주세요.</string>
+  <string name="cafe_website_uri">SNS</string>
+  <string name="input_cafe_website_uri">SNS 주소를 입력해주세요.</string>
 </resources>

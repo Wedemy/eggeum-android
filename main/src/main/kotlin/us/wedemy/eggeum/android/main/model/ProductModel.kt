@@ -7,7 +7,11 @@
 
 package us.wedemy.eggeum.android.main.model
 
-data class CafeMenuModel(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class ProductModel(
   val name: String,
   val price: Int,
-)
+) : Parcelable

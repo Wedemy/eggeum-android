@@ -161,6 +161,7 @@ androidx-lifecycle = [
 androidx-navigation = [
     "androidx-navigation-ui",
     "androidx-navigation-fragment",
+    "androidx-hilt-navigation-fragment",
 ]
 ktor-client = [
     "ktor-client-core",

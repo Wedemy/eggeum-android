@@ -10,7 +10,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:paddingVertical="16dp"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  tools:ignore="HardcodedText">
 
   <TextView
     android:id="@+id/tv_cafe_menu_name"
@@ -32,18 +33,19 @@
     android:textColor="@color/gray_900"
     android:layout_marginEnd="16dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/iv_btn"
+    app:layout_constraintEnd_toStartOf="@+id/iv_cafe_menu_option"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="₩3,000" />
 
   <ImageView
-    android:id="@+id/iv_btn"
+    android:id="@+id/iv_cafe_menu_option"
     android:background="@drawable/ic_menu_gray400_24"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    android:contentDescription="Cafe Menu Option" />
 
   <View
     android:id="@+id/line_notice_bottom"
@@ -54,6 +56,5 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

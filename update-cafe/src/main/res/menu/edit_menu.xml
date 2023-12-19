@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
     android:id="@+id/menu_edit"
-    android:title="@string/edit"
-    android:icon="@drawable/ic_edit_outlined_20"/>
+    android:icon="@drawable/ic_edit_outlined_20"
+    android:title="@string/edit" />
 
   <item
     android:id="@+id/menu_delete"
-    android:title="@string/delete"
-    android:icon="@drawable/ic_trash_20"/>
+    android:icon="@drawable/ic_trash_20"
+    android:title="@string/delete" />
 
 </menu>

@@ -10,20 +10,20 @@ package us.wedemy.eggeum.android.domain.model.place
 public data class PlaceEntity(
   val address1: String?,
   val address2: String?,
-  val id: Int?,
+  val id: Int,
   val image: ImageEntity?,
   var info: InfoEntity?,
-  val latitude: Double,
-  val longitude: Double,
+  val latitude: Double?,
+  val longitude: Double?,
   val menu: MenuEntity?,
-  val name: String?,
+  val name: String,
   val type: String?,
 ) {
   public fun toUpsertPlaceEntity(): UpsertPlaceEntity {
     return UpsertPlaceEntity(
       address1 = address1,
       address2 = address2,
-      placeId = id!!,
+      placeId = id,
       image = image,
       info = info!!,
       latitude = latitude,
@@ -38,13 +38,13 @@ public data class PlaceEntity(
     public fun of(
       address1: String? = null,
       address2: String? = null,
-      id: Int? = null,
+      id: Int,
       image: ImageEntity? = null,
       info: InfoEntity? = null,
       latitude: Double? = null,
       longitude: Double? = null,
       menu: MenuEntity? = null,
-      name: String? = null,
+      name: String,
       type: String? = null,
     ): PlaceEntity {
       return PlaceEntity(

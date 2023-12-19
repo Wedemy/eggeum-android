@@ -5,32 +5,41 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
- * Designed and developed by Wedemy 2023.
- *
- * Licensed under the MIT.
- * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
- */
-
 package us.wedemy.eggeum.android.main.ui.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseBottomSheetFragment
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeDetailBinding
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 @AndroidEntryPoint
 class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() {
   override fun getViewBinding() = FragmentCafeDetailBinding.inflate(layoutInflater)
 
+  private val viewModel by activityViewModels<CafeDetailViewModel>()
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    showFragment(TAG_CAFE_INFO_FRAGMENT)
+    initView()
+    initListener()
+  }
 
+  private fun initView() {
+    showFragment(TAG_CAFE_INFO_FRAGMENT)
+    binding.apply {
+      val cafeDetailInfo = viewModel.cafeDetailInfo.value
+      tvCafeDetailName.text = cafeDetailInfo.name
+      tvCafeDetailAddress.text = cafeDetailInfo.address1
+    }
+  }
+
+  private fun initListener() {
     binding.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         when (tab?.position) {

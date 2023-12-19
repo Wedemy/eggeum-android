@@ -7,9 +7,7 @@
 
 package us.wedemy.eggeum.android.main.mapper
 
-import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
-import us.wedemy.eggeum.android.main.model.FileModel
 import us.wedemy.eggeum.android.main.model.ProfileImageModel
 
 internal fun ProfileImageEntity.toUiModel() =
@@ -20,16 +18,4 @@ internal fun ProfileImageEntity.toUiModel() =
 internal fun ProfileImageModel.toEntity() =
   ProfileImageEntity(
     files = files.map { it.toEntity() },
-  )
-
-internal fun FileEntity.toUiModel() =
-  FileModel(
-    uploadFileId = uploadFileId,
-    url = url,
-  )
-
-internal fun FileModel.toEntity() =
-  FileEntity(
-    uploadFileId = uploadFileId,
-    url = url,
   )

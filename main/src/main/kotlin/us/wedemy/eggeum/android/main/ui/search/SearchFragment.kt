@@ -16,6 +16,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ItemSnapshotList
@@ -23,12 +24,14 @@ import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,13 +44,19 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
+import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.mapper.toUilModel
+import us.wedemy.eggeum.android.main.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
+import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<SearchViewModel>()
+  private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
+  private val searchViewModel by viewModels<SearchViewModel>()
 
   private val cafePagingAdapter by lazy { CafePagingAdapter() }
 
@@ -104,7 +113,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initListener() {
-    // TODO 마커 클릭 화면 전환 클릭 이벤트 리스터 구현
     binding.fabSearchTracking.setOnClickListener {
       naverMap?.locationTrackingMode = LocationTrackingMode.Follow
     }
@@ -114,7 +122,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
 
     binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToSearchCafeFragment()
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment()
       findNavController().safeNavigate(action)
     }
   }
@@ -122,7 +130,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.placeList.collectLatest { pagingData ->
+        searchViewModel.placeList.collectLatest { pagingData ->
           cafePagingAdapter.submitData(pagingData)
         }
       }
@@ -132,6 +140,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
+              searchViewModel.updatePlaceSnapshotList(cafePagingAdapter.snapshot())
               addMarkersToMap(cafePagingAdapter.snapshot())
             }
           }
@@ -145,17 +154,43 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         createAndAddMarker(place)
       }
     }
-    markers.forEach { marker ->
-      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
-      marker.map = naverMap
-    }
   }
 
   private fun createAndAddMarker(data: PlaceEntity) {
     val marker = Marker()
-    marker.position = LatLng(data.latitude!!, data.longitude!!)
+    if (data.latitude != null && data.longitude != null) {
+      marker.position = LatLng(data.latitude!!, data.longitude!!)
+      markers.add(marker)
+      marker.map = naverMap
+    }
+    marker.tag = data.id
+    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    marker.onClickListener = this@SearchFragment
     markers.add(marker)
-    marker.map = naverMap
+  }
+
+  override fun onClick(overlay: Overlay): Boolean {
+    val selectedPlaceModel = searchViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    if (selectedPlaceModel != null) {
+      val cafeDetailInfo = CafeDetailModel(
+        address1 = selectedPlaceModel.address1,
+        address2 = selectedPlaceModel.address2,
+        id = selectedPlaceModel.id,
+        image = selectedPlaceModel.image?.toUiModel(),
+        info = selectedPlaceModel.info?.toUilModel(),
+        menu = selectedPlaceModel.menu?.toUiModel(),
+        name = selectedPlaceModel.name,
+      )
+      if (selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude!!, selectedPlaceModel.longitude!!))
+          .animate(CameraAnimation.Easing)
+        naverMap?.moveCamera(cameraUpdate)
+      }
+      cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail()
+      findNavController().safeNavigate(action)
+    }
+    return true
   }
 
   private fun initNaverMap() {

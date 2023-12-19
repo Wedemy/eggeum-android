@@ -36,7 +36,7 @@ class CafeMenuViewHolder(
       tvCafeMenuName.text = item.name
       tvCafeMenuPrice.text = formatPrice(item.price)
 
-      ivBtn.setOnClickListener {
+      ivCafeMenuOption.setOnClickListener {
         val popupMenu = PopupMenu(binding.root.context, it)
         popupMenu.menuInflater.inflate(R.menu.edit_menu, popupMenu.menu)
 

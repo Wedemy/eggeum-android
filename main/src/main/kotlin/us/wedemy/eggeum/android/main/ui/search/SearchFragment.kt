@@ -16,6 +16,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ItemSnapshotList
@@ -46,18 +47,16 @@ import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.mapper.toUilModel
 import us.wedemy.eggeum.android.main.model.CafeDetailModel
-import us.wedemy.eggeum.android.main.model.ImageModel
-import us.wedemy.eggeum.android.main.model.InfoModel
-import us.wedemy.eggeum.android.main.model.MenuModel
-import us.wedemy.eggeum.android.main.model.ProductModel
 import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<SearchViewModel>()
+  private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
+  private val searchViewModel by viewModels<SearchViewModel>()
 
   private val cafePagingAdapter by lazy { CafePagingAdapter() }
 
@@ -123,36 +122,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
 
     binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(
-        CafeDetailModel(
-          address1 = "서울특별시 강남구 강남대로 396",
-          address2 = "",
-          id = 1,
-          image = ImageModel(
-            listOf()
-          ),
-          info = InfoModel(
-            areaSize = "30",
-            meetingRoomCount = 3,
-            multiSeatCount = 24,
-            singleSeatCount = 1,
-            businessHours = listOf("매일 09:00 - 21:00"),
-            existsSmokingArea = false,
-            existsWifi = true,
-            mobileCharging = "카운터에서 가능",
-            parking = "가능 / 기본 1시간 / 시간당 3,000원",
-            phone = "02-123-4567",
-            restRoom = "내부 / 남녀분리 / 장애인 화장실 있음",
-            websiteUri = "",
-            instagramUri = "",
-            blogUri = "",
-          ),
-          menu = MenuModel(
-            listOf(ProductModel("아메리카노", 3000), ProductModel("카페라테", 5000))
-          ),
-          name = "스타벅스 강남역신분당역사점"
-        )
-      )
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment()
       findNavController().safeNavigate(action)
     }
   }
@@ -160,7 +130,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.placeList.collectLatest { pagingData ->
+        searchViewModel.placeList.collectLatest { pagingData ->
           cafePagingAdapter.submitData(pagingData)
         }
       }
@@ -170,7 +140,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              viewModel.updatePlaceSnapshotList(cafePagingAdapter.snapshot())
+              searchViewModel.updatePlaceSnapshotList(cafePagingAdapter.snapshot())
               addMarkersToMap(cafePagingAdapter.snapshot())
             }
           }
@@ -194,6 +164,28 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
     marker.onClickListener = this@SearchFragment
     markers.add(marker)
+  }
+
+  override fun onClick(overlay: Overlay): Boolean {
+    val selectedPlaceModel = searchViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    if (selectedPlaceModel != null) {
+      val cafeDetailInfo = CafeDetailModel(
+        address1 = selectedPlaceModel.address1,
+        address2 = selectedPlaceModel.address2,
+        id = selectedPlaceModel.id,
+        image = selectedPlaceModel.image.toUiModel(),
+        info = selectedPlaceModel.info.toUilModel(),
+        menu = selectedPlaceModel.menu.toUiModel(),
+        name = selectedPlaceModel.name,
+      )
+      val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude, selectedPlaceModel.longitude))
+        .animate(CameraAnimation.Easing)
+      naverMap?.moveCamera(cameraUpdate)
+      cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail()
+      findNavController().safeNavigate(action)
+    }
+    return true
   }
 
   private fun initNaverMap() {
@@ -285,26 +277,5 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private companion object {
     private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private const val ZOOM_LEVEL = 15.0
-  }
-
-  override fun onClick(overlay: Overlay): Boolean {
-    val selectedPlaceModel = viewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
-    if (selectedPlaceModel != null) {
-      val cafeDetailModel = CafeDetailModel(
-        address1 = selectedPlaceModel.address1,
-        address2 = selectedPlaceModel.address2,
-        id = selectedPlaceModel.id,
-        image = selectedPlaceModel.image.toUiModel(),
-        info = selectedPlaceModel.info.toUilModel(),
-        menu = selectedPlaceModel.menu.toUiModel(),
-        name = selectedPlaceModel.name,
-      )
-      val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude, selectedPlaceModel.longitude))
-        .animate(CameraAnimation.Easing)
-      naverMap?.moveCamera(cameraUpdate)
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(cafeDetailModel)
-      findNavController().safeNavigate(action)
-    }
-    return true
   }
 }

@@ -12,5 +12,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ImageModel (
-  val files: List<FileModel>,
+  val files: List<FileModel> = emptyList(),
 ): Parcelable

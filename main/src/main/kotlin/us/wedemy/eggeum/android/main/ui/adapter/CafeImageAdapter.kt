@@ -11,11 +11,12 @@ import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.android.main.model.FileModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageViewHolder
 import us.wedemy.eggeum.android.main.ui.search.CafeImageClickListener
 
 class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
-  BaseRecyclerViewAdapter<String, ItemCafeImageBinding>() {
+  BaseRecyclerViewAdapter<FileModel, ItemCafeImageBinding>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageViewHolder(

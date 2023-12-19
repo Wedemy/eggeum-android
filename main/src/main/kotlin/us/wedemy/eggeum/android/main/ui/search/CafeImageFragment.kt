@@ -9,10 +9,11 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
-import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
@@ -25,13 +26,13 @@ interface CafeImageClickListener {
 class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
   override fun getViewBinding() = FragmentCafeImageBinding.inflate(layoutInflater)
 
-  private val viewModel: CafeDetailViewModel by hiltNavGraphViewModels(R.id.nav_main)
+  private val viewModel by activityViewModels<CafeDetailViewModel>()
 
   private val cafeImageAdapter by lazy {
     CafeImageAdapter(
       object : CafeImageClickListener {
         override fun onItemClick(position: Int) {
-          TODO("Not yet implemented")
+          // TODO CafeImageDetail 화면 으로 이동하는 이벤트 구현
         }
       },
     )
@@ -39,9 +40,25 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initView()
+    initObserver()
+
+  }
+
+  private fun initView() {
     binding.rvCafeImage.apply {
       setHasFixedSize(true)
       adapter = cafeImageAdapter
+    }
+  }
+
+  private fun initObserver() {
+    repeatOnStarted {
+      launch {
+        viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
+          cafeImageAdapter.replaceAll(cafeDetailInfo.image.files)
+        }
+      }
     }
   }
 }

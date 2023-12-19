@@ -30,11 +30,11 @@
   <string name="multi_seat">다인석</string>
   <string name="single_seat">1인석</string>
   <string name="business_hours">영업시간</string>
-  <string name="toilet">화장실</string>
+  <string name="rest_room">화장실</string>
   <string name="parking">주차</string>
   <string name="smoking_zone">흡연구역</string>
   <string name="wifi">WIFI</string>
-  <string name="plug">콘센트</string>
+  <string name="outlet">콘센트</string>
   <string name="sns">SNS</string>
   <string name="phone">전화</string>
   <string name="phone_charging">휴대폰 충전</string>

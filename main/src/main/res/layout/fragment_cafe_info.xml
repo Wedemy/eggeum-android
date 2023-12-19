@@ -164,42 +164,42 @@
       app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_business_hours" />
 
     <ImageView
-      android:id="@+id/iv_cafe_info_toilet"
+      android:id="@+id/iv_cafe_info_rest_room"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_marginTop="16dp"
-      android:contentDescription="Toilet"
-      android:src="@drawable/ic_toilet_outlined_24"
+      android:contentDescription="Rest Room"
+      android:src="@drawable/ic_rest_room_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/line_cafe_info_business_hours" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_toilet"
+      android:id="@+id/tv_cafe_info_rest_room"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:text="@string/toilet"
+      android:text="@string/rest_room"
       android:textColor="@color/gray_400"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_toilet"
-      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_toilet"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_toilet" />
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_rest_room"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_rest_room"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_rest_room" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_toilet_value"
+      android:id="@+id/tv_cafe_info_rest_room_value"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
       android:textColor="@color/gray_900"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_toilet"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_rest_room"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_toilet"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_rest_room"
       tools:text="내부 / 남녀 분리 / 장애인 화장실 있음" />
 
     <View
-      android:id="@+id/line_cafe_info_toilet"
+      android:id="@+id/line_cafe_info_rest_room"
       android:layout_width="0dp"
       android:layout_height="1dp"
       android:layout_marginHorizontal="16dp"
@@ -207,7 +207,7 @@
       android:background="@color/gray_100"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_toilet" />
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_rest_room" />
 
     <ImageView
       android:id="@+id/iv_cafe_info_parking"
@@ -218,7 +218,7 @@
       android:contentDescription="Parking"
       android:src="@drawable/ic_parking_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_toilet" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_rest_room" />
 
     <TextView
       android:id="@+id/tv_cafe_info_parking"
@@ -346,41 +346,41 @@
       app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_wifi" />
 
     <ImageView
-      android:id="@+id/iv_cafe_info_plug"
+      android:id="@+id/iv_cafe_info_outlet"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_marginTop="16dp"
-      android:contentDescription="Plug"
-      android:src="@drawable/ic_plug_outlined_24"
+      android:contentDescription="Outlet"
+      android:src="@drawable/ic_outlet_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/line_cafe_info_wifi" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_plug"
+      android:id="@+id/tv_cafe_info_outlet"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:text="@string/plug"
+      android:text="@string/outlet"
       android:textColor="@color/gray_400"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_plug"
-      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_plug"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_plug" />
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_outlet"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_outlet"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_outlet" />
 
     <ImageView
-      android:id="@+id/iv_cafe_info_plug_value"
+      android:id="@+id/iv_cafe_info_outlet_value"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
-      android:contentDescription="Plug Value"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_plug"
+      android:contentDescription="Outlet Value"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_outlet"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_plug"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_outlet"
       tools:src="@drawable/ic_o_filled_16" />
 
     <View
-      android:id="@+id/line_cafe_info_plug"
+      android:id="@+id/line_cafe_info_outlet"
       android:layout_width="0dp"
       android:layout_height="1dp"
       android:layout_marginHorizontal="16dp"
@@ -388,10 +388,10 @@
       android:background="@color/gray_100"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_plug" />
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_outlet" />
 
     <ImageView
-      android:id="@+id/iv_cafe_info_phone_charging"
+      android:id="@+id/iv_cafe_info_mobile_charging"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
@@ -399,34 +399,34 @@
       android:contentDescription="Phone Charging"
       android:src="@drawable/ic_phone_charging_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_plug" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_outlet" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_phone_charging"
+      android:id="@+id/tv_cafe_info_mobile_charging"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:text="@string/phone_charging"
       android:textColor="@color/gray_400"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_phone_charging"
-      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_phone_charging"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_phone_charging" />
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_mobile_charging"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_mobile_charging"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_mobile_charging" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_phone_charging_value"
+      android:id="@+id/tv_cafe_info_mobile_charging_value"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
       android:textColor="@color/gray_900"
-      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_phone_charging"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_mobile_charging"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_phone_charging"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_mobile_charging"
       tools:text="카운터에서 가능" />
 
     <View
-      android:id="@+id/line_cafe_info_phone_charging"
+      android:id="@+id/line_cafe_info_mobile_charging"
       android:layout_width="0dp"
       android:layout_height="1dp"
       android:layout_marginHorizontal="16dp"
@@ -434,7 +434,7 @@
       android:background="@color/gray_100"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_phone_charging" />
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_mobile_charging" />
 
     <ImageView
       android:id="@+id/iv_cafe_info_phone"
@@ -445,7 +445,7 @@
       android:contentDescription="Phone"
       android:src="@drawable/ic_phone_outlined_24"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone_charging" />
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_mobile_charging" />
 
     <TextView
       android:id="@+id/tv_cafe_info_phone"

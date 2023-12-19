@@ -178,10 +178,6 @@
     android:label="CafeDetailFragment"
     tools:layout="@layout/fragment_cafe_detail" >
 
-    <argument
-      android:name="cafe_detail_model"
-      app:argType="us.wedemy.eggeum.android.main.model.CafeDetailModel" />
-
   </dialog>
 
 </navigation>

@@ -5,19 +5,12 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
- * Designed and developed by Wedemy 2023.
- *
- * Licensed under the MIT.
- * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
- */
-
 package us.wedemy.eggeum.android.main.ui.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseBottomSheetFragment
@@ -29,7 +22,7 @@ import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() {
   override fun getViewBinding() = FragmentCafeDetailBinding.inflate(layoutInflater)
 
-  private val viewModel: CafeDetailViewModel by hiltNavGraphViewModels(R.id.nav_main)
+  private val viewModel by activityViewModels<CafeDetailViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -40,8 +33,9 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
   private fun initView() {
     showFragment(TAG_CAFE_INFO_FRAGMENT)
     binding.apply {
-      tvCafeDetailName.text = "스타벅스 강남역신분당역사점"
-      tvCafeDetailAddress.text = "서울특별시 강남구 강남대로 396"
+      val cafeDetailInfo = viewModel.cafeDetailInfo.value
+      tvCafeDetailName.text = cafeDetailInfo.name
+      tvCafeDetailAddress.text = cafeDetailInfo.address1
     }
   }
 

@@ -11,10 +11,10 @@ import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
+import us.wedemy.eggeum.android.main.model.ProductModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeMenuViewHolder
-import us.wedemy.eggeum.android.main.model.CafeMenuModel
 
-class CafeMenuAdapter : BaseRecyclerViewAdapter<CafeMenuModel, ItemCafeMenuBinding>() {
+class CafeMenuAdapter : BaseRecyclerViewAdapter<ProductModel, ItemCafeMenuBinding>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeMenuViewHolder(ItemCafeMenuBinding.inflate(parent.context.layoutInflater, parent, false))

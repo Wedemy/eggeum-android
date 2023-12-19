@@ -11,7 +11,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CafeDetailModel (
+data class CafeDetailModel(
   val address1: String? = "",
   val address2: String? = "",
   val id: Int = -1,
@@ -19,4 +19,4 @@ data class CafeDetailModel (
   val info: InfoModel = InfoModel(),
   val menu: MenuModel = MenuModel(),
   val name: String = "",
-): Parcelable
+) : Parcelable

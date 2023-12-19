@@ -13,4 +13,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MenuModel(
   val products: List<ProductModel> = emptyList(),
-): Parcelable
+) : Parcelable

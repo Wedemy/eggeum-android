@@ -42,7 +42,6 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
     super.onViewCreated(view, savedInstanceState)
     initView()
     initObserver()
-
   }
 
   private fun initView() {

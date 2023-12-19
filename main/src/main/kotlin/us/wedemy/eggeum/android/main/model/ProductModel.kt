@@ -14,4 +14,4 @@ import kotlinx.parcelize.Parcelize
 data class ProductModel(
   val name: String,
   val price: Int,
-): Parcelable
+) : Parcelable

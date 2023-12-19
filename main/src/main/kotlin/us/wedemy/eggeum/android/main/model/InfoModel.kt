@@ -26,4 +26,4 @@ data class InfoModel(
   val restRoom: String? = "",
   val singleSeatCount: Int? = null,
   val websiteUri: String? = "",
-): Parcelable
+) : Parcelable

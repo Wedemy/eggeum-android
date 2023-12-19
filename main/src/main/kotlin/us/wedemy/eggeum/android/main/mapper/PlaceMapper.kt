@@ -31,7 +31,7 @@ internal fun PlaceEntity.toUiModel() =
 
 internal fun ImageEntity.toUiModel() =
   ImageModel(
-    files = files.map { it.toUiModel() }
+    files = files.map { it.toUiModel() },
   )
 
 internal fun InfoEntity.toUilModel() =

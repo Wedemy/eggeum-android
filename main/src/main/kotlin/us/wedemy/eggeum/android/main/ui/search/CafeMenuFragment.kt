@@ -45,13 +45,13 @@ class CafeMenuFragment : BaseFragment<FragmentCafeMenuBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeDetailInfo.collect { cafeDetailInfo->
+        viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
           cafeMenuAdapter.replaceAll(cafeDetailInfo.menu.products)
         }
       }
 
       launch {
-        viewModel.navigateToUpdateCafeEvent.collect{
+        viewModel.navigateToUpdateCafeEvent.collect {
           (activity as MainActivity).navigateToUpdateCafe()
         }
       }

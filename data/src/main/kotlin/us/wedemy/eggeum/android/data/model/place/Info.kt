@@ -58,7 +58,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class Info(
   @SerialName("areaSize")
-  val areaSize: String,
+  val areaSize: String?,
 
   @SerialName("blogUri")
   val blogUri: String?,
@@ -70,13 +70,13 @@ public data class Info(
   val existsSmokingArea: Boolean?,
 
   @SerialName("existsWifi")
-  val existsWifi: Boolean,
+  val existsWifi: Boolean?,
 
   @SerialName("instagramUri")
   val instagramUri: String?,
 
   @SerialName("meetingRoomCount")
-  val meetingRoomCount: Int,
+  val meetingRoomCount: Int?,
 
   @SerialName("mobileCharging")
   val mobileCharging: String?,

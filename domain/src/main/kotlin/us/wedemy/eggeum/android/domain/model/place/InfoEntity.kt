@@ -8,13 +8,13 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class InfoEntity(
-  val areaSize: String,
+  val areaSize: String?,
   val blogUri: String?,
   val businessHours: List<String>?,
   val existsSmokingArea: Boolean?,
-  val existsWifi: Boolean,
+  val existsWifi: Boolean?,
   val instagramUri: String?,
-  val meetingRoomCount: Int,
+  val meetingRoomCount: Int?,
   val mobileCharging: String?,
   val multiSeatCount: Int?,
   val parking: String?,
@@ -22,4 +22,40 @@ public data class InfoEntity(
   val restRoom: String?,
   val singleSeatCount: Int?,
   val websiteUri: String?,
-)
+) {
+  public companion object {
+    public fun of(
+      areaSize: String? = null,
+      blogUri: String? = null,
+      businessHours: List<String>? = null,
+      existsSmokingArea: Boolean? = null,
+      existsWifi: Boolean? = null,
+      instagramUri: String? = null,
+      meetingRoomCount: Int? = null,
+      mobileCharging: String? = null,
+      multiSeatCount: Int? = null,
+      parking: String? = null,
+      phone: String? = null,
+      restRoom: String? = null,
+      singleSeatCount: Int? = null,
+      websiteUri: String? = null,
+    ): InfoEntity {
+      return InfoEntity(
+        areaSize = areaSize,
+        blogUri = blogUri,
+        businessHours = businessHours,
+        existsSmokingArea = existsSmokingArea,
+        existsWifi = existsWifi,
+        instagramUri = instagramUri,
+        meetingRoomCount = meetingRoomCount,
+        mobileCharging = mobileCharging,
+        multiSeatCount = multiSeatCount,
+        parking = parking,
+        phone = phone,
+        restRoom = restRoom,
+        singleSeatCount = singleSeatCount,
+        websiteUri = websiteUri,
+      )
+    }
+  }
+}

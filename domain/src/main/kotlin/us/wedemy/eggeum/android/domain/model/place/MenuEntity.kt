@@ -8,5 +8,15 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class MenuEntity(
-  val products: List<ProductEntity>,
-)
+  var products: List<ProductEntity>?,
+) {
+  public companion object {
+    public fun of(
+      products: List<ProductEntity>? = null,
+    ): MenuEntity {
+      return MenuEntity(
+        products = products,
+      )
+    }
+  }
+}

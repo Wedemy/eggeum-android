@@ -35,5 +35,6 @@ dependencies {
     projects.common,
     projects.designResource,
     projects.navigator,
+    projects.domain,
   )
 }

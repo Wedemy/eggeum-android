@@ -45,11 +45,11 @@ internal fun UpsertPlaceEntity.toModel() =
   UpsertPlaceRequest(
     address1 = address1,
     address2 = address2,
-    image = image.toModel(),
+    image = image?.toModel(),
     info = info.toModel(),
     latitude = latitude,
     longitude = longitude,
-    menu = menu.toModel(),
+    menu = menu?.toModel(),
     name = name,
     placeId = placeId,
     remarks = remarks,
@@ -94,12 +94,12 @@ public fun InfoEntity.toModel(): Info =
 
 public fun Menu.toEntity(): MenuEntity =
   MenuEntity(
-    products = products.map { it.toEntity() },
+    products = products?.map { it.toEntity() },
   )
 
 public fun MenuEntity.toModel(): Menu =
   Menu(
-    products = products.map { it.toModel() },
+    products = products?.map { it.toModel() },
   )
 
 public fun Product.toEntity(): ProductEntity =

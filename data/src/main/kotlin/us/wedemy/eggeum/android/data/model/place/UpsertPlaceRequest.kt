@@ -49,35 +49,35 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class UpsertPlaceRequest(
   @SerialName("address1")
-  val address1: String,
+  val address1: String?,
 
   @SerialName("address2")
-  val address2: String,
+  val address2: String?,
 
   @SerialName("image")
-  val image: Image,
+  val image: Image?,
 
   @SerialName("info")
   val info: Info,
 
   @SerialName("latitude")
-  val latitude: Double,
+  val latitude: Double?,
 
   @SerialName("longitude")
-  val longitude: Double,
+  val longitude: Double?,
 
   @SerialName("menu")
-  val menu: Menu,
+  val menu: Menu?,
 
   @SerialName("name")
-  val name: String,
+  val name: String?,
 
   @SerialName("placeId")
   val placeId: Int,
 
   @SerialName("remarks")
-  val remarks: String,
+  val remarks: String?,
 
   @SerialName("type")
-  val type: String,
+  val type: String?,
 )

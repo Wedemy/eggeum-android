@@ -19,5 +19,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class Menu(
   @SerialName("products")
-  val products: List<Product>,
+  val products: List<Product>?,
 )

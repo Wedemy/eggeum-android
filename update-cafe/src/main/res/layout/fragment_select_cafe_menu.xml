@@ -64,7 +64,7 @@
     app:layout_constraintBottom_toTopOf="@+id/line_input_cafe_menu"
     android:layout_marginTop="24dp"
     android:layout_marginHorizontal="16dp"
-    tools:listitem="@layout/item_cafe_menu"/>
+    tools:listitem="@layout/item_update_cafe_menu"/>
 
     <View
       android:id="@+id/line_input_cafe_menu"

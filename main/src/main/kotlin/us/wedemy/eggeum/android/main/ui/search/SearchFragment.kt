@@ -153,7 +153,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
 
   private fun createAndAddMarker(data: PlaceEntity) {
     val marker = Marker()
-    marker.position = LatLng(data.latitude, data.longitude)
+    marker.position = LatLng(data.latitude!!, data.longitude!!)
     markers.add(marker)
     marker.map = naverMap
   }

@@ -8,6 +8,6 @@
 package us.wedemy.eggeum.android.domain.model.place
 
 public data class ProductEntity(
-  val name: String,
-  val price: Int,
+  var name: String,
+  var price: Int,
 )

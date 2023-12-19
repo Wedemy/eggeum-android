@@ -29,7 +29,7 @@ import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 @HiltViewModel
 class InputCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
-  private val upsertlaceBodyUseCase: UpsertPlaceUseCase,
+  private val upsertPlaceUseCase: UpsertPlaceUseCase,
 ) : ViewModel() {
   private val _cafeInfo = MutableStateFlow(CafeInfoItem())
   val cafeInfo = _cafeInfo.asStateFlow()
@@ -81,7 +81,7 @@ class InputCafeInfoViewModel @Inject constructor(
 
   fun upsertPlaceBody() {
     viewModelScope.launch {
-      val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
+      val result = upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())
       when {
         result.isSuccess -> {
           _navigateToUpsertEvent.emit(true)

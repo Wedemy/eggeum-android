@@ -29,7 +29,7 @@ import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 @HiltViewModel
 class ProposeCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
-  private val upsertlaceBodyUseCase: UpsertPlaceUseCase,
+  private val upsertPlaceUseCase: UpsertPlaceUseCase,
 ) : ViewModel() {
 
   private val _cafeMenuList = MutableStateFlow(emptyList<CafeMenuItem>())
@@ -103,7 +103,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
 
   fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
-      val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
+      val result = upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())
       when {
         result.isSuccess -> {
           // TODO: 메뉴 수정을 완료했어요 fragment

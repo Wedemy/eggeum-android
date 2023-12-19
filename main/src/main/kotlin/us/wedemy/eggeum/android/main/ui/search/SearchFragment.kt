@@ -23,19 +23,20 @@ import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
@@ -53,7 +54,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
   private val viewModel by viewModels<SearchViewModel>()
@@ -113,7 +114,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initListener() {
-    // TODO 마커 클릭 화면 전환 클릭 이벤트 리스터 구현
     binding.fabSearchTracking.setOnClickListener {
       naverMap?.locationTrackingMode = LocationTrackingMode.Follow
     }
@@ -148,35 +148,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
             blogUri = "",
           ),
           menu = MenuModel(
-            listOf(ProductModel("아메리카노", 3000), ProductModel("카페라테", 5000),)
+            listOf(ProductModel("아메리카노", 3000), ProductModel("카페라테", 5000))
           ),
           name = "스타벅스 강남역신분당역사점"
         )
       )
       findNavController().safeNavigate(action)
-    }
-
-    // https://navermaps.github.io/android-map-sdk/guide-ko/4-1.html
-    for (i in 0..< markers.size) {
-      // TODO 클릭 리스너가 동작하지 않는 문제 해결
-      // TODO 클릭한 마커 이미지 변경
-      markers[i].setOnClickListener {
-        Timber.d("marker $i clicked")
-        val placeModel = viewModel.placeSnapshotList.value[i]
-        val cafeDetailModel = CafeDetailModel(
-          address1 = placeModel.address1,
-          address2 = placeModel.address2,
-          id = placeModel.id,
-          image = placeModel.image.toUiModel(),
-          info = placeModel.info.toUilModel(),
-          menu = placeModel.menu.toUiModel(),
-          name = placeModel.name,
-        )
-        Timber.d("$cafeDetailModel")
-        val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(cafeDetailModel)
-        findNavController().safeNavigate(action)
-        false
-      }
     }
   }
 
@@ -207,17 +184,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         createAndAddMarker(place)
       }
     }
-    markers.forEach { marker ->
-      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
-      marker.map = naverMap
-    }
   }
 
   private fun createAndAddMarker(data: PlaceEntity) {
     val marker = Marker()
     marker.position = LatLng(data.latitude, data.longitude)
-    markers.add(marker)
     marker.map = naverMap
+    marker.tag = data.id
+    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    marker.onClickListener = this@SearchFragment
+    markers.add(marker)
   }
 
   private fun initNaverMap() {
@@ -309,5 +285,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private companion object {
     private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private const val ZOOM_LEVEL = 15.0
+  }
+
+  override fun onClick(overlay: Overlay): Boolean {
+    val selectedPlaceModel = viewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    if (selectedPlaceModel != null) {
+      val cafeDetailModel = CafeDetailModel(
+        address1 = selectedPlaceModel.address1,
+        address2 = selectedPlaceModel.address2,
+        id = selectedPlaceModel.id,
+        image = selectedPlaceModel.image.toUiModel(),
+        info = selectedPlaceModel.info.toUilModel(),
+        menu = selectedPlaceModel.menu.toUiModel(),
+        name = selectedPlaceModel.name,
+      )
+      val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude, selectedPlaceModel.longitude))
+        .animate(CameraAnimation.Easing)
+      naverMap?.moveCamera(cameraUpdate)
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(cafeDetailModel)
+      findNavController().safeNavigate(action)
+    }
+    return true
   }
 }

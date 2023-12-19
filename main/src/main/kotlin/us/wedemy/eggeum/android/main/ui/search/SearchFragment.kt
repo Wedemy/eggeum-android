@@ -158,8 +158,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
 
   private fun createAndAddMarker(data: PlaceEntity) {
     val marker = Marker()
-    marker.position = LatLng(data.latitude, data.longitude)
-    marker.map = naverMap
+    if (data.latitude != null && data.longitude != null) {
+      marker.position = LatLng(data.latitude!!, data.longitude!!)
+      markers.add(marker)
+      marker.map = naverMap
+    }
     marker.tag = data.id
     marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
     marker.onClickListener = this@SearchFragment
@@ -173,14 +176,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         address1 = selectedPlaceModel.address1,
         address2 = selectedPlaceModel.address2,
         id = selectedPlaceModel.id,
-        image = selectedPlaceModel.image.toUiModel(),
-        info = selectedPlaceModel.info.toUilModel(),
-        menu = selectedPlaceModel.menu.toUiModel(),
+        image = selectedPlaceModel.image?.toUiModel(),
+        info = selectedPlaceModel.info?.toUilModel(),
+        menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )
-      val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude, selectedPlaceModel.longitude))
-        .animate(CameraAnimation.Easing)
-      naverMap?.moveCamera(cameraUpdate)
+      if(selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude!!, selectedPlaceModel.longitude!!))
+          .animate(CameraAnimation.Easing)
+        naverMap?.moveCamera(cameraUpdate)
+      }
       cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
       val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail()
       findNavController().safeNavigate(action)

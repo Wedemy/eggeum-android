@@ -23,16 +23,18 @@ internal fun PlaceEntity.toUiModel() =
     address1 = address1,
     address2 = address2,
     id = id,
-    image = image.toUiModel(),
-    info = info.toUilModel(),
-    menu = menu.toUiModel(),
+    image = image?.toUiModel(),
+    info = info?.toUilModel(),
+    menu = menu?.toUiModel(),
     name = name,
   )
 
 internal fun ImageEntity.toUiModel() =
-  ImageModel(
-    files = files.map { it.toUiModel() },
-  )
+  files?.let {
+    ImageModel(
+      files = it.map { it.toUiModel() },
+    )
+  }
 
 internal fun InfoEntity.toUilModel() =
   InfoModel(
@@ -53,9 +55,11 @@ internal fun InfoEntity.toUilModel() =
   )
 
 internal fun MenuEntity.toUiModel() =
-  MenuModel(
-    products = products.map { it.toUiModel() },
-  )
+  products?.let {
+    MenuModel(
+      products = it.map { it.toUiModel() },
+    )
+  }
 
 internal fun ProductEntity.toUiModel() =
   ProductModel(

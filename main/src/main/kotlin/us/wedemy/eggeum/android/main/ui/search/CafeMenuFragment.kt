@@ -46,7 +46,7 @@ class CafeMenuFragment : BaseFragment<FragmentCafeMenuBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
-          cafeMenuAdapter.replaceAll(cafeDetailInfo.menu.products)
+          cafeMenuAdapter.replaceAll(cafeDetailInfo.menu?.products)
         }
       }
 

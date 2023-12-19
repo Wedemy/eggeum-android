@@ -18,53 +18,44 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
+import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
-import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
 @HiltViewModel
-class InputCafeInfoViewModel @Inject constructor(
+class ProposeCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
   private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
 ) : ViewModel() {
-  private val _cafeInfo = MutableStateFlow(CafeInfoItem())
-  val cafeInfo = _cafeInfo.asStateFlow()
+
+  private val _cafeMenuList = MutableStateFlow(emptyList<CafeMenuItem>())
+  val cafeMenuList = _cafeMenuList.asStateFlow()
 
   lateinit var placeBody: PlaceEntity
 
-  private val _navigateToUpsertEvent = MutableSharedFlow<Boolean>(0)
-  val navigateToUpsertEvent: SharedFlow<Boolean> = _navigateToUpsertEvent.asSharedFlow()
-
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
-  fun getPlaceBody(placeId: Int) {
+
+  private val _cafeMenuItemMap = MutableStateFlow(emptyMap<String, CafeMenuItem>())
+  private val cafeMenuItemMap = _cafeMenuItemMap.asStateFlow()
+
+  fun setCafeMenuItemMap(cafeMenuItemMap: MutableMap<String, CafeMenuItem>) {
+    _cafeMenuItemMap.value = cafeMenuItemMap
+  }
+
+  fun getCafeMenuList(placeId: Int) {
     viewModelScope.launch {
       val result = getPlaceUseCase(placeId)
       when {
         result.isSuccess && result.getOrNull() != null -> {
           placeBody = result.getOrNull()!!
-          Timber.d("plcaeBody >>> $placeBody")
-          _cafeInfo.update { cafeInfo ->
-            cafeInfo.copy(
-              areaSize = placeBody.info?.areaSize,
-              blogUri = placeBody.info?.blogUri,
-              businessHours = placeBody.info?.businessHours,
-              existsSmokingArea = placeBody.info?.existsSmokingArea,
-              existsWifi = placeBody.info?.existsWifi,
-              instagramUri = placeBody.info?.instagramUri,
-              meetingRoomCount = placeBody.info?.meetingRoomCount,
-              mobileCharging = placeBody.info?.mobileCharging,
-              multiSeatCount = placeBody.info?.multiSeatCount,
-              parking = placeBody.info?.parking,
-              phone = placeBody.info?.phone,
-              restRoom = placeBody.info?.restRoom,
-              singleSeatCount = placeBody.info?.singleSeatCount,
-              websiteUri = placeBody.info?.websiteUri,
-            )
+          placeBody.menu?.products?.let {
+            val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+            updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
           }
         }
         result.isSuccess && result.getOrNull() == null -> {
@@ -79,12 +70,43 @@ class InputCafeInfoViewModel @Inject constructor(
     }
   }
 
-  fun upsertPlaceBody() {
+  fun initializeCafeMenuItem(products: List<ProductEntity>): MutableList<CafeMenuItem> {
+    val productList = mutableListOf<CafeMenuItem>()
+    products.forEach { product ->
+      productList.add(CafeMenuItem(name = product.name, price = product.price))
+    }
+    return productList
+  }
+
+  fun updateCafeMenuList(cafeMenuItemList: MutableList<CafeMenuItem>) {
+    _cafeMenuList.value = cafeMenuItemList
+  }
+
+  fun editCafeMenuItem() {
+    val before = cafeMenuItemMap.value["before"]
+    val after = cafeMenuItemMap.value["after"]
+
+    placeBody.menu?.products.let { productEntities ->
+      productEntities?.forEach {
+        if (it.name == before?.name && it.price == before.price) {
+          it.name = after?.name!!
+          it.price = after.price
+        }
+      }
+    }
+
+    placeBody.menu?.products?.let {
+      val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+      updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
+    }
+  }
+
+  fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
       val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
       when {
         result.isSuccess -> {
-          _navigateToUpsertEvent.emit(true)
+          // TODO: 메뉴 수정을 완료했어요 fragment
         }
         result.isFailure -> {
           val exception = result.exceptionOrNull()

@@ -138,11 +138,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
           <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_input_cafe_meeting_price"
+            android:id="@+id/tiet_input_cafe_price"
             style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
             android:ellipsize="end"
             android:hint="@string/input_cafe_menu_price_hint"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>

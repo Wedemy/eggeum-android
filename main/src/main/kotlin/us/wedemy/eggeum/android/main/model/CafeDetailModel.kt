@@ -15,8 +15,8 @@ data class CafeDetailModel(
   val address1: String? = "",
   val address2: String? = "",
   val id: Int = -1,
-  val image: ImageModel = ImageModel(),
-  val info: InfoModel = InfoModel(),
-  val menu: MenuModel = MenuModel(),
+  val image: ImageModel? = ImageModel(),
+  val info: InfoModel? = InfoModel(),
+  val menu: MenuModel? = MenuModel(),
   val name: String = "",
 ) : Parcelable

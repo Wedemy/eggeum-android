@@ -55,7 +55,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
-          cafeImageAdapter.replaceAll(cafeDetailInfo.image.files)
+          cafeImageAdapter.replaceAll(cafeDetailInfo.image?.files)
         }
       }
     }

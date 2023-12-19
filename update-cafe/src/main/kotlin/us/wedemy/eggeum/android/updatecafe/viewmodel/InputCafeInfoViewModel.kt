@@ -23,13 +23,13 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
-import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
+import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 
 @HiltViewModel
 class InputCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
-  private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
+  private val upsertlaceBodyUseCase: UpsertPlaceUseCase,
 ) : ViewModel() {
   private val _cafeInfo = MutableStateFlow(CafeInfoItem())
   val cafeInfo = _cafeInfo.asStateFlow()

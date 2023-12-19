@@ -20,10 +20,14 @@ import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.common.util.isSuccess
-import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
+import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
+import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
 
 @HiltViewModel
-class RegisterCafeViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+class RegisterCafeViewModel @Inject constructor(
+  private val upsertPlaceUseCase: UpsertPlaceUseCase,
+  savedStateHandle: SavedStateHandle,
+) : ViewModel() {
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageItem>())
   val cafeImages = _cafeImages.asStateFlow()
 

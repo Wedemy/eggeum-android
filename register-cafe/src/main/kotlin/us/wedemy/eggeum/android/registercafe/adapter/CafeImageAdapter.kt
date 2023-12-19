@@ -10,11 +10,11 @@ package us.wedemy.eggeum.android.registercafe.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import us.wedemy.eggeum.android.common.extension.layoutInflater
+import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHolder
 import us.wedemy.eggeum.android.registercafe.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
-import us.wedemy.eggeum.android.common.extension.layoutInflater
-import us.wedemy.eggeum.android.registercafe.ui.CafeImageClickListener
+import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
 
 class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
   ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {

@@ -26,13 +26,10 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.registercafe.R
 import us.wedemy.eggeum.android.registercafe.adapter.CafeImageAdapter
+import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.databinding.FragmentRegisterCafeBinding
-import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
+import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
 import us.wedemy.eggeum.android.registercafe.viewmodel.RegisterCafeViewModel
-
-interface CafeImageClickListener {
-  fun onItemClick(position: Int)
-}
 
 @AndroidEntryPoint
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {

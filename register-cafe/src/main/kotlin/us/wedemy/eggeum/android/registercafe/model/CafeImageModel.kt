@@ -11,4 +11,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CafeImageItem(val url: String) : Parcelable
+data class CafeImageModel(val url: String) : Parcelable

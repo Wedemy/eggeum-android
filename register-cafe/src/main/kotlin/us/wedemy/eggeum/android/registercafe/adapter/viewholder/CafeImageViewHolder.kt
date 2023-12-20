@@ -11,19 +11,19 @@ import coil.load
 import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
-import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
+import us.wedemy.eggeum.android.registercafe.model.CafeImageModel
 
 class CafeImageViewHolder(
   binding: ItemRegisterCafeImageBinding,
   clickListener: CafeImageClickListener,
-) : BaseViewHolder<CafeImageItem, ItemRegisterCafeImageBinding>(binding) {
+) : BaseViewHolder<CafeImageModel, ItemRegisterCafeImageBinding>(binding) {
 
   init {
     binding.ivCafeImageClose.setOnClickListener {
       clickListener.onItemClick(adapterPosition)
     }
   }
-  override fun bind(item: CafeImageItem) {
+  override fun bind(item: CafeImageModel) {
     binding.ivCafeImage.load(item.url)
   }
 }

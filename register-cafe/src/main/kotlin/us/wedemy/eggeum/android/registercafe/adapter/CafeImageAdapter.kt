@@ -14,10 +14,10 @@ import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHolder
 import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
-import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
+import us.wedemy.eggeum.android.registercafe.model.CafeImageModel
 
 class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
-  ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {
+  ListAdapter<CafeImageModel, CafeImageViewHolder>(CafeImageItemDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     CafeImageViewHolder(ItemRegisterCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
@@ -27,9 +27,9 @@ class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
   }
 
   private companion object {
-    private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageItem>() {
-      override fun areItemsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem === newItem
-      override fun areContentsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem == newItem
+    private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageModel>() {
+      override fun areItemsTheSame(oldItem: CafeImageModel, newItem: CafeImageModel) = oldItem === newItem
+      override fun areContentsTheSame(oldItem: CafeImageModel, newItem: CafeImageModel) = oldItem == newItem
     }
   }
 }

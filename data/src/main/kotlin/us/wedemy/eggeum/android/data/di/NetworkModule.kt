@@ -41,7 +41,7 @@ import us.wedemy.eggeum.android.data.service.TokenInterceptor
 import us.wedemy.eggeum.android.data.util.JsonBuilder
 import us.wedemy.eggeum.android.data.util.buildJson
 
-private const val MaxTimeoutMillis = 15_000L
+private const val MaxTimeoutMillis = 30_000L
 private const val MaxRetryCount = 3
 
 private val jsonRule = Json {
@@ -196,6 +196,8 @@ internal object NetworkModule {
     val contentType = "multipart/form-data".toMediaType()
     val httpClient = OkHttpClient.Builder()
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
+      .readTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
+      .writeTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
       // To set the token in the header
       .addInterceptor(tokenInterceptor)
       // To update the token when it gets HTTP unauthorized error

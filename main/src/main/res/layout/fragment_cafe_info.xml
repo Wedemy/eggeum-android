@@ -50,7 +50,7 @@
 
     <TextView
       android:id="@+id/tv_cafe_info_meeting_room_value"
-      style="@style/Logo"
+      style="@style/H2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
@@ -73,7 +73,7 @@
 
     <TextView
       android:id="@+id/tv_cafe_info_multi_seat_value"
-      style="@style/Logo"
+      style="@style/H2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
@@ -96,7 +96,7 @@
 
     <TextView
       android:id="@+id/tv_cafe_info_single_seat_value"
-      style="@style/Logo"
+      style="@style/H2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"

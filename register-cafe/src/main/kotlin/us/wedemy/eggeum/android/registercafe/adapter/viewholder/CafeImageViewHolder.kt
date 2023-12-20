@@ -10,13 +10,13 @@ package us.wedemy.eggeum.android.registercafe.adapter.viewholder
 import coil.load
 import us.wedemy.eggeum.android.common.ui.BaseViewHolder
 import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
-import us.wedemy.eggeum.android.registercafe.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
 import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
 
 class CafeImageViewHolder(
-  binding: ItemCafeImageBinding,
+  binding: ItemRegisterCafeImageBinding,
   clickListener: CafeImageClickListener,
-) : BaseViewHolder<CafeImageItem, ItemCafeImageBinding>(binding) {
+) : BaseViewHolder<CafeImageItem, ItemRegisterCafeImageBinding>(binding) {
 
   init {
     binding.ivCafeImageClose.setOnClickListener {

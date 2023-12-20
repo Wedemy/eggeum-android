@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.ListAdapter
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHolder
-import us.wedemy.eggeum.android.registercafe.databinding.ItemCafeImageBinding
+import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
 import us.wedemy.eggeum.android.registercafe.model.CafeImageItem
 
 class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
   ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    CafeImageViewHolder(ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
+    CafeImageViewHolder(ItemRegisterCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
 
   override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
     holder.bind(getItem(position))

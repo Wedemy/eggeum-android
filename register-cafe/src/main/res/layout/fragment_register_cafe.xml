@@ -207,7 +207,7 @@
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
           android:hint="@string/input_cafe_area"
-          android:inputType="text"
+          android:inputType="number"
           android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
@@ -237,7 +237,7 @@
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
           android:hint="@string/input_cafe_meeting_room"
-          android:inputType="text"
+          android:inputType="number"
           android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
@@ -267,7 +267,7 @@
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
           android:hint="@string/input_cafe_multi_seat"
-          android:inputType="text"
+          android:inputType="number"
           android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>
@@ -297,7 +297,7 @@
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
           android:hint="@string/input_cafe_single_seat"
-          android:inputType="text"
+          android:inputType="number"
           android:maxLines="1" />
 
       </com.google.android.material.textfield.TextInputLayout>

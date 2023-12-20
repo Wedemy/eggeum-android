@@ -34,6 +34,7 @@ dependencies {
     libs.timber,
     projects.common,
     projects.designResource,
+    projects.domain,
     projects.navigator,
   )
 }

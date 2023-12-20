@@ -10,26 +10,26 @@ package us.wedemy.eggeum.android.registercafe.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHolder
-import us.wedemy.eggeum.android.registercafe.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
 import us.wedemy.eggeum.android.common.extension.layoutInflater
-import us.wedemy.eggeum.android.registercafe.ui.CafeImageClickListener
+import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
+import us.wedemy.eggeum.android.registercafe.adapter.viewholder.CafeImageViewHolder
+import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
+import us.wedemy.eggeum.android.registercafe.model.CafeImageModel
 
 class CafeImageAdapter(private val clickListener: CafeImageClickListener) :
-  ListAdapter<CafeImageItem, CafeImageViewHolder>(CafeImageItemDiffCallback) {
+  ListAdapter<CafeImageModel, CafeImageViewHolder>(CafeImageItemDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    CafeImageViewHolder(ItemCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
+    CafeImageViewHolder(ItemRegisterCafeImageBinding.inflate(parent.context.layoutInflater, parent, false), clickListener)
 
   override fun onBindViewHolder(holder: CafeImageViewHolder, position: Int) {
     holder.bind(getItem(position))
   }
 
   private companion object {
-    private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageItem>() {
-      override fun areItemsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem === newItem
-      override fun areContentsTheSame(oldItem: CafeImageItem, newItem: CafeImageItem) = oldItem == newItem
+    private val CafeImageItemDiffCallback = object : DiffUtil.ItemCallback<CafeImageModel>() {
+      override fun areItemsTheSame(oldItem: CafeImageModel, newItem: CafeImageModel) = oldItem === newItem
+      override fun areContentsTheSame(oldItem: CafeImageModel, newItem: CafeImageModel) = oldItem == newItem
     }
   }
 }

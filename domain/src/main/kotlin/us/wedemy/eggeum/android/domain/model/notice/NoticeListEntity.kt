@@ -13,7 +13,7 @@ package us.wedemy.eggeum.android.domain.model.notice
  * @param totalElements 조회 가능한 전체 공지 수
  */
 public data class NoticeListEntity(
-  public val list: List<NoticeEntity>,
-  public val totalPages: Int,
-  public val totalElements: Int,
+  val list: List<NoticeEntity>,
+  val totalPages: Int,
+  val totalElements: Int,
 )

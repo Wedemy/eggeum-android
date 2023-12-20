@@ -9,6 +9,8 @@ package us.wedemy.eggeum.android.registercafe.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -17,6 +19,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
@@ -26,13 +29,10 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.registercafe.R
 import us.wedemy.eggeum.android.registercafe.adapter.CafeImageAdapter
+import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.databinding.FragmentRegisterCafeBinding
-import us.wedemy.eggeum.android.registercafe.item.CafeImageItem
+import us.wedemy.eggeum.android.registercafe.model.CafeImageModel
 import us.wedemy.eggeum.android.registercafe.viewmodel.RegisterCafeViewModel
-
-interface CafeImageClickListener {
-  fun onItemClick(position: Int)
-}
 
 @AndroidEntryPoint
 class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
@@ -42,7 +42,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
 
   private var pickMedia = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(10)) { uris ->
     if (uris.isNotEmpty()) {
-      val imageItems = uris.map { CafeImageItem(it.toString()) }
+      val imageItems = uris.map { CafeImageModel(it.toString()) }
       viewModel.setCafeImages(imageItems)
     } else {
       Timber.tag("PhotoPicker").d("No media selected")
@@ -60,7 +60,8 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initView()
     initListener()
-    initObserver()
+    initDataObserver()
+    initEventObserver()
   }
 
   private fun initView() {
@@ -83,13 +84,12 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
       }
 
       btnRegisterCafe.setOnClickListener {
-        val action = RegisterCafeFragmentDirections.actionFragmentRegisterCafeToFragmentRegisterCafeComplete()
-        findNavController().safeNavigate(action)
+        viewModel.registerCafe()
       }
     }
   }
 
-  private fun initObserver() {
+  private fun initDataObserver() {
     repeatOnStarted {
       launch {
         viewModel.cafeImages.collect { cafeImages ->
@@ -114,20 +114,12 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
         }
       }
 
-      launch {
-        val cafeNameEditTextFlow = binding.tietRegisterCafeName.textChangesAsFlow()
-        cafeNameEditTextFlow.collect { text ->
-          val cafeName = text.toString().trim()
-          viewModel.handleCafeNameValidation(cafeName)
-        }
+      collectTextChanges(this, binding.tietRegisterCafeName) { cafeName ->
+        viewModel.handleCafeNameValidation(cafeName)
       }
 
-      launch {
-        val cafeAddressEditTextFlow = binding.tietRegisterCafeAddress.textChangesAsFlow()
-        cafeAddressEditTextFlow.collect { text ->
-          val cafeAddress = text.toString().trim()
-          viewModel.handleCafeAddressValidation(cafeAddress)
-        }
+      collectTextChanges(this, binding.tietRegisterCafeAddress) { cafeAddress ->
+        viewModel.handleCafeAddressValidation(cafeAddress)
       }
 
       launch {
@@ -150,12 +142,98 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
         }
       }
 
+      collectTextChanges(this, binding.tietRegisterCafeArea) { cafeArea ->
+        viewModel.setCafeArea(cafeArea)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeMeetingRoom) { cafeMeetingRoom ->
+        viewModel.setCafeMeetingRoom(cafeMeetingRoom)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeMultiSeat) { cafeMultiSeat ->
+        viewModel.setCafeMultiSeat(cafeMultiSeat)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeMultiSeat) { cafeSingleSeat ->
+        viewModel.setCafeSingleSeat(cafeSingleSeat)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeBusinessHours) { cafeBusinessHours ->
+        viewModel.setCafeBusinessHours(cafeBusinessHours)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeRestRoom) { cafeRestRoom ->
+        viewModel.setCafeRestRoom(cafeRestRoom)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeParking) { cafeParking ->
+        viewModel.setCafeParking(cafeParking)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeSmokeArea) { cafeSmokeArea ->
+        viewModel.setCafeSmokeArea(cafeSmokeArea)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeWifi) { cafeWifi ->
+        viewModel.setCafeWifi(cafeWifi)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeOutlet) { cafeOutlet ->
+        viewModel.setCafeOutlet(cafeOutlet)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeMobileCharging) { cafeMobileCharging ->
+        viewModel.setCafeMobileCharging(cafeMobileCharging)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafePhone) { cafePhone ->
+        viewModel.setCafePhone(cafePhone)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeBlogUri) { cafeBlogUri ->
+        viewModel.setCafeBlogUri(cafeBlogUri)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeInstagramUri) { cafeInstagramUri ->
+        viewModel.setCafeInstagramUri(cafeInstagramUri)
+      }
+
+      collectTextChanges(this, binding.tietRegisterCafeWebsiteUri) { cafeWebsiteUri ->
+        viewModel.setCafeWebsiteUri(cafeWebsiteUri)
+      }
+    }
+  }
+
+  private fun initEventObserver() {
+    repeatOnStarted {
+      launch {
+        viewModel.navigateToRegisterCafeCompleteEvent.collect {
+          val action = RegisterCafeFragmentDirections.actionFragmentRegisterCafeToFragmentRegisterCafeComplete()
+          findNavController().safeNavigate(action)
+        }
+      }
+
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+      }
+
       launch {
         viewModel.enableRegisterCafe.collect { flag ->
           binding.tvPleaseToInputAllRequiredItem.isInvisible = flag
           binding.btnRegisterCafe.isEnabled = flag
         }
       }
+    }
+  }
+
+  private fun collectTextChanges(scope: CoroutineScope, editText: EditText, onTextChange: (String) -> Unit) {
+    scope.launch {
+      editText.textChangesAsFlow()
+        .collect { text ->
+          onTextChange(text.toString().trim())
+        }
     }
   }
 

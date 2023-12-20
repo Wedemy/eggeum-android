@@ -10,26 +10,14 @@ package us.wedemy.eggeum.android.data.model.notice
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// @JsonClass(generateAdapter = true)
-// public data class NoticeListResponse(
-//   @Json(name = "list")
-//   public val list: List<NoticeResponse>,
-//
-//   @Json(name = "totalElements")
-//   public val totalElements: Int,
-//
-//   @Json(name = "totalPages")
-//   public val totalPages: Int,
-// )
-
 @Serializable
 public data class NoticeListResponse(
   @SerialName("list")
-  public val list: List<NoticeResponse>,
+  val list: List<NoticeResponse>,
 
   @SerialName("totalElements")
-  public val totalElements: Int,
+  val totalElements: Int,
 
   @SerialName("totalPages")
-  public val totalPages: Int,
+  val totalPages: Int,
 )

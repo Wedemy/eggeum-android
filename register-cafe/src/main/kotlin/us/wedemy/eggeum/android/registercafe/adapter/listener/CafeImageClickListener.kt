@@ -5,11 +5,8 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.domain.model.notice
+package us.wedemy.eggeum.android.registercafe.adapter.listener
 
-public data class NoticeEntity(
-  val id: Int,
-  val title: String,
-  val content: String,
-  val viewCount: Int,
-)
+interface CafeImageClickListener {
+  fun onItemClick(position: Int)
+}

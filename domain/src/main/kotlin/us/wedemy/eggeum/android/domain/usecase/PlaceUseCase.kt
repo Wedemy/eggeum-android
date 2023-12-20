@@ -28,7 +28,7 @@ public class GetPlaceUseCase @Inject constructor(
 }
 
 @Singleton
-public class UpsertlaceBodyUseCase @Inject constructor(
+public class UpsertPlaceUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
   public suspend operator fun invoke(upsertPlaceEntity: UpsertPlaceEntity): Result<Unit> =

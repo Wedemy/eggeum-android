@@ -10,14 +10,8 @@ package us.wedemy.eggeum.android.data.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// @JsonClass(generateAdapter = true)
-// public data class ProfileImage(
-//   @Json(name = "files")
-//   public val files: List<File>,
-// )
-
 @Serializable
 public data class ProfileImage(
   @SerialName("files")
-  public val files: List<File>,
+  val files: List<File>,
 )

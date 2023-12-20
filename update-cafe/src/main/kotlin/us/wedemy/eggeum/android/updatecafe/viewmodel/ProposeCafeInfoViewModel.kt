@@ -23,13 +23,13 @@ import timber.log.Timber
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
-import us.wedemy.eggeum.android.domain.usecase.UpsertlaceBodyUseCase
+import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
 @HiltViewModel
 class ProposeCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
-  private val upsertlaceBodyUseCase: UpsertlaceBodyUseCase,
+  private val upsertPlaceUseCase: UpsertPlaceUseCase,
 ) : ViewModel() {
 
   private val _cafeMenuList = MutableStateFlow(emptyList<CafeMenuItem>())
@@ -103,7 +103,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
 
   fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
-      val result = upsertlaceBodyUseCase(placeBody.toUpsertPlaceEntity())
+      val result = upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())
       when {
         result.isSuccess -> {
           // TODO: 메뉴 수정을 완료했어요 fragment

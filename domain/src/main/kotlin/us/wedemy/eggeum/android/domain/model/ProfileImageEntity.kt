@@ -8,5 +8,5 @@
 package us.wedemy.eggeum.android.domain.model
 
 public data class ProfileImageEntity(
-  public val files: List<FileEntity>,
+  val files: List<FileEntity>,
 )

@@ -13,5 +13,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class LoginRequest(
   @SerialName("idToken")
-  public val idToken: String,
+  val idToken: String,
 )

@@ -36,14 +36,20 @@
   <string name="input_cafe_rest_room">화장실의 유무를 입력해주세요.</string>
   <string name="input_cafe_parking">주차 가능 여부를 입력해주세요.</string>
   <string name="cafe_parking">주차(O/X)</string>
-  <string name="cafe_smoke">흡연 구역(O/X)</string>
-  <string name="input_cafe_smoke">흡연구역 여부를 입력해주세요.</string>
+  <string name="cafe_smoke_area">흡연 구역(O/X)</string>
+  <string name="input_cafe_smoke_area">흡연구역 여부를 입력해주세요.</string>
   <string name="cafe_outlet">콘센트(O/X)</string>
   <string name="input_cafe_outlet">콘센트 여부를 입력해주세요.</string>
   <string name="cafe_mobile_charging">휴대폰 충전</string>
   <string name="input_cafe_mobile_charging">휴대폰 충전 가능 여부를 입력해주세요.</string>
   <string name="cafe_phone">전화</string>
   <string name="input_cafe_phone">전화 번호를 입력해주세요.</string>
-  <string name="cafe_website_uri">SNS</string>
-  <string name="input_cafe_website_uri">SNS 주소를 입력해주세요.</string>
+  <string name="cafe_website_uri">웹사이트</string>
+  <string name="input_cafe_website_uri">웹사이트 주소를 입력해주세요.</string>
+  <string name="cafe_blog_uri">블로그</string>
+  <string name="input_cafe_blog_uri">블로그 주소를 입력해주세요.</string>
+  <string name="cafe_instagram_uri">인스타그램</string>
+  <string name="input_cafe_instagram_uri">인스타그램 주소를 입력해주세요.</string>
+  <string name="cafe_wifi">WIFI</string>
+  <string name="input_cafe_wifi">Wifi 사용 가능 여부를 입력해주세요.</string>
 </resources>

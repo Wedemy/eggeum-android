@@ -37,7 +37,7 @@ public data class UpsertPlaceRequest(
   val name: String?,
 
   @SerialName("placeId")
-  val placeId: Int,
+  val placeId: Int?,
 
   @SerialName("remarks")
   val remarks: String?,

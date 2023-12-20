@@ -16,7 +16,7 @@ public data class UpsertPlaceEntity(
   val longitude: Double?,
   val menu: MenuEntity?,
   val name: String?,
-  val placeId: Int,
+  val placeId: Int?,
   val remarks: String?,
   val type: String?,
 ) {

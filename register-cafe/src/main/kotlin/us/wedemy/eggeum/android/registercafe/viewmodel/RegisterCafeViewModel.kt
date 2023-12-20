@@ -16,11 +16,9 @@ import kotlin.random.Random
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -31,7 +29,6 @@ import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.common.util.isSuccess
 import us.wedemy.eggeum.android.domain.model.FileEntity
-import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 import us.wedemy.eggeum.android.domain.model.place.ImageEntity
 import us.wedemy.eggeum.android.domain.model.place.InfoEntity
 import us.wedemy.eggeum.android.domain.model.place.MenuEntity
@@ -55,9 +52,6 @@ class RegisterCafeViewModel @Inject constructor(
 
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageModel>())
   val cafeImages = _cafeImages.asStateFlow()
-
-  private val _cafeUploadFiles = MutableStateFlow<List<FileResponseEntity>>(listOf())
-  val cafeUploadFiles = _cafeUploadFiles.asStateFlow()
 
   private val _cafeName = savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
 
@@ -247,7 +241,7 @@ class RegisterCafeViewModel @Inject constructor(
             .map { fileResponse ->
               FileEntity(
                 uploadFileId = fileResponse.uploadFileId,
-                url = fileResponse.url
+                url = fileResponse.url,
               )
             }
           val (cafeLatitude, cafeLongitude) = getRandomCoordinate()

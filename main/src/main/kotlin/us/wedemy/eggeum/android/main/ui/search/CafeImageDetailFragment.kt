@@ -9,10 +9,12 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageDetailAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeImageDetailViewModel
@@ -48,6 +50,22 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
       tbCafeImageDetail.setNavigationOnClickListener {
         if (!findNavController().navigateUp()) {
           requireActivity().finish()
+        }
+      }
+
+      binding.ivCafeImageDetailOption.setOnClickListener {
+        val popupMenu = PopupMenu(binding.root.context, it)
+        popupMenu.menuInflater.inflate(R.menu.cafe_image_detail_menu, popupMenu.menu)
+
+        popupMenu.setForceShowIcon(true)
+        popupMenu.show()
+
+        popupMenu.setOnMenuItemClickListener {
+          if (it.itemId == R.id.cafe_image_report) {
+            // TODO 카페 사진 신고하기 다이얼로그 구현
+            true
+          }
+          else false
         }
       }
 

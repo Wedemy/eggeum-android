@@ -16,11 +16,11 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
+    android:contentDescription="@string/ic_bottom_sheet_handle"
     android:src="@drawable/ic_bottom_sheet_handle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:contentDescription="@string/ic_bottom_sheet_handle" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/tv_cafe_detail_name"
@@ -29,6 +29,8 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginTop="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
     android:textColor="@color/gray_900"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_handle"
@@ -40,6 +42,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_cafe_detail_name"
     tools:text="서울특별시 강남구 강남대로 396" />

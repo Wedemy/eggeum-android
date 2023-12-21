@@ -30,4 +30,12 @@ class CafeImageDetailAdapter(
   }
 
   override fun getItemCount() = if (imageUrlList.size > 1) Integer.MAX_VALUE else imageUrlList.size
+
+  fun getCurrentPageIndex(viewPagerPosition: Int): Int {
+    return viewPagerPosition % imageUrlList.size
+  }
+
+  fun getTotalPageCount(): Int {
+    return imageUrlList.size
+  }
 }

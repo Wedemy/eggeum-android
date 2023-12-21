@@ -17,9 +17,8 @@ import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.R
@@ -27,7 +26,6 @@ import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageDetailAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeImageDetailViewModel
 
-// TODO 툴바에 currentPosition 표기
 @AndroidEntryPoint
 class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
 
@@ -43,13 +41,32 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
     super.onViewCreated(view, savedInstanceState)
     initView()
     initListener()
-    initObserver()
   }
 
   private fun initView() {
     binding.vpCafeImageDetail.apply {
       adapter = cafeImageDetailAdapter
-      setCurrentItem(viewModel.currentPosition.value, false)
+      setCurrentItem(viewModel.currentPosition, false)
+      registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+          super.onPageSelected(position)
+          val realPosition = cafeImageDetailAdapter.getCurrentPageIndex(position)
+          val totalPageCount = cafeImageDetailAdapter.getTotalPageCount()
+
+          val text = "${realPosition + 1} / $totalPageCount"
+          val spannableString = SpannableString(text)
+
+          val slashIndex = text.indexOf("/")
+
+          val whiteSpan = ForegroundColorSpan(Color.WHITE)
+          spannableString.setSpan(whiteSpan, 0, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+          val graySpan = ForegroundColorSpan(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_500))
+          spannableString.setSpan(graySpan, slashIndex, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+          binding.tvCafeImageDetailImageIndex.text = spannableString
+        }
+      })
     }
   }
 
@@ -80,40 +97,15 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
       ivCafeImageDetailNext.setOnClickListener {
         val currentItem = vpCafeImageDetail.currentItem
         vpCafeImageDetail.setCurrentItem(currentItem + 1, true)
-        viewModel.updateCurrentPosition(currentItem + 1)
       }
 
       ivCafeImageDetailPrev.setOnClickListener {
         val currentItem = vpCafeImageDetail.currentItem
         if (currentItem > 0) {
           vpCafeImageDetail.setCurrentItem(currentItem - 1, true)
-          viewModel.updateCurrentPosition(currentItem - 1)
         } else {
-          // 이미지가 존재해야 해당 화면에 접근할 수 있으므로 imageUrlList 의 사이즈는 0 이 될 수 없음
           val lastIndex = (vpCafeImageDetail.adapter?.itemCount ?: 0) / viewModel.cafeImages.files.size - 1
           vpCafeImageDetail.setCurrentItem(lastIndex * viewModel.cafeImages.files.size, true)
-          viewModel.updateCurrentPosition(lastIndex * viewModel.cafeImages.files.size)
-        }
-      }
-    }
-  }
-
-  private fun initObserver() {
-    repeatOnStarted {
-      launch {
-        viewModel.currentPosition.collect { index ->
-          val text = "${index + 1} / ${viewModel.cafeImages.files.size}"
-          val spannableString = SpannableString(text)
-
-          val slashIndex = text.indexOf("/")
-
-          val whiteSpan = ForegroundColorSpan(Color.WHITE)
-          spannableString.setSpan(whiteSpan, 0, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-          val graySpan = ForegroundColorSpan(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_500))
-          spannableString.setSpan(graySpan, slashIndex, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-          binding.tvCafeImageDetailImageIndex.text = spannableString
         }
       }
     }

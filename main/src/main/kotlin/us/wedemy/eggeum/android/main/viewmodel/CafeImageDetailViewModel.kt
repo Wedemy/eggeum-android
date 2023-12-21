@@ -11,8 +11,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.StateFlow
-import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.main.model.ImageModel
 
 @HiltViewModel
@@ -22,12 +20,8 @@ class CafeImageDetailViewModel @Inject constructor(
   val cafeImages: ImageModel =
     requireNotNull(savedStateHandle.get<ImageModel>(CAFE_IMAGES)) { "cafeImages is required." }
 
-  private val _currentPosition = savedStateHandle.getMutableStateFlow(CURRENT_POSITION, 0)
-  val currentPosition: StateFlow<Int> = _currentPosition.asStateFlow()
-
-  fun updateCurrentPosition(position: Int) {
-    _currentPosition.value = position
-  }
+  val currentPosition: Int =
+    requireNotNull(savedStateHandle.get<Int>(CURRENT_POSITION)) { "currentPosition is required." }
 
   private companion object {
     private const val CAFE_IMAGES = "cafe_images"

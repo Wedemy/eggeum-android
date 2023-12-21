@@ -112,13 +112,13 @@ class MainActivity : BaseActivity() {
     updateCafeNavigator.navigateFrom(
       activity = this,
       intentBuilder = {
-        putExtra(CAFE_DETAIL_INFO, cafeDetailInfo)
+        putExtra(KEY_CAFE_DETAIL_INFO, cafeDetailInfo)
       },
       withFinish = false,
     )
   }
 
   private companion object {
-    private const val CAFE_DETAIL_INFO = "cafe_detail_info"
+    private const val KEY_CAFE_DETAIL_INFO = "cafe_detail_info"
   }
 }

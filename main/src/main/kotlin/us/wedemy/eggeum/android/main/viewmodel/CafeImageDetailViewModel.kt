@@ -18,13 +18,13 @@ class CafeImageDetailViewModel @Inject constructor(
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   val cafeImages: ImageModel =
-    requireNotNull(savedStateHandle.get<ImageModel>(CAFE_IMAGES)) { "cafeImages is required." }
+    requireNotNull(savedStateHandle.get<ImageModel>(KEY_CAFE_IMAGES)) { "cafeImages is required." }
 
   val currentPosition: Int =
-    requireNotNull(savedStateHandle.get<Int>(CURRENT_POSITION)) { "currentPosition is required." }
+    requireNotNull(savedStateHandle.get<Int>(KEY_CURRENT_POSITION)) { "currentPosition is required." }
 
   private companion object {
-    private const val CAFE_IMAGES = "cafe_images"
-    private const val CURRENT_POSITION = "current_position"
+    private const val KEY_CAFE_IMAGES = "cafe_images"
+    private const val KEY_CURRENT_POSITION = "current_position"
   }
 }

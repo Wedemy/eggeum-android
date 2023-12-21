@@ -47,7 +47,7 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
     binding.vpCafeImageDetail.apply {
       adapter = cafeImageDetailAdapter
       setCurrentItem(viewModel.currentPosition, false)
-      registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+      registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
           super.onPageSelected(position)
           val realPosition = cafeImageDetailAdapter.getCurrentPageIndex(position)
@@ -61,7 +61,12 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
           val whiteSpan = ForegroundColorSpan(Color.WHITE)
           spannableString.setSpan(whiteSpan, 0, slashIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-          val graySpan = ForegroundColorSpan(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_500))
+          val graySpan = ForegroundColorSpan(
+            ContextCompat.getColor(
+              requireContext(),
+              us.wedemy.eggeum.android.design.R.color.gray_500,
+            ),
+          )
           spannableString.setSpan(graySpan, slashIndex, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
           binding.tvCafeImageDetailImageIndex.text = spannableString

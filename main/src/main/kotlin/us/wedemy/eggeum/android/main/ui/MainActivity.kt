@@ -80,12 +80,14 @@ class MainActivity : BaseActivity() {
     window.navigationBarColor = color
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
       val controller = window.insetsController
       if (color == ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900)) {
         controller?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
       } else {
-        controller?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+        controller?.setSystemBarsAppearance(
+          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+        )
       }
     } else {
       @Suppress("DEPRECATION")

@@ -69,8 +69,7 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
         if (it.itemId == R.id.proposal_info_edit) {
           viewModel.navigateToUpdateCafe()
           true
-        }
-        else false
+        } else false
       }
     }
   }

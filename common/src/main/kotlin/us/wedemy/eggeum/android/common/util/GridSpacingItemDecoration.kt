@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GridSpacingItemDecoration(
   private val spanCount: Int, // Grid의 column 수
-  private val spacing: Int // 간격
+  private val spacing: Int, // 간격
 ) : RecyclerView.ItemDecoration() {
 
   override fun getItemOffsets(
     outRect: Rect,
     view: View,
     parent: RecyclerView,
-    state: RecyclerView.State
+    state: RecyclerView.State,
   ) {
     val position: Int = parent.getChildAdapterPosition(view)
 

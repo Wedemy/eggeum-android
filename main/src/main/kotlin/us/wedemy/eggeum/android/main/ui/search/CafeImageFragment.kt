@@ -40,7 +40,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
           val action = cafeImageModel?.let { cafeImages ->
             CafeDetailFragmentDirections.actionFragmentCafeDetailToFragmentCafeImageDetail(
               cafeImages = cafeImages,
-              currentPosition = position
+              currentPosition = position,
             )
           }
           if (action != null) {

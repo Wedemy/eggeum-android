@@ -22,6 +22,7 @@ import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 class ReportCafeImageFragment : BaseDialogFragment<FragmentReportCafeImageBinding>() {
   override fun getViewBinding() = FragmentReportCafeImageBinding.inflate(layoutInflater)
 
+  @Suppress("unused")
   private val viewModel by activityViewModels<CafeDetailViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,13 +32,14 @@ class ReportCafeImageFragment : BaseDialogFragment<FragmentReportCafeImageBindin
   }
 
   private fun initListener() {
-
+    // TODO 체크 박스 클릭 이벤트
+    // TODO 버튼 클릭을 통한 사진 신고하기 API 호출
   }
 
   private fun initObserver() {
     repeatOnStarted {
       launch {
-
+        // TODO 화면 이동 이벤트 구독
       }
     }
   }

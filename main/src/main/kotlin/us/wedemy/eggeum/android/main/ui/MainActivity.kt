@@ -18,6 +18,7 @@ import javax.inject.Inject
 import us.wedemy.eggeum.android.common.ui.BaseActivity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
+import us.wedemy.eggeum.android.main.model.CafeDetailModel
 import us.wedemy.eggeum.android.navigator.LoginNavigator
 import us.wedemy.eggeum.android.navigator.UpdateCafeNavigator
 
@@ -64,10 +65,17 @@ class MainActivity : BaseActivity() {
     )
   }
 
-  fun navigateToUpdateCafe() {
+  fun navigateToUpdateCafe(cafeDetailInfo: CafeDetailModel) {
     updateCafeNavigator.navigateFrom(
       activity = this,
+      intentBuilder = {
+        putExtra(CAFE_DETAIL_INFO, cafeDetailInfo)
+      },
       withFinish = false,
     )
+  }
+
+  private companion object {
+    private const val CAFE_DETAIL_INFO = "cafe_detail_info"
   }
 }

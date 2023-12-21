@@ -12,12 +12,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeMenuBinding
-import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
@@ -48,13 +46,6 @@ class CafeMenuFragment : BaseFragment<FragmentCafeMenuBinding>() {
       launch {
         viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
           cafeMenuAdapter.replaceAll(cafeDetailInfo.menu?.products)
-          Timber.d("${cafeDetailInfo.menu?.products}")
-        }
-      }
-
-      launch {
-        viewModel.navigateToUpdateCafeEvent.collect {
-          (activity as MainActivity).navigateToUpdateCafe()
         }
       }
     }

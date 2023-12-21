@@ -10,12 +10,16 @@ package us.wedemy.eggeum.android.main.ui.search
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseBottomSheetFragment
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeDetailBinding
+import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 @AndroidEntryPoint
@@ -28,6 +32,7 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
     super.onViewCreated(view, savedInstanceState)
     initView()
     initListener()
+    initObserver()
   }
 
   private fun initView() {
@@ -52,6 +57,32 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
       override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
       override fun onTabReselected(tab: TabLayout.Tab?) = Unit
     })
+
+    binding.ivCafeDetailOption.setOnClickListener {
+      val popupMenu = PopupMenu(binding.root.context, it)
+      popupMenu.menuInflater.inflate(R.menu.cafe_detail_menu, popupMenu.menu)
+
+      popupMenu.setForceShowIcon(true)
+      popupMenu.show()
+
+      popupMenu.setOnMenuItemClickListener {
+        if (it.itemId == R.id.proposal_info_edit) {
+          viewModel.navigateToUpdateCafe()
+          true
+        }
+        else false
+      }
+    }
+  }
+
+  private fun initObserver() {
+    repeatOnStarted {
+      launch {
+        viewModel.navigateToUpdateCafeEvent.collect {
+          (activity as MainActivity).navigateToUpdateCafe(viewModel.cafeDetailInfo.value)
+        }
+      }
+    }
   }
 
   @SuppressLint("CommitTransaction")

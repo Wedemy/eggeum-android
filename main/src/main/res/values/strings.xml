@@ -41,8 +41,9 @@
   <string name="sns_list"><font color="#14b8a6">블로그</font><font color="#e5e7eb">•</font><font color="#14b8a6">인스타그램</font><font color="#e5e7eb">•</font><font color="#14b8a6">웹사이트</font></string>
   <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
   <string name="share">share</string>
-  <string name="options">options</string>
+  <string name="cafe_image_report">사진 신고하기</string>
   <string name="image_index"><font color="#ffffff">5</font><font color="#6b7280">/25</font></string>
+  <string name="proposal_info_edit">정보 수정 제안</string>
 
   <!--  MyAccount-->
   <string name="edit_my_info">내 정보 수정</string>
@@ -89,5 +90,13 @@
   <string name="ic_network_error">ic_network_error</string>
   <string name="network_error_title">잠시 연결이 불안해요</string>
   <string name="network_error_subtitle">조금 뒤 다시 접속해주세요.</string>
+
+  <!-- ReportCafeImage-->
+  <string name="report_cafe_image_title">이 사진에 어떤 문제가 있나요?</string>
+  <string name="wrong_place">잘못된 장소</string>
+  <string name="expression_of_hatred_or_outright_violence">증오심 표현 또는 노골적 폭력</string>
+  <string name="pornographic_or_sexual_content">포르노 또는 성적인 콘텐츠</string>
+  <string name="spam">스팸</string>
+  <string name="copyright_or_legal_matter">저작권 또는 법적 문제</string>
 
 </resources>

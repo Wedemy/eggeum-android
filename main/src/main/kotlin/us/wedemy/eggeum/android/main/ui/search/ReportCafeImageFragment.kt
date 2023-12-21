@@ -12,41 +12,34 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.databinding.FragmentCafeMenuBinding
-import us.wedemy.eggeum.android.main.ui.adapter.CafeMenuAdapter
+import us.wedemy.eggeum.android.common.ui.BaseDialogFragment
+import us.wedemy.eggeum.android.main.databinding.FragmentReportCafeImageBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
+// TOOD 사진 신고하기 API 연동
 @AndroidEntryPoint
-class CafeMenuFragment : BaseFragment<FragmentCafeMenuBinding>() {
-  override fun getViewBinding() = FragmentCafeMenuBinding.inflate(layoutInflater)
+class ReportCafeImageFragment : BaseDialogFragment<FragmentReportCafeImageBinding>() {
+  override fun getViewBinding() = FragmentReportCafeImageBinding.inflate(layoutInflater)
 
+  @Suppress("unused")
   private val viewModel by activityViewModels<CafeDetailViewModel>()
-
-  private val cafeMenuAdapter by lazy { CafeMenuAdapter() }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initView()
+    initListener()
     initObserver()
   }
 
-  private fun initView() {
-    binding.rvCafeMenu.apply {
-      setHasFixedSize(true)
-      adapter = cafeMenuAdapter
-      addDivider(us.wedemy.eggeum.android.design.R.color.gray_300)
-    }
+  private fun initListener() {
+    // TODO 체크 박스 클릭 이벤트
+    // TODO 버튼 클릭을 통한 사진 신고하기 API 호출
   }
 
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
-          cafeMenuAdapter.replaceAll(cafeDetailInfo.menu?.products)
-        }
+        // TODO 화면 이동 이벤트 구독
       }
     }
   }

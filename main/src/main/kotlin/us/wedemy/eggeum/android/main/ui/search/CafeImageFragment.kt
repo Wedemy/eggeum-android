@@ -10,10 +10,14 @@ package us.wedemy.eggeum.android.main.ui.search
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.fromDpToPx
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.util.GridSpacingItemDecoration
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
@@ -32,7 +36,16 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
     CafeImageAdapter(
       object : CafeImageClickListener {
         override fun onItemClick(position: Int) {
-          // TODO CafeImageDetail 화면 으로 이동하는 이벤트 구현
+          val cafeImageModel = viewModel.cafeDetailInfo.value.image
+          val action = cafeImageModel?.let { cafeImages ->
+            CafeDetailFragmentDirections.actionFragmentCafeDetailToFragmentCafeImageDetail(
+              cafeImages = cafeImages,
+              currentPosition = position,
+            )
+          }
+          if (action != null) {
+            findNavController().safeNavigate(action)
+          }
         }
       },
     )
@@ -47,6 +60,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
   private fun initView() {
     binding.rvCafeImage.apply {
       setHasFixedSize(true)
+      addItemDecoration(GridSpacingItemDecoration(spanCount = 2, spacing = 16f.fromDpToPx()))
       adapter = cafeImageAdapter
     }
   }

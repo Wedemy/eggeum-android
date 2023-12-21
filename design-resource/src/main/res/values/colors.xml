@@ -26,4 +26,6 @@
 
   <color name="error_500">#ef4444</color>
 
+  <color name="muted_900">#171717</color>
+
 </resources>

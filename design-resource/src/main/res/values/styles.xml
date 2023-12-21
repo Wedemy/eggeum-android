@@ -95,6 +95,10 @@
     <item name="android:textSize">0sp</item>
   </style>
 
+  <style name="EggeumDialog" parent="@style/Theme.MaterialComponents.Dialog">
+    <item name="android:background">@drawable/bg_eggeum_dialog</item>
+  </style>
+
   <style name="EggeumBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
     <item name="bottomSheetStyle">@style/EggeumBottomSheet</item>
   </style>

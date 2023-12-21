@@ -22,6 +22,6 @@ class CafeImageViewHolder(binding: ItemCafeImageBinding, clickListener: CafeImag
   }
 
   override fun bind(item: FileModel) {
-    binding.ivCafeImage.load(item.url)
+    binding.ivCafeImage.load(item.url) { crossfade(true) }
   }
 }

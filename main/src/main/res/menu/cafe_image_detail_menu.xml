@@ -7,14 +7,11 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+
   <item
-    android:id="@+id/action_share"
-    android:icon="@drawable/ic_share_white_outlined_24"
-    android:title="@string/share"
+    android:id="@+id/cafe_image_report"
+    android:icon="@drawable/ic_report_outlined_20"
+    android:title="@string/cafe_image_report"
     app:showAsAction="ifRoom" />
-  <item
-    android:id="@+id/action_options"
-    android:icon="@drawable/ic_overflow_white_outlined_24"
-    android:title="@string/options"
-    app:showAsAction="ifRoom" />
+
 </menu>

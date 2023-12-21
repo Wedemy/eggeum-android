@@ -13,11 +13,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.extension.fromDpToPx
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.GridSpacingItemDecoration
-import us.wedemy.eggeum.android.common.util.fromDpToPx
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel

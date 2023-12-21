@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
@@ -69,7 +70,8 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
 
         popupMenu.setOnMenuItemClickListener {
           if (it.itemId == R.id.cafe_image_report) {
-            // TODO 카페 사진 신고하기 다이얼로그 구현
+            val action = CafeImageDetailFragmentDirections.actionFragmentCafeImageDetailToReportCafeImageFragment()
+            findNavController().safeNavigate(action)
             true
           } else false
         }

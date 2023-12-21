@@ -176,7 +176,7 @@
     android:id="@+id/fragment_cafe_detail"
     android:name="us.wedemy.eggeum.android.main.ui.search.CafeDetailFragment"
     android:label="CafeDetailFragment"
-    tools:layout="@layout/fragment_cafe_detail" >
+    tools:layout="@layout/fragment_cafe_detail">
 
     <action
       android:id="@+id/action_fragment_cafe_detail_to_fragment_cafe_image_detail"
@@ -184,7 +184,7 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </dialog>
 
@@ -202,6 +202,20 @@
       android:name="current_position"
       app:argType="integer" />
 
+    <action
+      android:id="@+id/action_fragment_cafe_image_detail_to_reportCafeImageFragment"
+      app:destination="@id/fragment_report_cafe_image"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
+
+  <dialog
+    android:id="@+id/fragment_report_cafe_image"
+    android:name="us.wedemy.eggeum.android.main.ui.search.ReportCafeImageFragment"
+    android:label="ReportCafeImageFragment"
+    tools:layout="@layout/fragment_report_cafe_image" />
 
 </navigation>

@@ -12,10 +12,11 @@
   android:layout_height="match_parent"
   tools:ignore="HardcodedText">
 
-  <com.google.android.material.imageview.ShapeableImageView
+  <com.github.chrisbanes.photoview.PhotoView
     android:id="@+id/iv_cafe_image_detail"
     android:layout_width="0dp"
     android:layout_height="0dp"
+    android:adjustViewBounds="true"
     android:contentDescription="Cafe Image Detail"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

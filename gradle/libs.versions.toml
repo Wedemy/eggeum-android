@@ -49,6 +49,7 @@ insetter = "0.6.1"
 timber = "5.0.1"
 naver-map = "3.17.0"
 ksp = "1.9.21-1.0.16"
+photo-view = "2.0.0"
 
 javax-inject = "1"
 
@@ -138,6 +139,7 @@ lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 naver-map = { module = "com.naver.maps:map-sdk", version.ref = "naver-map" }
+photo-view = { module = "com.github.chrisbanes:PhotoView", version.ref = "photo-view"}
 
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
 

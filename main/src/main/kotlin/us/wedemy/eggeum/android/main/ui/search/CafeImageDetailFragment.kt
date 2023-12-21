@@ -17,6 +17,8 @@ import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageDetailAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeImageDetailViewModel
 
+// TODO 툴바에 currentPosition 표기
+// statusBar, navigationBar 검은색으로
 @AndroidEntryPoint
 class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
 
@@ -33,6 +35,7 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
     initView()
     initListener()
   }
+
   private fun initView() {
     binding.vpCafeImageDetail.apply {
       adapter = cafeImageDetailAdapter

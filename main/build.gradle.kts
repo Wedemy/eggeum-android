@@ -42,6 +42,7 @@ dependencies {
     libs.coil,
     libs.timber,
     libs.naver.map,
+    libs.photo.view,
     projects.common,
     projects.designResource,
     projects.domain,

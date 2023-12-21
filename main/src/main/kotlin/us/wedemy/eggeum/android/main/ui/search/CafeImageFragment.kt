@@ -20,6 +20,7 @@ import us.wedemy.eggeum.android.common.util.fromDpToPx
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter
 import us.wedemy.eggeum.android.common.util.GridSpacingItemDecoration
+import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 interface CafeImageClickListener {
@@ -70,6 +71,12 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
       launch {
         viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
           cafeImageAdapter.replaceAll(cafeDetailInfo.image?.files)
+        }
+      }
+
+      launch {
+        viewModel.navigateToUpdateCafeEvent.collect {
+          (activity as MainActivity).navigateToUpdateCafe()
         }
       }
     }

@@ -28,6 +28,7 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    maven("https://www.jitpack.io")
   }
 
   dependencies {
@@ -40,6 +41,7 @@ allprojects {
     google()
     mavenCentral()
     maven("https://naver.jfrog.io/artifactory/maven/")
+    maven("https://www.jitpack.io")
   }
 
   apply {

@@ -12,7 +12,7 @@
   android:layout_height="match_parent"
   tools:ignore="HardcodedText">
 
-  <ImageView
+  <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/iv_cafe_image_detail"
     android:layout_width="0dp"
     android:layout_height="0dp"
@@ -21,6 +21,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+    app:shapeAppearance="@style/ShapeAppearance.SmallComponent"
     tools:src="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

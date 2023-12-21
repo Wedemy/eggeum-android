@@ -11,10 +11,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageDetailBinding
+import us.wedemy.eggeum.android.main.model.FileModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageDetailViewHolder
 
 class CafeImageDetailAdapter(
-  private var imageUrlList: List<String> = emptyList(),
+  private var imageUrlList: List<FileModel> = emptyList(),
 ) : RecyclerView.Adapter<CafeImageDetailViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -25,7 +26,7 @@ class CafeImageDetailAdapter(
   override fun onBindViewHolder(holder: CafeImageDetailViewHolder, position: Int) {
     val realPosition = position % imageUrlList.size
     val imageUrl = imageUrlList[realPosition]
-    holder.bind(imageUrl)
+    imageUrl.url?.let { holder.bind(it) }
   }
 
   override fun getItemCount() = if (imageUrlList.size > 1) Integer.MAX_VALUE else imageUrlList.size

@@ -49,7 +49,7 @@ insetter = "0.6.1"
 timber = "5.0.1"
 naver-map = "3.17.0"
 ksp = "1.9.21-1.0.16"
-photo-view = "2.0.0"
+photo-view = "2.3.0"
 
 javax-inject = "1"
 

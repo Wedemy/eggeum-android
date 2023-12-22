@@ -42,6 +42,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
     binding.rvSearchCafe.apply {
       setHasFixedSize(true)
       addDivider(R.color.gray_300)
+      adapter = searchCafeAdapter
     }
   }
 

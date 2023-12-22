@@ -118,9 +118,10 @@ androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragme
 androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "androidx-hilt-navigation" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "androidx.paging3"}
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx.paging3"}
-androidx-room = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
-androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room"}
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
 androidx-room-compile = { module = "androidx.room:room-compiler", version.ref = "androidx.room"}
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room"}
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room"}
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-client-core" }
@@ -181,4 +182,3 @@ retrofit = [
     "okhttp",
     "okhttp-logging-interceptor",
 ]
-

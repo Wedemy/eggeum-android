@@ -20,8 +20,10 @@ import us.wedemy.eggeum.android.data.datasource.login.LoginRemoteDataSource
 import us.wedemy.eggeum.android.data.datasource.login.LoginRemoteDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.notice.NoticeDataSource
 import us.wedemy.eggeum.android.data.datasource.notice.NoticeDataSourceImpl
-import us.wedemy.eggeum.android.data.datasource.place.PlaceDataSource
-import us.wedemy.eggeum.android.data.datasource.place.PlaceDataSourceImpl
+import us.wedemy.eggeum.android.data.datasource.place.local.PlaceLocalDataSource
+import us.wedemy.eggeum.android.data.datasource.place.local.PlaceLocalDataSourceImpl
+import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSource
+import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.report.ReportDataSource
 import us.wedemy.eggeum.android.data.datasource.report.ReportDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.user.UserDataSource
@@ -44,7 +46,11 @@ internal abstract class DataSourceModule {
 
   @Binds
   @Singleton
-  abstract fun bindPlaceDataSource(placeDataSourceImpl: PlaceDataSourceImpl): PlaceDataSource
+  abstract fun bindPlaceRemoteDataSource(placeRemoteDataSourceImpl: PlaceRemoteDataSourceImpl): PlaceRemoteDataSource
+
+  @Binds
+  @Singleton
+  abstract fun bindPlaceLocalDataSource(placeLocalDataSourceImpl: PlaceLocalDataSourceImpl): PlaceLocalDataSource
 
   @Binds
   @Singleton

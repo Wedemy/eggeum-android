@@ -12,20 +12,20 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
-import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
-import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeViewHolder
+import us.wedemy.eggeum.android.main.databinding.ItemSearchCafeLocationBinding
+import us.wedemy.eggeum.android.main.ui.adapter.viewholder.SearchCafeViewHolder
 
-class CafePagingAdapter : PagingDataAdapter<PlaceEntity, CafeViewHolder>(PlaceEntityDiffCallback) {
+class SearchCafeAdapter : PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    CafeViewHolder(
-      ItemNewCafeBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+    SearchCafeViewHolder(
+      ItemSearchCafeLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       null,
     )
 
-  override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {
-    val newCafeItem = getItem(position)
-    newCafeItem?.let { cafe ->
+  override fun onBindViewHolder(holder: SearchCafeViewHolder, position: Int) {
+    val cafeItem = getItem(position)
+    cafeItem?.let { cafe ->
       holder.bind(cafe)
     }
   }

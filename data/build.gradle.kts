@@ -14,6 +14,7 @@ plugins {
   eggeum("android-hilt")
   eggeum("kotlin-explicit-api")
   eggeum("test-kotest")
+  eggeum("androidx-room")
   alias(libs.plugins.google.secrets)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.moshix.ir)

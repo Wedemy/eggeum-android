@@ -22,7 +22,7 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.HorizontalSpacingItemDecoration
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
-import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
   private val viewModel by viewModels<HomeViewModel>()
 
-  private val cafePagingAdapter by lazy { CafePagingAdapter() }
+  private val searchCafeAdapter by lazy { SearchCafeAdapter() }
 
   private val newCafeAdapter by lazy {
     NewCafeAdapter(
@@ -94,16 +94,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeList.collectLatest { cafes ->
-          cafePagingAdapter.submitData(cafes)
+          searchCafeAdapter.submitData(cafes)
         }
       }
 
       launch {
-        cafePagingAdapter.loadStateFlow
+        searchCafeAdapter.loadStateFlow
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              viewModel.getNewCafeList(cafePagingAdapter.snapshot())
+              viewModel.getNewCafeList(searchCafeAdapter.snapshot())
             }
           }
       }

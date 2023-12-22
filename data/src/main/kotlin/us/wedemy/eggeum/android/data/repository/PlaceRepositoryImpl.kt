@@ -12,7 +12,8 @@ import androidx.paging.map
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import us.wedemy.eggeum.android.data.datasource.place.PlaceDataSource
+import us.wedemy.eggeum.android.data.datasource.place.local.PlaceLocalDataSource
+import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSource
 import us.wedemy.eggeum.android.data.mapper.toModel
 import us.wedemy.eggeum.android.data.mapper.toEntity
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -20,10 +21,11 @@ import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
 public class PlaceRepositoryImpl @Inject constructor(
-  private val dataSource: PlaceDataSource,
+  private val remoteDataSource: PlaceRemoteDataSource,
+  private val localDataSource: PlaceLocalDataSource,
 ) : PlaceRepository {
   override suspend fun getPlace(placeId: Int): PlaceEntity? {
-    return dataSource.getPlace(placeId)?.toEntity()
+    return remoteDataSource.getPlace(placeId)?.toEntity()
   }
 
   override fun getPlaceList(
@@ -38,7 +40,7 @@ public class PlaceRepositoryImpl @Inject constructor(
     startDate: String?,
     type: String?,
   ): Flow<PagingData<PlaceEntity>> {
-    return dataSource.getPlaceList(
+    return remoteDataSource.getPlaceList(
       distance = distance,
       endDate = endDate,
       latitude = latitude,
@@ -57,6 +59,22 @@ public class PlaceRepositoryImpl @Inject constructor(
   }
 
   override suspend fun upsertPlace(upsertPlaceEntity: UpsertPlaceEntity) {
-    dataSource.upsertPlace(upsertPlaceEntity.toModel())
+    remoteDataSource.upsertPlace(upsertPlaceEntity.toModel())
+  }
+
+  override suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity) {
+    localDataSource.insertRecentSearchPlace(placeEntity)
+  }
+
+  override suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity) {
+    localDataSource.deleteRecentSearchPlace(placeEntity)
+  }
+
+  override fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceEntity>> {
+    return localDataSource.getRecentSearchPlaceList(name).map { pagingData ->
+      pagingData.map { place ->
+        place.toEntity()
+      }
+    }
   }
 }

@@ -25,11 +25,25 @@ internal fun PlaceResponse.toEntity() =
     address1 = address1,
     address2 = address2,
     id = id,
-    image = image.toEntity(),
-    info = info.toEntity(),
+    image = image?.toEntity(),
+    info = info?.toEntity(),
     latitude = latitude,
     longitude = longitude,
-    menu = menu.toEntity(),
+    menu = menu?.toEntity(),
+    name = name,
+    type = type,
+  )
+
+internal fun PlaceEntity.toModel() =
+  PlaceResponse(
+    address1 = address1,
+    address2 = address2,
+    id = id,
+    image = image?.toModel(),
+    info = info?.toModel(),
+    latitude = latitude,
+    longitude = longitude,
+    menu = menu?.toModel(),
     name = name,
     type = type,
   )

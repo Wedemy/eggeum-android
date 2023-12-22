@@ -47,7 +47,7 @@ import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.mapper.toUilModel
 import us.wedemy.eggeum.android.main.model.CafeDetailModel
-import us.wedemy.eggeum.android.main.ui.adapter.CafePagingAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
   private val searchViewModel by viewModels<SearchViewModel>()
 
-  private val cafePagingAdapter by lazy { CafePagingAdapter() }
+  private val searchCafeAdapter by lazy { SearchCafeAdapter() }
 
   private var naverMap: NaverMap? = null
   private val markers = mutableListOf<Marker>()
@@ -95,7 +95,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       naverMap.locationTrackingMode = LocationTrackingMode.Follow
     }
     initNaverMap()
-    addMarkersToMap(cafePagingAdapter.snapshot())
+    addMarkersToMap(searchCafeAdapter.snapshot())
   }
 
   private fun isPermissionsGranted(): Boolean {
@@ -131,17 +131,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     repeatOnStarted {
       launch {
         searchViewModel.placeList.collectLatest { pagingData ->
-          cafePagingAdapter.submitData(pagingData)
+          searchCafeAdapter.submitData(pagingData)
         }
       }
 
       launch {
-        cafePagingAdapter.loadStateFlow
+        searchCafeAdapter.loadStateFlow
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              searchViewModel.updatePlaceSnapshotList(cafePagingAdapter.snapshot())
-              addMarkersToMap(cafePagingAdapter.snapshot())
+              searchViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
+              addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
       }

@@ -12,7 +12,7 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
 
-class CafeViewHolder(
+class NewCafeViewHolder(
   binding: ItemNewCafeBinding,
   clickListener: NewCafeClickListener? = null,
 ) : BaseViewHolder<PlaceEntity, ItemNewCafeBinding>(binding) {

@@ -12,7 +12,7 @@ import androidx.paging.map
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import us.wedemy.eggeum.android.data.datasource.place.PlaceDataSource
+import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSource
 import us.wedemy.eggeum.android.data.mapper.toModel
 import us.wedemy.eggeum.android.data.mapper.toEntity
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
 public class PlaceRepositoryImpl @Inject constructor(
-  private val dataSource: PlaceDataSource,
+  private val dataSource: PlaceRemoteDataSource,
 ) : PlaceRepository {
   override suspend fun getPlace(placeId: Int): PlaceEntity? {
     return dataSource.getPlace(placeId)?.toEntity()

@@ -7,10 +7,13 @@
 
 package us.wedemy.eggeum.android.data.model.place
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Entity(tableName = "places")
 public data class PlaceResponse(
   @SerialName("address1")
   val address1: String?,
@@ -18,23 +21,24 @@ public data class PlaceResponse(
   @SerialName("address2")
   val address2: String?,
 
+  @PrimaryKey(autoGenerate = false)
   @SerialName("id")
   val id: Int,
 
   @SerialName("image")
-  val image: Image,
+  val image: Image?,
 
   @SerialName("info")
-  val info: Info,
+  val info: Info?,
 
   @SerialName("latitude")
-  val latitude: Double,
+  val latitude: Double?,
 
   @SerialName("longitude")
-  val longitude: Double,
+  val longitude: Double?,
 
   @SerialName("menu")
-  val menu: Menu,
+  val menu: Menu?,
 
   @SerialName("name")
   val name: String,

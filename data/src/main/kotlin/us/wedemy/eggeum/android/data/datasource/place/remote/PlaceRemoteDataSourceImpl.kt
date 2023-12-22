@@ -5,7 +5,14 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data.datasource.place
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
+package us.wedemy.eggeum.android.data.datasource.place.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -19,9 +26,9 @@ import us.wedemy.eggeum.android.data.service.PlaceService
 import us.wedemy.eggeum.android.data.util.Constants
 import us.wedemy.eggeum.android.data.util.safeRequest
 
-public class PlaceDataSourceImpl @Inject constructor(
+public class PlaceRemoteDataSourceImpl @Inject constructor(
   private val service: PlaceService,
-) : PlaceDataSource {
+) : PlaceRemoteDataSource {
   override suspend fun getPlace(placeId: Int): PlaceResponse? {
     return safeRequest {
       service.getPlace(placeId)

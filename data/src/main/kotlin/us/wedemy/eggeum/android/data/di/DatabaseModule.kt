@@ -18,7 +18,7 @@ import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.database.PlaceSearchDatabase
 
 @Module
-@InstallIn(SingletonComponent:: class)
+@InstallIn(SingletonComponent::class)
 public object DatabaseModule {
 
   @Singleton

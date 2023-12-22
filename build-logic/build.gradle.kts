@@ -18,6 +18,7 @@ gradlePlugin {
     "AndroidApplicationPlugin" to "android-application",
     "AndroidLibraryPlugin" to "android-library",
     "AndroidHiltPlugin" to "android-hilt",
+    "AndroidxRoomPlugin" to "androidx-room",
     "AndroidGmdPlugin" to "android-gmd",
     "JvmKotlinPlugin" to "jvm-kotlin",
     "KotlinExplicitApiPlugin" to "kotlin-explicit-api",

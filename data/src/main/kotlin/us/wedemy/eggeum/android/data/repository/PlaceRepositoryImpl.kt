@@ -71,8 +71,8 @@ public class PlaceRepositoryImpl @Inject constructor(
   }
 
   override fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceEntity>> {
-    return localDataSource.getRecentSearchPlaceList(name).map { pagingData->
-      pagingData.map {place ->
+    return localDataSource.getRecentSearchPlaceList(name).map { pagingData ->
+      pagingData.map { place ->
         place.toEntity()
       }
     }

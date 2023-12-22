@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
@@ -52,6 +53,15 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         viewModel.placeList.collectLatest {
           searchCafeAdapter.submitData(it)
         }
+      }
+
+      launch {
+        val editTextFlow = binding.tietSearchCafe.textChangesAsFlow()
+        editTextFlow
+          .collect { text ->
+            val query = text.toString().trim()
+            viewModel.setSearchQuery(query)
+          }
       }
     }
   }

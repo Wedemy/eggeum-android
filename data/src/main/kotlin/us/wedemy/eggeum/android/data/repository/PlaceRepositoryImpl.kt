@@ -70,8 +70,8 @@ public class PlaceRepositoryImpl @Inject constructor(
     localDataSource.deleteRecentSearchPlace(placeEntity)
   }
 
-  override fun getRecentSearchPlaces(name: String): Flow<PagingData<PlaceEntity>> {
-    return localDataSource.getRecentSearchPlaces(name).map { pagingData->
+  override fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceEntity>> {
+    return localDataSource.getRecentSearchPlaceList(name).map { pagingData->
       pagingData.map {place ->
         place.toEntity()
       }

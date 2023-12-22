@@ -29,9 +29,9 @@ public class PlaceLocalDataSourceImpl @Inject constructor(
     placeSearchDatabase.placeSearchDao().deleteRecentSearchPlace(placeEntity.toModel())
   }
 
-  override fun getRecentSearchPlaces(name: String): Flow<PagingData<PlaceResponse>> {
+  override fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceResponse>> {
     val pagingSourceFactory = {
-      placeSearchDatabase.placeSearchDao().getRecentSearchPlaces()
+      placeSearchDatabase.placeSearchDao().getRecentSearchPlaceList()
     }
 
     return Pager(

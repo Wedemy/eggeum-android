@@ -24,5 +24,5 @@ public interface PlaceSearchDao {
   public suspend fun deleteRecentSearchPlace(place: PlaceResponse)
 
   @Query("SELECT * FROM places")
-  public fun getRecentSearchPlaces(): PagingSource<Int, PlaceResponse>
+  public fun getRecentSearchPlaceList(): PagingSource<Int, PlaceResponse>
 }

@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data.local
+package us.wedemy.eggeum.android.data.database
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
@@ -18,11 +18,11 @@ import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 @Dao
 public interface PlaceSearchDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  public suspend fun insertPlace(place: PlaceResponse)
+  public suspend fun insertRecentSearchPlace(place: PlaceResponse)
 
   @Delete
-  public suspend fun deletePlace(place: PlaceResponse)
+  public suspend fun deleteRecentSearchPlace(place: PlaceResponse)
 
   @Query("SELECT * FROM places")
-  public fun searchPlace(): PagingSource<Int, PlaceResponse>
+  public fun getRecentSearchPlaces(): PagingSource<Int, PlaceResponse>
 }

@@ -5,12 +5,18 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data.local.db
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
+package us.wedemy.eggeum.android.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import us.wedemy.eggeum.android.data.local.PlaceSearchDao
 import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 
 @Database(

@@ -28,6 +28,15 @@ public class GetPlaceUseCase @Inject constructor(
 }
 
 @Singleton
+public class GetPlaceListUseCase @Inject constructor(
+  private val repository: PlaceRepository,
+) {
+  public operator fun invoke(type: String? = null): Flow<PagingData<PlaceEntity>> {
+    return repository.getPlaceList()
+  }
+}
+
+@Singleton
 public class UpsertPlaceUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
@@ -38,10 +47,29 @@ public class UpsertPlaceUseCase @Inject constructor(
 }
 
 @Singleton
-public class GetPlaceListUseCase @Inject constructor(
-  private val repository: PlaceRepository,
+public class InsertRecentSearchPlaceUseCase @Inject constructor(
+  private val repository: PlaceRepository
 ) {
-  public operator fun invoke(type: String? = null): Flow<PagingData<PlaceEntity>> {
-    return repository.getPlaceList()
+  public suspend operator fun invoke(placeEntity: PlaceEntity) {
+    repository.insertRecentSearchPlace(placeEntity)
   }
 }
+
+@Singleton
+public class DeleteRecentSearchPlaceUseCase @Inject constructor(
+  private val repository: PlaceRepository
+) {
+  public suspend operator fun invoke(placeEntity: PlaceEntity) {
+    repository.deleteRecentSearchPlace(placeEntity)
+  }
+}
+
+@Singleton
+public class GetRecentSearchPlaces @Inject constructor(
+  private val repository: PlaceRepository
+) {
+  public operator fun invoke(name: String) {
+    repository.getRecentSearchPlaces(name)
+  }
+}
+

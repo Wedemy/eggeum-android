@@ -13,9 +13,9 @@ import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 
 public interface PlaceLocalDataSource {
-  public suspend fun insertPlace(placeEntity: PlaceEntity)
+  public suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity)
 
-  public suspend fun deletePlace(placeEntity: PlaceEntity)
+  public suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity)
 
-  public fun searchPlace(name: String): Flow<PagingData<PlaceResponse>>
+  public fun getRecentSearchPlaces(name: String): Flow<PagingData<PlaceResponse>>
 }

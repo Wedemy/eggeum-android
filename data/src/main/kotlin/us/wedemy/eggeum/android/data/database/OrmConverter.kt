@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.data.local.db
+package us.wedemy.eggeum.android.data.database
 
 import androidx.room.TypeConverter
 import kotlinx.serialization.encodeToString

@@ -56,4 +56,25 @@ public interface PlaceRepository {
    * @param upsertPlaceEntity
    */
   public suspend fun upsertPlace(upsertPlaceEntity: UpsertPlaceEntity)
+
+  /**
+   * 최근 검색 장소 추가
+   *
+   * @param placeEntity
+   */
+  public suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity)
+
+  /**
+   * 최근 검색 장소 삭제
+   *
+   * @param placeEntity
+   */
+  public suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity)
+
+  /**
+   * 최근 검색 장소 조회
+   *
+   * @param name 장소 이름
+   */
+  public fun getRecentSearchPlaces(name: String): Flow<PagingData<PlaceEntity>>
 }

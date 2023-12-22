@@ -79,13 +79,12 @@ internal class AndroidHiltPlugin : BuildLogicPlugin({
 })
 
 internal class AndroidxRoomPlugin : BuildLogicPlugin({
-  applyPlugins(
-    libs.findPlugin("androidx-room").get().get().pluginId,
-    Plugins.Ksp,
-  )
-  dependencies.add("ksp", libs.findLibrary("androidx-room-compile").get())
+  applyPlugins(Plugins.Ksp)
+
   dependencies.add("implementation", libs.findLibrary("androidx-room-runtime").get())
+  dependencies.add("implementation", libs.findLibrary("androidx-room-ktx").get())
   dependencies.add("implementation", libs.findLibrary("androidx-room-paging").get())
+  dependencies.add("ksp", libs.findLibrary("androidx-room-compile").get())
 })
 
 internal class AndroidGmdPlugin : BuildLogicPlugin({

@@ -14,7 +14,7 @@ plugins {
   eggeum("android-hilt")
   eggeum("kotlin-explicit-api")
   eggeum("test-kotest")
-  // eggeum("androidx-room")
+  eggeum("androidx-room")
   alias(libs.plugins.google.secrets)
   alias(libs.plugins.kotlinx.serialization)
   alias(libs.plugins.moshix.ir)
@@ -38,10 +38,8 @@ dependencies {
     libs.androidx.paging.runtime,
     libs.bundles.ktor.client,
     libs.bundles.retrofit,
-    libs.bundles.room,
     projects.domain,
   )
-  ksp(libs.androidx.room.compile)
   testImplementation(libs.test.ktor.client.mock)
 }
 

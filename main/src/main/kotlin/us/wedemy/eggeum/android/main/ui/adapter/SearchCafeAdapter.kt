@@ -16,7 +16,8 @@ import us.wedemy.eggeum.android.main.databinding.ItemSearchCafeLocationBinding
 import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.SearchCafeViewHolder
 
-class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = null) : PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
+class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = null) :
+  PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     SearchCafeViewHolder(

@@ -36,7 +36,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         override fun onItemClick(position: Int) {
           Toast.makeText(requireContext(), "${position}번째 장소를 저장했습니다.", Toast.LENGTH_SHORT).show()
         }
-      }
+      },
     )
   }
 

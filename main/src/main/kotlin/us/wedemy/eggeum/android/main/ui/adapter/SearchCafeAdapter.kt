@@ -13,14 +13,15 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemSearchCafeLocationBinding
+import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.SearchCafeViewHolder
 
-class SearchCafeAdapter : PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
+class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = null) : PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     SearchCafeViewHolder(
       ItemSearchCafeLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      null,
+      clickListener,
     )
 
   override fun onBindViewHolder(holder: SearchCafeViewHolder, position: Int) {

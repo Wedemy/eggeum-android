@@ -47,7 +47,7 @@ public class PlaceRemoteDataSourceImpl @Inject constructor(
     startDate: String?,
     type: String?,
   ): Flow<PagingData<PlaceResponse>> {
-    val pagingSourceFactory = { PlacePagingSource(service) }
+    val pagingSourceFactory = { PlacePagingSource(service, search) }
 
     return Pager(
       config = PagingConfig(

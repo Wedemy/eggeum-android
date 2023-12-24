@@ -12,10 +12,10 @@ import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
-import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
+import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NewCafeViewHolder
 
-class NewCafeAdapter(private val clickListener: NewCafeClickListener) :
+class NewCafeAdapter(private val clickListener: SearchCafeClickListener) :
   BaseRecyclerViewAdapter<PlaceEntity, ItemNewCafeBinding>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

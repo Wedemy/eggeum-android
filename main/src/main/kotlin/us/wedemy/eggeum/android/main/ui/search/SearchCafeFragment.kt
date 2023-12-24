@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,6 +21,7 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
+import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.viewmodel.SearchCafeViewModel
 
 @AndroidEntryPoint
@@ -28,7 +30,15 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
 
   private val viewModel by viewModels<SearchCafeViewModel>()
 
-  private val searchCafeAdapter by lazy { SearchCafeAdapter() }
+  private val searchCafeAdapter by lazy {
+    SearchCafeAdapter(
+      object : SearchCafeClickListener {
+        override fun onItemClick(position: Int) {
+          Toast.makeText(requireContext(), "${position}번째 장소를 저장했습니다.", Toast.LENGTH_SHORT).show()
+        }
+      }
+    )
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -50,7 +60,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.placeList.collectLatest {
+        viewModel.searchPlaceList.collectLatest {
           searchCafeAdapter.submitData(it)
         }
       }

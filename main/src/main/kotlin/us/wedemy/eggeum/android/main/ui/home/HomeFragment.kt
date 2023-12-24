@@ -25,7 +25,7 @@ import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
-import us.wedemy.eggeum.android.main.ui.adapter.listener.NewCafeClickListener
+import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.ui.adapter.listener.NoticeCardClickListener
 import us.wedemy.eggeum.android.main.viewmodel.HomeViewModel
 
@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
   private val newCafeAdapter by lazy {
     NewCafeAdapter(
-      object : NewCafeClickListener {
+      object : SearchCafeClickListener {
         override fun onItemClick(position: Int) {
           // TODO 화면 전환 클릭 이벤트 리스터 구현
         }

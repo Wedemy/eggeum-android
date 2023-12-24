@@ -10,9 +10,18 @@ package us.wedemy.eggeum.android.main.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
@@ -30,13 +39,25 @@ class SearchCafeViewModel @Inject constructor(
   private val deleteRecentSearchPlaceUseCase: DeleteRecentSearchPlaceUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
-  val placeList = getPlaceListUseCase().cachedIn(viewModelScope)
   val recentSearchPlaceList = getRecentSearchPlaceListUseCase().cachedIn(viewModelScope)
 
   private val _searchQuery: SaveableMutableStateFlow<String> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
   val searchQuery = _searchQuery.asStateFlow()
+
+  @OptIn(FlowPreview::class)
+  val debouncedSearchQuery: Flow<String?> = searchQuery
+    .debounce(SEARCH_TIME_DELAY)
+    .filter { it.isNotEmpty() }
+    .distinctUntilChanged()
+
+  @OptIn(ExperimentalCoroutinesApi::class)
+  val searchPlaceList: Flow<PagingData<PlaceEntity>> =
+    debouncedSearchQuery.filterNotNull()
+      .flatMapLatest { query ->
+        getPlaceListUseCase(query)
+      }
+      .cachedIn(viewModelScope)
 
   fun setSearchQuery(query: String) {
     _searchQuery.value = query
@@ -56,5 +77,6 @@ class SearchCafeViewModel @Inject constructor(
 
   private companion object {
     private const val KEY_CAFE_NAME = "cafe_name"
+    private const val SEARCH_TIME_DELAY = 500L
   }
 }

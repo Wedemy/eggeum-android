@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
   private val searchViewModel by viewModels<SearchViewModel>()
 
-  private val searchCafeAdapter by lazy { SearchCafeAdapter() }
+  private val searchCafeAdapter by lazy { SearchCafeAdapter(null) }
 
   private var naverMap: NaverMap? = null
   private val markers = mutableListOf<Marker>()

@@ -16,6 +16,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -64,8 +65,6 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
 
   private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
 
-  private var callCount = 0
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initView()
     initListener()
@@ -102,14 +101,6 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
   }
 
   private fun initView() {
-    // TODO: 지도에서 placdId 받아와서 인자 넣기
-    if (callCount == 0) {
-      viewModel.getCafeMenuList(1)
-      callCount++
-    } else {
-      viewModel.editCafeMenuItem()
-    }
-
     binding.rvCafeMenuList.apply {
       setHasFixedSize(true)
       adapter = cafeMenuAdapter
@@ -124,10 +115,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
         }
       }
       btnInputCafeMenu.setOnClickListener {
-        // TODO: 새로운 placeBody -> UpsertPlaceBody -> db update -> 수정 완료 페이지
         viewModel.updatePlaceBodyUseCase()
-        val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentUpdateMenuComplete()
-        findNavController().safeNavigate(action)
       }
     }
   }
@@ -136,6 +124,18 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeMenuList.collect { cafeMenuAdapter.replaceAll(it) }
+      }
+      launch {
+        viewModel.updatePlaceBodySuccess.collect {
+          val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentUpdateMenuComplete()
+          findNavController().safeNavigate(action)
+        }
+        viewModel.initializeUpdatePlaceBodySuccess()
+      }
+      launch {
+        viewModel.getInitCall.collect {
+          viewModel.editCafeMenuItem()
+        }
       }
     }
   }

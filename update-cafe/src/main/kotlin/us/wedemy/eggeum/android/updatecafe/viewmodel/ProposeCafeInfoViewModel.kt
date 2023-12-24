@@ -9,6 +9,7 @@
 
 package us.wedemy.eggeum.android.updatecafe.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,11 +44,24 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val _cafeMenuItemMap = MutableStateFlow(emptyMap<String, CafeMenuItem>())
   private val cafeMenuItemMap = _cafeMenuItemMap.asStateFlow()
 
+  private val _getInitCall = MutableSharedFlow<Unit>(1)
+  val getInitCall = _getInitCall.asSharedFlow()
+
+  private val _updatePlaceBodySuccess = MutableSharedFlow<Boolean>()
+  val updatePlaceBodySuccess = _updatePlaceBodySuccess.asSharedFlow()
+
   fun setCafeMenuItemMap(cafeMenuItemMap: MutableMap<String, CafeMenuItem>) {
     _cafeMenuItemMap.value = cafeMenuItemMap
   }
 
-  fun getCafeMenuList(placeId: Int) {
+  init {
+    // TODO: 지도에서 placdId 받아와서 인자 넣기
+    viewModelScope.launch {
+      getCafeMenuList(1)
+    }
+  }
+
+  private fun getCafeMenuList(placeId: Int) {
     viewModelScope.launch {
       val result = getPlaceUseCase(placeId)
       when {
@@ -57,6 +71,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
             val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
             updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
           }
+          _getInitCall.emit(Unit)
         }
         result.isSuccess && result.getOrNull() == null -> {
           Timber.e("Request succeeded but data validation failed.")
@@ -85,12 +100,11 @@ class ProposeCafeInfoViewModel @Inject constructor(
   fun editCafeMenuItem() {
     val before = cafeMenuItemMap.value["before"]
     val after = cafeMenuItemMap.value["after"]
-
     placeBody.menu?.products.let { productEntities ->
-      productEntities?.forEach {
-        if (it.name == before?.name && it.price == before.price) {
-          it.name = after?.name!!
-          it.price = after.price
+      productEntities?.forEach { productEntity ->
+        if (productEntity.name == before?.name && productEntity.price == before.price) {
+          productEntity.name = after?.name!!
+          productEntity.price = after.price
         }
       }
     }
@@ -107,6 +121,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
       when {
         result.isSuccess -> {
           // TODO: 메뉴 수정을 완료했어요 fragment
+          _updatePlaceBodySuccess.emit(true)
         }
         result.isFailure -> {
           val exception = result.exceptionOrNull()
@@ -114,6 +129,12 @@ class ProposeCafeInfoViewModel @Inject constructor(
           _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
         }
       }
+    }
+  }
+
+  fun initializeUpdatePlaceBodySuccess() {
+    viewModelScope.launch {
+      _updatePlaceBodySuccess.emit(false)
     }
   }
 }

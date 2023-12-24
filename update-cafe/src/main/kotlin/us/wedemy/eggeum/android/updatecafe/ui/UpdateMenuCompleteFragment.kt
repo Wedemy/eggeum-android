@@ -23,7 +23,6 @@ class UpdateMenuCompleteFragment : BaseFragment<FragmentUpdateMenuCompleteBindin
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initListener()
-    initObserver()
   }
 
   private fun initListener() {
@@ -32,9 +31,5 @@ class UpdateMenuCompleteFragment : BaseFragment<FragmentUpdateMenuCompleteBindin
       val action = UpdateMenuCompleteFragmentDirections.actionFragmentUpdateMenuCompleteToFragmentSelectInfoCategories()
       findNavController().safeNavigate(action)
     }
-  }
-
-  private fun initObserver() {
-    // TODO
   }
 }

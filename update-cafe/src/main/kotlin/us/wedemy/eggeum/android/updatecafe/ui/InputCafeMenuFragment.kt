@@ -52,7 +52,6 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
 
       newCafeMenuName = args.cafeMenuItem.name
       newCafeMenuPrice = args.cafeMenuItem.price.toString()
-
     }
   }
 

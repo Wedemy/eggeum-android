@@ -9,7 +9,6 @@
 
 package us.wedemy.eggeum.android.updatecafe.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel

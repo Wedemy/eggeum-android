@@ -1,5 +1,5 @@
 [versions]
-android-gradle-plugin = "8.2.0"
+android-gradle-plugin = "8.1.4"
 gradle-dependency-handler-extensions = "1.1.0"
 
 google-secrets = "2.0.1"

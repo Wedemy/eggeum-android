@@ -47,8 +47,8 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
 
   private fun initView() {
     binding.apply {
-      tietInputCafeName.hint = args.cafeMenuItem.name
-      tietInputCafePrice.hint = args.cafeMenuItem.price.toString()
+      tietInputCafeName.setText(args.cafeMenuItem.name)
+      tietInputCafePrice.setText(args.cafeMenuItem.price.toString())
 
       newCafeMenuName = args.cafeMenuItem.name
       newCafeMenuPrice = args.cafeMenuItem.price.toString()

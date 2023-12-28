@@ -100,10 +100,10 @@ class ProposeCafeInfoViewModel @Inject constructor(
     val before = cafeMenuItemMap.value["before"]
     val after = cafeMenuItemMap.value["after"]
     placeBody.menu?.products.let { productEntities ->
-      productEntities?.forEach { productEntity ->
-        if (productEntity.name == before?.name && productEntity.price == before.price) {
-          productEntity.name = after?.name!!
-          productEntity.price = after.price
+      productEntities?.forEach { product ->
+        if (product.name == before?.name && product.price == before.price) {
+          product.name = after?.name!!
+          product.price = after.price
         }
       }
     }

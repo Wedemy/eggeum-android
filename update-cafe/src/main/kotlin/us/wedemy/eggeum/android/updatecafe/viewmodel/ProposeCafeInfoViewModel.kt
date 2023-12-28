@@ -55,9 +55,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
 
   init {
     // TODO: 지도에서 placdId 받아와서 인자 넣기
-    viewModelScope.launch {
-      getCafeMenuList(1)
-    }
+    getCafeMenuList(1)
   }
 
   private fun getCafeMenuList(placeId: Int) {

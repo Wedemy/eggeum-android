@@ -20,15 +20,15 @@ class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = nu
   PagingDataAdapter<PlaceEntity, SearchCafeViewHolder>(PlaceEntityDiffCallback) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    SearchCafeViewHolder(
-      ItemSearchCafeLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      clickListener,
-    )
+    SearchCafeViewHolder(ItemSearchCafeLocationBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
   override fun onBindViewHolder(holder: SearchCafeViewHolder, position: Int) {
     val cafeItem = getItem(position)
     cafeItem?.let { cafe ->
       holder.bind(cafe)
+      holder.itemView.setOnClickListener {
+        clickListener?.onItemClick(cafeItem)
+      }
     }
   }
 

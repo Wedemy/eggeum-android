@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +22,7 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.HorizontalSpacingItemDecoration
 import us.wedemy.eggeum.android.design.R
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
@@ -40,8 +42,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   private val newCafeAdapter by lazy {
     NewCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(position: Int) {
-          // TODO 화면 전환 클릭 이벤트 리스터 구현
+        override fun onItemClick(item: PlaceEntity) {
+          Toast.makeText(requireContext(), "${item.name}을 선택했습니다.", Toast.LENGTH_SHORT).show()
         }
       },
     )

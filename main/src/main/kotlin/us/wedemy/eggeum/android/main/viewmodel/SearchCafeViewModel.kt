@@ -19,28 +19,22 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.usecase.DeleteRecentSearchPlaceUseCase
-import us.wedemy.eggeum.android.domain.usecase.GetPlaceListUseCase
-import us.wedemy.eggeum.android.domain.usecase.GetRecentSearchPlaceListUseCase
+import us.wedemy.eggeum.android.domain.usecase.GetSearchPlaceListUseCase
 import us.wedemy.eggeum.android.domain.usecase.InsertRecentSearchPlaceUseCase
 
 @HiltViewModel
 class SearchCafeViewModel @Inject constructor(
-  getPlaceListUseCase: GetPlaceListUseCase,
-  getRecentSearchPlaceListUseCase: GetRecentSearchPlaceListUseCase,
+  getSearchPlaceListUseCase: GetSearchPlaceListUseCase,
   private val insertRecentSearchPlaceUseCase: InsertRecentSearchPlaceUseCase,
   private val deleteRecentSearchPlaceUseCase: DeleteRecentSearchPlaceUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-  val recentSearchPlaceList = getRecentSearchPlaceListUseCase().cachedIn(viewModelScope)
-
   private val _searchQuery: SaveableMutableStateFlow<String> =
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
   val searchQuery = _searchQuery.asStateFlow()
@@ -48,15 +42,13 @@ class SearchCafeViewModel @Inject constructor(
   @OptIn(FlowPreview::class)
   val debouncedSearchQuery: Flow<String?> = searchQuery
     .debounce(SEARCH_TIME_DELAY)
-    .filter { it.isNotEmpty() }
     .distinctUntilChanged()
 
   @OptIn(ExperimentalCoroutinesApi::class)
   val searchPlaceList: Flow<PagingData<PlaceEntity>> =
-    debouncedSearchQuery.filterNotNull()
-      .flatMapLatest { query ->
-        getPlaceListUseCase(query)
-      }
+    debouncedSearchQuery.flatMapLatest { query ->
+      getSearchPlaceListUseCase(query)
+    }
       .cachedIn(viewModelScope)
 
   fun setSearchQuery(query: String) {

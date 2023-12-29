@@ -17,11 +17,13 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
+import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.viewmodel.SearchCafeViewModel
@@ -39,8 +41,8 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
           Toast.makeText(requireContext(), "${item.name}을 저장했습니다.", Toast.LENGTH_SHORT).show()
           viewModel.insertRecentSearchPlace(item)
 
-//          val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
-//          findNavController().safeNavigate(action)
+          val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail(item.toUiModel())
+          findNavController().safeNavigate(action)
         }
       },
     )

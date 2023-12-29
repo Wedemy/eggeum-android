@@ -187,7 +187,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         naverMap?.moveCamera(cameraUpdate)
       }
       cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail()
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail(null)
       findNavController().safeNavigate(action)
     }
     return true

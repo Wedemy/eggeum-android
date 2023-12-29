@@ -10,6 +10,7 @@ package us.wedemy.eggeum.android.main.ui.search
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
@@ -27,6 +28,11 @@ class CafeDetailFragment : BaseBottomSheetFragment<FragmentCafeDetailBinding>() 
   override fun getViewBinding() = FragmentCafeDetailBinding.inflate(layoutInflater)
 
   private val viewModel by activityViewModels<CafeDetailViewModel>()
+
+  override fun onStart() {
+    super.onStart()
+    dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

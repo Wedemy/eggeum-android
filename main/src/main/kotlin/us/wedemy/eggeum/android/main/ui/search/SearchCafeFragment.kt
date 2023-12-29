@@ -19,6 +19,7 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
@@ -33,8 +34,12 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private val searchCafeAdapter by lazy {
     SearchCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(position: Int) {
-          Toast.makeText(requireContext(), "${position}번째 장소를 저장했습니다.", Toast.LENGTH_SHORT).show()
+        override fun onItemClick(item: PlaceEntity) {
+          Toast.makeText(requireContext(), "${item.name}을 저장했습니다.", Toast.LENGTH_SHORT).show()
+          viewModel.insertRecentSearchPlace(item)
+
+          //    val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
+          //    findNavController().safeNavigate(action)
         }
       },
     )
@@ -44,9 +49,6 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
     super.onViewCreated(view, savedInstanceState)
     initView()
     initObserver()
-
-//    val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
-//    findNavController().safeNavigate(action)
   }
 
   private fun initView() {

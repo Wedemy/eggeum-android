@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseRecyclerViewAdapter<T, VB : ViewBinding> : RecyclerView.Adapter<BaseViewHolder<T, VB>>() {
-  private val items = mutableListOf<T>()
+  protected val items = mutableListOf<T>()
 
   override fun onBindViewHolder(holder: BaseViewHolder<T, VB>, position: Int) {
     holder.bind(items[position])

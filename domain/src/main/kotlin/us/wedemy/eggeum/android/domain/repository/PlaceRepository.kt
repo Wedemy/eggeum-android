@@ -73,8 +73,6 @@ public interface PlaceRepository {
 
   /**
    * 최근 검색 장소 조회
-   *
-   * @param name 장소 이름
    */
-  public fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceEntity>>
+  public fun getRecentSearchPlaceList(): Flow<PagingData<PlaceEntity>>
 }

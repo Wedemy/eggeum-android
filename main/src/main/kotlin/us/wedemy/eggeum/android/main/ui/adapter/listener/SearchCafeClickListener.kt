@@ -7,6 +7,8 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.listener
 
+import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
+
 interface SearchCafeClickListener {
-  fun onItemClick(position: Int)
+  fun onItemClick(item: PlaceEntity)
 }

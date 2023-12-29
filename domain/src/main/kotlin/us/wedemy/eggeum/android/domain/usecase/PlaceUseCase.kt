@@ -37,6 +37,28 @@ public class GetPlaceListUseCase @Inject constructor(
 }
 
 @Singleton
+public class GetSearchPlaceListUseCase @Inject constructor(
+  private val repository: PlaceRepository,
+) {
+  public operator fun invoke(query: String? = null): Flow<PagingData<PlaceEntity>> {
+    return if (query.isNullOrEmpty()) {
+      repository.getRecentSearchPlaceList()
+    } else {
+      repository.getPlaceList(search = query)
+    }
+  }
+}
+
+@Singleton
+public class GetRecentSearchPlaceListUseCase @Inject constructor(
+  private val repository: PlaceRepository,
+) {
+  public operator fun invoke(): Flow<PagingData<PlaceEntity>> {
+    return repository.getRecentSearchPlaceList()
+  }
+}
+
+@Singleton
 public class UpsertPlaceUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
@@ -61,14 +83,5 @@ public class DeleteRecentSearchPlaceUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(placeEntity: PlaceEntity) {
     repository.deleteRecentSearchPlace(placeEntity)
-  }
-}
-
-@Singleton
-public class GetRecentSearchPlaceListUseCase @Inject constructor(
-  private val repository: PlaceRepository,
-) {
-  public operator fun invoke(name: String? = null): Flow<PagingData<PlaceEntity>> {
-    return repository.getRecentSearchPlaceList(name)
   }
 }

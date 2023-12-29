@@ -17,5 +17,5 @@ public interface PlaceLocalDataSource {
 
   public suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity)
 
-  public fun getRecentSearchPlaceList(name: String?): Flow<PagingData<PlaceResponse>>
+  public fun getRecentSearchPlaceList(): Flow<PagingData<PlaceResponse>>
 }

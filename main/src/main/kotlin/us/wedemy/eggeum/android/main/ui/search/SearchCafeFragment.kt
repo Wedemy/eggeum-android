@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -48,6 +49,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
+    initListener()
     initObserver()
   }
 
@@ -56,6 +58,14 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
       setHasFixedSize(true)
       addDivider(R.color.gray_300)
       adapter = searchCafeAdapter
+    }
+  }
+
+  private fun initListener() {
+    binding.tilSearchCafe.setStartIconOnClickListener {
+      if (!findNavController().navigateUp()) {
+        requireActivity().finish()
+      }
     }
   }
 

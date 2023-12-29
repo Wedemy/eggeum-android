@@ -39,8 +39,8 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
           Toast.makeText(requireContext(), "${item.name}을 저장했습니다.", Toast.LENGTH_SHORT).show()
           viewModel.insertRecentSearchPlace(item)
 
-          //    val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
-          //    findNavController().safeNavigate(action)
+//          val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
+//          findNavController().safeNavigate(action)
         }
       },
     )

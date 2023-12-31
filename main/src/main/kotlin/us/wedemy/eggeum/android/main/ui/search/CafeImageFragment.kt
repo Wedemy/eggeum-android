@@ -38,7 +38,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
         override fun onItemClick(position: Int) {
           val cafeImageModel = viewModel.cafeDetailInfo.value.image
           val action = cafeImageModel?.let { cafeImages ->
-            CafeDetailFragmentDirections.actionFragmentCafeDetailToFragmentCafeImageDetail(
+            MapFragmentDirections.actionFragmentMapToFragmentCafeImageDetail(
               cafeImages = cafeImages,
               currentPosition = position,
             )
@@ -47,7 +47,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
             findNavController().safeNavigate(action)
           }
         }
-      },
+      }
     )
   }
 

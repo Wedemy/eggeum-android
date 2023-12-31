@@ -5,13 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
- * Designed and developed by Wedemy 2023.
- *
- * Licensed under the MIT.
- * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
- */
-
 package us.wedemy.eggeum.android.main.ui.search
 
 import android.Manifest
@@ -19,17 +12,20 @@ import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
+import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.paging.ItemSnapshotList
 import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraPosition
@@ -46,24 +42,26 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
-import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
+import us.wedemy.eggeum.android.main.databinding.FragmentMapBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.mapper.toUilModel
 import us.wedemy.eggeum.android.main.model.CafeDetailModel
+import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
-import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
+import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
-  override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
+class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
+
+  private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
   private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
-  private val searchViewModel by viewModels<SearchViewModel>()
+  private val mapViewModel by viewModels<MapViewModel>()
+  override fun getViewBinding(): FragmentMapBinding = FragmentMapBinding.inflate(layoutInflater)
 
   private val searchCafeAdapter by lazy { SearchCafeAdapter(null) }
 
@@ -86,29 +84,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-    with(binding) {
-      mvSearch.onCreate(savedInstanceState)
-      mvSearch.getMapAsync(this@SearchFragment)
-    }
     checkPermission()
+    initCafeDetailBottomSheet()
+    initView()
     initListener()
     initObserver()
-  }
-
-  override fun onMapReady(naverMap: NaverMap) {
-    this.naverMap = naverMap
-    if (permissionsGranted) {
-      naverMap.locationTrackingMode = LocationTrackingMode.Follow
-    }
-    initNaverMap()
-    addMarkersToMap(searchCafeAdapter.snapshot())
-  }
-
-  private fun isPermissionsGranted(): Boolean {
-    return permissions.all {
-      ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
-    }
   }
 
   private fun checkPermission() {
@@ -119,25 +99,95 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
   }
 
+  private fun initCafeDetailBottomSheet() {
+    bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.root)
+//    val screenHeight = getScreenHeight()
+//    bottomSheetBehavior.peekHeight = (screenHeight * 0.5).toInt()
+//    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+
+    bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+      override fun onSlide(bottomSheet: View, slideOffset: Float) {
+        // 0 ~ 1
+        if (slideOffset > 0.6f) {
+          // TODO Expanding Persistent Bottom Sheet
+          // showFullScreenFragment()
+        }
+      }
+
+      override fun onStateChanged(bottomSheet: View, newState: Int) {
+      }
+    })
+  }
+
+  private fun getScreenHeight(): Int {
+    val displayMetrics = DisplayMetrics()
+    requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics.heightPixels
+  }
+
+  private fun initView() {
+    showFragment(TAG_CAFE_INFO_FRAGMENT)
+    binding.bottomSheet.apply {
+      val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
+      tvCafeDetailName.text = cafeDetailInfo.name
+      tvCafeDetailAddress.text = cafeDetailInfo.address1
+    }
+  }
+
+  @SuppressLint("CommitTransaction")
+  private fun showFragment(fragmentTag: String) {
+    val existingFragment = childFragmentManager.findFragmentByTag(fragmentTag)
+    childFragmentManager.beginTransaction().apply {
+      childFragmentManager.fragments.forEach { hide(it) }
+      if (existingFragment == null) {
+        val newFragment = when (fragmentTag) {
+          TAG_CAFE_INFO_FRAGMENT -> CafeInfoFragment()
+          TAG_CAFE_IMAGE_FRAGMENT -> CafeImageFragment()
+          TAG_CAFE_MENU_FRAGMENT -> CafeMenuFragment()
+          else -> error("Unknown fragment tag: $fragmentTag")
+        }
+        add(R.id.child_fragment_container, newFragment, fragmentTag)
+      } else {
+        show(existingFragment)
+      }
+      commit()
+    }
+  }
+
   private fun initListener() {
-    binding.fabSearchTracking.setOnClickListener {
-      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
-    }
+    binding.bottomSheet.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+      override fun onTabSelected(tab: TabLayout.Tab?) {
+        when (tab?.position) {
+          0 -> showFragment(TAG_CAFE_INFO_FRAGMENT)
+          1 -> showFragment(TAG_CAFE_IMAGE_FRAGMENT)
+          2 -> showFragment(TAG_CAFE_MENU_FRAGMENT)
+        }
+      }
 
-    binding.tietSearchCafe.setOnClickListener {
-      binding.cvSearchCafe.performClick()
-    }
+      override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
+      override fun onTabReselected(tab: TabLayout.Tab?) = Unit
+    })
 
-    binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment()
-      findNavController().safeNavigate(action)
+    binding.bottomSheet.ivCafeDetailOption.setOnClickListener {
+      val popupMenu = PopupMenu(binding.root.context, it)
+      popupMenu.menuInflater.inflate(R.menu.cafe_detail_menu, popupMenu.menu)
+
+      popupMenu.setForceShowIcon(true)
+      popupMenu.show()
+
+      popupMenu.setOnMenuItemClickListener {
+        if (it.itemId == R.id.proposal_info_edit) {
+          mapViewModel.navigateToUpdateCafe()
+          true
+        } else false
+      }
     }
   }
 
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        searchViewModel.placeList.collectLatest { pagingData ->
+        mapViewModel.placeList.collectLatest { pagingData ->
           searchCafeAdapter.submitData(pagingData)
         }
       }
@@ -147,12 +197,49 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              searchViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
+              mapViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
               addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
       }
+
+      launch {
+        mapViewModel.navigateToUpdateCafeEvent.collect {
+          (activity as MainActivity).navigateToUpdateCafe(cafeDetailViewModel.cafeDetailInfo.value)
+        }
+      }
     }
+  }
+
+//  private fun showFullScreenFragment() {
+//    val fullScreenFragment = CafeDetailFragment()
+//
+//    requireActivity().supportFragmentManager.beginTransaction()
+//      .replace(R.id.bottomSheet, fullScreenFragment)
+//      .addToBackStack(null)
+//      .commit()
+//  }
+
+  override fun onMapReady(naverMap: NaverMap) {
+    this.naverMap = naverMap
+    if (permissionsGranted) {
+      naverMap.locationTrackingMode = LocationTrackingMode.Follow
+    }
+    initNaverMap()
+    addMarkersToMap(searchCafeAdapter.snapshot())
+  }
+
+  private fun initNaverMap() {
+    naverMap?.apply {
+      locationSource = this@MapFragment.locationSource
+      uiSettings.isZoomControlEnabled = false
+      cameraPosition = CameraPosition(
+        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
+        ZOOM_LEVEL,
+      )
+      setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
+    }
+    moveToCameraToUserLocation()
   }
 
   private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
@@ -172,45 +259,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
     marker.tag = data.id
     marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
-    marker.onClickListener = this@SearchFragment
+    marker.onClickListener = this@MapFragment
     markers.add(marker)
   }
 
-  override fun onClick(overlay: Overlay): Boolean {
-    val selectedPlaceModel = searchViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
-    if (selectedPlaceModel != null) {
-      val cafeDetailInfo = CafeDetailModel(
-        address1 = selectedPlaceModel.address1,
-        address2 = selectedPlaceModel.address2,
-        id = selectedPlaceModel.id,
-        image = selectedPlaceModel.image?.toUiModel(),
-        info = selectedPlaceModel.info?.toUilModel(),
-        menu = selectedPlaceModel.menu?.toUiModel(),
-        name = selectedPlaceModel.name,
-      )
-      if (selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude!!, selectedPlaceModel.longitude!!))
-          .animate(CameraAnimation.Easing)
-        naverMap?.moveCamera(cameraUpdate)
-      }
-      cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentMap()
-      findNavController().safeNavigate(action)
+  private fun isPermissionsGranted(): Boolean {
+    return permissions.all {
+      ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
-    return true
-  }
-
-  private fun initNaverMap() {
-    naverMap?.apply {
-      locationSource = this@SearchFragment.locationSource
-      uiSettings.isZoomControlEnabled = false
-      cameraPosition = CameraPosition(
-        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
-        ZOOM_LEVEL,
-      )
-      setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
-    }
-    moveToCameraToUserLocation()
   }
 
   @SuppressLint("MissingPermission")
@@ -244,6 +300,28 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       getButton(DialogInterface.BUTTON_NEGATIVE)
         .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
     }
+  }
+
+  override fun onClick(overlay: Overlay): Boolean {
+    val selectedPlaceModel = mapViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    if (selectedPlaceModel != null) {
+      val cafeDetailInfo = CafeDetailModel(
+        address1 = selectedPlaceModel.address1,
+        address2 = selectedPlaceModel.address2,
+        id = selectedPlaceModel.id,
+        image = selectedPlaceModel.image?.toUiModel(),
+        info = selectedPlaceModel.info?.toUilModel(),
+        menu = selectedPlaceModel.menu?.toUiModel(),
+        name = selectedPlaceModel.name,
+      )
+      if (selectedPlaceModel.latitude != null && selectedPlaceModel.longitude != null) {
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedPlaceModel.latitude!!, selectedPlaceModel.longitude!!))
+          .animate(CameraAnimation.Easing)
+        naverMap?.moveCamera(cameraUpdate)
+      }
+      cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
+    }
+    return true
   }
 
   override fun onStart() {
@@ -285,8 +363,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     super.onLowMemory()
     binding.mvSearch.onLowMemory()
   }
-
   private companion object {
+    private const val TAG_CAFE_INFO_FRAGMENT = "CafeInfoFragment"
+    private const val TAG_CAFE_IMAGE_FRAGMENT = "CafeImageFragment"
+    private const val TAG_CAFE_MENU_FRAGMENT = "CafeMenuFragment"
     private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     private const val ZOOM_LEVEL = 15.0
   }

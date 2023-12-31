@@ -9,8 +9,9 @@ package us.wedemy.eggeum.android.main.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,23 +20,27 @@ import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.common.util.HorizontalSpacingItemDecoration
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
-import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
+import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
-import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
+import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.listener.NoticeCardClickListener
+import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.HomeViewModel
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<HomeViewModel>()
+  private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
+  private val homeViewModel by viewModels<HomeViewModel>()
 
   private val searchCafeAdapter by lazy { SearchCafeAdapter() }
 
@@ -43,7 +48,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NewCafeAdapter(
       object : SearchCafeClickListener {
         override fun onItemClick(item: PlaceEntity) {
-          Toast.makeText(requireContext(), "${item.name}을 선택했습니다.", Toast.LENGTH_SHORT).show()
+          cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
+          val action = HomeFragmentDirections.actionFragmentHomeToFragmentMap()
+          findNavController().safeNavigate(action)
         }
       },
     )
@@ -53,7 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     NoticeCardAdapter(
       object : NoticeCardClickListener {
         override fun onItemClick(position: Int) {
-          // TODO 화면 전환 클릭 이벤트 리스터 구현
+          val action = HomeFragmentDirections.actionFragmentHomeToFragmentNotice()
+          findNavController().safeNavigate(action)
         }
       },
     )
@@ -82,7 +90,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
       tlHomeNewCafe.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
         override fun onTabSelected(tab: TabLayout.Tab) {
-          newCafeAdapter.replaceAll(viewModel.cafesList.value[tab.position])
+          newCafeAdapter.replaceAll(homeViewModel.cafesList.value[tab.position])
         }
 
         override fun onTabUnselected(tab: TabLayout.Tab) = Unit
@@ -95,7 +103,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeList.collectLatest { cafes ->
+        homeViewModel.cafeList.collectLatest { cafes ->
           searchCafeAdapter.submitData(cafes)
         }
       }
@@ -105,19 +113,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              viewModel.getNewCafeList(searchCafeAdapter.snapshot())
+              homeViewModel.getNewCafeList(searchCafeAdapter.snapshot())
             }
           }
       }
 
       launch {
-        viewModel.cafesList.collect { cafesList ->
+        homeViewModel.cafesList.collect { cafesList ->
           newCafeAdapter.replaceAll(cafesList[0])
         }
       }
 
       launch {
-        viewModel.noticeList.collectLatest { notices ->
+        homeViewModel.noticeList.collectLatest { notices ->
           noticeCardAdapter.submitData(notices)
         }
       }

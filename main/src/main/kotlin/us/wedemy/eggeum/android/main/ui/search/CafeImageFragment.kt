@@ -47,7 +47,7 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
             findNavController().safeNavigate(action)
           }
         }
-      }
+      },
     )
   }
 

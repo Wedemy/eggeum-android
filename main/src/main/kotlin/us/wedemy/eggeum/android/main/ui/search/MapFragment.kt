@@ -41,6 +41,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -114,11 +115,33 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         }
       }
 
+      @Suppress("unused")
       override fun onStateChanged(bottomSheet: View, newState: Int) {
+        when (newState) {
+          BottomSheetBehavior.STATE_COLLAPSED -> {
+            Timber.d("onStateChanged: 접음")
+          }
+          BottomSheetBehavior.STATE_DRAGGING -> {
+            Timber.d("onStateChanged: 드래그")
+          }
+          BottomSheetBehavior.STATE_EXPANDED -> {
+            Timber.d("onStateChanged: 펼침")
+          }
+          BottomSheetBehavior.STATE_HIDDEN -> {
+            Timber.d("onStateChanged: 숨기기")
+          }
+          BottomSheetBehavior.STATE_SETTLING -> {
+            Timber.d("onStateChanged: 고정됨")
+          }
+          BottomSheetBehavior.STATE_HALF_EXPANDED -> {
+            Timber.d("onStateChanged: 절반 펼침")
+          }
+        }
       }
     })
   }
 
+  @Suppress("unused")
   private fun getScreenHeight(): Int {
     val displayMetrics = DisplayMetrics()
     requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -363,6 +386,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     super.onLowMemory()
     binding.mvSearch.onLowMemory()
   }
+
   private companion object {
     private const val TAG_CAFE_INFO_FRAGMENT = "CafeInfoFragment"
     private const val TAG_CAFE_IMAGE_FRAGMENT = "CafeImageFragment"

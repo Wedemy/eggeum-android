@@ -5,6 +5,13 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
 package us.wedemy.eggeum.android.main.ui.search
 
 import android.Manifest
@@ -187,7 +194,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         naverMap?.moveCamera(cameraUpdate)
       }
       cafeDetailViewModel.setCafeDetailInfo(cafeDetailInfo)
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentCafeDetail()
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentMap()
       findNavController().safeNavigate(action)
     }
     return true

@@ -9,7 +9,7 @@ package us.wedemy.eggeum.android.main.ui.search
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,30 +17,34 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
+import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
+import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchCafeViewModel
 
 @AndroidEntryPoint
 class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   override fun getViewBinding() = FragmentSearchCafeBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<SearchCafeViewModel>()
+  private val cafeDetailViewModel by activityViewModels<CafeDetailViewModel>()
+  private val searchCafeViewModel by viewModels<SearchCafeViewModel>()
 
   private val searchCafeAdapter by lazy {
     SearchCafeAdapter(
       object : SearchCafeClickListener {
         override fun onItemClick(item: PlaceEntity) {
-          Toast.makeText(requireContext(), "${item.name}을 저장했습니다.", Toast.LENGTH_SHORT).show()
-          viewModel.insertRecentSearchPlace(item)
+          searchCafeViewModel.insertRecentSearchPlace(item)
 
-//          val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentCafeDetail()
-//          findNavController().safeNavigate(action)
+          cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
+          val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentMap()
+          findNavController().safeNavigate(action)
         }
       },
     )
@@ -72,7 +76,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.searchPlaceList.collectLatest {
+        searchCafeViewModel.searchPlaceList.collectLatest {
           searchCafeAdapter.submitData(it)
         }
       }
@@ -82,7 +86,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         editTextFlow
           .collect { text ->
             val query = text.toString().trim()
-            viewModel.setSearchQuery(query)
+            searchCafeViewModel.setSearchQuery(query)
           }
       }
     }

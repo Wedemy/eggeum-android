@@ -14,12 +14,12 @@
 
   <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/iv_cafe_image"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="0dp"
     android:contentDescription="Cafe Image"
     android:scaleType="centerCrop"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintDimensionRatio="w,3:4"
+    app:layout_constraintDimensionRatio="w,4:3"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"

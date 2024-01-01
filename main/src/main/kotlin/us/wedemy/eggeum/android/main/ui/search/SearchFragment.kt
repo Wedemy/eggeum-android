@@ -261,10 +261,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     super.onPause()
   }
 
-  override fun onSaveInstanceState(outState: Bundle) {
-    super.onSaveInstanceState(outState)
-    binding.mvSearch.onSaveInstanceState(outState)
-  }
+  // TODO: 지도 -> 정보수정제안 시, 이 부분에서 NPE 발생하여 주석 처리
+//  override fun onSaveInstanceState(outState: Bundle) {
+//    super.onSaveInstanceState(outState)
+//    binding.mvSearch.onSaveInstanceState(outState)
+//  }
 
   override fun onStop() {
     binding.mvSearch.onStop()

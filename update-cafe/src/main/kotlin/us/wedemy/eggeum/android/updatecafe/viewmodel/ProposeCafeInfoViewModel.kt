@@ -26,7 +26,7 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
-import us.wedemy.eggeum.android.main.model.CafeDetailModel
+import us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
@@ -36,8 +36,9 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val upsertPlaceUseCase: UpsertPlaceUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-  private val selectedCafeInfo: CafeDetailModel = savedStateHandle[CAFE_DETAIL_INFO]
-    ?: throw IllegalArgumentException("CAFE_DETAIL_INFO is missing from SavedStateHandle")
+  private val selectedCafeInfo: CafeDetailModel = requireNotNull(savedStateHandle[CAFE_DETAIL_INFO]) {
+    "cafeDetailInfo is required."
+  }
 
   private val _navigateToUpsertEvent = MutableSharedFlow<Boolean>()
   val navigateToUpsertEvent = _navigateToUpsertEvent.asSharedFlow()

@@ -55,6 +55,8 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
+// TODO 맵 위치 싱크 및 마커 추가
+// TODO exand
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -102,9 +104,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   private fun initCafeDetailBottomSheet() {
     bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.root)
-//    val screenHeight = getScreenHeight()
-//    bottomSheetBehavior.peekHeight = (screenHeight * 0.5).toInt()
-//    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+    val screenHeight = getScreenHeight()
+    bottomSheetBehavior.peekHeight = (screenHeight * 0.5).toInt()
+    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
 
     bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -112,6 +114,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         if (slideOffset > 0.6f) {
           // TODO Expanding Persistent Bottom Sheet
           // showFullScreenFragment()
+          bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+          bottomSheetBehavior.skipCollapsed = true
         }
       }
 

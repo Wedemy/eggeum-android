@@ -125,11 +125,12 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
         viewModel.cafeMenuList.collect { cafeMenuAdapter.replaceAll(it) }
       }
       launch {
-        viewModel.updatePlaceBodySuccess.collect {
+        viewModel.navigateToUpsertEvent.collect {
           val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentUpdateMenuComplete()
           findNavController().safeNavigate(action)
         }
-        viewModel.initializeUpdatePlaceBodySuccess()
+        // TODO: 에뮬레이터와 달리 실기기로 테스트 시, 해당 state value를 초기화 안해도 마지막 완료 화면으로 넘어가지 않음. (확인 필요)
+        // viewModel.initializeUpdatePlaceBodySuccess()
       }
       launch {
         viewModel.getInitCall.collect {

@@ -29,6 +29,7 @@ class SelectInfoCategoriesFragment : BaseFragment<FragmentSelectInfoCategoriesBi
   private val viewModel by viewModels<SelectInfoCategoriesViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     initListener()
     initObserver()
   }

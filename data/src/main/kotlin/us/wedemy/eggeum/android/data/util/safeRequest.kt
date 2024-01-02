@@ -7,10 +7,10 @@
 
 package us.wedemy.eggeum.android.data.util
 
+import java.io.IOException
 import java.net.UnknownHostException
 import retrofit2.HttpException
 import retrofit2.Response
-import timber.log.Timber
 import us.wedemy.eggeum.android.data.extensions.toAlertMessage
 
 @Suppress("TooGenericExceptionCaught")
@@ -21,7 +21,6 @@ internal suspend fun <T> safeRequest(request: suspend () -> Response<T>): T? {
       return response.body()
     } else {
       val errorBody = response.errorBody()?.string() ?: "Unknown error"
-      Timber.d(Exception(errorBody))
       throw ExceptionWrapper(
         statusCode = response.code(),
         message = Exception(errorBody).toAlertMessage(),
@@ -29,20 +28,22 @@ internal suspend fun <T> safeRequest(request: suspend () -> Response<T>): T? {
       )
     }
   } catch (exception: HttpException) {
-    Timber.d(exception)
     throw ExceptionWrapper(
       statusCode = exception.code(),
       message = exception.response()?.errorBody()?.string() ?: exception.message(),
       cause = exception,
     )
   } catch (exception: UnknownHostException) {
-    Timber.d(exception)
+    throw ExceptionWrapper(
+      message = exception.toAlertMessage(),
+      cause = exception,
+    )
+  } catch (exception: IOException) {
     throw ExceptionWrapper(
       message = exception.toAlertMessage(),
       cause = exception,
     )
   } catch (exception: Exception) {
-    Timber.d(exception)
     throw ExceptionWrapper(
       message = exception.toAlertMessage(),
       cause = exception,

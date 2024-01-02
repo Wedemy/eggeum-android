@@ -9,7 +9,6 @@ package us.wedemy.eggeum.android.data.service
 
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 import us.wedemy.eggeum.android.data.model.login.LoginRequest
 import us.wedemy.eggeum.android.data.model.login.LoginResponse
@@ -23,7 +22,7 @@ public interface LoginService {
     @Body loginRequest: LoginRequest,
   ): Response<LoginResponse>
 
-  @GET("app/sns-sign-up")
+  @POST("app/sns-sign-up")
   public suspend fun signUp(
     @Body signUpRequest: SignUpRequest,
   ): Response<SignUpResponse>

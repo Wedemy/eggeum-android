@@ -54,10 +54,12 @@ class LoginViewModel @Inject constructor(
         result.isFailure -> {
           val exception = result.exceptionOrNull()
           Timber.d(exception)
-          if (exception == LoginApiResponseNotFound) {
-            _navigateToOnBoardingEvent.emit(Unit)
-          } else {
-            _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+          if (exception != null) {
+            if (exception.cause == LoginApiResponseNotFound) {
+              _navigateToOnBoardingEvent.emit(Unit)
+            } else {
+              _showToastEvent.emit(exception.message ?: "Unknown Error Occured")
+            }
           }
         }
       }

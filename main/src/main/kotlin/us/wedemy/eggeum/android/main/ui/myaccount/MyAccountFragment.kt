@@ -21,6 +21,7 @@ import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
 import us.wedemy.eggeum.android.main.model.UserInfoModel
+import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.viewmodel.MyAccountViewModel
 
 @AndroidEntryPoint
@@ -80,6 +81,12 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
       launch {
         viewModel.showToastEvent.collect { message ->
           Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+      }
+
+      launch {
+        viewModel.navigateToLoginEvent.collect {
+          (activity as MainActivity).navigateToLogin()
         }
       }
     }

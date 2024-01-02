@@ -13,6 +13,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import us.wedemy.eggeum.android.data.extensions.toAlertMessage
 
+@Suppress("TooGenericExceptionCaught")
 internal suspend fun <T> safeRequest(request: suspend () -> Response<T>): T? {
   try {
     val response = request()
@@ -38,6 +39,11 @@ internal suspend fun <T> safeRequest(request: suspend () -> Response<T>): T? {
       cause = exception,
     )
   } catch (exception: IOException) {
+    throw ExceptionWrapper(
+      message = exception.toAlertMessage(),
+      cause = exception,
+    )
+  } catch (exception: Exception) {
     throw ExceptionWrapper(
       message = exception.toAlertMessage(),
       cause = exception,

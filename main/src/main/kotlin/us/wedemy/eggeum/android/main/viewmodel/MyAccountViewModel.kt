@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.domain.usecase.GetUserInfoUseCase
+import us.wedemy.eggeum.android.domain.util.RefreshTokenExpiredException
 import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.model.ProfileImageModel
 
@@ -43,6 +44,9 @@ class MyAccountViewModel @Inject constructor(
   private val _showToastEvent = MutableSharedFlow<String>()
   val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
 
+  private val _navigateToLoginEvent = MutableSharedFlow<Unit>()
+  val navigateToLoginEvent: SharedFlow<Unit> = _navigateToLoginEvent.asSharedFlow()
+
   fun getUserInfo() {
     viewModelScope.launch {
       val result = getUserInfoUseCase()
@@ -62,8 +66,13 @@ class MyAccountViewModel @Inject constructor(
         }
         result.isFailure -> {
           val exception = result.exceptionOrNull()
-          Timber.d(exception)
-          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
+          Timber.e(exception)
+          if (exception != null) {
+            if (exception.cause == RefreshTokenExpiredException) {
+              _navigateToLoginEvent.emit(Unit)
+            }
+            _showToastEvent.emit(exception.message ?: "Unknown Error Occured")
+          }
         }
       }
     }

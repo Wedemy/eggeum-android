@@ -11,7 +11,6 @@ import javax.inject.Inject
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 
 public class LoginLocalDataSourceImpl @Inject constructor(
-  // private val dataStore: TokenDataStore
   private val dataStore: TokenDataStoreProvider,
 ) : LoginLocalDataSource {
   override suspend fun setAccessToken(accessToken: String) {

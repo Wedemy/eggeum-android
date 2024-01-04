@@ -1,47 +1,44 @@
 package us.wedemy.eggeum.android.data.service
 
+import javax.inject.Inject
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
-import javax.inject.Inject
+import timber.log.Timber
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
+import us.wedemy.eggeum.android.domain.util.RefreshTokenExpiredException
 
+@Suppress("TooGenericExceptionCaught")
 public class TokenAuthenticator @Inject constructor(
   private val dataStoreProvider: TokenDataStoreProvider,
 ) : Authenticator {
-
   override fun authenticate(route: Route?, response: Response): Request? {
-    val accessToken = runBlocking {
-      dataStoreProvider.getAccessToken()
-    }
+    Timber.d("authenticate 호출")
+    return runBlocking {
+      val currentAccessToken = dataStoreProvider.getAccessToken()
 
-    if (hasNotAccessTokenOnResponse(response)) {
-      synchronized(this) {
-        val newAccessToken = runBlocking {
-          dataStoreProvider.getAccessToken()
-        }
-        if (accessToken != newAccessToken) {
-          return newRequestWithAccessToken(response.request, newAccessToken)
-        }
+      // 현재 액세스 토큰이 요청 헤더의 토큰과 다르면 이미 갱신된 것으로 간주
+      if (response.request.header("Authorization") != "Bearer $currentAccessToken") {
+        Timber.d("RefreshToken is Expired")
+        // 로그인 토큰 제거(로그아웃)
+        dataStoreProvider.clear()
+        throw RefreshTokenExpiredException
+      }
 
-        val refreshToken = runBlocking {
-          dataStoreProvider.getRefreshToken()
-        }
-        return newRequestWithAccessToken(response.request, refreshToken)
+      try {
+        val newAccessToken = runBlocking { dataStoreProvider.getRefreshToken() }
+        newRequestWithAccessToken(response.request, newAccessToken)
+      } catch (e: Exception) {
+        Timber.e("TokenAuthenticator Error :: ${e.message}")
+        null
       }
     }
-
-    return null
   }
-
-  private fun hasNotAccessTokenOnResponse(response: Response): Boolean =
-    response.header("Authorization") == null
 
   private fun newRequestWithAccessToken(request: Request, accessToken: String): Request =
     request.newBuilder()
-      .addHeader("Content-Type", "application/json")
-      .addHeader("Authorization", "Bearer $accessToken")
+      .header("Authorization", "Bearer $accessToken")
       .build()
 }

@@ -18,11 +18,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
 import us.wedemy.eggeum.android.domain.usecase.WithdrawUseCase
 
 @HiltViewModel
 class WithdrawViewModel @Inject constructor(
   private val withdrawUseCase: WithdrawUseCase,
+  private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
   private val _agreeToWithdraw = savedStateHandle.getMutableStateFlow(KEY_AGREE_TO_NOTIFICATION, false)
@@ -43,6 +45,7 @@ class WithdrawViewModel @Inject constructor(
       val result = withdrawUseCase()
       when {
         result.isSuccess -> {
+          logoutUseCase()
           _navigateToLoginEvent.emit(Unit)
         }
         result.isFailure -> {

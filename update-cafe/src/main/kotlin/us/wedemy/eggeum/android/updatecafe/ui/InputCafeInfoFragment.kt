@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,13 +22,15 @@ import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.InfoEntity
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
-import us.wedemy.eggeum.android.updatecafe.viewmodel.InputCafeInfoViewModel
+import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
 
 @AndroidEntryPoint
 class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   override fun getViewBinding() = FragmentInputCafeInfoBinding.inflate(layoutInflater)
 
-  private val viewModel by viewModels<InputCafeInfoViewModel>()
+  private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
+
+  // TODO: 데이터 뷰모델에서 관리 >> 현재, 데이터를 변경한 후에 다시 정보 수정에 접근하면 데이터가 기초 데이터인데, 이와 달리 메뉴에 재접근하면 수정된 정보를 들고 있다.
 
   private var cafeArea = ""
   private var cafeMeetingRoom = ""
@@ -49,17 +51,14 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   private val guideMessage = "정보를 입력해주세요!" // resources.getString(R.string.guide_message) // 에러발생
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    initView()
+//    initView()
     initListener()
     initObserver()
   }
 
-  private fun initView() {
-    /**
-     * Intent에서 placeId 가져오기
-     */
-    viewModel.getPlaceBody(1)
-  }
+//  private fun initView() {
+//
+//  }
 
   private fun initListener() {
     with(binding) {
@@ -132,7 +131,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
         )
         viewModel.placeBody.info = infoEntity
 
-        viewModel.upsertPlaceBody()
+        viewModel.updatePlaceBodyUseCase()
       }
     }
   }
@@ -192,15 +191,14 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       }
 
       launch {
-        binding.apply {
-          viewModel.navigateToUpsertEvent.collect {
-            if (it) {
-              val action = InputCafeInfoFragmentDirections.actionFragmentInputCafeInfoToFragmentUpdateMenuComplete()
-              findNavController().safeNavigate(action)
-            }
-          }
+        viewModel.navigateToUpsertEvent.collect {
+          val action = InputCafeInfoFragmentDirections.actionFragmentInputCafeInfoToFragmentUpdateMenuComplete()
+          findNavController().safeNavigate(action)
         }
+        // TODO: 에뮬레이터와 달리 실기기로 테스트 시, 해당 state value를 초기화 안해도 마지막 완료 화면으로 넘어가지 않음. (확인 필요)
+        // viewModel.initializeUpdatePlaceBodySuccess()
       }
+
       launch {
         viewModel.showToastEvent.collect { message ->
           Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

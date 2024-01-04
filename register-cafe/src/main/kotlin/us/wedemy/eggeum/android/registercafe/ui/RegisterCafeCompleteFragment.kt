@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.registercafe.ui
 import android.os.Bundle
 import android.view.View
 import us.wedemy.eggeum.android.registercafe.databinding.FragmentRegisterCafeCompleteBinding
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 
 class RegisterCafeCompleteFragment : BaseFragment<FragmentRegisterCafeCompleteBinding>() {
   override fun getViewBinding() = FragmentRegisterCafeCompleteBinding.inflate(layoutInflater)

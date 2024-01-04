@@ -32,14 +32,15 @@
       android:layout_gravity="center"
       tools:text="@string/image_index" />
 
-    <ImageView
-      android:id="@+id/iv_cafe_image_detail_option"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="end"
-      android:layout_marginEnd="16dp"
-      android:background="@drawable/ic_menu_white_24"
-      android:contentDescription="Cafe Menu Option" />
+<!--    mvp 제와-->
+<!--    <ImageView-->
+<!--      android:id="@+id/iv_cafe_image_detail_option"-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:layout_height="wrap_content"-->
+<!--      android:layout_gravity="end"-->
+<!--      android:layout_marginEnd="16dp"-->
+<!--      android:background="@drawable/ic_menu_white_24"-->
+<!--      android:contentDescription="Cafe Menu Option" />-->
 
   </com.google.android.material.appbar.MaterialToolbar>
 

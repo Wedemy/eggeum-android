@@ -25,7 +25,7 @@ import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.registercafe.R
 import us.wedemy.eggeum.android.registercafe.adapter.CafeImageAdapter

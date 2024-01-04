@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeMenuBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeMenuAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel

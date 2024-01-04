@@ -9,8 +9,8 @@ package us.wedemy.eggeum.android.main.ui.adapter
 
 import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
-import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseRecyclerViewAdapter
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
@@ -26,7 +26,7 @@ class NewCafeAdapter(private val clickListener: SearchCafeClickListener) :
     super.onBindViewHolder(holder, position)
     val cafeItem = items[position]
     holder.itemView.setOnClickListener {
-      clickListener.onItemClick(cafeItem)
+      clickListener.onItemSelected(cafeItem)
     }
   }
 }

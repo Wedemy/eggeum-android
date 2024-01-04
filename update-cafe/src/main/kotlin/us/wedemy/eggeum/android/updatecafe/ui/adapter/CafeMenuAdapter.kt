@@ -9,7 +9,7 @@ package us.wedemy.eggeum.android.updatecafe.ui.adapter
 
 import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
-import us.wedemy.eggeum.android.common.ui.BaseRecyclerViewAdapter
+import us.wedemy.eggeum.android.common.base.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.updatecafe.databinding.ItemUpdateCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.ui.DeleteOnClickListener
 import us.wedemy.eggeum.android.updatecafe.ui.EditOnClickListener

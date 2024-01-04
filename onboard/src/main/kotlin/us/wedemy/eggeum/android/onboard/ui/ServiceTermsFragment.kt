@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.onboard.ui
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.databinding.FragmentServiceTermsBinding
 
 class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>() {

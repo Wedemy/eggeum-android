@@ -11,11 +11,23 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/white"
-  app:behavior_hideable="false"
   app:behavior_draggable="true"
   app:behavior_fitToContents="true"
+  app:behavior_hideable="false"
   app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
   tools:ignore="HardcodedText">
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_shrink"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:contentDescription="@string/ic_bottom_sheet_handle"
+    android:src="@drawable/ic_arrow_down_outlined_24"
+    android:visibility="invisible"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
     android:id="@+id/iv_cafe_detail_handle"
@@ -26,6 +38,17 @@
     android:src="@drawable/ic_bottom_sheet_handle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_option"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/ic_menu_filled_24"
+    android:contentDescription="Cafe Menu Option"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
@@ -39,19 +62,8 @@
     android:maxLines="1"
     android:textColor="@color/gray_900"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_handle"
+    app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_shrink"
     tools:text="스타벅스 강남역신분당역사점" />
-
-  <ImageView
-    android:id="@+id/iv_cafe_detail_option"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/ic_menu_filled_24"
-    android:contentDescription="Cafe Menu Option"
-    app:layout_constraintBottom_toBottomOf="@id/tv_cafe_detail_name"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/tv_cafe_detail_name" />
 
   <TextView
     android:id="@+id/tv_cafe_detail_address"

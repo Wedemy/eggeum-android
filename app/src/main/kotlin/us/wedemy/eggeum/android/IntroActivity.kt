@@ -30,7 +30,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.startActivityWithAnimation
-import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.databinding.ActivityIntroBinding
 import us.wedemy.eggeum.android.login.LoginActivity
 import us.wedemy.eggeum.android.main.ui.MainActivity

@@ -12,7 +12,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentNoticeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.model.NoticeModel

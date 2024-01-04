@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.common.ui
+package us.wedemy.eggeum.android.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

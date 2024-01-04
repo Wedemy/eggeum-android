@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.registercafe.adapter.viewholder
 
 import coil.load
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.registercafe.adapter.listener.CafeImageClickListener
 import us.wedemy.eggeum.android.registercafe.databinding.ItemRegisterCafeImageBinding
 import us.wedemy.eggeum.android.registercafe.model.CafeImageModel

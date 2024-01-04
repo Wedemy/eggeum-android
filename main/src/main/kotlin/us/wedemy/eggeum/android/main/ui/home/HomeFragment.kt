@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.util.HorizontalSpacingItemDecoration
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -47,10 +47,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   private val newCafeAdapter by lazy {
     NewCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(item: PlaceEntity) {
+        override fun onItemSelected(item: PlaceEntity) {
           cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
           val action = HomeFragmentDirections.actionFragmentHomeToFragmentMap()
           findNavController().safeNavigate(action)
+        }
+
+        override fun onItemDeleteClick(item: PlaceEntity) {
+          // unused
         }
       },
     )

@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel

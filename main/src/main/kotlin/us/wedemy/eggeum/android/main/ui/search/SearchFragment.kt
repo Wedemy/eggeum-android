@@ -5,13 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-/*
- * Designed and developed by Wedemy 2023.
- *
- * Licensed under the MIT.
- * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
- */
-
 package us.wedemy.eggeum.android.main.ui.search
 
 import android.Manifest
@@ -47,7 +40,7 @@ import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding

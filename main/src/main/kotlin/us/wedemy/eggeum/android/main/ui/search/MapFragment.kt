@@ -41,9 +41,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.util.fadeInView
+import us.wedemy.eggeum.android.common.util.fadeOutView
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMapBinding
@@ -55,6 +56,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
+// TODO 맵 위치 싱크 및 마커 추가
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -102,46 +104,50 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   private fun initCafeDetailBottomSheet() {
     bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.root)
-//    val screenHeight = getScreenHeight()
-//    bottomSheetBehavior.peekHeight = (screenHeight * 0.5).toInt()
-//    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-
+    val screenHeight = getScreenHeight()
+    bottomSheetBehavior.apply {
+      peekHeight = (screenHeight * 0.5).toInt()
+      state = BottomSheetBehavior.STATE_HALF_EXPANDED
+    }
     bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
         // 0 ~ 1
         if (slideOffset > 0.6f) {
-          // TODO Expanding Persistent Bottom Sheet
-          // showFullScreenFragment()
+          bottomSheetBehavior.apply {
+            BottomSheetBehavior.STATE_EXPANDED
+            skipCollapsed = true
+          }
         }
       }
 
-      @Suppress("unused")
       override fun onStateChanged(bottomSheet: View, newState: Int) {
         when (newState) {
           BottomSheetBehavior.STATE_COLLAPSED -> {
-            Timber.d("onStateChanged: 접음")
+            binding.bottomSheet.apply {
+              fadeInView(binding.bottomSheet.ivCafeDetailHandle)
+              fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
+            }
           }
-          BottomSheetBehavior.STATE_DRAGGING -> {
-            Timber.d("onStateChanged: 드래그")
-          }
+          BottomSheetBehavior.STATE_DRAGGING -> {}
           BottomSheetBehavior.STATE_EXPANDED -> {
-            Timber.d("onStateChanged: 펼침")
+            binding.bottomSheet.apply {
+              fadeInView(binding.bottomSheet.ivCafeDetailShrink)
+              fadeOutView(binding.bottomSheet.ivCafeDetailHandle)
+            }
           }
           BottomSheetBehavior.STATE_HIDDEN -> {
-            Timber.d("onStateChanged: 숨기기")
           }
           BottomSheetBehavior.STATE_SETTLING -> {
-            Timber.d("onStateChanged: 고정됨")
           }
           BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-            Timber.d("onStateChanged: 절반 펼침")
+            fadeInView(binding.bottomSheet.ivCafeDetailHandle)
+            fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
           }
         }
       }
     })
   }
 
-  @Suppress("unused")
   private fun getScreenHeight(): Int {
     val displayMetrics = DisplayMetrics()
     requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -178,31 +184,40 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   }
 
   private fun initListener() {
-    binding.bottomSheet.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-      override fun onTabSelected(tab: TabLayout.Tab?) {
-        when (tab?.position) {
-          0 -> showFragment(TAG_CAFE_INFO_FRAGMENT)
-          1 -> showFragment(TAG_CAFE_IMAGE_FRAGMENT)
-          2 -> showFragment(TAG_CAFE_MENU_FRAGMENT)
+    with(binding) {
+      bottomSheet.tlCafeDetail.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+          when (tab?.position) {
+            0 -> showFragment(TAG_CAFE_INFO_FRAGMENT)
+            1 -> showFragment(TAG_CAFE_IMAGE_FRAGMENT)
+            2 -> showFragment(TAG_CAFE_MENU_FRAGMENT)
+          }
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
+        override fun onTabReselected(tab: TabLayout.Tab?) = Unit
+      })
+
+      bottomSheet.ivCafeDetailOption.setOnClickListener {
+        val popupMenu = PopupMenu(binding.root.context, it)
+        popupMenu.menuInflater.inflate(R.menu.cafe_detail_menu, popupMenu.menu)
+
+        popupMenu.setForceShowIcon(true)
+        popupMenu.show()
+
+        popupMenu.setOnMenuItemClickListener {
+          if (it.itemId == R.id.proposal_info_edit) {
+            mapViewModel.navigateToUpdateCafe()
+            true
+          } else false
         }
       }
 
-      override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
-      override fun onTabReselected(tab: TabLayout.Tab?) = Unit
-    })
-
-    binding.bottomSheet.ivCafeDetailOption.setOnClickListener {
-      val popupMenu = PopupMenu(binding.root.context, it)
-      popupMenu.menuInflater.inflate(R.menu.cafe_detail_menu, popupMenu.menu)
-
-      popupMenu.setForceShowIcon(true)
-      popupMenu.show()
-
-      popupMenu.setOnMenuItemClickListener {
-        if (it.itemId == R.id.proposal_info_edit) {
-          mapViewModel.navigateToUpdateCafe()
-          true
-        } else false
+      bottomSheet.ivCafeDetailShrink.setOnClickListener {
+        bottomSheetBehavior.apply {
+          state = BottomSheetBehavior.STATE_HALF_EXPANDED
+          skipCollapsed = true
+        }
       }
     }
   }
@@ -210,7 +225,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        mapViewModel.placeList.collectLatest { pagingData ->
+        cafeDetailViewModel.placeList.collectLatest { pagingData ->
           searchCafeAdapter.submitData(pagingData)
         }
       }
@@ -220,7 +235,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
-              mapViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
+              cafeDetailViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
               addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
@@ -233,15 +248,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       }
     }
   }
-
-//  private fun showFullScreenFragment() {
-//    val fullScreenFragment = CafeDetailFragment()
-//
-//    requireActivity().supportFragmentManager.beginTransaction()
-//      .replace(R.id.bottomSheet, fullScreenFragment)
-//      .addToBackStack(null)
-//      .commit()
-//  }
 
   override fun onMapReady(naverMap: NaverMap) {
     this.naverMap = naverMap
@@ -326,7 +332,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   }
 
   override fun onClick(overlay: Overlay): Boolean {
-    val selectedPlaceModel = mapViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    val selectedPlaceModel = cafeDetailViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
     if (selectedPlaceModel != null) {
       val cafeDetailInfo = CafeDetailModel(
         address1 = selectedPlaceModel.address1,

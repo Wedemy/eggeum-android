@@ -26,8 +26,11 @@ class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = nu
     val cafeItem = getItem(position)
     cafeItem?.let { cafe ->
       holder.bind(cafe)
-      holder.itemView.setOnClickListener {
-        clickListener?.onItemClick(cafeItem)
+      holder.binding.root.setOnClickListener {
+        clickListener?.onItemSelected(cafeItem)
+      }
+      holder.binding.ivCafeSearchLocationDelete.setOnClickListener {
+        clickListener?.onItemDeleteClick(cafeItem)
       }
     }
   }

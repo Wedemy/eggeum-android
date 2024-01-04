@@ -12,14 +12,16 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
@@ -39,12 +41,16 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private val searchCafeAdapter by lazy {
     SearchCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(item: PlaceEntity) {
+        override fun onItemSelected(item: PlaceEntity) {
           searchCafeViewModel.insertRecentSearchPlace(item)
 
           cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
           val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentMap()
           findNavController().safeNavigate(action)
+        }
+
+        override fun onItemDeleteClick(item: PlaceEntity) {
+          searchCafeViewModel.deleteRecentSearchPlace(item)
         }
       },
     )
@@ -76,18 +82,36 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        searchCafeViewModel.searchPlaceList.collectLatest {
-          searchCafeAdapter.submitData(it)
+        searchCafeViewModel.searchPlaceList.collectLatest { pagingData ->
+          searchCafeAdapter.submitData(pagingData)
         }
       }
 
       launch {
-        val editTextFlow = binding.tietSearchCafe.textChangesAsFlow()
-        editTextFlow
-          .collect { text ->
-            val query = text.toString().trim()
-            searchCafeViewModel.setSearchQuery(query)
+        searchCafeAdapter.loadStateFlow
+          .distinctUntilChangedBy { it.refresh }
+          .collect { loadStates ->
+            if (loadStates.source.refresh is LoadState.NotLoading && loadStates.append.endOfPaginationReached && searchCafeAdapter.itemCount < 1
+            ) {
+              binding.apply {
+                tvNoRecentSearches.visibility = View.VISIBLE
+                binding.rvSearchCafe.visibility = View.GONE
+              }
+            } else {
+              binding.apply {
+                tvNoRecentSearches.visibility = View.GONE
+                binding.rvSearchCafe.visibility = View.VISIBLE
+              }
+            }
           }
+      }
+
+      launch {
+        val editTextFlow = binding.tietSearchCafe.textChangesAsFlow()
+        editTextFlow.collect { text ->
+          val query = text.toString().trim()
+          searchCafeViewModel.setSearchQuery(query)
+        }
       }
     }
   }

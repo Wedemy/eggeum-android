@@ -13,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.ui.BaseDialogFragment
+import us.wedemy.eggeum.android.common.base.BaseDialogFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentReportCafeImageBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 

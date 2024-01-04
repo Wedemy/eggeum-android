@@ -26,7 +26,7 @@ class NewCafeAdapter(private val clickListener: SearchCafeClickListener) :
     super.onBindViewHolder(holder, position)
     val cafeItem = items[position]
     holder.itemView.setOnClickListener {
-      clickListener.onItemClick(cafeItem)
+      clickListener.onItemSelected(cafeItem)
     }
   }
 }

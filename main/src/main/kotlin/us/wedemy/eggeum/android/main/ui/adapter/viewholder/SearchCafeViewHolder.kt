@@ -16,5 +16,8 @@ class SearchCafeViewHolder(binding: ItemSearchCafeLocationBinding) :
 
   override fun bind(item: PlaceEntity) {
     binding.tvCafeSearchLocation.text = item.name
+    binding.ivCafeSearchLocation.setOnClickListener {
+
+    }
   }
 }

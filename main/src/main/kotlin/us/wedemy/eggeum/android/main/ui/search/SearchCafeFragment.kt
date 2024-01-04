@@ -42,12 +42,16 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private val searchCafeAdapter by lazy {
     SearchCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(item: PlaceEntity) {
+        override fun onItemSelected(item: PlaceEntity) {
           searchCafeViewModel.insertRecentSearchPlace(item)
 
           cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
           val action = SearchCafeFragmentDirections.actionFragmentSearchCafeToFragmentMap()
           findNavController().safeNavigate(action)
+        }
+
+        override fun onItemDeleteClick(item: PlaceEntity) {
+          searchCafeViewModel.deleteRecentSearchPlace(item)
         }
       },
     )

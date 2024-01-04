@@ -47,11 +47,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   private val newCafeAdapter by lazy {
     NewCafeAdapter(
       object : SearchCafeClickListener {
-        override fun onItemClick(item: PlaceEntity) {
+        override fun onItemSelected(item: PlaceEntity) {
           cafeDetailViewModel.setCafeDetailInfo(item.toUiModel())
           val action = HomeFragmentDirections.actionFragmentHomeToFragmentMap()
           findNavController().safeNavigate(action)
         }
+
+        override fun onItemDeleteClick(item: PlaceEntity) {}
       },
     )
   }

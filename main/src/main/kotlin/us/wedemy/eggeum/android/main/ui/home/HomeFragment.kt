@@ -53,7 +53,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
           findNavController().safeNavigate(action)
         }
 
-        override fun onItemDeleteClick(item: PlaceEntity) {}
+        override fun onItemDeleteClick(item: PlaceEntity) {
+          // unused
+        }
       },
     )
   }

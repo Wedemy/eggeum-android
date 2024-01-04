@@ -91,8 +91,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         searchCafeAdapter.loadStateFlow
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
-            if (loadStates.source.refresh is LoadState.NotLoading && loadStates.append.endOfPaginationReached
-              && searchCafeAdapter.itemCount < 1
+            if (loadStates.source.refresh is LoadState.NotLoading && loadStates.append.endOfPaginationReached && searchCafeAdapter.itemCount < 1
             ) {
               binding.apply {
                 tvNoRecentSearches.visibility = View.VISIBLE

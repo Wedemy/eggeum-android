@@ -148,6 +148,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
           }
           BottomSheetBehavior.STATE_HALF_EXPANDED -> {
             Timber.d("onStateChanged: 절반 펼침")
+            fadeInView(binding.bottomSheet.ivCafeDetailHandle)
+            fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
           }
         }
       }
@@ -222,7 +224,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
       bottomSheet.ivCafeDetailShrink.setOnClickListener {
         bottomSheetBehavior.apply {
-          state = BottomSheetBehavior.STATE_EXPANDED
+          state = BottomSheetBehavior.STATE_HALF_EXPANDED
           skipCollapsed = true
         }
       }

@@ -83,8 +83,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
 
       launch {
         val editTextFlow = binding.tietSearchCafe.textChangesAsFlow()
-        editTextFlow
-          .collect { text ->
+        editTextFlow.collect { text ->
             val query = text.toString().trim()
             searchCafeViewModel.setSearchQuery(query)
           }

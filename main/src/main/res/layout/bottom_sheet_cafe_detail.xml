@@ -40,6 +40,17 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
+  <ImageView
+    android:id="@+id/iv_cafe_detail_option"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/ic_menu_filled_24"
+    android:contentDescription="Cafe Menu Option"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
   <TextView
     android:id="@+id/tv_cafe_detail_name"
     style="@style/H5"
@@ -53,17 +64,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_shrink"
     tools:text="스타벅스 강남역신분당역사점" />
-
-  <ImageView
-    android:id="@+id/iv_cafe_detail_option"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:background="@drawable/ic_menu_filled_24"
-    android:contentDescription="Cafe Menu Option"
-    app:layout_constraintBottom_toBottomOf="@id/tv_cafe_detail_name"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/tv_cafe_detail_name" />
 
   <TextView
     android:id="@+id/tv_cafe_detail_address"

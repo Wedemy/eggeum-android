@@ -44,6 +44,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.util.fadeInView
+import us.wedemy.eggeum.android.common.util.fadeOutView
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMapBinding
@@ -124,8 +126,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
           BottomSheetBehavior.STATE_COLLAPSED -> {
             Timber.d("onStateChanged: 접음")
             binding.bottomSheet.apply {
-              ivCafeDetailShrink.visibility = View.INVISIBLE
-              ivCafeDetailHandle.visibility = View.VISIBLE
+              fadeInView(binding.bottomSheet.ivCafeDetailHandle)
+              fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
             }
           }
           BottomSheetBehavior.STATE_DRAGGING -> {
@@ -134,8 +136,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
           BottomSheetBehavior.STATE_EXPANDED -> {
             Timber.d("onStateChanged: 펼침")
             binding.bottomSheet.apply {
-              ivCafeDetailShrink.visibility = View.VISIBLE
-              ivCafeDetailHandle.visibility = View.INVISIBLE
+              fadeInView(binding.bottomSheet.ivCafeDetailShrink)
+              fadeOutView(binding.bottomSheet.ivCafeDetailHandle)
             }
           }
           BottomSheetBehavior.STATE_HIDDEN -> {

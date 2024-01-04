@@ -12,8 +12,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
@@ -29,6 +31,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchCafeViewModel
 
+// TODO 최근 검색어 x 버튼 클릭해서 삭제
 @AndroidEntryPoint
 class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   override fun getViewBinding() = FragmentSearchCafeBinding.inflate(layoutInflater)
@@ -76,17 +79,37 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        searchCafeViewModel.searchPlaceList.collectLatest {
-          searchCafeAdapter.submitData(it)
+        searchCafeViewModel.searchPlaceList.collectLatest { pagingData ->
+          searchCafeAdapter.submitData(pagingData)
         }
+      }
+
+      launch {
+        searchCafeAdapter.loadStateFlow
+          .distinctUntilChangedBy { it.refresh }
+          .collect { loadStates ->
+            if (loadStates.source.refresh is LoadState.NotLoading && loadStates.append.endOfPaginationReached
+              && searchCafeAdapter.itemCount < 1
+            ) {
+              binding.apply {
+                tvNoRecentSearches.visibility = View.VISIBLE
+                binding.rvSearchCafe.visibility = View.GONE
+              }
+            } else {
+              binding.apply {
+                tvNoRecentSearches.visibility = View.GONE
+                binding.rvSearchCafe.visibility = View.VISIBLE
+              }
+            }
+          }
       }
 
       launch {
         val editTextFlow = binding.tietSearchCafe.textChangesAsFlow()
         editTextFlow.collect { text ->
-            val query = text.toString().trim()
-            searchCafeViewModel.setSearchQuery(query)
-          }
+          val query = text.toString().trim()
+          searchCafeViewModel.setSearchQuery(query)
+        }
       }
     }
   }

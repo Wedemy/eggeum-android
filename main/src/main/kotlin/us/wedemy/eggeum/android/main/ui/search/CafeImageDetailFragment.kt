@@ -13,15 +13,12 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.ui.BaseFragment
-import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageDetailAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeImageDetailViewModel
@@ -83,21 +80,21 @@ class CafeImageDetailFragment : BaseFragment<FragmentCafeImageDetailBinding>() {
         }
       }
 
-      binding.ivCafeImageDetailOption.setOnClickListener {
-        val popupMenu = PopupMenu(binding.root.context, it)
-        popupMenu.menuInflater.inflate(R.menu.cafe_image_detail_menu, popupMenu.menu)
-
-        popupMenu.setForceShowIcon(true)
-        popupMenu.show()
-
-        popupMenu.setOnMenuItemClickListener {
-          if (it.itemId == R.id.cafe_image_report) {
-            val action = CafeImageDetailFragmentDirections.actionFragmentCafeImageDetailToReportCafeImageFragment()
-            findNavController().safeNavigate(action)
-            true
-          } else false
-        }
-      }
+//      binding.ivCafeImageDetailOption.setOnClickListener {
+//        val popupMenu = PopupMenu(binding.root.context, it)
+//        popupMenu.menuInflater.inflate(R.menu.cafe_image_detail_menu, popupMenu.menu)
+//
+//        popupMenu.setForceShowIcon(true)
+//        popupMenu.show()
+//
+//        popupMenu.setOnMenuItemClickListener {
+//          if (it.itemId == R.id.cafe_image_report) {
+//            val action = CafeImageDetailFragmentDirections.actionFragmentCafeImageDetailToReportCafeImageFragment()
+//            findNavController().safeNavigate(action)
+//            true
+//          } else false
+//        }
+//      }
 
       ivCafeImageDetailNext.setOnClickListener {
         val currentItem = vpCafeImageDetail.currentItem

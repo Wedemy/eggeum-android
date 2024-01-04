@@ -11,11 +11,23 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/white"
-  app:behavior_hideable="false"
   app:behavior_draggable="true"
   app:behavior_fitToContents="true"
+  app:behavior_hideable="false"
   app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
   tools:ignore="HardcodedText">
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_shrink"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:contentDescription="@string/ic_bottom_sheet_handle"
+    android:src="@drawable/ic_arrow_down_outlined_24"
+    android:visibility="invisible"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
     android:id="@+id/iv_cafe_detail_handle"
@@ -39,7 +51,7 @@
     android:maxLines="1"
     android:textColor="@color/gray_900"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_handle"
+    app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_shrink"
     tools:text="스타벅스 강남역신분당역사점" />
 
   <ImageView

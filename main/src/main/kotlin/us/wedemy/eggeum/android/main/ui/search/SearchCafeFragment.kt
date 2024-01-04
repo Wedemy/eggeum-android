@@ -31,7 +31,6 @@ import us.wedemy.eggeum.android.main.ui.adapter.listener.SearchCafeClickListener
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchCafeViewModel
 
-// TODO 최근 검색어 x 버튼 클릭해서 삭제
 @AndroidEntryPoint
 class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   override fun getViewBinding() = FragmentSearchCafeBinding.inflate(layoutInflater)

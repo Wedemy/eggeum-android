@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.fromDpToPx
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.util.GridSpacingItemDecoration
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageAdapter

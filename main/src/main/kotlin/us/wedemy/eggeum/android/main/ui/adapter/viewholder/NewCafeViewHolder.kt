@@ -7,7 +7,7 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.ItemNewCafeBinding
 

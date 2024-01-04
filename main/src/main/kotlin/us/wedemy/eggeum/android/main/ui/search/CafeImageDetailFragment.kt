@@ -18,7 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeImageDetailBinding
 import us.wedemy.eggeum.android.main.ui.adapter.CafeImageDetailAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeImageDetailViewModel

@@ -7,7 +7,7 @@
 
 @file:Suppress("MemberVisibilityCanBePrivate")
 
-package us.wedemy.eggeum.android.common.ui
+package us.wedemy.eggeum.android.common.base
 
 import android.graphics.Color
 import android.os.Build

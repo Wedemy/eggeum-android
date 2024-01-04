@@ -9,7 +9,7 @@ package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
 import java.text.NumberFormat
 import java.util.Locale
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
 import us.wedemy.eggeum.android.main.model.ProductModel
 

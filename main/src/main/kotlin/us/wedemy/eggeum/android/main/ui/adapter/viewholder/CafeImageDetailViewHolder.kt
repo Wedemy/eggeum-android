@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
 import coil.load
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageDetailBinding
 
 class CafeImageDetailViewHolder(binding: ItemCafeImageDetailBinding) :

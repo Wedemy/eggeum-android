@@ -32,7 +32,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
-import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.common.util.setOnSingleClickListener
 import us.wedemy.eggeum.android.login.databinding.ActivityLoginBinding
 import us.wedemy.eggeum.android.navigator.MainNavigator

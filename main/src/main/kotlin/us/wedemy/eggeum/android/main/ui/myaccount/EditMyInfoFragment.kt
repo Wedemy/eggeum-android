@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.main.R

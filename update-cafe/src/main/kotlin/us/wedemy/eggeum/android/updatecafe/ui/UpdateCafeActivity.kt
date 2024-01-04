@@ -11,7 +11,7 @@ import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.navigator.MainNavigator
 import us.wedemy.eggeum.android.updatecafe.R
 import us.wedemy.eggeum.android.updatecafe.databinding.ActivityUpdateCafeBinding

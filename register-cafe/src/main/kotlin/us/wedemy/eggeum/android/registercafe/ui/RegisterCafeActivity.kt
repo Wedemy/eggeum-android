@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.registercafe.R
 import us.wedemy.eggeum.android.registercafe.databinding.ActivityRegisterCafeBinding
-import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.base.BaseActivity
 
 @AndroidEntryPoint
 class RegisterCafeActivity : BaseActivity() {

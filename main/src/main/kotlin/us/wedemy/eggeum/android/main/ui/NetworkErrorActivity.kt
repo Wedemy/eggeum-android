@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.main.ui
 
 import android.os.Bundle
-import us.wedemy.eggeum.android.common.ui.BaseActivity
+import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.main.databinding.ActivityNetworkErrorBinding
 
 class NetworkErrorActivity : BaseActivity() {

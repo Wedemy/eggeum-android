@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.updatecafe.ui.adapter.viewholder
 import android.widget.PopupMenu
 import java.text.NumberFormat
 import java.util.Locale
-import us.wedemy.eggeum.android.common.ui.BaseViewHolder
+import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.updatecafe.R
 import us.wedemy.eggeum.android.updatecafe.databinding.ItemUpdateCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.ui.DeleteOnClickListener

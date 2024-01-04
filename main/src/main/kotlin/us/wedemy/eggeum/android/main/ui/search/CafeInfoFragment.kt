@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
-import us.wedemy.eggeum.android.common.ui.BaseFragment
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeInfoBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 

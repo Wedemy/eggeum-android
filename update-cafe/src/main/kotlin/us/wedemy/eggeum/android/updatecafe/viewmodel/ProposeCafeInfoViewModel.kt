@@ -36,9 +36,6 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val upsertPlaceUseCase: UpsertPlaceUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-  /*
-   * TODO: import us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
-   */
   private val selectedCafeInfo: CafeDetailModel = requireNotNull(savedStateHandle[CAFE_DETAIL_INFO]) {
     "cafeDetailInfo is required."
   }
@@ -68,10 +65,6 @@ class ProposeCafeInfoViewModel @Inject constructor(
   val cafeInfo = _cafeInfo.asStateFlow()
 
   init {
-    /*
-     * TODO:
-     *  java.lang.ClassCastException: us.wedemy.eggeum.android.main.model.CafeDetailModel cannot be cast to us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
-     */
     getCafeMenuListAndInfo(selectedCafeInfo.id)
   }
 

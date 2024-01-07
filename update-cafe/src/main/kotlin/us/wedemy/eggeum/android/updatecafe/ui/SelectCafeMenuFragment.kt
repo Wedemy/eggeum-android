@@ -66,7 +66,7 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
   }
 
   private fun showEditOrDeleteDialog(item: CafeMenuItem) {
-    val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToDeleteCafeMenuFrament(
+    val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToFragmentDeleteCafeMenu(
       CafeMenuItem(
         name = item.name,
         price = item.price,

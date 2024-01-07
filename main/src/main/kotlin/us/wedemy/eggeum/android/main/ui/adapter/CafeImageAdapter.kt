@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.base.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.android.main.model.FileModel
+import us.wedemy.eggeum.android.common.model.FileModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageViewHolder
 import us.wedemy.eggeum.android.main.ui.search.CafeImageClickListener
 

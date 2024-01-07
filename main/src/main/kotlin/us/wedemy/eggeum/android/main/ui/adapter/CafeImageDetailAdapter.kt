@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageDetailBinding
-import us.wedemy.eggeum.android.main.model.FileModel
+import us.wedemy.eggeum.android.common.model.FileModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeImageDetailViewHolder
 
 class CafeImageDetailAdapter(

@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import us.wedemy.eggeum.android.common.model.FileModel
 
 @Parcelize
 data class ProfileImageModel(

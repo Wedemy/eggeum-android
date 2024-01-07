@@ -5,12 +5,13 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-package us.wedemy.eggeum.android.updatecafe.model
+package us.wedemy.eggeum.android.common.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ImageModel(
-  val files: List<FileModel> = emptyList(),
+data class FileModel(
+  val uploadFileId: Int?,
+  val url: String?,
 ) : Parcelable

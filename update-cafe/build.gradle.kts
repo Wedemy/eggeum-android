@@ -36,6 +36,5 @@ dependencies {
     projects.designResource,
     projects.navigator,
     projects.domain,
-    projects.main,
   )
 }

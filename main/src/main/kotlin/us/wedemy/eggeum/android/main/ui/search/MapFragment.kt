@@ -50,7 +50,7 @@ import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMapBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
 import us.wedemy.eggeum.android.main.mapper.toUilModel
-import us.wedemy.eggeum.android.main.model.CafeDetailModel
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel

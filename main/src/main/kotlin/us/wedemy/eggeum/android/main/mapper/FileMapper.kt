@@ -8,7 +8,7 @@
 package us.wedemy.eggeum.android.main.mapper
 
 import us.wedemy.eggeum.android.domain.model.FileEntity
-import us.wedemy.eggeum.android.main.model.FileModel
+import us.wedemy.eggeum.android.common.model.FileModel
 
 internal fun FileEntity.toUiModel() =
   FileModel(

@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceListUseCase
-import us.wedemy.eggeum.android.main.model.CafeDetailModel
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
 
 @HiltViewModel
 class CafeDetailViewModel @Inject constructor(

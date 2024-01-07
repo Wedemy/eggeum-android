@@ -12,11 +12,11 @@ import us.wedemy.eggeum.android.domain.model.place.InfoEntity
 import us.wedemy.eggeum.android.domain.model.place.MenuEntity
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
-import us.wedemy.eggeum.android.main.model.CafeDetailModel
-import us.wedemy.eggeum.android.main.model.ImageModel
-import us.wedemy.eggeum.android.main.model.InfoModel
-import us.wedemy.eggeum.android.main.model.MenuModel
-import us.wedemy.eggeum.android.main.model.ProductModel
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
+import us.wedemy.eggeum.android.common.model.ImageModel
+import us.wedemy.eggeum.android.common.model.InfoModel
+import us.wedemy.eggeum.android.common.model.MenuModel
+import us.wedemy.eggeum.android.common.model.ProductModel
 
 internal fun PlaceEntity.toUiModel() =
   CafeDetailModel(

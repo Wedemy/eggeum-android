@@ -12,6 +12,7 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.base.BaseDialogFragment
@@ -37,7 +38,9 @@ class DeleteCafeMenuFrament : BaseDialogFragment<FragmentDeleteCafeMenuBinding>(
   private fun initListener() {
     with(binding) {
       btnCancelCafeMenu.setOnClickListener {
-        popOut()
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
       }
 
       btnDeleteCafeMenu.setOnClickListener {
@@ -53,13 +56,9 @@ class DeleteCafeMenuFrament : BaseDialogFragment<FragmentDeleteCafeMenuBinding>(
         val newCafeMenuItemList = viewModel.initializeCafeMenuItem(products = newPlaceBody)
         viewModel.updateCafeMenuList(cafeMenuItemList = newCafeMenuItemList)
 
-        popOut()
+        findNavController().navigateUp()
       }
     }
-  }
-
-  private fun popOut() {
-    this@DeleteCafeMenuFrament.dismiss()
   }
 
   private fun initObserver() {

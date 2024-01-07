@@ -12,6 +12,7 @@ package us.wedemy.eggeum.android.updatecafe.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.base.BaseDialogFragment
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
@@ -20,12 +21,12 @@ import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
 
 @AndroidEntryPoint
-class DeleteCafeMenuFrament(
-  val item: CafeMenuItem,
-) : BaseDialogFragment<FragmentDeleteCafeMenuBinding>() {
+class DeleteCafeMenuFrament : BaseDialogFragment<FragmentDeleteCafeMenuBinding>() {
   override fun getViewBinding() = FragmentDeleteCafeMenuBinding.inflate(layoutInflater)
 
   private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
+
+  private val args by navArgs<InputCafeMenuFragmentArgs>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -43,7 +44,7 @@ class DeleteCafeMenuFrament(
         val newCafeMenuList = mutableListOf<CafeMenuItem>()
         val cafeMenuList = viewModel.cafeMenuList.value
         cafeMenuList.forEach {
-          if (!(it.name == item.name && it.price == item.price)) {
+          if (!(it.name == args.cafeMenuItem.name && it.price == args.cafeMenuItem.price)) {
             newCafeMenuList.add(it)
           }
         }

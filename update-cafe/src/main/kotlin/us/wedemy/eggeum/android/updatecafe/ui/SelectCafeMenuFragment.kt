@@ -66,8 +66,13 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
   }
 
   private fun showEditOrDeleteDialog(item: CafeMenuItem) {
-    val dialog = DeleteCafeMenuFrament(item = item)
-    dialog.show(requireActivity().supportFragmentManager, "DeleteCafeMenuFrament")
+    val action = SelectCafeMenuFragmentDirections.actionFragmentSelectCafeMenuToDeleteCafeMenuFrament(
+      CafeMenuItem(
+        name = item.name,
+        price = item.price,
+      ),
+    )
+    findNavController().safeNavigate(action)
   }
 
   private fun initView() {

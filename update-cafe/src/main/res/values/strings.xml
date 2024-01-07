@@ -39,11 +39,11 @@
   <string name="complete">완료</string>
   <string name="input_corrections">수정하려는 내용을 입력해주세요.</string>
   <string name="input_cafe_info_hint">30m</string>
-  <string name="input_cafe_area">면적(㎡)</string>
-  <string name="input_cafe_meeting_room">회의실(개)</string>
-  <string name="input_cafe_multi_seat">다인석(개)</string>
-  <string name="input_cafe_single_seat">1인석(개)</string>
-  <string name="input_cafe_business_hours">영업시간</string>
+  <string name="description_cafe_area">면적(㎡)</string>
+  <string name="description_cafe_meeting_room">회의실(개)</string>
+  <string name="description_cafe_multi_seat">다인석(개)</string>
+  <string name="description_cafe_single_seat">1인석(개)</string>
+  <string name="description_cafe_business_hours">영업시간</string>
   <string name="input_parking">주차(O/X)</string>
   <string name="input_exists_smoking_area">흡연</string>
   <string name="input_exists_wifi">와이파이(O/X)</string>

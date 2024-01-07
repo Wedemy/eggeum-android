@@ -26,7 +26,7 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
-import us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
+import us.wedemy.eggeum.android.main.model.CafeDetailModel
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
@@ -36,6 +36,9 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val upsertPlaceUseCase: UpsertPlaceUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+  /*
+   * TODO: import us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
+   */
   private val selectedCafeInfo: CafeDetailModel = requireNotNull(savedStateHandle[CAFE_DETAIL_INFO]) {
     "cafeDetailInfo is required."
   }
@@ -65,6 +68,10 @@ class ProposeCafeInfoViewModel @Inject constructor(
   val cafeInfo = _cafeInfo.asStateFlow()
 
   init {
+    /*
+     * TODO:
+     *  java.lang.ClassCastException: us.wedemy.eggeum.android.main.model.CafeDetailModel cannot be cast to us.wedemy.eggeum.android.updatecafe.model.CafeDetailModel
+     */
     getCafeMenuListAndInfo(selectedCafeInfo.id)
   }
 

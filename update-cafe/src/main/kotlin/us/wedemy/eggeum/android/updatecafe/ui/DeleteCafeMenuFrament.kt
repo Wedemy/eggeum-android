@@ -1,0 +1,67 @@
+/*
+ * Designed and developed by Wedemy 2023.
+ *
+ * Licensed under the MIT.
+ * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+ */
+
+@file:Suppress("unused", "UnusedPrivateProperty")
+
+package us.wedemy.eggeum.android.updatecafe.ui
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import us.wedemy.eggeum.android.common.base.BaseDialogFragment
+import us.wedemy.eggeum.android.domain.model.place.ProductEntity
+import us.wedemy.eggeum.android.updatecafe.databinding.FragmentDeleteCafeMenuBinding
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
+import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
+
+@AndroidEntryPoint
+class DeleteCafeMenuFrament(
+  val item: CafeMenuItem,
+) : BaseDialogFragment<FragmentDeleteCafeMenuBinding>() {
+  override fun getViewBinding() = FragmentDeleteCafeMenuBinding.inflate(layoutInflater)
+
+  private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initListener()
+    initObserver()
+  }
+
+  private fun initListener() {
+    with(binding) {
+      btnCancelCafeMenu.setOnClickListener {
+        popOut()
+      }
+
+      btnDeleteCafeMenu.setOnClickListener {
+        val newCafeMenuList = mutableListOf<CafeMenuItem>()
+        val cafeMenuList = viewModel.cafeMenuList.value
+        cafeMenuList.forEach {
+          if (!(it.name == item.name && it.price == item.price)) {
+            newCafeMenuList.add(it)
+          }
+        }
+        viewModel.placeBody.menu?.products = newCafeMenuList.map { it.toEntity() }
+        val newPlaceBody = (viewModel.placeBody.menu?.products as MutableList<ProductEntity>)
+        val newCafeMenuItemList = viewModel.initializeCafeMenuItem(products = newPlaceBody)
+        viewModel.updateCafeMenuList(cafeMenuItemList = newCafeMenuItemList)
+
+        popOut()
+      }
+    }
+  }
+
+  private fun popOut() {
+    this@DeleteCafeMenuFrament.dismiss()
+  }
+
+  private fun initObserver() {
+    // TODO
+  }
+}

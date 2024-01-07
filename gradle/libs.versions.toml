@@ -1,5 +1,5 @@
 [versions]
-android-gradle-plugin = "8.2.1"
+android-gradle-plugin = "8.1.4"
 gradle-dependency-handler-extensions = "1.1.0"
 
 google-secrets = "2.0.1"
@@ -58,6 +58,7 @@ test-junit-core = "4.13.2"
 test-junit-engine = "5.10.1"
 test-roborazzi = "1.7.0"
 test-robolectric = "4.11.1"
+org-jetbrains-kotlin-android = "1.9.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
@@ -80,6 +81,7 @@ moshix-ir = { id = "dev.zacsweers.moshix", version.ref = "moshix-ir" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-roborazzi" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 
 [libraries]
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }

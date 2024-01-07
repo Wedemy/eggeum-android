@@ -8,6 +8,7 @@
 <resources>
   <string name="update_cafe">정보 수정 제안</string>
   <string name="cancel">취소</string>
+  <string name="deletion">삭제</string>
   <string name="next">다음</string>
   <string name="ask_options">어떤 의견이 있으신가요?</string>
   <string name="ask_options_sub">주신 의견은 한글자도 빼놓지 않고 꼼꼼히 읽어볼게요.</string>
@@ -32,7 +33,7 @@
   <string name="input_cafe_address_hint">매장 주소</string>
   <string name="ic_register_cafe_complete">ic_register_cafe_complete</string>
   <string name="register_cafe_complete_title">카페 등록 신청을\n완료 했어요.</string>
-  <string name="update_menu_complete_title">메뉴 수정을 완료했어요.</string>
+  <string name="update_menu_complete_title">정보 수정을 완료했어요.</string>
   <string name="register_cafe_complete_subtitle">심사 후에 카페가 확인되면 지도에 등록할게요.</string>
   <string name="update_menu_complete_subtitle">이끔을 개선하는데 도움을 주셔서 감사합니다.</string>
   <string name="complete">완료</string>
@@ -63,4 +64,5 @@
   <string name="ic_edit_outlined_20">ic_edit_outlined_20</string>
   <string name="ic_trash_20">ic_trash_20</string>
   <string name="guide_message">정보를 입력해주세요!</string>
+  <string name="ask_deletion">삭제하시겠어요?</string>
 </resources>

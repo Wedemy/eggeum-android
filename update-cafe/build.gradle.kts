@@ -11,7 +11,6 @@ plugins {
   eggeum("android-library")
   eggeum("android-hilt")
   alias(libs.plugins.androidx.navigation.safeargs)
-  alias(libs.plugins.org.jetbrains.kotlin.android)
   `kotlin-parcelize`
 }
 

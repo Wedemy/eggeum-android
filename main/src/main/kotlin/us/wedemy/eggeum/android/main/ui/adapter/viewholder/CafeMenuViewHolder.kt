@@ -11,7 +11,7 @@ import java.text.NumberFormat
 import java.util.Locale
 import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
-import us.wedemy.eggeum.android.main.model.ProductModel
+import us.wedemy.eggeum.android.common.model.ProductModel
 
 class CafeMenuViewHolder(binding: ItemCafeMenuBinding) : BaseViewHolder<ProductModel, ItemCafeMenuBinding>(binding) {
 

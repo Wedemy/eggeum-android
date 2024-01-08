@@ -11,7 +11,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import us.wedemy.eggeum.android.main.model.ImageModel
+import us.wedemy.eggeum.android.common.model.ImageModel
 
 @HiltViewModel
 class CafeImageDetailViewModel @Inject constructor(

@@ -121,6 +121,14 @@
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <action
+      android:id="@+id/action_fragment_select_cafe_menu_to_fragment_delete_cafe_menu"
+      app:destination="@id/fragment_delete_cafe_menu"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -168,5 +176,17 @@
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </fragment>
+
+  <dialog
+    android:id="@+id/fragment_delete_cafe_menu"
+    android:name="us.wedemy.eggeum.android.updatecafe.ui.DeleteCafeMenuFrament"
+    android:label="DeleteCafeMenuFrament"
+    tools:layout="@layout/fragment_delete_cafe_menu">
+
+    <argument
+      android:name="cafeMenuItem"
+      app:argType="us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem" />
+
+  </dialog>
 
 </navigation>

@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 import coil.load
 import us.wedemy.eggeum.android.common.base.BaseViewHolder
 import us.wedemy.eggeum.android.main.databinding.ItemCafeImageBinding
-import us.wedemy.eggeum.android.main.model.FileModel
+import us.wedemy.eggeum.android.common.model.FileModel
 import us.wedemy.eggeum.android.main.ui.search.CafeImageClickListener
 
 class CafeImageViewHolder(binding: ItemCafeImageBinding, clickListener: CafeImageClickListener) :

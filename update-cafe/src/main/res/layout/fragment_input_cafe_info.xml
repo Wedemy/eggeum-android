@@ -41,7 +41,7 @@
 
   <TextView
     android:id="@+id/tv_input_cafe_info"
-    style="@style/H3"
+    style="@style/H4"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/input_corrections"
@@ -75,7 +75,7 @@
         style="@style/TextSMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/input_cafe_area"
+        android:text="@string/description_cafe_area"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -106,7 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/input_cafe_meeting_room"
+        android:text="@string/description_cafe_meeting_room"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_input_cafe_area" />
@@ -137,7 +137,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/input_cafe_multi_seat"
+        android:text="@string/description_cafe_multi_seat"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_input_cafe_meeting_room" />
@@ -167,8 +167,8 @@
         style="@style/TextSMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/input_cafe_single_seat"
+        android:layout_marginTop="20dp"
+        android:text="@string/description_cafe_single_seat"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_input_cafe_multi_seat" />
@@ -199,7 +199,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/input_cafe_business_hours"
+        android:text="@string/description_cafe_business_hours"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_input_cafe_single_seat" />

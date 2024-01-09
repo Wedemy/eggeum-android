@@ -57,7 +57,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
-// TODO 맵 위치 싱크 및 마커 추가
+// TODO 맵 마커 싱크 및 선택된 마커로 변경
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -251,6 +251,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       launch {
         cafeDetailViewModel.cafeDetailInfo.collect { cafeDetailModel ->
           updateCafeInfo(cafeDetailModel)
+          initNaverMap()
         }
       }
 
@@ -275,13 +276,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     naverMap?.apply {
       locationSource = this@MapFragment.locationSource
       uiSettings.isZoomControlEnabled = false
+      val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       cameraPosition = CameraPosition(
-        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
-        ZOOM_LEVEL,
+        LatLng(cafeDetailInfo.latitude!!, cafeDetailInfo.longitude!!),
+        ZOOM_LEVEL
       )
       setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
     }
-    moveToCameraToUserLocation()
   }
 
   private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
@@ -353,6 +354,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         id = selectedPlaceModel.id,
         image = selectedPlaceModel.image?.toUiModel(),
         info = selectedPlaceModel.info?.toUilModel(),
+        latitude = selectedPlaceModel.latitude,
+        longitude = selectedPlaceModel.longitude,
         menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )

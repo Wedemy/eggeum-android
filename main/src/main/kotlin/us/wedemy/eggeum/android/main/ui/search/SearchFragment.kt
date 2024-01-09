@@ -178,6 +178,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         id = selectedPlaceModel.id,
         image = selectedPlaceModel.image?.toUiModel(),
         info = selectedPlaceModel.info?.toUilModel(),
+        latitude = selectedPlaceModel.latitude,
+        longitude = selectedPlaceModel.longitude,
         menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )

@@ -16,12 +16,12 @@ import us.wedemy.eggeum.android.data.model.notice.NoticeListResponse
 
 public interface NoticeService {
 
-  @GET("notice/{noticeId}")
+  @GET("app/notice/{noticeId}")
   public suspend fun getNotice(
     @Path("noticeId") noticeId: Int,
   ): Response<NoticeResponse>
 
-  @GET("notice/all")
+  @GET("app/notice/all")
   public suspend fun getNoticeList(
     @Query("search") search: String? = null,
     @Query("page") page: Int? = null,

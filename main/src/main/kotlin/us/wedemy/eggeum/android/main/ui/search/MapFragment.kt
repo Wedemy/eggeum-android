@@ -314,14 +314,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     }
   }
 
-  @SuppressLint("MissingPermission")
-  private fun moveToCameraToUserLocation() {
-    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-      val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
-      naverMap?.moveCamera(cameraUpdate)
-    }
-  }
-
   private fun requestPermissions() {
     requestMultiplePermissionsLauncher.launch(permissions)
   }
@@ -347,8 +339,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     }
   }
 
+  // TODO 선택된 마커의 아이콘이 바뀌지 않음!
   override fun onClick(overlay: Overlay): Boolean {
     val selectedPlaceModel = cafeDetailViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    for (marker in markers) {
+      if (marker.tag == overlay.tag) {
+        marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_40)
+      } else {
+        marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+      }
+    }
     if (selectedPlaceModel != null) {
       val cafeDetailInfo = CafeDetailModel(
         address1 = selectedPlaceModel.address1,

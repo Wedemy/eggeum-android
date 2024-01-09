@@ -57,7 +57,6 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
-// TODO 맵 마커 싱크 및 선택된 마커로 변경
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -277,6 +276,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   private fun initNaverMap() {
     naverMap?.apply {
       locationSource = this@MapFragment.locationSource
+      uiSettings.isScaleBarEnabled = false
       uiSettings.isZoomControlEnabled = false
       val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       cameraPosition = CameraPosition(

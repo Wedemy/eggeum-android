@@ -198,6 +198,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun initNaverMap() {
     naverMap?.apply {
       locationSource = this@SearchFragment.locationSource
+      uiSettings.isScaleBarEnabled = false
       uiSettings.isZoomControlEnabled = false
       cameraPosition = CameraPosition(
         LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),

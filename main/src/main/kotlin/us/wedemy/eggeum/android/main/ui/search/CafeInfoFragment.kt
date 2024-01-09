@@ -14,8 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.model.InfoModel
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeInfoBinding
-import us.wedemy.eggeum.android.main.model.InfoModel
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
 @AndroidEntryPoint

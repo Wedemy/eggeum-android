@@ -37,7 +37,7 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        viewModel.cafeDetailInfo.collect {cafeDetailModel->
+        viewModel.cafeDetailInfo.collect { cafeDetailModel ->
           cafeDetailModel.info?.let { info -> updateCafeInfo(info) }
         }
       }

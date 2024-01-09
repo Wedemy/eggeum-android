@@ -298,7 +298,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       cameraPosition = CameraPosition(
         LatLng(cafeDetailInfo.latitude!!, cafeDetailInfo.longitude!!),
-        ZOOM_LEVEL
+        ZOOM_LEVEL,
       )
       setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
     }

@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.PopupMenu
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.paging.ItemSnapshotList
 import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.naver.maps.geometry.LatLng
@@ -41,8 +43,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.util.fadeInView
 import us.wedemy.eggeum.android.common.util.fadeOutView
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -56,7 +58,6 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
-// TODO 맵 위치 싱크 및 마커 추가
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -87,6 +88,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+    binding.mvSearch.apply {
+      onCreate(savedInstanceState)
+      getMapAsync(this@MapFragment)
+    }
     checkPermission()
     initCafeDetailBottomSheet()
     initView()
@@ -106,13 +112,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.root)
     val screenHeight = getScreenHeight()
     bottomSheetBehavior.apply {
-      peekHeight = (screenHeight * 0.5).toInt()
-      state = BottomSheetBehavior.STATE_HALF_EXPANDED
+      peekHeight = (screenHeight * 0.6).toInt()
+      // peekHeight 를 0.6 으로, state 를 collapsed 로 해야 0.6 만큼 차지함
+      // Half expanded 로 설정할 경우 0.6 이 무시됨
+      state = BottomSheetBehavior.STATE_COLLAPSED
     }
     bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
         // 0 ~ 1
-        if (slideOffset > 0.6f) {
+        if (slideOffset > 0.8f) {
           bottomSheetBehavior.apply {
             BottomSheetBehavior.STATE_EXPANDED
             skipCollapsed = true
@@ -135,14 +143,28 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
               fadeOutView(binding.bottomSheet.ivCafeDetailHandle)
             }
           }
-          BottomSheetBehavior.STATE_HIDDEN -> {
-          }
-          BottomSheetBehavior.STATE_SETTLING -> {
-          }
+          BottomSheetBehavior.STATE_HIDDEN -> {}
+          BottomSheetBehavior.STATE_SETTLING -> {}
           BottomSheetBehavior.STATE_HALF_EXPANDED -> {
             fadeInView(binding.bottomSheet.ivCafeDetailHandle)
             fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
           }
+        }
+      }
+    })
+
+    // 바텀 시트가 화면을 꽉 채웠을 때, 뒤로가기 버튼을 누르면, 화면을 나가지 않고, 바텀시트가 축소 되도록
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+          // 바텀시트가 확장된 상태일 때 백 버튼을 누르면, 초기 상태(60% 높이)로 변경
+          bottomSheetBehavior.apply {
+            state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheetBehavior.skipCollapsed = true
+          }
+        } else {
+          isEnabled = false
+          requireActivity().onBackPressed()
         }
       }
     })
@@ -156,8 +178,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   private fun initView() {
     showFragment(TAG_CAFE_INFO_FRAGMENT)
+    updateCafeInfo(cafeDetailViewModel.cafeDetailInfo.value)
+  }
+
+  private fun updateCafeInfo(cafeDetailInfo: CafeDetailModel) {
     binding.bottomSheet.apply {
-      val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       tvCafeDetailName.text = cafeDetailInfo.name
       tvCafeDetailAddress.text = cafeDetailInfo.address1
     }
@@ -242,6 +267,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       }
 
       launch {
+        cafeDetailViewModel.cafeDetailInfo.collect { cafeDetailModel ->
+          updateCafeInfo(cafeDetailModel)
+          initNaverMap()
+        }
+      }
+
+      launch {
         mapViewModel.navigateToUpdateCafeEvent.collect {
           (activity as MainActivity).navigateToUpdateCafe(cafeDetailViewModel.cafeDetailInfo.value)
         }
@@ -261,14 +293,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   private fun initNaverMap() {
     naverMap?.apply {
       locationSource = this@MapFragment.locationSource
+      uiSettings.isScaleBarEnabled = false
       uiSettings.isZoomControlEnabled = false
+      val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       cameraPosition = CameraPosition(
-        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
+        LatLng(cafeDetailInfo.latitude!!, cafeDetailInfo.longitude!!),
         ZOOM_LEVEL,
       )
       setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
     }
-    moveToCameraToUserLocation()
   }
 
   private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
@@ -287,7 +320,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       marker.map = naverMap
     }
     marker.tag = data.id
-    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    val selectedCafeInfo = cafeDetailViewModel.cafeDetailInfo.value
+    if (marker.position.latitude == selectedCafeInfo.latitude && marker.position.longitude == selectedCafeInfo.longitude) {
+      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_40)
+    } else {
+      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    }
     marker.onClickListener = this@MapFragment
     markers.add(marker)
   }
@@ -295,14 +333,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
   private fun isPermissionsGranted(): Boolean {
     return permissions.all {
       ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
-    }
-  }
-
-  @SuppressLint("MissingPermission")
-  private fun moveToCameraToUserLocation() {
-    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-      val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
-      naverMap?.moveCamera(cameraUpdate)
     }
   }
 
@@ -333,6 +363,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   override fun onClick(overlay: Overlay): Boolean {
     val selectedPlaceModel = cafeDetailViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
+    for (marker in markers) {
+      if (marker.tag == overlay.tag) {
+        marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_40)
+      } else {
+        marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+      }
+    }
     if (selectedPlaceModel != null) {
       val cafeDetailInfo = CafeDetailModel(
         address1 = selectedPlaceModel.address1,
@@ -340,6 +377,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         id = selectedPlaceModel.id,
         image = selectedPlaceModel.image?.toUiModel(),
         info = selectedPlaceModel.info?.toUilModel(),
+        latitude = selectedPlaceModel.latitude,
+        longitude = selectedPlaceModel.longitude,
         menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )

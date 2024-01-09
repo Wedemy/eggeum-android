@@ -80,9 +80,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-    with(binding) {
-      mvSearch.onCreate(savedInstanceState)
-      mvSearch.getMapAsync(this@SearchFragment)
+    binding.mvSearch.apply {
+      onCreate(savedInstanceState)
+      getMapAsync(this@SearchFragment)
     }
     checkPermission()
     initListener()
@@ -178,6 +178,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         id = selectedPlaceModel.id,
         image = selectedPlaceModel.image?.toUiModel(),
         info = selectedPlaceModel.info?.toUilModel(),
+        latitude = selectedPlaceModel.latitude,
+        longitude = selectedPlaceModel.longitude,
         menu = selectedPlaceModel.menu?.toUiModel(),
         name = selectedPlaceModel.name,
       )
@@ -196,6 +198,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private fun initNaverMap() {
     naverMap?.apply {
       locationSource = this@SearchFragment.locationSource
+      uiSettings.isScaleBarEnabled = false
       uiSettings.isZoomControlEnabled = false
       cameraPosition = CameraPosition(
         LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),

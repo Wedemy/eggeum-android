@@ -25,6 +25,8 @@ internal fun PlaceEntity.toUiModel() =
     id = id,
     image = image?.toUiModel(),
     info = info?.toUilModel(),
+    latitude = latitude,
+    longitude = longitude,
     menu = menu?.toUiModel(),
     name = name,
   )

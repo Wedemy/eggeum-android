@@ -113,7 +113,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     val screenHeight = getScreenHeight()
     bottomSheetBehavior.apply {
       peekHeight = (screenHeight * 0.6).toInt()
-      state = BottomSheetBehavior.STATE_HALF_EXPANDED
+      // peekHeight 를 0.6 으로, state 를 collapsed 로 해야 0.6 만큼 차지함
+      // Half expanded 로 설정할 경우 0.6 이 무시됨
+      state = BottomSheetBehavior.STATE_COLLAPSED
     }
     bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
       override fun onSlide(bottomSheet: View, slideOffset: Float) {

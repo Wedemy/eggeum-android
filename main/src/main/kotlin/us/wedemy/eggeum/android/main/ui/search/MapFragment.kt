@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.PopupMenu
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +58,6 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
-// TODO 바텀 시트가 화면을 꽉 채웠을 때, 뒤로가기 버튼을 누르면 바텀시트가 축소 되도록
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -149,6 +149,22 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
             fadeInView(binding.bottomSheet.ivCafeDetailHandle)
             fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
           }
+        }
+      }
+    })
+
+    // 바텀 시트가 화면을 꽉 채웠을 때, 뒤로가기 버튼을 누르면, 화면을 나가지 않고, 바텀시트가 축소 되도록
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+          // 바텀시트가 확장된 상태일 때 백 버튼을 누르면, 초기 상태(60% 높이)로 변경
+          bottomSheetBehavior.apply {
+            state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheetBehavior.skipCollapsed = true
+          }
+        } else {
+          isEnabled = false
+          requireActivity().onBackPressed()
         }
       }
     })

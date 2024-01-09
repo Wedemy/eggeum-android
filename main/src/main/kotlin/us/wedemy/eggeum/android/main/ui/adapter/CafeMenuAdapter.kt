@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import us.wedemy.eggeum.android.common.extension.layoutInflater
 import us.wedemy.eggeum.android.common.base.BaseRecyclerViewAdapter
 import us.wedemy.eggeum.android.main.databinding.ItemCafeMenuBinding
-import us.wedemy.eggeum.android.main.model.ProductModel
+import us.wedemy.eggeum.android.common.model.ProductModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.CafeMenuViewHolder
 
 class CafeMenuAdapter : BaseRecyclerViewAdapter<ProductModel, ItemCafeMenuBinding>() {

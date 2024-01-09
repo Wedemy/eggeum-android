@@ -198,7 +198,7 @@
 
     <argument
       android:name="cafe_images"
-      app:argType="us.wedemy.eggeum.android.main.model.ImageModel" />
+      app:argType="us.wedemy.eggeum.android.common.model.ImageModel" />
 
     <argument
       android:name="current_position"

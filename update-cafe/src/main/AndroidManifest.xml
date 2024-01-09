@@ -11,7 +11,8 @@
       android:name=".ui.UpdateCafeActivity"
       android:exported="true"
       android:theme="@style/Theme.Eggeum.UpdateCafe"
-      android:windowSoftInputMode="adjustPan" />
+      android:windowSoftInputMode="adjustPan">
+    </activity>
   </application>
 
 </manifest>

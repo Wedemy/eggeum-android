@@ -10,7 +10,7 @@
 plugins {
   eggeum("android-library")
   alias(libs.plugins.androidx.navigation.safeargs)
-  id("kotlin-parcelize")
+  `kotlin-parcelize`
 }
 
 android {

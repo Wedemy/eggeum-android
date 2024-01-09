@@ -57,6 +57,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.MapViewModel
 
+// TODO 바텀 시트가 화면을 꽉 채웠을 때, 뒤로가기 버튼을 누르면 바텀시트가 축소 되도록
 @AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
 
@@ -303,7 +304,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
       marker.map = naverMap
     }
     marker.tag = data.id
-    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    val selectedCafeInfo = cafeDetailViewModel.cafeDetailInfo.value
+    if (marker.position.latitude == selectedCafeInfo.latitude && marker.position.longitude == selectedCafeInfo.longitude) {
+      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_40)
+    } else {
+      marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+    }
     marker.onClickListener = this@MapFragment
     markers.add(marker)
   }
@@ -339,7 +345,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     }
   }
 
-  // TODO 선택된 마커의 아이콘이 바뀌지 않음!
   override fun onClick(overlay: Overlay): Boolean {
     val selectedPlaceModel = cafeDetailViewModel.placeSnapshotList.value.firstOrNull { it.id == overlay.tag }
     for (marker in markers) {

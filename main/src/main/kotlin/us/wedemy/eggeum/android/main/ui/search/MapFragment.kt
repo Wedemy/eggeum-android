@@ -24,6 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.paging.ItemSnapshotList
 import androidx.paging.LoadState
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.naver.maps.geometry.LatLng
@@ -41,8 +42,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.util.fadeInView
 import us.wedemy.eggeum.android.common.util.fadeOutView
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
@@ -87,6 +88,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+    binding.mvSearch.apply {
+      onCreate(savedInstanceState)
+      getMapAsync(this@MapFragment)
+    }
     checkPermission()
     initCafeDetailBottomSheet()
     initView()
@@ -106,13 +112,13 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
     bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.root)
     val screenHeight = getScreenHeight()
     bottomSheetBehavior.apply {
-      peekHeight = (screenHeight * 0.5).toInt()
+      peekHeight = (screenHeight * 0.6).toInt()
       state = BottomSheetBehavior.STATE_HALF_EXPANDED
     }
     bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
         // 0 ~ 1
-        if (slideOffset > 0.6f) {
+        if (slideOffset > 0.8f) {
           bottomSheetBehavior.apply {
             BottomSheetBehavior.STATE_EXPANDED
             skipCollapsed = true
@@ -135,10 +141,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
               fadeOutView(binding.bottomSheet.ivCafeDetailHandle)
             }
           }
-          BottomSheetBehavior.STATE_HIDDEN -> {
-          }
-          BottomSheetBehavior.STATE_SETTLING -> {
-          }
+          BottomSheetBehavior.STATE_HIDDEN -> {}
+          BottomSheetBehavior.STATE_SETTLING -> {}
           BottomSheetBehavior.STATE_HALF_EXPANDED -> {
             fadeInView(binding.bottomSheet.ivCafeDetailHandle)
             fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
@@ -156,8 +160,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
 
   private fun initView() {
     showFragment(TAG_CAFE_INFO_FRAGMENT)
+    updateCafeInfo(cafeDetailViewModel.cafeDetailInfo.value)
+  }
+
+  private fun updateCafeInfo(cafeDetailInfo: CafeDetailModel) {
     binding.bottomSheet.apply {
-      val cafeDetailInfo = cafeDetailViewModel.cafeDetailInfo.value
       tvCafeDetailName.text = cafeDetailInfo.name
       tvCafeDetailAddress.text = cafeDetailInfo.address1
     }
@@ -239,6 +246,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
               addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
+      }
+
+      launch {
+        cafeDetailViewModel.cafeDetailInfo.collect { cafeDetailModel ->
+          updateCafeInfo(cafeDetailModel)
+        }
       }
 
       launch {

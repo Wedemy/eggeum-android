@@ -80,9 +80,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-    with(binding) {
-      mvSearch.onCreate(savedInstanceState)
-      mvSearch.getMapAsync(this@SearchFragment)
+    binding.mvSearch.apply {
+      onCreate(savedInstanceState)
+      getMapAsync(this@SearchFragment)
     }
     checkPermission()
     initListener()

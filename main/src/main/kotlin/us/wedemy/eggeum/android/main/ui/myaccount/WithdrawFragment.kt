@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentWithdrawBinding
 import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.viewmodel.WithdrawViewModel
@@ -61,6 +62,7 @@ class WithdrawFragment : BaseFragment<FragmentWithdrawBinding>() {
 
       launch {
         viewModel.navigateToLoginEvent.collect {
+          Toast.makeText(requireContext(), getString(R.string.withdraw_complete), Toast.LENGTH_SHORT).show()
           (activity as MainActivity).navigateToLogin()
         }
       }

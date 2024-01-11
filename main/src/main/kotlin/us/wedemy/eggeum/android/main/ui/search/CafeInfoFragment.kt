@@ -18,6 +18,7 @@ import us.wedemy.eggeum.android.common.model.InfoModel
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeInfoBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
+// TODO 블로그, 인스타, 웹사이트 를 클릭 했을 때, 웹 브라우저로 해당 url 이 실행 되도록
 @AndroidEntryPoint
 class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
   override fun getViewBinding() = FragmentCafeInfoBinding.inflate(layoutInflater)

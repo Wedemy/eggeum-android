@@ -11,4 +11,3 @@ package us.wedemy.eggeum.android.common.util
 fun String.toFormatDate(): String {
   return this.substring(2, 4) + "." + this.substring(5, 7) + "." + this.substring(8, 10)
 }
-

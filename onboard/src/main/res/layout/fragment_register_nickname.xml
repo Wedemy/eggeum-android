@@ -63,7 +63,6 @@
 
   </com.google.android.material.textfield.TextInputLayout>
 
-
   <View
     android:layout_width="0dp"
     android:layout_height="1dp"

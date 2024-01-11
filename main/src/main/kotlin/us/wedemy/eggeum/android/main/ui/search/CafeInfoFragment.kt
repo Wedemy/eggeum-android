@@ -7,14 +7,19 @@
 
 package us.wedemy.eggeum.android.main.ui.search
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.model.InfoModel
+import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeInfoBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
@@ -28,11 +33,24 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
+    initListener()
     initObserver()
   }
 
   private fun initView() {
     viewModel.cafeDetailInfo.value.info?.let { updateCafeInfo(it) }
+  }
+
+  private fun initListener() {
+    binding.tvCafeInfoSnsValue.setOnClickListener {
+      try {
+        val url = viewModel.cafeDetailInfo.value.info?.instagramUri
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+      } catch (e: ActivityNotFoundException) {
+        Toast.makeText(requireContext(), getString(R.string.invalid_address), Toast.LENGTH_SHORT).show()
+      }
+    }
   }
 
   private fun initObserver() {
@@ -74,7 +92,11 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
       tvCafeInfoMobileChargingValue.text = cafeDetailInfo.mobileCharging
       tvCafeInfoPhoneNumber.text = cafeDetailInfo.phone
       // TODO 텍스트를 클릭하면 웹 페이지가 열리도록
-      tvCafeInfoSnsValue.text = ""
+      if (cafeDetailInfo.instagramUri.isNullOrEmpty()) {
+        tvCafeInfoSnsValue.text = ""
+      } else {
+        tvCafeInfoSnsValue.text = getString(R.string.instagram)
+      }
     }
   }
 }

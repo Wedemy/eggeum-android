@@ -512,6 +512,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"

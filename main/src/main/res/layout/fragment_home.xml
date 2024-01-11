@@ -53,22 +53,20 @@
       app:tabIndicatorHeight="2dp"
       app:tabRippleColor="@null"
       app:tabSelectedTextColor="@color/gray_900"
+      app:tabTextAppearance="@style/EggeumTabItemText"
       app:tabTextColor="@color/gray_500">
 
       <com.google.android.material.tabs.TabItem
-        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cafe" />
 
       <com.google.android.material.tabs.TabItem
-        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/study_cafe" />
 
       <com.google.android.material.tabs.TabItem
-        style="@style/TextMMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/study_room" />

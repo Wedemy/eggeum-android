@@ -44,8 +44,8 @@
     android:id="@+id/iv_cafe_detail_option"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
     android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
     android:background="@drawable/ic_menu_filled_24"
     android:contentDescription="Cafe Menu Option"
     app:layout_constraintEnd_toEndOf="parent"
@@ -91,22 +91,20 @@
     app:tabIndicatorHeight="2dp"
     app:tabRippleColor="@null"
     app:tabSelectedTextColor="@color/gray_900"
+    app:tabTextAppearance="@style/EggeumTabItemText"
     app:tabTextColor="@color/gray_500">
 
     <com.google.android.material.tabs.TabItem
-      style="@style/TextMMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/Info" />
 
     <com.google.android.material.tabs.TabItem
-      style="@style/TextMMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/image" />
 
     <com.google.android.material.tabs.TabItem
-      style="@style/TextMMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/menu" />

@@ -257,6 +257,7 @@ class RegisterCafeViewModel @Inject constructor(
               businessHours = cafeBusinessHours.value,
               existsSmokingArea = cafeSmokeArea.value,
               existsWifi = cafeWifi.value,
+              existsOutlet = cafeOutlet.value,
               instagramUri = cafeInstagramUri.value,
               meetingRoomCount = cafeMeetingRoom.value,
               mobileCharging = cafeMobileCharging.value,

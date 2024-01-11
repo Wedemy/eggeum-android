@@ -66,14 +66,11 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
       } else if (cafeDetailInfo.existsWifi == false) {
         ivCafeInfoWifiValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
       }
-
-      // TODO API 에 콘센트 여부 파라미터 누락 -> 추가 요청
-      if (cafeDetailInfo.existsWifi == true) {
+      if (cafeDetailInfo.existsOutlet == true) {
         ivCafeInfoOutletValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_o_filled_16)
-      } else if (cafeDetailInfo.existsWifi == false) {
+      } else if (cafeDetailInfo.existsOutlet == false) {
         ivCafeInfoOutletValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
       }
-
       tvCafeInfoMobileChargingValue.text = cafeDetailInfo.mobileCharging
       tvCafeInfoPhoneNumber.text = cafeDetailInfo.phone
       // TODO 텍스트를 클릭하면 웹 페이지가 열리도록

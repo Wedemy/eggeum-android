@@ -33,9 +33,7 @@ internal fun PlaceEntity.toUiModel() =
 
 internal fun ImageEntity.toUiModel() =
   files?.let {
-    ImageModel(
-      files = it.map { it.toUiModel() },
-    )
+    ImageModel(files = it.map { it.toUiModel() })
   }
 
 internal fun InfoEntity.toUilModel() =
@@ -45,6 +43,7 @@ internal fun InfoEntity.toUilModel() =
     businessHours = businessHours,
     existsSmokingArea = existsSmokingArea,
     existsWifi = existsWifi,
+    existsOutlet = existsOutlet,
     instagramUri = instagramUri,
     meetingRoomCount = meetingRoomCount,
     mobileCharging = mobileCharging,
@@ -58,9 +57,7 @@ internal fun InfoEntity.toUilModel() =
 
 internal fun MenuEntity.toUiModel() =
   products?.let {
-    MenuModel(
-      products = it.map { it.toUiModel() },
-    )
+    MenuModel(products = it.map { it.toUiModel() })
   }
 
 internal fun ProductEntity.toUiModel() =

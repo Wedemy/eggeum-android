@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 
 public interface NoticeDataSource {
-  public suspend fun getNotice(noticeId: Int): NoticeResponse?
+  public suspend fun getNotice(noticeId: Long): NoticeResponse?
 
   public fun getNoticeList(
     search: String?,

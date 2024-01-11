@@ -8,6 +8,6 @@
 package us.wedemy.eggeum.android.domain.model
 
 public data class FileEntity(
-  val uploadFileId: Int?,
+  val uploadFileId: Long?,
   val url: String?,
 )

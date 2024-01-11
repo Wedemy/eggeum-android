@@ -41,18 +41,16 @@
         tools:text="일이삼사오육칠팔구십일이삼사오육" />
 
       <TextView
-        android:id="@+id/tv_notification_date"
+        android:id="@+id/tv_notification_created_date"
         style="@style/TextSRegular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="54dp"
         android:layout_marginBottom="12dp"
         android:textColor="@color/gray_400"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home_notice_title"
         tools:text="23.03.01" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

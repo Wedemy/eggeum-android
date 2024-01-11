@@ -24,7 +24,7 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <action
       android:id="@+id/action_fragment_home_to_fragment_notice"
@@ -32,7 +32,7 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </fragment>
 
@@ -56,7 +56,7 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </fragment>
 
@@ -132,7 +132,13 @@
     android:id="@+id/fragment_notice"
     android:name="us.wedemy.eggeum.android.main.ui.myaccount.NoticeFragment"
     android:label="NoticeFragment"
-    tools:layout="@layout/fragment_notice" />
+    tools:layout="@layout/fragment_notice">
+
+    <argument
+      android:name="notice_id"
+      app:argType="long" />
+
+  </fragment>
 
   <fragment
     android:id="@+id/fragment_setting"
@@ -232,7 +238,7 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </fragment>
 

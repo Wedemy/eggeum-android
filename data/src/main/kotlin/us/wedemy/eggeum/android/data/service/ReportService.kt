@@ -23,7 +23,7 @@ public interface ReportService {
 
   @GET("app/report/{reportId}")
   public suspend fun getReport(
-    @Path("reportId") reportId: Int,
+    @Path("reportId") reportId: Long,
   ): Response<ReportResponse>
 
   @GET("app/report/list")
@@ -40,7 +40,7 @@ public interface ReportService {
 
   @PATCH("app/report/update/{reportId}")
   public suspend fun updateReport(
-    @Path("reportId") reportId: Int,
+    @Path("reportId") reportId: Long,
     @Body updateReportRequest: UpdateReportRequest,
   ): Response<Unit>
 }

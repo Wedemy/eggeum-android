@@ -57,8 +57,10 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
         findNavController().safeNavigate(action)
       }
 
+      // 내 계정 화면에서 공지 화면으로 갈 때는 noticeId 를 건네줄 필요 없음
+      // long type 의 argument 는 nullable 이 불가능
       clMyAccountNotice.setOnClickListener {
-        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentNotice()
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentNotice(-1)
         findNavController().safeNavigate(action)
       }
     }

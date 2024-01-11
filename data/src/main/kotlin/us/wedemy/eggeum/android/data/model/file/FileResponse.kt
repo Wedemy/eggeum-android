@@ -16,7 +16,7 @@ public data class FileResponse(
   val name: String?,
 
   @SerialName("uploadFileId")
-  val uploadFileId: Int?,
+  val uploadFileId: Long?,
 
   @SerialName("url")
   val url: String?,

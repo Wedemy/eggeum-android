@@ -18,7 +18,7 @@ public interface NoticeRepository {
    *
    * @param noticeId 조회할 공지 아이디
    */
-  public suspend fun getNotice(noticeId: Int): NoticeEntity?
+  public suspend fun getNotice(noticeId: Long): NoticeEntity?
 
   /**
    * 조건에 맞는 공지 목록 조회

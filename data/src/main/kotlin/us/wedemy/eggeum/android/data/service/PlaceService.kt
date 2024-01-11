@@ -21,7 +21,7 @@ public interface PlaceService {
 
   @GET("app/place/{placeId}")
   public suspend fun getPlace(
-    @Path("placeId") placeId: Int,
+    @Path("placeId") placeId: Long,
   ): Response<PlaceResponse>
 
   @GET("app/place")

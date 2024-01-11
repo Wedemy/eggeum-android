@@ -23,23 +23,16 @@ class NoticeCardAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
     NoticeCardViewHolder(
       ItemNoticeCardBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      clickListener,
     )
 
   override fun onBindViewHolder(holder: NoticeCardViewHolder, position: Int) {
     val noticeItem = getItem(position)
     noticeItem?.let { notice ->
       holder.bind(notice)
-      holder.itemView.setOnClickListener {
-        onItemClickListener?.let { it(notice.id) }
+      holder.binding.root.setOnClickListener {
+        clickListener.onItemClick(noticeItem)
       }
     }
-  }
-
-  private var onItemClickListener: ((Int) -> Unit)? = null
-
-  fun setOnItemClickListener(listener: (Int) -> Unit) {
-    onItemClickListener = listener
   }
 
   companion object {

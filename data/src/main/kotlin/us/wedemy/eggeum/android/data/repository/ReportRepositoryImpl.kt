@@ -23,7 +23,7 @@ import us.wedemy.eggeum.android.domain.repository.ReportRepository
 public class ReportRepositoryImpl @Inject constructor(
   private val dataSource: ReportDataSource,
 ) : ReportRepository {
-  override suspend fun getReport(reportId: Int): ReportEntity? {
+  override suspend fun getReport(reportId: Long): ReportEntity? {
     return dataSource.getReport(reportId)?.toEntity()
   }
 
@@ -47,7 +47,7 @@ public class ReportRepositoryImpl @Inject constructor(
     dataSource.createReport(createReportEntity.toModel())
   }
 
-  public override suspend fun updateReport(reportId: Int, updateReportEntity: UpdateReportEntity) {
+  public override suspend fun updateReport(reportId: Long, updateReportEntity: UpdateReportEntity) {
     dataSource.updateReport(reportId, updateReportEntity.toModel())
   }
 }

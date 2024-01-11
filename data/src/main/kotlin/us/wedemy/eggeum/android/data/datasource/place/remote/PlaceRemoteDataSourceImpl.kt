@@ -29,7 +29,7 @@ import us.wedemy.eggeum.android.data.util.safeRequest
 public class PlaceRemoteDataSourceImpl @Inject constructor(
   private val service: PlaceService,
 ) : PlaceRemoteDataSource {
-  override suspend fun getPlace(placeId: Int): PlaceResponse? {
+  override suspend fun getPlace(placeId: Long): PlaceResponse? {
     return safeRequest {
       service.getPlace(placeId)
     }

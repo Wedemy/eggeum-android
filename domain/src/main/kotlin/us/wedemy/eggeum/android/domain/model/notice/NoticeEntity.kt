@@ -8,8 +8,10 @@
 package us.wedemy.eggeum.android.domain.model.notice
 
 public data class NoticeEntity(
-  val id: Int,
+  val id: Long,
   val title: String,
   val content: String,
   val viewCount: Int,
+  val createdDate: String,
+  val modifiedDate: String,
 )

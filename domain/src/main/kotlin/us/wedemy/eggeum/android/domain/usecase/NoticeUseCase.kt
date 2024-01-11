@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 public class GetNoticeUseCase @Inject constructor(
   private val repository: NoticeRepository,
 ) {
-  public suspend operator fun invoke(noticeId: Int): Result<NoticeEntity> =
+  public suspend operator fun invoke(noticeId: Long): Result<NoticeEntity> =
     runSuspendCatching {
       repository.getNotice(noticeId) ?: throw NoticeApiResponseIsNull
     }

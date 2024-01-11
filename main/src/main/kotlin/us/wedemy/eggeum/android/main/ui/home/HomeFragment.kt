@@ -27,6 +27,7 @@ import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentHomeBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.model.NoticeCardModel
 import us.wedemy.eggeum.android.main.ui.adapter.NewCafeAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeCardAdapter
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
@@ -63,8 +64,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
   private val noticeCardAdapter by lazy {
     NoticeCardAdapter(
       object : NoticeCardClickListener {
-        override fun onItemClick(position: Int) {
-          val action = HomeFragmentDirections.actionFragmentHomeToFragmentNotice()
+        override fun onItemClick(noticeItem: NoticeCardModel) {
+          val action = HomeFragmentDirections.actionFragmentHomeToFragmentNotice(noticeItem.id)
           findNavController().safeNavigate(action)
         }
       },

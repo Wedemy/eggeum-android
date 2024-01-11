@@ -10,7 +10,7 @@ package us.wedemy.eggeum.android.domain.model.place
 public data class PlaceEntity(
   val address1: String?,
   val address2: String?,
-  val id: Int,
+  val id: Long,
   val image: ImageEntity?,
   var info: InfoEntity?,
   val latitude: Double?,
@@ -38,7 +38,7 @@ public data class PlaceEntity(
     public fun of(
       address1: String? = null,
       address2: String? = null,
-      id: Int,
+      id: Long,
       image: ImageEntity? = null,
       info: InfoEntity? = null,
       latitude: Double? = null,

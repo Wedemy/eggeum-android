@@ -68,7 +68,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
     getCafeMenuListAndInfo(selectedCafeInfo.id)
   }
 
-  private fun getCafeMenuListAndInfo(placeId: Int) {
+  private fun getCafeMenuListAndInfo(placeId: Long) {
     viewModelScope.launch {
       val result = getPlaceUseCase(placeId)
       when {

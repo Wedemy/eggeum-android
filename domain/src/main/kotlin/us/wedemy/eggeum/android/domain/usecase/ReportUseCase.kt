@@ -21,7 +21,7 @@ import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 public class GetReportUseCase @Inject constructor(
   private val repository: ReportRepository,
 ) {
-  public suspend operator fun invoke(reportId: Int): Result<ReportEntity> =
+  public suspend operator fun invoke(reportId: Long): Result<ReportEntity> =
     runSuspendCatching {
       repository.getReport(reportId) ?: throw ReportApiResponseIsNull
     }

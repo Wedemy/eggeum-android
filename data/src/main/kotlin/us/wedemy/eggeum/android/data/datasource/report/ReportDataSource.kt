@@ -14,7 +14,7 @@ import us.wedemy.eggeum.android.data.model.report.UpdateReportRequest
 import us.wedemy.eggeum.android.data.model.report.ReportResponse
 
 public interface ReportDataSource {
-  public suspend fun getReport(reportId: Int): ReportResponse?
+  public suspend fun getReport(reportId: Long): ReportResponse?
 
   public fun getReportList(
     page: Int?,
@@ -24,5 +24,5 @@ public interface ReportDataSource {
 
   public suspend fun createReport(createReportRequest: CreateReportRequest)
 
-  public suspend fun updateReport(reportId: Int, updateReportRequest: UpdateReportRequest)
+  public suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest)
 }

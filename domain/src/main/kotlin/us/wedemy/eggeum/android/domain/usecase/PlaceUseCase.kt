@@ -21,7 +21,7 @@ import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 public class GetPlaceUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
-  public suspend operator fun invoke(placeId: Int): Result<PlaceEntity> =
+  public suspend operator fun invoke(placeId: Long): Result<PlaceEntity> =
     runSuspendCatching {
       repository.getPlace(placeId) ?: throw PlaceApiResponseIsNull
     }

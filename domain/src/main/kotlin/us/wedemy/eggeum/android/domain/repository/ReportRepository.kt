@@ -18,7 +18,7 @@ public interface ReportRepository {
   /**
    * 사용자 문의 단건 조회
    */
-  public suspend fun getReport(reportId: Int): ReportEntity?
+  public suspend fun getReport(reportId: Long): ReportEntity?
 
   /**
    * 사용자 문의 목록 조회
@@ -49,7 +49,7 @@ public interface ReportRepository {
    * @param title 문의 제목
    */
   public suspend fun updateReport(
-    reportId: Int,
+    reportId: Long,
     updateReportEntity: UpdateReportEntity,
   )
 }

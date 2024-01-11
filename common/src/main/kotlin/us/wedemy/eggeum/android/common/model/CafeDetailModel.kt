@@ -14,7 +14,7 @@ import kotlinx.parcelize.Parcelize
 data class CafeDetailModel(
   val address1: String? = "",
   val address2: String? = "",
-  val id: Int = -1,
+  val id: Long = -1,
   val image: ImageModel? = ImageModel(),
   val info: InfoModel? = InfoModel(),
   val latitude: Double? = null,

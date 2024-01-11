@@ -11,54 +11,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.ProfileImage
 
-// @JsonClass(generateAdapter = true)
-// public data class User(
-//   @Json(name = "agreeMarketing")
-//   val agreeMarketing: Boolean,
-//
-//   @Json(name = "createdBy")
-//   val createdBy: Int,
-//
-//   @Json(name = "createdDate")
-//   val createdDate: String,
-//
-//   @Json(name = "email")
-//   val email: String,
-//
-//   @Json(name = "id")
-//   val id: Int,
-//
-//   @Json(name = "modifiedBy")
-//   val modifiedBy: Int,
-//
-//   @Json(name = "modifiedDate")
-//   val modifiedDate: String,
-//
-//   @Json(name = "name")
-//   val name: String,
-//
-//   @Json(name = "nickname")
-//   val nickname: String,
-//
-//   @Json(name = "password")
-//   val password: String,
-//
-//   @Json(name = "phoneNumber")
-//   val phoneNumber: String,
-//
-//   @Json(name = "profileImage")
-//   val profileImage: ProfileImage,
-//
-//   @Json(name = "roles")
-//   val roles: List<String>,
-//
-//   @Json(name = "snsId")
-//   val snsId: String,
-//
-//   @Json(name = "status")
-//   val status: String,
-// )
-
 @Serializable
 public data class User(
   @SerialName("agreeMarketing")
@@ -74,7 +26,7 @@ public data class User(
   val email: String,
 
   @SerialName("id")
-  val id: Int,
+  val id: Long,
 
   @SerialName("modifiedBy")
   val modifiedBy: Int,

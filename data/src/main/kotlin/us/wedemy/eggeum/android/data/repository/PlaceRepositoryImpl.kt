@@ -24,7 +24,7 @@ public class PlaceRepositoryImpl @Inject constructor(
   private val remoteDataSource: PlaceRemoteDataSource,
   private val localDataSource: PlaceLocalDataSource,
 ) : PlaceRepository {
-  override suspend fun getPlace(placeId: Int): PlaceEntity? {
+  override suspend fun getPlace(placeId: Long): PlaceEntity? {
     return remoteDataSource.getPlace(placeId)?.toEntity()
   }
 

@@ -15,7 +15,7 @@
 package us.wedemy.eggeum.android.main.model
 
 data class NoticeCardModel(
-  val id: Int,
+  val id: Long,
   val title: String,
   val date: String,
 )

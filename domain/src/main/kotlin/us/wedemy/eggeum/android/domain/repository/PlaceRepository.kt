@@ -20,7 +20,7 @@ public interface PlaceRepository {
    * @param placeId 조회할 장소 아아디
    */
   public suspend fun getPlace(
-    placeId: Int,
+    placeId: Long,
   ): PlaceEntity?
 
   /**

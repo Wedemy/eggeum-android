@@ -12,7 +12,7 @@ import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 public data class UserInfoEntity(
   val agreeMarketing: Boolean,
   val email: String,
-  val id: Int,
+  val id: Long,
   val name: String?,
   val nickname: String,
   val profileImageEntity: ProfileImageEntity?,

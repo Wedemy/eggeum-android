@@ -23,7 +23,7 @@ public data class PlaceResponse(
 
   @PrimaryKey(autoGenerate = false)
   @SerialName("id")
-  val id: Int,
+  val id: Long,
 
   @SerialName("image")
   val image: Image?,

@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class NoticeResponse(
   @SerialName("id")
-  val id: Int,
+  val id: Long,
 
   @SerialName("viewCount")
   val viewCount: Int,

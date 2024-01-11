@@ -21,7 +21,7 @@ import us.wedemy.eggeum.android.data.util.safeRequest
 public class NoticeDataSourceImpl @Inject constructor(
   private val service: NoticeService,
 ) : NoticeDataSource {
-  override suspend fun getNotice(noticeId: Int): NoticeResponse? {
+  override suspend fun getNotice(noticeId: Long): NoticeResponse? {
     return safeRequest {
       service.getNotice(noticeId)
     }

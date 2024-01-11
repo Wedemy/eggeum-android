@@ -7,6 +7,8 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.listener
 
+import us.wedemy.eggeum.android.main.model.NoticeCardModel
+
 interface NoticeCardClickListener {
-  fun onItemClick(position: Int)
+  fun onItemClick(noticeItem: NoticeCardModel)
 }

@@ -16,12 +16,12 @@ public data class UpsertPlaceEntity(
   val longitude: Double?,
   val menu: MenuEntity?,
   val name: String?,
-  val placeId: Int?,
+  val placeId: Long?,
   val remarks: String?,
   val type: String?,
 ) {
   public companion object {
-    public fun of(info: InfoEntity, placeId: Int, name: String?): UpsertPlaceEntity {
+    public fun of(info: InfoEntity, placeId: Long, name: String?): UpsertPlaceEntity {
       return UpsertPlaceEntity(
         address1 = null,
         address2 = null,

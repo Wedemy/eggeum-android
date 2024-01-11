@@ -18,7 +18,7 @@ public interface NoticeService {
 
   @GET("app/notice/{noticeId}")
   public suspend fun getNotice(
-    @Path("noticeId") noticeId: Int,
+    @Path("noticeId") noticeId: Long,
   ): Response<NoticeResponse>
 
   @GET("app/notice/all")

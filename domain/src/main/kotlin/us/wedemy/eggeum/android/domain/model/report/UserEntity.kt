@@ -14,7 +14,7 @@ public data class UserEntity(
   val createdBy: Int,
   val createdDate: String,
   val email: String,
-  val id: Int,
+  val id: Long,
   val modifiedBy: Int,
   val modifiedDate: String,
   val name: String,

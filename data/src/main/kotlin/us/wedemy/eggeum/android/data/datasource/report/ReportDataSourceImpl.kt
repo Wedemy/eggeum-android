@@ -24,7 +24,7 @@ public class ReportDataSourceImpl @Inject constructor(
   private val service: ReportService,
 ) : ReportDataSource {
 
-  public override suspend fun getReport(reportId: Int): ReportResponse? {
+  public override suspend fun getReport(reportId: Long): ReportResponse? {
     return safeRequest {
       service.getReport(reportId)
     }
@@ -54,7 +54,7 @@ public class ReportDataSourceImpl @Inject constructor(
     }
   }
 
-  public override suspend fun updateReport(reportId: Int, updateReportRequest: UpdateReportRequest) {
+  public override suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest) {
     safeRequest {
       service.updateReport(
         reportId = reportId,

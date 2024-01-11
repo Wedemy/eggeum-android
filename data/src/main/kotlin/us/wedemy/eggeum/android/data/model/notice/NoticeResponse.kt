@@ -23,4 +23,10 @@ public data class NoticeResponse(
 
   @SerialName("content")
   val content: String,
+
+  @SerialName("createdDate")
+  val createdDate: String,
+
+  @SerialName("modifiedDate")
+  val modifiedDate: String,
 )

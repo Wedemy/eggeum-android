@@ -26,7 +26,7 @@ class NoticeCardViewHolder(
   override fun bind(item: NoticeCardModel) {
     binding.apply {
       tvHomeNoticeTitle.text = item.title
-      tvNotificationDate.text = item.date
+      tvNotificationCreatedDate.text = item.date
     }
   }
 }

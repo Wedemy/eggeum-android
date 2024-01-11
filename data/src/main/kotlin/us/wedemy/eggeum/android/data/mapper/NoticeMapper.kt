@@ -18,6 +18,8 @@ internal fun NoticeResponse.toEntity() =
     title = title,
     content = content,
     viewCount = viewCount,
+    createdDate = createdDate,
+    modifiedDate = modifiedDate,
   )
 
 internal fun NoticeListResponse.toEntity() =

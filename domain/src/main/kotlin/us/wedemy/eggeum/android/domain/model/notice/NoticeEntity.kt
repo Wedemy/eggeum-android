@@ -12,4 +12,6 @@ public data class NoticeEntity(
   val title: String,
   val content: String,
   val viewCount: Int,
+  val createdDate: String,
+  val modifiedDate: String,
 )

@@ -23,7 +23,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeListItemViewHol
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeSearchViewHolder
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeTitleViewHolder
 import us.wedemy.eggeum.android.main.ui.myaccount.NoticeItemClickListener
-import us.wedemy.eggeum.android.main.ui.myaccount.NoticeUiModel
+import us.wedemy.eggeum.android.main.model.NoticeUiModel
 
 class NoticeAdapter(private var clickListener: NoticeItemClickListener) :
   ListAdapter<NoticeUiModel, RecyclerView.ViewHolder>(NoticeItemDiffCallback) {

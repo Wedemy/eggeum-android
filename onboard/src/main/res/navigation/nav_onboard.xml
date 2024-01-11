@@ -37,9 +37,9 @@
 
   <fragment
     android:id="@+id/fragment_service_terms"
-    android:name="us.wedemy.eggeum.android.onboard.ui.ServiceTermsFragment"
+    android:name="us.wedemy.eggeum.android.onboard.ui.OnboardServiceTermsFragment"
     android:label="ServiceTermsFragment"
-    tools:layout="@layout/fragment_service_terms" />
+    tools:layout="@layout/fragment_onboard_service_terms" />
 
   <fragment
     android:id="@+id/fragment_register_nickname"

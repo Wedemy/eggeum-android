@@ -50,7 +50,7 @@
   <string name="notice">공지사항</string>
   <string name="customer_support">고객지원</string>
   <string name="privacy_policy">개인정보 처리 방침</string>
-  <string name="terms_of_service">서비스 이용약관</string>
+  <string name="service_terms">서비스 이용약관</string>
   <string name="version_info">버전 정보</string>
   <string name="setting">설정</string>
   <string name="nickname">닉네임 <font color="#14b8a6">*</font></string>

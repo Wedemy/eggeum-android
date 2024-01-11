@@ -47,11 +47,6 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
         findNavController().safeNavigate(action)
       }
 
-      clMyAccountSetting.setOnClickListener {
-        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
-        findNavController().safeNavigate(action)
-      }
-
       clMyAccountCustomerSupport.setOnClickListener {
         val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentReport()
         findNavController().safeNavigate(action)
@@ -61,6 +56,21 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
       // long type 의 argument 는 nullable 이 불가능
       clMyAccountNotice.setOnClickListener {
         val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentNotice(-1)
+        findNavController().safeNavigate(action)
+      }
+
+      clMyAccountServiceTerms.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentServiceTerms()
+        findNavController().safeNavigate(action)
+      }
+
+      clMyAccountPrivacyPolicy.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentPrivacyPolicy()
+        findNavController().safeNavigate(action)
+      }
+
+      clMyAccountSetting.setOnClickListener {
+        val action = MyAccountFragmentDirections.actionFragmentMyAccountToFragmentSetting()
         findNavController().safeNavigate(action)
       }
     }

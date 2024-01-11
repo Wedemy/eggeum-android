@@ -149,7 +149,7 @@
       </androidx.constraintlayout.widget.ConstraintLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_my_account_terms_of_service"
+        android:id="@+id/cl_my_account_service_terms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -158,13 +158,13 @@
         app:layout_constraintTop_toBottomOf="@id/cl_my_account_customer_support">
 
         <TextView
-          android:id="@+id/tv_my_account_terms_of_service"
+          android:id="@+id/tv_my_account_service_terms"
           style="@style/TextMMedium"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
           android:layout_marginTop="16dp"
-          android:text="@string/terms_of_service"
+          android:text="@string/service_terms"
           android:textColor="@color/gray_900"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
@@ -175,13 +175,13 @@
           android:layout_marginEnd="16dp"
           android:contentDescription="Right Arrow"
           android:src="@drawable/ic_arrow_right_outlined_16"
-          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_terms_of_service"
+          app:layout_constraintBottom_toBottomOf="@id/tv_my_account_service_terms"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@id/tv_my_account_terms_of_service"
+          app:layout_constraintTop_toTopOf="@id/tv_my_account_service_terms"
           tools:ignore="HardcodedText" />
 
         <View
-          android:id="@+id/line_my_account_terms_of_service"
+          android:id="@+id/line_my_account_service_terms"
           android:layout_width="0dp"
           android:layout_height="1dp"
           android:layout_marginHorizontal="16dp"
@@ -189,7 +189,7 @@
           android:background="@color/gray_100"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/tv_my_account_terms_of_service" />
+          app:layout_constraintTop_toBottomOf="@id/tv_my_account_service_terms" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -199,7 +199,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_my_account_terms_of_service">
+        app:layout_constraintTop_toBottomOf="@id/cl_my_account_service_terms">
 
         <TextView
           android:id="@+id/tv_my_account_privacy_policy"

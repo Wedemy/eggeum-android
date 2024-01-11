@@ -16,6 +16,7 @@ import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentNoticeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.model.NoticeModel
+import us.wedemy.eggeum.android.main.model.NoticeUiModel
 import us.wedemy.eggeum.android.main.viewmodel.NoticeViewModel
 
 @Suppress("unused")

@@ -11,10 +11,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import us.wedemy.eggeum.android.common.base.BaseFragment
-import us.wedemy.eggeum.android.onboard.databinding.FragmentServiceTermsBinding
+import us.wedemy.eggeum.android.onboard.databinding.FragmentOnboardServiceTermsBinding
 
-class ServiceTermsFragment : BaseFragment<FragmentServiceTermsBinding>() {
-  override fun getViewBinding() = FragmentServiceTermsBinding.inflate(layoutInflater)
+class OnboardServiceTermsFragment : BaseFragment<FragmentOnboardServiceTermsBinding>() {
+  override fun getViewBinding() = FragmentOnboardServiceTermsBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

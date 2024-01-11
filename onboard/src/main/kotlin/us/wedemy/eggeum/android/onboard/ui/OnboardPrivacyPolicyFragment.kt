@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.BuildConfig
-import us.wedemy.eggeum.android.onboard.databinding.FragmentOnboardServiceTermsBinding
+import us.wedemy.eggeum.android.onboard.databinding.FragmentOnboardPrivacyPolicyBinding
 
 @AndroidEntryPoint
-class OnboardServiceTermsFragment : BaseFragment<FragmentOnboardServiceTermsBinding>() {
-  override fun getViewBinding() = FragmentOnboardServiceTermsBinding.inflate(layoutInflater)
+class OnboardPrivacyPolicyFragment : BaseFragment<FragmentOnboardPrivacyPolicyBinding>() {
+  override fun getViewBinding() = FragmentOnboardPrivacyPolicyBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -28,19 +28,19 @@ class OnboardServiceTermsFragment : BaseFragment<FragmentOnboardServiceTermsBind
   }
 
   private fun initView() {
-    binding.wvServiceTerms.apply {
+    binding.wvPrivacyPolicy.apply {
       webViewClient = WebViewClient()
       webChromeClient = WebChromeClient()
       // 자바 스크립트 허용
       settings.javaScriptEnabled = true
       // 로컬 스토리지 허용
       settings.domStorageEnabled = true
-      loadUrl(BuildConfig.SERVICE_TERMS_WEB_VIEW_URL)
+      loadUrl(BuildConfig.PRIVACY_POLICY_WEB_VIEW_URL)
     }
   }
 
   private fun initListener() {
-    binding.ivServiceTermsClose.setOnClickListener {
+    binding.ivPrivacyPolicyClose.setOnClickListener {
       if (!findNavController().navigateUp()) {
         requireActivity().finish()
       }
@@ -51,25 +51,25 @@ class OnboardServiceTermsFragment : BaseFragment<FragmentOnboardServiceTermsBind
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
       super.onPageStarted(view, url, favicon)
-      binding.pbServiceTermsContentLoading.show()
+      binding.pbPrivacyPolicyContentLoading.show()
     }
 
     override fun onPageFinished(view: WebView?, url: String?) {
       super.onPageFinished(view, url)
-      binding.pbServiceTermsContentLoading.hide()
+      binding.pbPrivacyPolicyContentLoading.hide()
     }
   }
 
   inner class WebChromeClient : android.webkit.WebChromeClient() {
     override fun onProgressChanged(view: WebView?, newProgress: Int) {
       super.onProgressChanged(view, newProgress)
-      binding.pbServiceTermsContentLoading.progress = newProgress
+      binding.pbPrivacyPolicyContentLoading.progress = newProgress
     }
   }
 
   // WebView 를 Fragment 에서 사용시 destroy 처리 필요
   override fun onDestroyView() {
-    binding.wvServiceTerms.destroy()
+    binding.wvPrivacyPolicy.destroy()
     super.onDestroyView()
   }
 }

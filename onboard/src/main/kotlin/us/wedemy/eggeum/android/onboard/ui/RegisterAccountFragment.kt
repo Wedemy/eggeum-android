@@ -65,17 +65,17 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
       }
 
       tvAgreeToServiceTermsDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardServiceTerms()
         findNavController().safeNavigate(action)
       }
 
       tvAgreeToCollectPersonalInfoDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyPolicy()
         findNavController().safeNavigate(action)
       }
 
       tvAgreeToProvidePersonalInfoTo3rdPartyDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyPolicy()
         findNavController().safeNavigate(action)
       }
 

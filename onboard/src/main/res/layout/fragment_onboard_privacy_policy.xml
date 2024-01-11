@@ -5,8 +5,7 @@
   ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -14,7 +13,7 @@
   tools:ignore="HardcodedText">
 
   <com.google.android.material.appbar.MaterialToolbar
-    android:id="@+id/tb_service_terms"
+    android:id="@+id/tb_privacy_policy"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
@@ -26,11 +25,11 @@
       android:layout_height="match_parent">
 
       <TextView
-        android:id="@+id/tv_service_terms_title"
+        android:id="@+id/tv_privacy_policy_title"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/service_terms"
+        android:text="@string/privacy_policy"
         android:textColor="@color/gray_900"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
       <ImageView
-        android:id="@+id/iv_service_terms_close"
+        android:id="@+id/iv_privacy_policy_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -53,35 +52,35 @@
   </com.google.android.material.appbar.MaterialToolbar>
 
   <WebView
-    android:id="@+id/wv_service_terms"
+    android:id="@+id/wv_privacy_policy"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="@id/line_service_terms"
+    app:layout_constraintBottom_toBottomOf="@id/line_privacy_policy"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_service_terms" />
+    app:layout_constraintTop_toBottomOf="@id/tb_privacy_policy" />
 
   <androidx.core.widget.ContentLoadingProgressBar
-    android:id="@+id/pb_service_terms_content_loading"
+    android:id="@+id/pb_privacy_policy_content_loading"
     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
     android:layout_width="0dp"
     android:layout_height="2dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_service_terms" />
+    app:layout_constraintTop_toBottomOf="@id/tb_privacy_policy" />
 
   <View
-    android:id="@+id/line_service_terms"
+    android:id="@+id/line_privacy_policy"
     android:layout_width="0dp"
     android:layout_height="1dp"
     android:layout_marginBottom="16dp"
     android:background="@color/gray_200"
-    app:layout_constraintBottom_toTopOf="@id/btn_service_terms_check"
+    app:layout_constraintBottom_toTopOf="@id/btn_privacy_policy_check"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
   <Button
-    android:id="@+id/btn_service_terms_check"
+    android:id="@+id/btn_privacy_policy_check"
     style="@style/Widget.Eggeum.Button"
     android:layout_width="0dp"
     android:layout_marginHorizontal="16dp"

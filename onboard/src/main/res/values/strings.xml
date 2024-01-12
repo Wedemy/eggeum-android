@@ -9,6 +9,7 @@
   <string name="nickname_setting">닉네임 설정</string>
   <string name="register_account">계정 등록</string>
   <string name="service_terms">서비스 이용약관</string>
+  <string name="privacy_policy">개인정보 처리 방침</string>
   <string name="detail"><u>내용보기</u></string>
   <string name="agree_to_service_terms">서비스 이용약관 동의 <font color="#6B7280">(필수)</font></string>
   <string name="agree_to_collect_personal_info">개인정보 수집 이용 동의 <font color="#6B7280">(필수)</font></string>
@@ -26,4 +27,6 @@
   <string name="temp">최소 2자 이상 입력해주세요.</string>
   <string name="empty_text_error">닉네임을 입력해주세요.</string>
   <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>
+  <string name="finish">완료</string>
+  <string name="sign_up_complete">회원가입이 완료되었습니다.</string>
 </resources>

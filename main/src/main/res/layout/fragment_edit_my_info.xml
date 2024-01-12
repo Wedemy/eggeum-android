@@ -22,6 +22,7 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
+      android:id="@+id/tv_edit_my_info_title"
       style="@style/Title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

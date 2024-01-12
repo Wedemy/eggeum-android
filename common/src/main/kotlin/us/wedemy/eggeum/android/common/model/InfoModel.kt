@@ -17,6 +17,7 @@ data class InfoModel(
   val businessHours: List<String>? = emptyList(),
   val existsSmokingArea: Boolean? = null,
   val existsWifi: Boolean? = null,
+  val existsOutlet: Boolean? = null,
   val instagramUri: String? = "",
   val meetingRoomCount: Int? = null,
   val mobileCharging: String? = "",

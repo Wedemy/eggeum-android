@@ -77,6 +77,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
 
       launch {
         viewModel.navigateToMainEvent.collect {
+          Toast.makeText(requireContext(), getString(R.string.sign_up_complete), Toast.LENGTH_SHORT).show()
           (activity as OnboardActivity).navigateToMain()
         }
       }

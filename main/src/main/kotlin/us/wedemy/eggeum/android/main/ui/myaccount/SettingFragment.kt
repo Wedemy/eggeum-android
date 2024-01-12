@@ -9,6 +9,7 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSettingBinding
 import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.viewmodel.SettingViewModel
@@ -55,6 +57,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     repeatOnStarted {
       launch {
         viewModel.navigateToLoginEvent.collect {
+          Toast.makeText(requireContext(), getString(R.string.logout_complete), Toast.LENGTH_SHORT).show()
           (activity as MainActivity).navigateToLogin()
         }
       }

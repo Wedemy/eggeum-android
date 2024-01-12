@@ -115,4 +115,8 @@
     <item name="cornerSizeBottomLeft">0dp</item>
   </style>
 
+  <style name="EggeumTabItemText" parent="@android:style/TextAppearance.Widget.TabWidget">
+    <item name="android:textAppearance">@style/TextMSemiBold</item>
+  </style>
+
 </resources>

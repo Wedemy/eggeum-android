@@ -20,6 +20,7 @@ import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.databinding.FragmentRegisterAccountBinding
 import us.wedemy.eggeum.android.onboard.viewmodel.OnBoardViewModel
 
+// TODO 개인정보 제3자 제공 동의도 웹뷰 화면을 추가해야 함
 @AndroidEntryPoint
 class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
   override fun getViewBinding() = FragmentRegisterAccountBinding.inflate(layoutInflater)
@@ -65,17 +66,17 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
       }
 
       tvAgreeToServiceTermsDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardServiceTerms()
         findNavController().safeNavigate(action)
       }
 
       tvAgreeToCollectPersonalInfoDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyPolicy()
         findNavController().safeNavigate(action)
       }
 
       tvAgreeToProvidePersonalInfoTo3rdPartyDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentServiceTerms()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyPolicy()
         findNavController().safeNavigate(action)
       }
 

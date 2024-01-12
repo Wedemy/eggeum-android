@@ -76,8 +76,16 @@ class OnBoardViewModel @Inject constructor(
     _agreeToServiceTerms.value = !agreeToServiceTerms.value
   }
 
+  fun checkCbAgreeToServiceTerms() {
+    _agreeToServiceTerms.value = true
+  }
+
   fun setCbAgreeToCollectPersonalInfo() {
     _agreeToCollectPersonalInfo.value = !agreeToCollectPersonalInfo.value
+  }
+
+  fun checkCbAgreeToCollectPersonalInfo() {
+    _agreeToCollectPersonalInfo.value = true
   }
 
   fun setCbAgreeToProvidePersonalInfoTo3rdParty() {

@@ -27,6 +27,9 @@ public data class Info(
   @SerialName("existsWifi")
   val existsWifi: Boolean?,
 
+  @SerialName("existsOutlet")
+  val existsOutlet: Boolean?,
+
   @SerialName("instagramUri")
   val instagramUri: String?,
 

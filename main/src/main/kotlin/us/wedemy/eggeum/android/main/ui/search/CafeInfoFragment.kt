@@ -118,6 +118,21 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
       } else {
         tvCafeInfoWebsiteValue.text = getString(R.string.website)
       }
+      if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.instagramUri.isNullOrEmpty()) {
+        tvCafeInfoDotFirst.visibility = View.VISIBLE
+      } else {
+        tvCafeInfoDotFirst.visibility = View.INVISIBLE
+      }
+      if (!cafeDetailInfo.instagramUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty()) {
+        tvCafeInfoDotSecond.visibility = View.VISIBLE
+      } else {
+        tvCafeInfoDotSecond.visibility = View.INVISIBLE
+      }
+      if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty() && cafeDetailInfo.instagramUri.isNullOrEmpty()) {
+        tvCafeInfoDotThird.visibility = View.VISIBLE
+      } else {
+        tvCafeInfoDotThird.visibility = View.INVISIBLE
+      }
     }
   }
 }

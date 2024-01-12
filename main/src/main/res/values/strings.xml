@@ -41,7 +41,7 @@
   <string name="blog">블로그</string>
   <string name="instagram">인스타그램</string>
   <string name="website">웹사이트</string>
-  <string name="sns_list"><font color="#14b8a6">블로그</font><font color="#e5e7eb">•</font><font color="#14b8a6">인스타그램</font><font color="#e5e7eb">•</font><font color="#14b8a6">웹사이트</font></string>
+  <string name="dot">•</string>
   <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
   <string name="share">share</string>
   <string name="cafe_image_report">사진 신고하기</string>

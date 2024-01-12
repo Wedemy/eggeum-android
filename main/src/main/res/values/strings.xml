@@ -102,5 +102,6 @@
   <string name="instagram">인스타그램</string>
   <string name="invalid_address">올바른 주소가 아닙니다</string>
   <string name="withdraw_complete">회원 탈퇴가 완료되었습니다.</string>
+  <string name="logout_complete">로그아웃이 완료되었습니다.</string>
 
 </resources>

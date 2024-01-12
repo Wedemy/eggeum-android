@@ -11,15 +11,19 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.BuildConfig
 import us.wedemy.eggeum.android.onboard.databinding.FragmentOnboardPrivacyPolicyBinding
+import us.wedemy.eggeum.android.onboard.viewmodel.OnBoardViewModel
 
 @AndroidEntryPoint
 class OnboardPrivacyPolicyFragment : BaseFragment<FragmentOnboardPrivacyPolicyBinding>() {
   override fun getViewBinding() = FragmentOnboardPrivacyPolicyBinding.inflate(layoutInflater)
+
+  private val viewModel by activityViewModels<OnBoardViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -40,9 +44,16 @@ class OnboardPrivacyPolicyFragment : BaseFragment<FragmentOnboardPrivacyPolicyBi
   }
 
   private fun initListener() {
-    binding.ivPrivacyPolicyClose.setOnClickListener {
-      if (!findNavController().navigateUp()) {
-        requireActivity().finish()
+    with(binding) {
+      ivPrivacyPolicyClose.setOnClickListener {
+        if (!findNavController().navigateUp()) {
+          requireActivity().finish()
+        }
+      }
+
+      btnPrivacyPolicyCheck.setOnClickListener {
+        viewModel.checkCbAgreeToCollectPersonalInfo()
+        findNavController().navigateUp()
       }
     }
   }

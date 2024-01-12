@@ -12,10 +12,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.model.InfoModel
@@ -61,6 +63,7 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
       val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
       startActivity(intent)
     } catch (e: ActivityNotFoundException) {
+      Timber.e("Invalid address or no available browser: $uri")
       Toast.makeText(requireContext(), getString(R.string.invalid_address), Toast.LENGTH_SHORT).show()
     }
   }
@@ -77,62 +80,67 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
 
   private fun updateCafeInfo(cafeDetailInfo: InfoModel) {
     binding.apply {
-      tvCafeInfoAreaValue.text = if (cafeDetailInfo.areaSize.isNullOrEmpty()) ""
-      else cafeDetailInfo.areaSize + "m²"
+      tvCafeInfoAreaValue.text = formatAreaSize(cafeDetailInfo.areaSize)
       tvCafeInfoMeetingRoomValue.text = (cafeDetailInfo.meetingRoomCount ?: "").toString()
       tvCafeInfoMultiSeatValue.text = (cafeDetailInfo.multiSeatCount ?: "").toString()
       tvCafeInfoSingleSeatValue.text = (cafeDetailInfo.singleSeatCount ?: "").toString()
-      // TODO 이거 확장 축소 가능한 요일별 리스트를 구현해야 함 (디자인 필요)
+      // TODO: 확장 축소 가능한 요일별 리스트 구현
       tvCafeInfoBusinessHoursValue.text = "매일 09:00 - 21:00"
       tvCafeInfoRestRoomValue.text = cafeDetailInfo.restRoom
       tvCafeInfoParkingValue.text = cafeDetailInfo.parking
-      if (cafeDetailInfo.existsSmokingArea == true) {
-        ivCafeInfoSmokingValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_o_filled_16)
-      } else if (cafeDetailInfo.existsSmokingArea == false) {
-        ivCafeInfoSmokingValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
-      }
-      if (cafeDetailInfo.existsWifi == true) {
-        ivCafeInfoWifiValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_o_filled_16)
-      } else if (cafeDetailInfo.existsWifi == false) {
-        ivCafeInfoWifiValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
-      }
-      if (cafeDetailInfo.existsOutlet == true) {
-        ivCafeInfoOutletValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_o_filled_16)
-      } else if (cafeDetailInfo.existsOutlet == false) {
-        ivCafeInfoOutletValue.setImageResource(us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16)
-      }
+      updateSmokingAreaIcon(cafeDetailInfo.existsSmokingArea)
+      updateWifiIcon(cafeDetailInfo.existsWifi)
+      updateOutletIcon(cafeDetailInfo.existsOutlet)
       tvCafeInfoMobileChargingValue.text = cafeDetailInfo.mobileCharging
       tvCafeInfoPhoneNumber.text = cafeDetailInfo.phone
-      if (cafeDetailInfo.blogUri.isNullOrEmpty()) {
-        tvCafeInfoBlogValue.text = ""
-      } else {
-        tvCafeInfoBlogValue.text = getString(R.string.blog)
-      }
-      if (cafeDetailInfo.instagramUri.isNullOrEmpty()) {
-        tvCafeInfoInstagramValue.text = ""
-      } else {
-        tvCafeInfoInstagramValue.text = getString(R.string.instagram)
-      }
-      if (cafeDetailInfo.websiteUri.isNullOrEmpty()) {
-        tvCafeInfoWebsiteValue.text = ""
-      } else {
-        tvCafeInfoWebsiteValue.text = getString(R.string.website)
-      }
-      if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.instagramUri.isNullOrEmpty()) {
-        tvCafeInfoDotFirst.visibility = View.VISIBLE
-      } else {
-        tvCafeInfoDotFirst.visibility = View.INVISIBLE
-      }
-      if (!cafeDetailInfo.instagramUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty()) {
-        tvCafeInfoDotSecond.visibility = View.VISIBLE
-      } else {
-        tvCafeInfoDotSecond.visibility = View.INVISIBLE
-      }
-      if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty() && cafeDetailInfo.instagramUri.isNullOrEmpty()) {
-        tvCafeInfoDotThird.visibility = View.VISIBLE
-      } else {
-        tvCafeInfoDotThird.visibility = View.INVISIBLE
-      }
+      updateSocialMediaLinks(cafeDetailInfo)
     }
+  }
+
+  private fun formatAreaSize(areaSize: String?): String {
+    return if (areaSize.isNullOrEmpty()) "" else "$areaSize m²"
+  }
+
+  private fun updateIcon(imageView: ImageView, exists: Boolean?) {
+    imageView.setImageResource(
+      if (exists == true) us.wedemy.eggeum.android.design.R.drawable.ic_o_filled_16
+      else us.wedemy.eggeum.android.design.R.drawable.ic_x_colored_16,
+    )
+  }
+
+  private fun updateSocialMediaLinks(cafeDetailInfo: InfoModel) {
+    binding.apply {
+      tvCafeInfoBlogValue.text =
+        cafeDetailInfo.blogUri.takeUnless { it.isNullOrEmpty() }?.let { getString(R.string.blog) } ?: ""
+      tvCafeInfoInstagramValue.text =
+        cafeDetailInfo.instagramUri.takeUnless { it.isNullOrEmpty() }?.let { getString(R.string.instagram) } ?: ""
+      tvCafeInfoWebsiteValue.text =
+        cafeDetailInfo.websiteUri.takeUnless { it.isNullOrEmpty() }?.let { getString(R.string.website) } ?: ""
+    }
+    updateLinkDots(cafeDetailInfo)
+  }
+
+  private fun updateLinkDots(cafeDetailInfo: InfoModel) {
+    binding.apply {
+      tvCafeInfoDotFirst.visibility =
+        if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.instagramUri.isNullOrEmpty()) View.VISIBLE else View.INVISIBLE
+      tvCafeInfoDotSecond.visibility =
+        if (!cafeDetailInfo.instagramUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty()) View.VISIBLE else View.INVISIBLE
+      tvCafeInfoDotThird.visibility =
+        if (!cafeDetailInfo.blogUri.isNullOrEmpty() && !cafeDetailInfo.websiteUri.isNullOrEmpty() &&
+          cafeDetailInfo.instagramUri.isNullOrEmpty()) View.VISIBLE else View.INVISIBLE
+    }
+  }
+
+  private fun updateSmokingAreaIcon(existsSmokingArea: Boolean?) {
+    updateIcon(binding.ivCafeInfoSmokingValue, existsSmokingArea)
+  }
+
+  private fun updateWifiIcon(existsWifi: Boolean?) {
+    updateIcon(binding.ivCafeInfoWifiValue, existsWifi)
+  }
+
+  private fun updateOutletIcon(existsOutlet: Boolean?) {
+    updateIcon(binding.ivCafeInfoOutletValue, existsOutlet)
   }
 }

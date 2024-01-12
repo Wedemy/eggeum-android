@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.databinding.FragmentRegisterAccountBinding
 import us.wedemy.eggeum.android.onboard.viewmodel.OnBoardViewModel
 
-// TODO 웹뷰 화면 하단에 버튼을 누르면 계정 등록 화면으로 돌아오면서 해당 체크박스가 체크 되어야 함
+// TODO 개인정보 제3자 제공 동의도 웹뷰 화면을 추가해야 함
 @AndroidEntryPoint
 class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
   override fun getViewBinding() = FragmentRegisterAccountBinding.inflate(layoutInflater)

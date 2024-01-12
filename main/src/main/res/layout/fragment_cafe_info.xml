@@ -507,7 +507,31 @@
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns" />
 
     <TextView
-      android:id="@+id/tv_cafe_info_sns_value"
+      android:id="@+id/tv_cafe_info_blog_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_instagram_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/blog" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_instagram_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_website_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/instagram" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_website_value"
       style="@style/TextSMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -516,7 +540,7 @@
       app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
-      tools:text="@string/sns_list" />
+      tools:text="@string/website" />
 
     <View
       android:id="@+id/line_cafe_info_sns"

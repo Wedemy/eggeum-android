@@ -23,8 +23,6 @@ import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentCafeInfoBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
-// TODO 블로그, 인스타, 웹사이트 를 클릭 했을 때, 웹 브라우저로 해당 url 이 실행 되도록
-// TextView 를 각각 분리 하여 클릭 리스너를 달아야 함
 @AndroidEntryPoint
 class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
   override fun getViewBinding() = FragmentCafeInfoBinding.inflate(layoutInflater)
@@ -43,14 +41,27 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
   }
 
   private fun initListener() {
-    binding.tvCafeInfoSnsValue.setOnClickListener {
-      try {
-        val url = viewModel.cafeDetailInfo.value.info?.instagramUri
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
-      } catch (e: ActivityNotFoundException) {
-        Toast.makeText(requireContext(), getString(R.string.invalid_address), Toast.LENGTH_SHORT).show()
+    with(binding) {
+      tvCafeInfoBlogValue.setOnClickListener {
+        startWebBrowser(viewModel.cafeDetailInfo.value.info?.blogUri)
       }
+
+      tvCafeInfoInstagramValue.setOnClickListener {
+        startWebBrowser(viewModel.cafeDetailInfo.value.info?.instagramUri)
+      }
+
+      tvCafeInfoWebsiteValue.setOnClickListener {
+        startWebBrowser(viewModel.cafeDetailInfo.value.info?.websiteUri)
+      }
+    }
+  }
+
+  private fun startWebBrowser(uri: String?) {
+    try {
+      val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+      startActivity(intent)
+    } catch (e: ActivityNotFoundException) {
+      Toast.makeText(requireContext(), getString(R.string.invalid_address), Toast.LENGTH_SHORT).show()
     }
   }
 
@@ -92,11 +103,20 @@ class CafeInfoFragment : BaseFragment<FragmentCafeInfoBinding>() {
       }
       tvCafeInfoMobileChargingValue.text = cafeDetailInfo.mobileCharging
       tvCafeInfoPhoneNumber.text = cafeDetailInfo.phone
-      // TODO 텍스트를 클릭하면 웹 페이지가 열리도록
-      if (cafeDetailInfo.instagramUri.isNullOrEmpty()) {
-        tvCafeInfoSnsValue.text = ""
+      if (cafeDetailInfo.blogUri.isNullOrEmpty()) {
+        tvCafeInfoBlogValue.text = ""
       } else {
-        tvCafeInfoSnsValue.text = getString(R.string.instagram)
+        tvCafeInfoBlogValue.text = getString(R.string.blog)
+      }
+      if (cafeDetailInfo.instagramUri.isNullOrEmpty()) {
+        tvCafeInfoInstagramValue.text = ""
+      } else {
+        tvCafeInfoInstagramValue.text = getString(R.string.instagram)
+      }
+      if (cafeDetailInfo.websiteUri.isNullOrEmpty()) {
+        tvCafeInfoWebsiteValue.text = ""
+      } else {
+        tvCafeInfoWebsiteValue.text = getString(R.string.website)
       }
     }
   }

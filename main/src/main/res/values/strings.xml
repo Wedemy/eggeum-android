@@ -38,6 +38,9 @@
   <string name="sns">SNS</string>
   <string name="phone">전화</string>
   <string name="phone_charging">휴대폰 충전</string>
+  <string name="blog">블로그</string>
+  <string name="instagram">인스타그램</string>
+  <string name="website">웹사이트</string>
   <string name="sns_list"><font color="#14b8a6">블로그</font><font color="#e5e7eb">•</font><font color="#14b8a6">인스타그램</font><font color="#e5e7eb">•</font><font color="#14b8a6">웹사이트</font></string>
   <string name="cafe_address">카페 주소 <font color="#14b8a6">*</font></string>
   <string name="share">share</string>
@@ -99,7 +102,6 @@
   <string name="spam">스팸</string>
   <string name="copyright_or_legal_matter">저작권 또는 법적 문제</string>
   <string name="no_recent_searches">최근 검색어가 없습니다.</string>
-  <string name="instagram">인스타그램</string>
   <string name="invalid_address">올바른 주소가 아닙니다</string>
   <string name="withdraw_complete">회원 탈퇴가 완료되었습니다.</string>
   <string name="logout_complete">로그아웃이 완료되었습니다.</string>

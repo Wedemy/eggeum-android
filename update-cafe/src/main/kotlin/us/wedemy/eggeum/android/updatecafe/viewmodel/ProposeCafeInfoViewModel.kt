@@ -82,6 +82,7 @@ class ProposeCafeInfoViewModel @Inject constructor(
                 businessHours = placeBody.info?.businessHours,
                 existsSmokingArea = placeBody.info?.existsSmokingArea,
                 existsWifi = placeBody.info?.existsWifi,
+                existsOutlet = placeBody.info?.existsOutlet,
                 instagramUri = placeBody.info?.instagramUri,
                 meetingRoomCount = placeBody.info?.meetingRoomCount,
                 mobileCharging = placeBody.info?.mobileCharging,

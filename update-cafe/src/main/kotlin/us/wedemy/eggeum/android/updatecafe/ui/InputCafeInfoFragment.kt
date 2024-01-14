@@ -40,6 +40,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   private var cafeParking = ""
   private var cafeExistsSmokingArea = ""
   private var cafeExistsWifi = ""
+  private var cafeExistsOutlet = ""
   private var cafeRestRoom = ""
   private var cafeMobileCharging = ""
   private var cafeInstagramUri = ""
@@ -94,6 +95,9 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       tietInputExistsWifi.doAfterTextChanged {
         cafeExistsWifi = it.toString()
       }
+      tietInputExistsOutlet.doAfterTextChanged {
+        cafeExistsOutlet = it.toString()
+      }
       tietInputRestRoom.doAfterTextChanged {
         cafeRestRoom = it.toString()
       }
@@ -119,6 +123,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           businessHours = if (cafeBusinessHours != "") cafeBusinessHours.split(" ~ ") else null,
           existsSmokingArea = stringToBoolean(cafeExistsSmokingArea),
           existsWifi = stringToBoolean(cafeExistsWifi),
+          existsOutlet = stringToBoolean(cafeExistsOutlet),
           instagramUri = stringOrElseNull(cafeInstagramUri),
           meetingRoomCount = stringToIntOrElseNull(cafeMeetingRoom),
           mobileCharging = stringOrElseNull(cafeMobileCharging),
@@ -164,6 +169,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
             tietInputParking.hint = stringOrElseGuideMessage(cafeInfo.parking)
             tietInputExistsSmokingArea.hint = boolToStringOrElseGuideMessage(cafeInfo.existsSmokingArea)
             tietInputExistsWifi.hint = boolToStringOrElseGuideMessage(cafeInfo.existsWifi)
+            tietInputExistsOutlet.hint = boolToStringOrElseGuideMessage(cafeInfo.existsOutlet)
             tietInputRestRoom.hint = stringOrElseGuideMessage(cafeInfo.restRoom)
             tietInputMobileCharging.hint = stringOrElseGuideMessage(cafeInfo.mobileCharging)
             tietInputInstagramUri.hint = stringOrElseGuideMessage(cafeInfo.instagramUri)
@@ -180,6 +186,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
             cafeParking = stringOrElseDefault(cafeInfo.parking)
             cafeExistsSmokingArea = boolToStringOrElseDefault(cafeInfo.existsSmokingArea)
             cafeExistsWifi = boolToStringOrElseDefault(cafeInfo.existsWifi)
+            cafeExistsOutlet = boolToStringOrElseDefault(cafeInfo.existsOutlet)
             cafeRestRoom = stringOrElseDefault(cafeInfo.restRoom)
             cafeMobileCharging = stringOrElseDefault(cafeInfo.mobileCharging)
             cafeWebsiteUri = stringOrElseDefault(cafeInfo.websiteUri)

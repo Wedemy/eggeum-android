@@ -47,6 +47,7 @@
   <string name="input_parking">주차(O/X)</string>
   <string name="input_exists_smoking_area">흡연</string>
   <string name="input_exists_wifi">와이파이(O/X)</string>
+  <string name="input_exists_outlet">콘센트(O/X)</string>
   <string name="input_rest_room">화장실</string>
   <string name="input_mobile_charging">모바일 충전</string>
   <string name="input_instagram_uri">인스타그램</string>

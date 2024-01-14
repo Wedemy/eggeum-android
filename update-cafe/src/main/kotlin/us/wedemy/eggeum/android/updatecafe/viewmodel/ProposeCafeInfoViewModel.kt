@@ -145,6 +145,10 @@ class ProposeCafeInfoViewModel @Inject constructor(
     }
   }
 
+  fun editCafeInfo() {
+    placeBody.info = cafeInfo.value.toEntity()
+  }
+
   fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
       val result = upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())

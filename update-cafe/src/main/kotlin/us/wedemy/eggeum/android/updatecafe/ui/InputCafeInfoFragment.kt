@@ -21,6 +21,7 @@ import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
 
 @AndroidEntryPoint
@@ -52,17 +53,8 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       tietInputCafeArea.doAfterTextChanged {
         viewModel.cafeInfo.value.areaSize = it.toString()
       }
-      tietInputCafeMeetingRoom.doAfterTextChanged {
-        viewModel.cafeInfo.value.meetingRoomCount = it.toString().toInt()
-      }
-      tietInputCafeMultiSeat.doAfterTextChanged {
-        viewModel.cafeInfo.value.multiSeatCount = it.toString().toInt()
-      }
-      tietInputCafeSingleSeat.doAfterTextChanged {
-        viewModel.cafeInfo.value.singleSeatCount = it.toString().toInt()
-      }
       tietInputCafeBusinessHours.doAfterTextChanged {
-        viewModel.cafeInfo.value.businessHours = it.toString().split(",")
+        viewModel.cafeInfo.value.businessHours = it.toString().replace(" ", "").split(",")
       }
       tietInputParking.doAfterTextChanged {
         viewModel.cafeInfo.value.parking = it.toString()
@@ -82,15 +74,10 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       tietInputMobileCharging.doAfterTextChanged {
         viewModel.cafeInfo.value.mobileCharging = it.toString()
       }
-      tietInputInstagramUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.instagramUri = it.toString()
-      }
-      tietInputWebsiteUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.websiteUri = it.toString()
-      }
-      tietInputBlogUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.blogUri = it.toString()
-      }
+
+      urlListener()
+      countListener()
+
       tietInputPhone.doAfterTextChanged {
         viewModel.cafeInfo.value.phone = it.toString()
       }
@@ -108,15 +95,57 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
     }
   }
 
+  private fun countListener() {
+    with(binding) {
+      tietInputCafeMeetingRoom.doAfterTextChanged {
+        viewModel.cafeInfo.value.meetingRoomCount = it.toString()
+      }
+      tietInputCafeMultiSeat.doAfterTextChanged {
+        viewModel.cafeInfo.value.multiSeatCount = it.toString()
+      }
+      tietInputCafeSingleSeat.doAfterTextChanged {
+        viewModel.cafeInfo.value.singleSeatCount = it.toString()
+      }
+    }
+  }
+
+  private fun urlListener() {
+    with(binding) {
+      tietInputInstagramUri.doAfterTextChanged {
+        viewModel.cafeInfo.value.instagramUri = it.toString()
+      }
+      tietInputWebsiteUri.doAfterTextChanged {
+        viewModel.cafeInfo.value.websiteUri = it.toString()
+      }
+      tietInputBlogUri.doAfterTextChanged {
+        viewModel.cafeInfo.value.blogUri = it.toString()
+      }
+    }
+  }
+
+  private fun countObserver(cafeInfo: CafeInfoItem) {
+    binding.apply {
+      cafeInfo.meetingRoomCount?.let { tietInputCafeMeetingRoom.setText(it) }
+      cafeInfo.multiSeatCount?. let { tietInputCafeMultiSeat.setText(it) }
+      cafeInfo.singleSeatCount?. let { tietInputCafeSingleSeat.setText(it) }
+    }
+  }
+
+  private fun urlObserver(cafeInfo: CafeInfoItem) {
+    binding.apply {
+      cafeInfo.instagramUri?.let { tietInputInstagramUri.setText(it) }
+      cafeInfo.websiteUri?.let { tietInputWebsiteUri.setText(it) }
+      cafeInfo.blogUri?.let { tietInputBlogUri.setText(it) }
+    }
+  }
+
   private fun initObserver() {
     repeatOnStarted {
       launch {
         viewModel.cafeInfo.collect { cafeInfo ->
           binding.apply {
             cafeInfo.areaSize?.let { tietInputCafeArea.setText(it) }
-            cafeInfo.meetingRoomCount?.let { tietInputCafeMeetingRoom.setText(it.toString()) }
-            cafeInfo.multiSeatCount?. let { tietInputCafeMultiSeat.setText(it.toString()) }
-            cafeInfo.singleSeatCount?. let { tietInputCafeSingleSeat.setText(it.toString()) }
+            countObserver(cafeInfo = cafeInfo)
             cafeInfo.businessHours?.let { tietInputCafeBusinessHours.setText(it.joinToString(",", "", "", -1)) }
             cafeInfo.parking?.let { tietInputParking.setText(it) }
             cafeInfo.existsSmokingArea?.let { tietInputExistsSmokingArea.setText(boolToString(it)) }
@@ -124,9 +153,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
             cafeInfo.existsOutlet?.let { tietInputExistsOutlet.setText(boolToString(it)) }
             cafeInfo.restRoom?.let { tietInputRestRoom.setText(it) }
             cafeInfo.mobileCharging?.let { tietInputMobileCharging.setText(it) }
-            cafeInfo.instagramUri?.let { tietInputInstagramUri.setText(it) }
-            cafeInfo.websiteUri?.let { tietInputWebsiteUri.setText(it) }
-            cafeInfo.blogUri?.let { tietInputBlogUri.setText(it) }
+            urlObserver(cafeInfo = cafeInfo)
             cafeInfo.phone?.let { tietInputPhone.setText(it) }
           }
         }

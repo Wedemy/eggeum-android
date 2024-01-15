@@ -18,13 +18,13 @@ data class CafeInfoItem(
   var existsWifi: Boolean? = null,
   var existsOutlet: Boolean? = null,
   var instagramUri: String? = null,
-  var meetingRoomCount: Int? = null,
+  var meetingRoomCount: String? = null,
   var mobileCharging: String? = null,
-  var multiSeatCount: Int? = null,
+  var multiSeatCount: String? = null,
   var parking: String? = null,
   var phone: String? = null,
   var restRoom: String? = null,
-  var singleSeatCount: Int? = null,
+  var singleSeatCount: String? = null,
   var websiteUri: String? = null,
 ) {
   fun toEntity(): InfoEntity {
@@ -36,13 +36,13 @@ data class CafeInfoItem(
       existsWifi = existsWifi,
       existsOutlet = existsOutlet,
       instagramUri = instagramUri,
-      meetingRoomCount = meetingRoomCount,
+      meetingRoomCount = meetingRoomCount?.toInt(),
       mobileCharging = mobileCharging,
-      multiSeatCount = multiSeatCount,
+      multiSeatCount = multiSeatCount?.toInt(),
       parking = parking,
       phone = phone,
       restRoom = restRoom,
-      singleSeatCount = singleSeatCount,
+      singleSeatCount = singleSeatCount?.toInt(),
       websiteUri = websiteUri,
     )
   }

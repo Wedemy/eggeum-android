@@ -84,13 +84,13 @@ class ProposeCafeInfoViewModel @Inject constructor(
                 existsWifi = placeBody.info?.existsWifi,
                 existsOutlet = placeBody.info?.existsOutlet,
                 instagramUri = placeBody.info?.instagramUri,
-                meetingRoomCount = placeBody.info?.meetingRoomCount,
+                meetingRoomCount = placeBody.info?.meetingRoomCount?.toString(),
                 mobileCharging = placeBody.info?.mobileCharging,
-                multiSeatCount = placeBody.info?.multiSeatCount,
+                multiSeatCount = placeBody.info?.multiSeatCount?.toString(),
                 parking = placeBody.info?.parking,
                 phone = placeBody.info?.phone,
                 restRoom = placeBody.info?.restRoom,
-                singleSeatCount = placeBody.info?.singleSeatCount,
+                singleSeatCount = placeBody.info?.singleSeatCount?.toString(),
                 websiteUri = placeBody.info?.websiteUri,
               )
             }

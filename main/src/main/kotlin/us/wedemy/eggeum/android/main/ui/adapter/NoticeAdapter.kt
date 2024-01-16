@@ -17,6 +17,11 @@ import us.wedemy.eggeum.android.main.model.NoticeModel
 import us.wedemy.eggeum.android.main.ui.adapter.viewholder.NoticeListItemViewHolder
 
 class NoticeAdapter : PagingDataAdapter<NoticeModel, NoticeListItemViewHolder>(NoticeItemDiffCallback) {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    NoticeListItemViewHolder(
+      ItemNoticeListBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+    )
+
   override fun onBindViewHolder(holder: NoticeListItemViewHolder, position: Int) {
     val noticeItem = getItem(position)
     noticeItem?.let { notice ->
@@ -29,11 +34,6 @@ class NoticeAdapter : PagingDataAdapter<NoticeModel, NoticeListItemViewHolder>(N
     }
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-    NoticeListItemViewHolder(
-      ItemNoticeListBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-    )
-
   private fun toggleLayout(isExpanded: Boolean, view: View) {
     if (isExpanded) {
       view.animate().setDuration(200).rotation(180f)
@@ -42,10 +42,21 @@ class NoticeAdapter : PagingDataAdapter<NoticeModel, NoticeListItemViewHolder>(N
     }
   }
 
-  private companion object {
+  companion object {
     private val NoticeItemDiffCallback = object : DiffUtil.ItemCallback<NoticeModel>() {
-      override fun areItemsTheSame(oldItem: NoticeModel, newItem: NoticeModel) = oldItem.id == newItem.id
-      override fun areContentsTheSame(oldItem: NoticeModel, newItem: NoticeModel) = oldItem == newItem
+      override fun areItemsTheSame(
+        oldItem: NoticeModel,
+        newItem: NoticeModel,
+      ): Boolean {
+        return oldItem.id == newItem.id
+      }
+
+      override fun areContentsTheSame(
+        oldItem: NoticeModel,
+        newItem: NoticeModel,
+      ): Boolean {
+        return oldItem == newItem
+      }
     }
   }
 }

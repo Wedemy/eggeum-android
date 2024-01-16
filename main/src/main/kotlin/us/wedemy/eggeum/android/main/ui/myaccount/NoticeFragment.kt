@@ -15,7 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
+import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
+import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentNoticeBinding
 import us.wedemy.eggeum.android.main.ui.adapter.NoticeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.NoticeViewModel
@@ -36,7 +39,10 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
   }
 
   private fun initView() {
-    binding.rvNotice.adapter = noticeAdapter
+    binding.rvNotice.apply {
+      addDivider(R.color.gray_100)
+      adapter = noticeAdapter
+    }
   }
 
   private fun initListener() {
@@ -54,6 +60,14 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
       launch {
         viewModel.noticeList.collectLatest { notices ->
           noticeAdapter.submitData(notices)
+        }
+      }
+
+      launch {
+        val editTextFlow = binding.tietNotice.textChangesAsFlow()
+        editTextFlow.collect { text ->
+          val query = text.toString().trim()
+          viewModel.setSearchQuery(query)
         }
       }
     }

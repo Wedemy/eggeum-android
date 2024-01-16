@@ -9,22 +9,32 @@ package us.wedemy.eggeum.android.main.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.domain.usecase.GetNoticeListUseCase
+import us.wedemy.eggeum.android.main.mapper.toNoticModel
 
 @HiltViewModel
-class NoticeViewModel @Inject constructor(savedStateHandle: SavedStateHandle) : ViewModel() {
+class NoticeViewModel @Inject constructor(
+  getNoticeListUseCase: GetNoticeListUseCase,
+  savedStateHandle: SavedStateHandle,
+) : ViewModel() {
   private val _searchKeyword = savedStateHandle.getMutableStateFlow(KEY_SEARCH_KEYWORD, "")
-  val searchKeyword = _searchKeyword.asStateFlow()
+  val searchKeyword: StateFlow<String> = _searchKeyword.asStateFlow()
 
-  init {
-    getNoticeList()
-  }
-
-  private fun getNoticeList() {
-    // TODO 공지사항 리스트 조회 구현
-  }
+  val noticeList = getNoticeListUseCase()
+    .map { pagingData ->
+      pagingData.map { notice ->
+        notice.toNoticModel()
+      }
+    }
+    .cachedIn(viewModelScope)
 
   fun setSearchKeyword(searchKeyword: String) {
     _searchKeyword.value = searchKeyword

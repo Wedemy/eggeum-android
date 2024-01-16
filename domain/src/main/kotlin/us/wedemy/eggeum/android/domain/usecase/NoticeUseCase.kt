@@ -30,7 +30,7 @@ public class GetNoticeUseCase @Inject constructor(
 public class GetNoticeListUseCase @Inject constructor(
   private val repository: NoticeRepository,
 ) {
-  public operator fun invoke(): Flow<PagingData<NoticeEntity>> {
-    return repository.getNoticeList()
+  public operator fun invoke(query: String? = null): Flow<PagingData<NoticeEntity>> {
+    return repository.getNoticeList(search = query)
   }
 }

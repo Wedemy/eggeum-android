@@ -35,7 +35,7 @@ public class NoticeDataSourceImpl @Inject constructor(
     startDate: String?,
     endDate: String?,
   ): Flow<PagingData<NoticeResponse>> {
-    val pagingSourceFactory = { NoticePagingSource(service) }
+    val pagingSourceFactory = { NoticePagingSource(service, search) }
 
     return Pager(
       config = PagingConfig(

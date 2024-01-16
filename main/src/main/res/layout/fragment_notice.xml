@@ -23,15 +23,57 @@
 
   </com.google.android.material.appbar.MaterialToolbar>
 
+  <TextView
+    android:id="@+id/tv_notice_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/notice"
+    android:layout_marginHorizontal="16dp"
+    style="@style/H5"
+    android:textColor="@color/gray_900"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_notice"/>
+
+  <androidx.cardview.widget.CardView
+    android:id="@+id/cv_notice"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_notice_title">
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_notice"
+      style="@style/Widget.Eggeum.TextInputLayout.SearchBox"
+      app:boxStrokeColor="@drawable/selector_box_stroke_color_white"
+      app:startIconDrawable="@drawable/ic_search_filled_16">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tiet_notice"
+        style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+        android:ellipsize="end"
+        android:hint="@string/search_keyword"
+        android:inputType="text"
+        android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+  </androidx.cardview.widget.CardView>
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_notice"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_notice"
+    app:layout_constraintTop_toBottomOf="@id/cv_notice"
     tools:listitem="@layout/item_notice_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

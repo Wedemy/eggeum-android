@@ -22,7 +22,7 @@ import timber.log.Timber
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.usecase.GetNoticeListUseCase
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceListUseCase
-import us.wedemy.eggeum.android.main.mapper.toUiModel
+import us.wedemy.eggeum.android.main.mapper.toNoticeCardModel
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
   val noticeList = getNoticeListUseCase()
     .map { pagingData ->
       pagingData.map { notice ->
-        notice.toUiModel()
+        notice.toNoticeCardModel()
       }
     }
     .cachedIn(viewModelScope)

@@ -10,10 +10,20 @@ package us.wedemy.eggeum.android.main.mapper
 import us.wedemy.eggeum.android.common.util.toFormatDate
 import us.wedemy.eggeum.android.domain.model.notice.NoticeEntity
 import us.wedemy.eggeum.android.main.model.NoticeCardModel
+import us.wedemy.eggeum.android.main.model.NoticeModel
 
-internal fun NoticeEntity.toUiModel() =
+internal fun NoticeEntity.toNoticeCardModel() =
   NoticeCardModel(
     id = id,
     title = title,
     date = createdDate.toFormatDate(),
+  )
+
+internal fun NoticeEntity.toNoticModel() =
+  NoticeModel(
+    id = id,
+    title = title,
+    date = createdDate.toFormatDate(),
+    description = content,
+    isExpanded = false,
   )

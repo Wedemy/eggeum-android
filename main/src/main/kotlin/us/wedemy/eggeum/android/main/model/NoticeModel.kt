@@ -8,6 +8,7 @@
 package us.wedemy.eggeum.android.main.model
 
 data class NoticeModel(
+  val id: Long,
   val title: String,
   val date: String,
   val description: String,

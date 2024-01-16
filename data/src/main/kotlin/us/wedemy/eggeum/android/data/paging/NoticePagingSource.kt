@@ -19,6 +19,7 @@ import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 
 public class NoticePagingSource(
   private val service: NoticeService,
+  private val query: String? = null,
 ) : PagingSource<Int, NoticeResponse>() {
 
   public override fun getRefreshKey(state: PagingState<Int, NoticeResponse>): Int? {
@@ -31,7 +32,7 @@ public class NoticePagingSource(
   public override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NoticeResponse> {
     return try {
       val pageNumber = params.key ?: STARTING_PAGE_INDEX
-      val response = service.getNoticeList(page = pageNumber, size = params.loadSize)
+      val response = service.getNoticeList(page = pageNumber, search = query, size = params.loadSize)
 
       val endOfPaginationReached = response.list.isEmpty()
 

@@ -48,8 +48,7 @@ class SearchCafeViewModel @Inject constructor(
   val searchPlaceList: Flow<PagingData<PlaceEntity>> =
     debouncedSearchQuery.flatMapLatest { query ->
       getSearchPlaceListUseCase(query)
-    }
-      .cachedIn(viewModelScope)
+    }.cachedIn(viewModelScope)
 
   fun setSearchQuery(query: String) {
     _searchQuery.value = query

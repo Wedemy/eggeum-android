@@ -11,15 +11,17 @@ package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
@@ -34,6 +36,7 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
 //    initView()
     initListener()
     initObserver()
+    initDataObserver()
   }
 
 //  private fun initView() {
@@ -47,87 +50,20 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           requireActivity().finish()
         }
       }
-      /**
-       * 입력란 별, 검증
-       */
-      tietInputCafeArea.doAfterTextChanged {
-        viewModel.cafeInfo.value.areaSize = it.toString()
-      }
-      tietInputCafeBusinessHours.doAfterTextChanged {
-        viewModel.cafeInfo.value.businessHours = it.toString().replace(" ", "").split(",")
-      }
-      tietInputParking.doAfterTextChanged {
-        viewModel.cafeInfo.value.parking = it.toString()
-      }
-      tietInputExistsSmokingArea.doAfterTextChanged {
-        viewModel.cafeInfo.value.existsSmokingArea = stringToBoolean(it.toString())
-      }
-      tietInputExistsWifi.doAfterTextChanged {
-        viewModel.cafeInfo.value.existsWifi = stringToBoolean(it.toString())
-      }
-      tietInputExistsOutlet.doAfterTextChanged {
-        viewModel.cafeInfo.value.existsOutlet = stringToBoolean(it.toString())
-      }
-      tietInputRestRoom.doAfterTextChanged {
-        viewModel.cafeInfo.value.restRoom = it.toString()
-      }
-      tietInputMobileCharging.doAfterTextChanged {
-        viewModel.cafeInfo.value.mobileCharging = it.toString()
-      }
-
-      urlListener()
-      countListener()
-
-      tietInputPhone.doAfterTextChanged {
-        viewModel.cafeInfo.value.phone = it.toString()
-      }
       btnNext.setOnClickListener {
+        // TODO: 맨처음에 읽을 때, 데이터 getMutableStateFlow 에 저장
+        // TODO: editCafeInfo할 때, getMutableStateFlow에서 placeBody update
         viewModel.editCafeInfo()
         viewModel.updatePlaceBodyUseCase()
-      }
-    }
-  }
-  private fun stringToBoolean(str: String): Boolean? {
-    return when (str) {
-      "O" -> true
-      "X" -> false
-      else -> null
-    }
-  }
-
-  private fun countListener() {
-    with(binding) {
-      tietInputCafeMeetingRoom.doAfterTextChanged {
-        viewModel.cafeInfo.value.meetingRoomCount = it.toString()
-      }
-      tietInputCafeMultiSeat.doAfterTextChanged {
-        viewModel.cafeInfo.value.multiSeatCount = it.toString()
-      }
-      tietInputCafeSingleSeat.doAfterTextChanged {
-        viewModel.cafeInfo.value.singleSeatCount = it.toString()
-      }
-    }
-  }
-
-  private fun urlListener() {
-    with(binding) {
-      tietInputInstagramUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.instagramUri = it.toString()
-      }
-      tietInputWebsiteUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.websiteUri = it.toString()
-      }
-      tietInputBlogUri.doAfterTextChanged {
-        viewModel.cafeInfo.value.blogUri = it.toString()
       }
     }
   }
 
   private fun countObserver(cafeInfo: CafeInfoItem) {
     binding.apply {
-      cafeInfo.meetingRoomCount?.let { tietInputCafeMeetingRoom.setText(it) }
-      cafeInfo.multiSeatCount?. let { tietInputCafeMultiSeat.setText(it) }
-      cafeInfo.singleSeatCount?. let { tietInputCafeSingleSeat.setText(it) }
+      cafeInfo.meetingRoomCount?.let { tietInputCafeMeetingRoom.setText(it.toString()) }
+      cafeInfo.multiSeatCount?. let { tietInputCafeMultiSeat.setText(it.toString()) }
+      cafeInfo.singleSeatCount?. let { tietInputCafeSingleSeat.setText(it.toString()) }
     }
   }
 
@@ -136,6 +72,59 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       cafeInfo.instagramUri?.let { tietInputInstagramUri.setText(it) }
       cafeInfo.websiteUri?.let { tietInputWebsiteUri.setText(it) }
       cafeInfo.blogUri?.let { tietInputBlogUri.setText(it) }
+    }
+  }
+
+  private fun initDataObserver() {
+    repeatOnStarted {
+      launch {
+        binding.tietInputCafeArea.textChangesAsFlow()
+          .collect { text ->
+            viewModel.setCafeAreaSize(text.toString().trim())
+          }
+      }
+      collectTextChanges(this, binding.tietInputCafeMeetingRoom) { cafeMeetingRoom ->
+        viewModel.setCafeMeetingRoom(cafeMeetingRoom)
+      }
+      collectTextChanges(this, binding.tietInputCafeMultiSeat) { cafeMultiSeat ->
+        viewModel.setCafeMultiSeat(cafeMultiSeat)
+      }
+      collectTextChanges(this, binding.tietInputCafeSingleSeat) { cafeSingleSeat ->
+        viewModel.setCafeSingleSeat(cafeSingleSeat)
+      }
+      collectTextChanges(this, binding.tietInputCafeBusinessHours) { cafeBusinessHours ->
+        viewModel.setCafeBusinessHours(cafeBusinessHours)
+      }
+      collectTextChanges(this, binding.tietInputParking) { cafeParking ->
+        viewModel.setCafeParking(cafeParking)
+      }
+      collectTextChanges(this, binding.tietInputExistsSmokingArea) { cafeSmoking ->
+        viewModel.setCafeSmoking(cafeSmoking)
+      }
+      collectTextChanges(this, binding.tietInputExistsWifi) { cafeWifi ->
+        viewModel.setCafeWifi(cafeWifi)
+      }
+      collectTextChanges(this, binding.tietInputExistsOutlet) { cafeOutlet ->
+        viewModel.setCafeOutlet(cafeOutlet)
+      }
+      collectTextChanges(this, binding.tietInputRestRoom) { cafeRestRoom ->
+        viewModel.setCafeRestRoom(cafeRestRoom)
+      }
+      collectTextChanges(this, binding.tietInputMobileCharging) { cafeMobileCharging ->
+        viewModel.setCafeMobileCharging(cafeMobileCharging)
+      }
+      collectTextChanges(this, binding.tietInputInstagramUri) { cafeInstagramUrl ->
+        viewModel.setCafeInstagramUrl(cafeInstagramUrl)
+      }
+      collectTextChanges(this, binding.tietInputWebsiteUri) { cafeWebsiteUrl ->
+        viewModel.setCafeWebsiteUrl(cafeWebsiteUrl)
+      }
+      collectTextChanges(this, binding.tietInputBlogUri) { cafeBlogUrl ->
+        viewModel.setCafeBlogUrl(cafeBlogUrl)
+      }
+      collectTextChanges(this, binding.tietInputPhone) { cafePhone ->
+        viewModel.setCafePhone(cafePhone)
+      }
     }
   }
 
@@ -173,6 +162,15 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
       }
+    }
+  }
+
+  private fun collectTextChanges(scope: CoroutineScope, editText: EditText, onTextChange: (String) -> Unit) {
+    scope.launch {
+      editText.textChangesAsFlow()
+        .collect { text ->
+          onTextChange(text.toString().trim())
+        }
     }
   }
 

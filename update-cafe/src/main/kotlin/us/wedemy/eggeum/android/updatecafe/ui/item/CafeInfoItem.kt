@@ -11,21 +11,21 @@ package us.wedemy.eggeum.android.updatecafe.ui.item
 import us.wedemy.eggeum.android.domain.model.place.InfoEntity
 
 data class CafeInfoItem(
-  var areaSize: String? = null,
-  var blogUri: String? = null,
-  var businessHours: List<String>? = null,
-  var existsSmokingArea: Boolean? = null,
-  var existsWifi: Boolean? = null,
-  var existsOutlet: Boolean? = null,
-  var instagramUri: String? = null,
-  var meetingRoomCount: String? = null,
-  var mobileCharging: String? = null,
-  var multiSeatCount: String? = null,
-  var parking: String? = null,
-  var phone: String? = null,
-  var restRoom: String? = null,
-  var singleSeatCount: String? = null,
-  var websiteUri: String? = null,
+  val areaSize: String? = null,
+  val blogUri: String? = null,
+  val businessHours: List<String>? = null,
+  val existsSmokingArea: Boolean? = null,
+  val existsWifi: Boolean? = null,
+  val existsOutlet: Boolean? = null,
+  val instagramUri: String? = null,
+  val meetingRoomCount: Int? = null,
+  val mobileCharging: String? = null,
+  val multiSeatCount: Int? = null,
+  val parking: String? = null,
+  val phone: String? = null,
+  val restRoom: String? = null,
+  val singleSeatCount: Int? = null,
+  val websiteUri: String? = null,
 ) {
   fun toEntity(): InfoEntity {
     return InfoEntity(
@@ -36,13 +36,13 @@ data class CafeInfoItem(
       existsWifi = existsWifi,
       existsOutlet = existsOutlet,
       instagramUri = instagramUri,
-      meetingRoomCount = meetingRoomCount?.toInt(),
+      meetingRoomCount = meetingRoomCount,
       mobileCharging = mobileCharging,
-      multiSeatCount = multiSeatCount?.toInt(),
+      multiSeatCount = multiSeatCount,
       parking = parking,
       phone = phone,
       restRoom = restRoom,
-      singleSeatCount = singleSeatCount?.toInt(),
+      singleSeatCount = singleSeatCount,
       websiteUri = websiteUri,
     )
   }

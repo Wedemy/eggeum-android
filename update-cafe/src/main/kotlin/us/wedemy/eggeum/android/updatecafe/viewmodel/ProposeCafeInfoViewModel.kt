@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.model.CafeDetailModel
+import us.wedemy.eggeum.android.common.util.getMutableStateFlow
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
@@ -64,6 +65,103 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val _cafeInfo = MutableStateFlow(CafeInfoItem())
   val cafeInfo = _cafeInfo.asStateFlow()
 
+  /*
+   * 카페 정보 수정 관련
+   */
+  private val _cafeAreaSize = savedStateHandle.getMutableStateFlow(KEY_CAFE_AREA_SIZE, "")
+  val cafeAreaSize = _cafeAreaSize.asStateFlow()
+
+  private val _cafeMeetingRoom = savedStateHandle.getMutableStateFlow(KEY_CAFE_MEETING_ROOM, 0)
+  val cafeMeetingRoom = _cafeMeetingRoom.asStateFlow()
+
+  private val _cafeMultiSeat = savedStateHandle.getMutableStateFlow(KEY_CAFE_MULTI_SEAT, 0)
+  val cafeMultiSeat = _cafeMultiSeat.asStateFlow()
+
+  private val _cafeSingleSeat = savedStateHandle.getMutableStateFlow(KEY_CAFE_SINGLE_SEAT, 0)
+  val cafeSingleSeat = _cafeSingleSeat.asStateFlow()
+
+  private val _cafeBusinessHours = savedStateHandle.getMutableStateFlow(KEY_CAFE_BUSINESS_HOURS, emptyList<String>())
+  val cafeBusinessHours = _cafeBusinessHours.asStateFlow()
+
+  private val _cafeParking = savedStateHandle.getMutableStateFlow(KEY_CAFE_PARKING, "")
+  val cafeParking = _cafeParking.asStateFlow()
+
+  private val _cafeSmoking = savedStateHandle.getMutableStateFlow(KEY_CAFE_SMOKING, "")
+  val cafeSmoking = _cafeSmoking.asStateFlow()
+
+  private val _cafeWifi = savedStateHandle.getMutableStateFlow(KEY_CAFE_WIFI, "")
+  val cafeWifi = _cafeWifi.asStateFlow()
+
+  private val _cafeOutlet = savedStateHandle.getMutableStateFlow(KEY_CAFE_OUTLET, "")
+  val cafeOutlet = _cafeOutlet.asStateFlow()
+
+  private val _cafeRestRoom = savedStateHandle.getMutableStateFlow(KEY_CAFE_REST_ROOM, "")
+  val cafeRestRoom = _cafeRestRoom.asStateFlow()
+
+  private val _cafeMobileCharging = savedStateHandle.getMutableStateFlow(KEY_CAFE_MOBILE_CHARGING, "")
+  val cafeMobileCharging = _cafeMobileCharging.asStateFlow()
+
+  private val _cafeInstagramUrl = savedStateHandle.getMutableStateFlow(KEY_CAFE_INSTAGRAM_URL, "")
+  val cafeInstagramUrl = _cafeInstagramUrl.asStateFlow()
+
+  private val _cafeWebsiteUrl = savedStateHandle.getMutableStateFlow(KEY_CAFE_WEBSITE_URL, "")
+  val cafeWebsiteUrl = _cafeWebsiteUrl.asStateFlow()
+
+  private val _cafeBlogUrl = savedStateHandle.getMutableStateFlow(KEY_CAFE_BLOG_URL, "")
+  val cafeBlogUrl = _cafeBlogUrl.asStateFlow()
+
+  private val _cafePhone = savedStateHandle.getMutableStateFlow(KEY_CAFE_PHONE, "")
+  val cafePhone = _cafePhone.asStateFlow()
+
+  fun setCafeAreaSize(cafeAreaSize: String) {
+    _cafeAreaSize.value = cafeAreaSize
+  }
+  fun setCafeMeetingRoom(cafeMeetingRoom: String) {
+    if (cafeMeetingRoom.isEmpty()) _cafeMeetingRoom.value = 0
+    else _cafeMeetingRoom.value = cafeMeetingRoom.toInt()
+  }
+  fun setCafeMultiSeat(cafeMultiSeat: String) {
+    if (cafeMultiSeat.isEmpty()) _cafeMultiSeat.value = 0
+    else _cafeMultiSeat.value = cafeMultiSeat.toInt()
+  }
+  fun setCafeSingleSeat(cafeSingleSeat: String) {
+    if (cafeSingleSeat.isEmpty()) _cafeSingleSeat.value = 0
+    else _cafeSingleSeat.value = cafeSingleSeat.toInt()
+  }
+  fun setCafeBusinessHours(cafeBusinessHours: String) {
+    _cafeBusinessHours.value = cafeBusinessHours.replace(" ", "").split(",")
+  }
+  fun setCafeParking(cafeParking: String) {
+    _cafeParking.value = cafeParking
+  }
+  fun setCafeSmoking(cafeSmoking: String) {
+    _cafeSmoking.value = cafeSmoking
+  }
+  fun setCafeWifi(cafeWifi: String) {
+    _cafeWifi.value = cafeWifi
+  }
+  fun setCafeOutlet(cafeOutlet: String) {
+    _cafeOutlet.value = cafeOutlet
+  }
+  fun setCafeRestRoom(cafeRestRoom: String) {
+    _cafeRestRoom.value = cafeRestRoom
+  }
+  fun setCafeMobileCharging(cafeMobileCharging: String) {
+    _cafeMobileCharging.value = cafeMobileCharging
+  }
+  fun setCafeInstagramUrl(cafeInstagramUrl: String) {
+    _cafeInstagramUrl.value = cafeInstagramUrl
+  }
+  fun setCafeWebsiteUrl(cafeWebsiteUrl: String) {
+    _cafeWebsiteUrl.value = cafeWebsiteUrl
+  }
+  fun setCafeBlogUrl(cafeBlogUrl: String) {
+    _cafeBlogUrl.value = cafeBlogUrl
+  }
+  fun setCafePhone(cafePhone: String) {
+    _cafePhone.value = cafePhone
+  }
+
   init {
     getCafeMenuListAndInfo(selectedCafeInfo.id)
   }
@@ -84,13 +182,13 @@ class ProposeCafeInfoViewModel @Inject constructor(
                 existsWifi = placeBody.info?.existsWifi,
                 existsOutlet = placeBody.info?.existsOutlet,
                 instagramUri = placeBody.info?.instagramUri,
-                meetingRoomCount = placeBody.info?.meetingRoomCount?.toString(),
+                meetingRoomCount = placeBody.info?.meetingRoomCount,
                 mobileCharging = placeBody.info?.mobileCharging,
-                multiSeatCount = placeBody.info?.multiSeatCount?.toString(),
+                multiSeatCount = placeBody.info?.multiSeatCount,
                 parking = placeBody.info?.parking,
                 phone = placeBody.info?.phone,
                 restRoom = placeBody.info?.restRoom,
-                singleSeatCount = placeBody.info?.singleSeatCount?.toString(),
+                singleSeatCount = placeBody.info?.singleSeatCount,
                 websiteUri = placeBody.info?.websiteUri,
               )
             }
@@ -146,6 +244,28 @@ class ProposeCafeInfoViewModel @Inject constructor(
   }
 
   fun editCafeInfo() {
+    viewModelScope.launch {
+      _cafeInfo.update { cafeInfo ->
+        cafeInfo.copy(
+          areaSize = cafeAreaSize.value,
+          meetingRoomCount = cafeMeetingRoom.value,
+          multiSeatCount = cafeMultiSeat.value,
+          singleSeatCount = cafeSingleSeat.value,
+          businessHours = cafeBusinessHours.value,
+          parking = cafeParking.value,
+          existsSmokingArea = cafeSmoking.value.lowercase() == "o",
+          existsWifi = cafeWifi.value.lowercase() == "o",
+          existsOutlet = cafeOutlet.value.lowercase() == "o",
+          restRoom = cafeRestRoom.value,
+          mobileCharging = cafeMobileCharging.value,
+          instagramUri = cafeInstagramUrl.value,
+          websiteUri = cafeWebsiteUrl.value,
+          blogUri = cafeBlogUrl.value,
+          phone = cafePhone.value,
+        )
+      }
+    }
+
     placeBody.info = cafeInfo.value.toEntity()
   }
 
@@ -174,5 +294,26 @@ class ProposeCafeInfoViewModel @Inject constructor(
 
   private companion object {
     private const val CAFE_DETAIL_INFO = "cafe_detail_info"
+
+    private const val KEY_CAFE_AREA_SIZE = "cafe_area"
+    private const val KEY_CAFE_MEETING_ROOM = "cafe_meeting_room"
+    private const val KEY_CAFE_MULTI_SEAT = "cafe_multi_seat"
+    private const val KEY_CAFE_SINGLE_SEAT = "cafe_single_seat"
+
+    private const val KEY_CAFE_BUSINESS_HOURS = "cafe_business_hours"
+    private const val KEY_CAFE_PARKING = "cafe_parking"
+
+    private const val KEY_CAFE_SMOKING = "cafe_smoke"
+    private const val KEY_CAFE_WIFI = "cafe_wifi"
+    private const val KEY_CAFE_OUTLET = "cafe_outlet"
+
+    private const val KEY_CAFE_REST_ROOM = "cafe_rest_room"
+    private const val KEY_CAFE_MOBILE_CHARGING = "cafe_mobile_charging"
+
+    private const val KEY_CAFE_INSTAGRAM_URL = "cafe_instagram_uri"
+    private const val KEY_CAFE_WEBSITE_URL = "cafe_website_uri"
+    private const val KEY_CAFE_BLOG_URL = "cafe_blog_uri"
+
+    private const val KEY_CAFE_PHONE = "cafe_phone"
   }
 }

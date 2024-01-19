@@ -77,11 +77,8 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
 
   private fun initDataObserver() {
     repeatOnStarted {
-      launch {
-        binding.tietInputCafeArea.textChangesAsFlow()
-          .collect { text ->
-            viewModel.setCafeAreaSize(text.toString().trim())
-          }
+      collectTextChanges(this, binding.tietInputCafeArea) { cafeAreaSize ->
+        viewModel.setCafeAreaSize(cafeAreaSize)
       }
       collectTextChanges(this, binding.tietInputCafeMeetingRoom) { cafeMeetingRoom ->
         viewModel.setCafeMeetingRoom(cafeMeetingRoom)

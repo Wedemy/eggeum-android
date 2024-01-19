@@ -125,7 +125,7 @@
           android:id="@+id/tiet_input_cafe_meeting_room"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_count_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -156,7 +156,7 @@
           android:id="@+id/tiet_input_cafe_multi_seat"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_count_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -187,7 +187,7 @@
           android:id="@+id/tiet_input_cafe_single_seat"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_count_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -218,7 +218,7 @@
           android:id="@+id/tiet_input_cafe_business_hours"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_business_hours_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -249,7 +249,7 @@
           android:id="@+id/tiet_input_parking"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_parking_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -280,7 +280,7 @@
           android:id="@+id/tiet_input_exists_smoking_area"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_ox_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -311,7 +311,38 @@
           android:id="@+id/tiet_input_exists_wifi"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_ox_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_exists_outlet"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_exists_outlet"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_exists_wifi" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_exists_outlet"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_outlet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_exists_outlet"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_ox_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -326,7 +357,7 @@
         android:text="@string/input_rest_room"
         android:textColor="@color/gray_800"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_input_exists_wifi" />
+        app:layout_constraintTop_toBottomOf="@id/til_input_exists_outlet" />
 
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_rest_room"
@@ -342,7 +373,7 @@
           android:id="@+id/tiet_input_rest_room"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_restroom_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -373,7 +404,7 @@
           android:id="@+id/tiet_input_mobile_charging"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_charging_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -404,7 +435,7 @@
           android:id="@+id/tiet_input_instagram_uri"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_instagram_url_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -435,7 +466,7 @@
           android:id="@+id/tiet_input_website_uri"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_website_url_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -466,7 +497,7 @@
           android:id="@+id/tiet_input_blog_uri"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_blog_url_hint"
           android:inputType="text"
           android:maxLines="1" />
 
@@ -497,7 +528,7 @@
           android:id="@+id/tiet_input_phone"
           style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
           android:ellipsize="end"
-          android:hint="@string/input_cafe_info_hint"
+          android:hint="@string/input_cafe_info_phone_hint"
           android:inputType="text"
           android:maxLines="1" />
 

@@ -11,17 +11,19 @@ package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
-import us.wedemy.eggeum.android.domain.model.place.InfoEntity
+import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeInfoBinding
+import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
 
 @AndroidEntryPoint
@@ -30,30 +32,11 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
 
   private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
 
-  // TODO: 데이터 뷰모델에서 관리 >> 현재, 데이터를 변경한 후에 다시 정보 수정에 접근하면 데이터가 기초 데이터인데, 이와 달리 메뉴에 재접근하면 수정된 정보를 들고 있다.
-
-  private var cafeArea = ""
-  private var cafeMeetingRoom = ""
-  private var cafeMultiSeat = ""
-  private var cafeSingleSeat = ""
-  private var cafeBusinessHours = ""
-  private var cafeParking = ""
-  private var cafeExistsSmokingArea = ""
-  private var cafeExistsWifi = ""
-  private var cafeRestRoom = ""
-  private var cafeMobileCharging = ""
-  private var cafeInstagramUri = ""
-  private var cafeWebsiteUri = ""
-  private var cafeBlogUri = ""
-  private var cafePhone = ""
-
-  private var cafeName: String = ""
-  private val guideMessage = "정보를 입력해주세요!" // resources.getString(R.string.guide_message) // 에러발생
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //    initView()
     initListener()
     initObserver()
+    initDataObserver()
   }
 
 //  private fun initView() {
@@ -67,87 +50,79 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           requireActivity().finish()
         }
       }
-      /**
-       * 입력란 별, 검증
-       */
-      tietInputCafeArea.doAfterTextChanged {
-        cafeArea = it.toString()
-      }
-      tietInputCafeMeetingRoom.doAfterTextChanged {
-        cafeMeetingRoom = it.toString()
-      }
-      tietInputCafeMultiSeat.doAfterTextChanged {
-        cafeMultiSeat = it.toString()
-      }
-      tietInputCafeSingleSeat.doAfterTextChanged {
-        cafeSingleSeat = it.toString()
-      }
-      tietInputCafeBusinessHours.doAfterTextChanged {
-        cafeBusinessHours = it.toString()
-      }
-      tietInputParking.doAfterTextChanged {
-        cafeParking = it.toString()
-      }
-      tietInputExistsSmokingArea.doAfterTextChanged {
-        cafeExistsSmokingArea = it.toString()
-      }
-      tietInputExistsWifi.doAfterTextChanged {
-        cafeExistsWifi = it.toString()
-      }
-      tietInputRestRoom.doAfterTextChanged {
-        cafeRestRoom = it.toString()
-      }
-      tietInputMobileCharging.doAfterTextChanged {
-        cafeMobileCharging = it.toString()
-      }
-      tietInputInstagramUri.doAfterTextChanged {
-        cafeInstagramUri = it.toString()
-      }
-      tietInputWebsiteUri.doAfterTextChanged {
-        cafeWebsiteUri = it.toString()
-      }
-      tietInputBlogUri.doAfterTextChanged {
-        cafeBlogUri = it.toString()
-      }
-      tietInputPhone.doAfterTextChanged {
-        cafePhone = it.toString()
-      }
       btnNext.setOnClickListener {
-        val infoEntity = InfoEntity.of(
-          areaSize = stringOrElseNull(cafeArea),
-          blogUri = stringOrElseNull(cafeBlogUri),
-          businessHours = if (cafeBusinessHours != "") cafeBusinessHours.split(" ~ ") else null,
-          existsSmokingArea = stringToBoolean(cafeExistsSmokingArea),
-          existsWifi = stringToBoolean(cafeExistsWifi),
-          instagramUri = stringOrElseNull(cafeInstagramUri),
-          meetingRoomCount = stringToIntOrElseNull(cafeMeetingRoom),
-          mobileCharging = stringOrElseNull(cafeMobileCharging),
-          multiSeatCount = stringToIntOrElseNull(cafeMultiSeat),
-          parking = stringOrElseNull(cafeParking),
-          phone = stringOrElseNull(cafePhone),
-          restRoom = stringOrElseNull(cafeRestRoom),
-          singleSeatCount = stringToIntOrElseNull(cafeSingleSeat),
-          websiteUri = stringOrElseNull(cafeWebsiteUri),
-        )
-        viewModel.placeBody.info = infoEntity
-
+        // TODO: 맨처음에 읽을 때, 데이터 getMutableStateFlow 에 저장
+        // TODO: editCafeInfo할 때, getMutableStateFlow에서 placeBody update
+        viewModel.editCafeInfo()
         viewModel.updatePlaceBodyUseCase()
       }
     }
   }
-  private fun stringToBoolean(str: String): Boolean? {
-    return if (str == "") null
-    else str == "O"
+
+  private fun countObserver(cafeInfo: CafeInfoItem) {
+    binding.apply {
+      cafeInfo.meetingRoomCount?.let { tietInputCafeMeetingRoom.setText(it.toString()) }
+      cafeInfo.multiSeatCount?. let { tietInputCafeMultiSeat.setText(it.toString()) }
+      cafeInfo.singleSeatCount?. let { tietInputCafeSingleSeat.setText(it.toString()) }
+    }
   }
 
-  private fun stringOrElseNull(str: String): String? {
-    return if (str != "") str
-    else null
+  private fun urlObserver(cafeInfo: CafeInfoItem) {
+    binding.apply {
+      cafeInfo.instagramUri?.let { tietInputInstagramUri.setText(it) }
+      cafeInfo.websiteUri?.let { tietInputWebsiteUri.setText(it) }
+      cafeInfo.blogUri?.let { tietInputBlogUri.setText(it) }
+    }
   }
 
-  private fun stringToIntOrElseNull(str: String): Int? {
-    return if (str != "") str.toInt()
-    else null
+  private fun initDataObserver() {
+    repeatOnStarted {
+      collectTextChanges(this, binding.tietInputCafeArea) { cafeAreaSize ->
+        viewModel.setCafeAreaSize(cafeAreaSize)
+      }
+      collectTextChanges(this, binding.tietInputCafeMeetingRoom) { cafeMeetingRoom ->
+        viewModel.setCafeMeetingRoom(cafeMeetingRoom)
+      }
+      collectTextChanges(this, binding.tietInputCafeMultiSeat) { cafeMultiSeat ->
+        viewModel.setCafeMultiSeat(cafeMultiSeat)
+      }
+      collectTextChanges(this, binding.tietInputCafeSingleSeat) { cafeSingleSeat ->
+        viewModel.setCafeSingleSeat(cafeSingleSeat)
+      }
+      collectTextChanges(this, binding.tietInputCafeBusinessHours) { cafeBusinessHours ->
+        viewModel.setCafeBusinessHours(cafeBusinessHours)
+      }
+      collectTextChanges(this, binding.tietInputParking) { cafeParking ->
+        viewModel.setCafeParking(cafeParking)
+      }
+      collectTextChanges(this, binding.tietInputExistsSmokingArea) { cafeSmoking ->
+        viewModel.setCafeSmoking(cafeSmoking)
+      }
+      collectTextChanges(this, binding.tietInputExistsWifi) { cafeWifi ->
+        viewModel.setCafeWifi(cafeWifi)
+      }
+      collectTextChanges(this, binding.tietInputExistsOutlet) { cafeOutlet ->
+        viewModel.setCafeOutlet(cafeOutlet)
+      }
+      collectTextChanges(this, binding.tietInputRestRoom) { cafeRestRoom ->
+        viewModel.setCafeRestRoom(cafeRestRoom)
+      }
+      collectTextChanges(this, binding.tietInputMobileCharging) { cafeMobileCharging ->
+        viewModel.setCafeMobileCharging(cafeMobileCharging)
+      }
+      collectTextChanges(this, binding.tietInputInstagramUri) { cafeInstagramUrl ->
+        viewModel.setCafeInstagramUrl(cafeInstagramUrl)
+      }
+      collectTextChanges(this, binding.tietInputWebsiteUri) { cafeWebsiteUrl ->
+        viewModel.setCafeWebsiteUrl(cafeWebsiteUrl)
+      }
+      collectTextChanges(this, binding.tietInputBlogUri) { cafeBlogUrl ->
+        viewModel.setCafeBlogUrl(cafeBlogUrl)
+      }
+      collectTextChanges(this, binding.tietInputPhone) { cafePhone ->
+        viewModel.setCafePhone(cafePhone)
+      }
+    }
   }
 
   private fun initObserver() {
@@ -155,37 +130,17 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
       launch {
         viewModel.cafeInfo.collect { cafeInfo ->
           binding.apply {
-            tietInputCafeArea.hint = stringOrElseGuideMessage(cafeInfo.areaSize)
-            tietInputCafeMeetingRoom.hint = intToStringOrElseGuideMessage(cafeInfo.meetingRoomCount)
-            tietInputCafeMultiSeat.hint = intToStringOrElseGuideMessage(cafeInfo.multiSeatCount)
-            tietInputCafeSingleSeat.hint = intToStringOrElseGuideMessage(cafeInfo.singleSeatCount)
-            tietInputCafeBusinessHours.hint = cafeInfo.businessHours
-              ?.joinToString(" ~ ", "", "", -1) ?: guideMessage
-            tietInputParking.hint = stringOrElseGuideMessage(cafeInfo.parking)
-            tietInputExistsSmokingArea.hint = boolToStringOrElseGuideMessage(cafeInfo.existsSmokingArea)
-            tietInputExistsWifi.hint = boolToStringOrElseGuideMessage(cafeInfo.existsWifi)
-            tietInputRestRoom.hint = stringOrElseGuideMessage(cafeInfo.restRoom)
-            tietInputMobileCharging.hint = stringOrElseGuideMessage(cafeInfo.mobileCharging)
-            tietInputInstagramUri.hint = stringOrElseGuideMessage(cafeInfo.instagramUri)
-            tietInputWebsiteUri.hint = stringOrElseGuideMessage(cafeInfo.websiteUri)
-            tietInputBlogUri.hint = stringOrElseGuideMessage(cafeInfo.blogUri)
-            tietInputPhone.hint = stringOrElseGuideMessage(cafeInfo.phone)
-
-            cafeArea = stringOrElseDefault(cafeInfo.areaSize)
-            cafeMeetingRoom = intToStringOrElseDefault(cafeInfo.meetingRoomCount)
-            cafeMultiSeat = intToStringOrElseDefault(cafeInfo.multiSeatCount)
-            cafeSingleSeat = intToStringOrElseDefault(cafeInfo.singleSeatCount)
-            cafeBusinessHours = cafeInfo.businessHours
-              ?.joinToString(" ~ ", "", "", -1) ?: ""
-            cafeParking = stringOrElseDefault(cafeInfo.parking)
-            cafeExistsSmokingArea = boolToStringOrElseDefault(cafeInfo.existsSmokingArea)
-            cafeExistsWifi = boolToStringOrElseDefault(cafeInfo.existsWifi)
-            cafeRestRoom = stringOrElseDefault(cafeInfo.restRoom)
-            cafeMobileCharging = stringOrElseDefault(cafeInfo.mobileCharging)
-            cafeWebsiteUri = stringOrElseDefault(cafeInfo.websiteUri)
-            cafeInstagramUri = stringOrElseDefault(cafeInfo.instagramUri)
-            cafeBlogUri = stringOrElseDefault(cafeInfo.blogUri)
-            cafePhone = stringOrElseDefault(cafeInfo.phone)
+            cafeInfo.areaSize?.let { tietInputCafeArea.setText(it) }
+            countObserver(cafeInfo = cafeInfo)
+            cafeInfo.businessHours?.let { tietInputCafeBusinessHours.setText(it.joinToString(",", "", "", -1)) }
+            cafeInfo.parking?.let { tietInputParking.setText(it) }
+            cafeInfo.existsSmokingArea?.let { tietInputExistsSmokingArea.setText(boolToString(it)) }
+            cafeInfo.existsWifi?.let { tietInputExistsWifi.setText(boolToString(it)) }
+            cafeInfo.existsOutlet?.let { tietInputExistsOutlet.setText(boolToString(it)) }
+            cafeInfo.restRoom?.let { tietInputRestRoom.setText(it) }
+            cafeInfo.mobileCharging?.let { tietInputMobileCharging.setText(it) }
+            urlObserver(cafeInfo = cafeInfo)
+            cafeInfo.phone?.let { tietInputPhone.setText(it) }
           }
         }
       }
@@ -207,33 +162,17 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
     }
   }
 
-  private fun stringOrElseDefault(str: String?): String {
-    return str ?: ""
-  }
-
-  private fun intToStringOrElseDefault(int: Int?): String {
-    return int?.toString() ?: ""
-  }
-
-  private fun boolToStringOrElseDefault(bool: Boolean?): String {
-    return if (bool == null) ""
-    else if (bool) "O"
-    else "X"
-  }
-
-  private fun stringOrElseGuideMessage(str: String?): String {
-    return str ?: guideMessage
-  }
-
-  private fun intToStringOrElseGuideMessage(int: Int?): String {
-    return int?.toString() ?: guideMessage
-  }
-
-  private fun boolToStringOrElseGuideMessage(bool: Boolean?): String {
-    return if (bool == null) guideMessage
-    else {
-      if (bool) "O"
-      else "X"
+  private fun collectTextChanges(scope: CoroutineScope, editText: EditText, onTextChange: (String) -> Unit) {
+    scope.launch {
+      editText.textChangesAsFlow()
+        .collect { text ->
+          onTextChange(text.toString().trim())
+        }
     }
+  }
+
+  private fun boolToString(bool: Boolean): String {
+    return if (bool) "O"
+    else "X"
   }
 }

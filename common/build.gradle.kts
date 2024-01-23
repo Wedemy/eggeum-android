@@ -28,6 +28,7 @@ dependencies {
     libs.kotlinx.coroutines.android,
     libs.lottie,
     libs.insetter,
+    libs.timber,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
     projects.designResource,

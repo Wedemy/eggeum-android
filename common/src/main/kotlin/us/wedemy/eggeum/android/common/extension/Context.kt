@@ -10,6 +10,7 @@ package us.wedemy.eggeum.android.common.extension
 import android.content.Context
 import android.content.pm.PackageManager
 import android.view.LayoutInflater
+import timber.log.Timber
 
 val Context.layoutInflater
   get() = LayoutInflater.from(this) ?: error("Failed to create LayoutInflater")
@@ -17,7 +18,8 @@ val Context.layoutInflater
 fun Context.getAppVersionName(): String {
   return try {
     packageManager.getPackageInfo(packageName, 0).versionName
-  } catch (e: PackageManager.NameNotFoundException) {
+  } catch (exception: PackageManager.NameNotFoundException) {
+    Timber.d(exception)
     "Unknown"
   }
 }

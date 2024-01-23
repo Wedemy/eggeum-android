@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.getAppVersionName
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMyAccountBinding
 import us.wedemy.eggeum.android.main.model.UserInfoModel
@@ -34,8 +35,15 @@ class MyAccountFragment : BaseFragment<FragmentMyAccountBinding>() {
     super.onViewCreated(view, savedInstanceState)
     viewModel.getUserInfo()
 
+    initView()
     initListener()
     initObserver()
+  }
+
+  private fun initView() {
+    binding.apply {
+      tvMyAccountVersionName.text = requireContext().getAppVersionName()
+    }
   }
 
   private fun initListener() {

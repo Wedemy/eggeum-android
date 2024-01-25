@@ -41,7 +41,7 @@ class SearchViewModel @Inject constructor(
       location.latitude != -1.0 && location.longitude != -1.0
     }.flatMapLatest { location ->
       getPlaceListUseCase(
-        distance = 1000.0,
+        distance = 2500.0,
         latitude = location.latitude,
         longitude = location.longitude,
       )

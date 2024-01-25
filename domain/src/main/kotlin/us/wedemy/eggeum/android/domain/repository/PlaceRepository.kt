@@ -38,10 +38,10 @@ public interface PlaceRepository {
    * @param type 타입(PlaceType)
    */
   public fun getPlaceList(
-    distance: Int? = null,
+    distance: Double? = null,
     endDate: String? = null,
-    latitude: Int? = null,
-    longitude: Int? = null,
+    latitude: Double? = null,
+    longitude: Double? = null,
     page: Int? = null,
     search: String? = null,
     size: Int? = null,

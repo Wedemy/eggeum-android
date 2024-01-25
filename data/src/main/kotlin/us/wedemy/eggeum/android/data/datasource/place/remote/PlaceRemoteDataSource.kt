@@ -16,10 +16,10 @@ public interface PlaceRemoteDataSource {
   public suspend fun getPlace(placeId: Long): PlaceResponse?
 
   public fun getPlaceList(
-    distance: Int?,
+    distance: Double?,
     endDate: String?,
-    latitude: Int?,
-    longitude: Int?,
+    latitude: Double?,
+    longitude: Double?,
     page: Int?,
     search: String?,
     size: Int?,

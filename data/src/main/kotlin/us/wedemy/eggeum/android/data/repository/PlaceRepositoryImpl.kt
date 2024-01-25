@@ -29,10 +29,10 @@ public class PlaceRepositoryImpl @Inject constructor(
   }
 
   override fun getPlaceList(
-    distance: Int?,
+    distance: Double?,
     endDate: String?,
-    latitude: Int?,
-    longitude: Int?,
+    latitude: Double?,
+    longitude: Double?,
     page: Int?,
     search: String?,
     size: Int?,

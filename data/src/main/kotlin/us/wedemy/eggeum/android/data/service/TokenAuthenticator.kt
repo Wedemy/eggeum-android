@@ -23,7 +23,7 @@ public class TokenAuthenticator @Inject constructor(
       if (response.request.header("Authorization") != "Bearer $currentAccessToken") {
         Timber.d("RefreshToken is Expired")
         // 로그인 토큰 제거(로그아웃)
-        dataStoreProvider.clear()
+        // dataStoreProvider.clear()
         throw RefreshTokenExpiredException
       }
 

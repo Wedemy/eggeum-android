@@ -26,10 +26,10 @@ public interface PlaceService {
 
   @GET("app/place")
   public suspend fun getPlaceList(
-    @Query("distance") distance: Int? = null,
+    @Query("distance") distance: Double? = null,
     @Query("endDate") endDate: String? = null,
-    @Query("latitude") latitude: Int? = null,
-    @Query("longitude") longiture: Int? = null,
+    @Query("latitude") latitude: Double? = null,
+    @Query("longitude") longitude: Double? = null,
     @Query("page") page: Int? = null,
     @Query("search") search: String? = null,
     @Query("size") size: Int? = null,

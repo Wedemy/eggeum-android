@@ -31,8 +31,18 @@ public class GetPlaceUseCase @Inject constructor(
 public class GetPlaceListUseCase @Inject constructor(
   private val repository: PlaceRepository,
 ) {
-  public operator fun invoke(query: String? = null): Flow<PagingData<PlaceEntity>> {
-    return repository.getPlaceList(search = query)
+  public operator fun invoke(
+    query: String? = null,
+    distance: Double? = null,
+    latitude: Double? = null,
+    longitude: Double? = null,
+  ): Flow<PagingData<PlaceEntity>> {
+    return repository.getPlaceList(
+      search = query,
+      distance = distance,
+      latitude = latitude,
+      longitude = longitude,
+    )
   }
 }
 

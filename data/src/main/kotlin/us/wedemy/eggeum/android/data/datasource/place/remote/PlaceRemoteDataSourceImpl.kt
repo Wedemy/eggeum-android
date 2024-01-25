@@ -36,10 +36,10 @@ public class PlaceRemoteDataSourceImpl @Inject constructor(
   }
 
   override fun getPlaceList(
-    distance: Int?,
+    distance: Double?,
     endDate: String?,
-    latitude: Int?,
-    longitude: Int?,
+    latitude: Double?,
+    longitude: Double?,
     page: Int?,
     search: String?,
     size: Int?,
@@ -47,7 +47,15 @@ public class PlaceRemoteDataSourceImpl @Inject constructor(
     startDate: String?,
     type: String?,
   ): Flow<PagingData<PlaceResponse>> {
-    val pagingSourceFactory = { PlacePagingSource(service, search) }
+    val pagingSourceFactory = {
+      PlacePagingSource(
+        service = service,
+        query = search,
+        distance = distance,
+        latitude = latitude,
+        longitude = longitude,
+      )
+    }
 
     return Pager(
       config = PagingConfig(

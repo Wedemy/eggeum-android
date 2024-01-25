@@ -214,6 +214,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
       val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
       naverMap?.moveCamera(cameraUpdate)
+
+      searchViewModel.setCurrentLocation(location.latitude, location.longitude)
     }
   }
 

@@ -20,6 +20,9 @@ import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 public class PlacePagingSource(
   private val service: PlaceService,
   private val query: String? = null,
+  private val distance: Double? = null,
+  private val latitude: Double? = null,
+  private val longitude: Double? = null,
 ) : PagingSource<Int, PlaceResponse>() {
 
   override fun getRefreshKey(state: PagingState<Int, PlaceResponse>): Int? {
@@ -32,7 +35,14 @@ public class PlacePagingSource(
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PlaceResponse> {
     return try {
       val pageNumber = params.key ?: STARTING_PAGE_INDEX
-      val response = service.getPlaceList(page = pageNumber, search = query, size = params.loadSize)
+      val response = service.getPlaceList(
+        page = pageNumber,
+        search = query,
+        size = params.loadSize,
+        distance = distance,
+        latitude = latitude,
+        longitude = longitude,
+      )
 
       val endOfPaginationReached = response.list.isEmpty()
 

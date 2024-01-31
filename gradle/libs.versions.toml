@@ -35,7 +35,7 @@ androidx-hilt-navigation = "1.1.0"
 androidx-paging3 = "3.2.1"
 androidx-room = "2.6.1"
 
-ktor-client-core = "2.3.7"
+ktor-client-core = "2.3.8"
 
 retrofit = "2.9.0"
 okhttp = "5.0.0-alpha.12"

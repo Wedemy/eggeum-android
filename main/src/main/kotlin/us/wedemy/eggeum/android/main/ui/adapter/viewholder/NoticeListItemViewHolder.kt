@@ -7,6 +7,7 @@
 
 package us.wedemy.eggeum.android.main.ui.adapter.viewholder
 
+import android.text.Html
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import us.wedemy.eggeum.android.main.databinding.ItemNoticeListBinding
@@ -17,7 +18,7 @@ class NoticeListItemViewHolder(val binding: ItemNoticeListBinding) : RecyclerVie
     binding.apply {
       tvNoticeTitle.text = notice.title
       tvNoticeDate.text = notice.date
-      tvNoticeDescription.text = notice.description
+      tvNoticeDescription.text = Html.fromHtml(notice.description, Html.FROM_HTML_MODE_COMPACT)
       ivNoticeExpand.rotation = if (notice.isExpanded) 180f else 0f
       llLayoutExpand.visibility = if (notice.isExpanded) View.VISIBLE else View.GONE
     }

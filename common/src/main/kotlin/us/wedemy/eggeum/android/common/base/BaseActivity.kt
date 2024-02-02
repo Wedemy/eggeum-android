@@ -41,8 +41,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
     setContentView(binding.root)
     binding.root.applyInsetter {
+//      type(navigationBars = true, f = InsetterApplyTypeDsl::padding)
       type(statusBars = true, f = InsetterApplyTypeDsl::padding)
-      type(navigationBars = true, f = InsetterApplyTypeDsl::padding)
     }
   }
 }

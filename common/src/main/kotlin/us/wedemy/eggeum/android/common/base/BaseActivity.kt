@@ -18,6 +18,8 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 
 abstract class BaseActivity : AppCompatActivity() {
   protected abstract val binding: ViewBinding
@@ -36,6 +38,14 @@ abstract class BaseActivity : AppCompatActivity() {
     } else {
       @Suppress("DEPRECATION")
       window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+    binding.root.applyInsetter {
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = false,
+        f = InsetterApplyTypeDsl::padding,
+      )
     }
     setContentView(binding.root)
   }

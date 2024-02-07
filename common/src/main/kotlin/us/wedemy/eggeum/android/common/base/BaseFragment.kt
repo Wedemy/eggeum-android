@@ -12,8 +12,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import dev.chrisbanes.insetter.InsetterApplyTypeDsl
-import dev.chrisbanes.insetter.applyInsetter
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
   private var _binding: VB? = null
@@ -26,13 +24,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ) = getViewBinding().also {
-    _binding = it
-    binding.root.applyInsetter {
-      type(navigationBars = true, f = InsetterApplyTypeDsl::padding)
-      type(statusBars = true, f = InsetterApplyTypeDsl::padding)
-    }
-  }.root
+  ) = getViewBinding().also { _binding = it }.root
 
   override fun onDestroyView() {
     _binding = null

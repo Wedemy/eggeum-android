@@ -39,10 +39,14 @@ abstract class BaseActivity : AppCompatActivity() {
       @Suppress("DEPRECATION")
       window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
-    setContentView(binding.root)
     binding.root.applyInsetter {
-      type(statusBars = true, f = InsetterApplyTypeDsl::padding)
-      type(navigationBars = true, f = InsetterApplyTypeDsl::padding)
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = false,
+        f = InsetterApplyTypeDsl::padding,
+      )
     }
+    setContentView(binding.root)
   }
 }

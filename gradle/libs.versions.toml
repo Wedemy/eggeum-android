@@ -3,7 +3,7 @@ android-gradle-plugin = "8.2.2"
 gradle-dependency-handler-extensions = "1.1.0"
 
 google-secrets = "2.0.1"
-google-gms-google-services = "4.4.0"
+google-gms-google-services = "4.4.1"
 google-gms-play-services-auth = "20.7.0"
 
 firebase-bom = "32.7.1"

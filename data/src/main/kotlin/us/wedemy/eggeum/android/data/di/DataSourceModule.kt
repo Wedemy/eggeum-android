@@ -26,6 +26,8 @@ import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSour
 import us.wedemy.eggeum.android.data.datasource.place.remote.PlaceRemoteDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.report.ReportDataSource
 import us.wedemy.eggeum.android.data.datasource.report.ReportDataSourceImpl
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSourceImpl
 import us.wedemy.eggeum.android.data.datasource.user.UserDataSource
 import us.wedemy.eggeum.android.data.datasource.user.UserDataSourceImpl
 
@@ -63,4 +65,8 @@ internal abstract class DataSourceModule {
   @Binds
   @Singleton
   abstract fun bindFileDataSource(fileDataSourceImpl: FileDataSourceImpl): FileDataSource
+
+  @Binds
+  @Singleton
+  abstract fun bindTokenDataSource(tokenDataSourceImpl: TokenDataSourceImpl): TokenDataSource
 }

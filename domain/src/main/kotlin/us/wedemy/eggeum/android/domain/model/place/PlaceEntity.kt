@@ -18,6 +18,7 @@ public data class PlaceEntity(
   val menu: MenuEntity?,
   val name: String,
   val type: String?,
+  val isRecentSearch: Boolean,
 ) {
   public fun toUpsertPlaceEntity(): UpsertPlaceEntity {
     return UpsertPlaceEntity(

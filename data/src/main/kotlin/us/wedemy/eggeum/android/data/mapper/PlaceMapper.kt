@@ -32,6 +32,7 @@ internal fun PlaceResponse.toEntity() =
     menu = menu?.toEntity(),
     name = name,
     type = type,
+    isRecentSearch = false,
   )
 
 internal fun PlaceEntity.toModel() =

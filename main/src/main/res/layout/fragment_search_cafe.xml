@@ -67,6 +67,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cv_search_cafe"
-    tools:listitem="@layout/item_search_cafe_location" />
+    tools:listitem="@layout/item_recent_search_cafe_result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

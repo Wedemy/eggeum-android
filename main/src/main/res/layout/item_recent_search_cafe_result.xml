@@ -14,7 +14,7 @@
   tools:ignore="HardcodedText">
 
   <ImageView
-    android:id="@+id/iv_cafe_search_location"
+    android:id="@+id/iv_recent_search_cafe"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -25,7 +25,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/tv_cafe_search_location"
+    android:id="@+id/tv_recent_search_cafe_name"
     style="@style/TextLMedium"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -35,13 +35,13 @@
     android:maxLines="1"
     android:textColor="@color/gray_900"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/iv_cafe_search_location_delete"
-    app:layout_constraintStart_toEndOf="@id/iv_cafe_search_location"
+    app:layout_constraintEnd_toStartOf="@id/iv_recent_search_cafe_delete"
+    app:layout_constraintStart_toEndOf="@id/iv_recent_search_cafe"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="스타벅스 강남역신분당역사점" />
 
   <ImageView
-    android:id="@+id/iv_cafe_search_location_delete"
+    android:id="@+id/iv_recent_search_cafe_delete"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="16dp"

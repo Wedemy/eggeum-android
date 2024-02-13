@@ -8,9 +8,11 @@
 package us.wedemy.eggeum.android.domain.usecase
 
 import androidx.paging.PagingData
+import androidx.paging.map
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
@@ -57,7 +59,11 @@ public class GetSearchPlaceListUseCase @Inject constructor(
     longitude: Double? = null,
   ): Flow<PagingData<PlaceEntity>> {
     return if (query.isNullOrEmpty()) {
-      repository.getRecentSearchPlaceList()
+      repository.getRecentSearchPlaceList().map { pagingData ->
+        pagingData.map { place ->
+          place.copy(isRecentSearch = true)
+        }
+      }
     } else {
       repository.getPlaceList(
         search = query,

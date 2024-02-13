@@ -28,6 +28,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -98,6 +100,14 @@ class LoginActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    binding.root.applyInsetter {
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = true,
+        f = InsetterApplyTypeDsl::padding,
+      )
+    }
     initGoogleLogin()
     initListener()
     initObserver()

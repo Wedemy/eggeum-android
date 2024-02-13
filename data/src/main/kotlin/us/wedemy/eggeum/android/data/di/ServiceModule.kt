@@ -19,6 +19,7 @@ import us.wedemy.eggeum.android.data.service.LoginService
 import us.wedemy.eggeum.android.data.service.NoticeService
 import us.wedemy.eggeum.android.data.service.PlaceService
 import us.wedemy.eggeum.android.data.service.ReportService
+import us.wedemy.eggeum.android.data.service.TokenService
 import us.wedemy.eggeum.android.data.service.UserService
 
 @Module
@@ -77,5 +78,14 @@ internal object ServiceModule {
     retrofit: Retrofit,
   ): FileService {
     return retrofit.create(FileService::class.java)
+  }
+
+  @Singleton
+  @Provides
+  internal fun provideTokenService(
+    @Named("RetrofitAuthHttpClient")
+    retrofit: Retrofit,
+  ): TokenService {
+    return retrofit.create(TokenService::class.java)
   }
 }

@@ -47,7 +47,7 @@ class SearchCafeViewModel @Inject constructor(
   @OptIn(ExperimentalCoroutinesApi::class)
   val searchPlaceList: Flow<PagingData<PlaceEntity>> =
     debouncedSearchQuery.flatMapLatest { query ->
-      getSearchPlaceListUseCase(query)
+      getSearchPlaceListUseCase(query = query)
     }.cachedIn(viewModelScope)
 
   fun setSearchQuery(query: String) {
@@ -68,6 +68,6 @@ class SearchCafeViewModel @Inject constructor(
 
   private companion object {
     private const val KEY_CAFE_NAME = "cafe_name"
-    private const val SEARCH_TIME_DELAY = 500L
+    private const val SEARCH_TIME_DELAY = 300L
   }
 }

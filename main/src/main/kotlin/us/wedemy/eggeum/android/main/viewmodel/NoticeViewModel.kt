@@ -58,6 +58,6 @@ class NoticeViewModel @Inject constructor(
 
   private companion object {
     private const val KEY_SEARCH_KEYWORD = "search_keyword"
-    private const val SEARCH_TIME_DELAY = 500L
+    private const val SEARCH_TIME_DELAY = 300L
   }
 }

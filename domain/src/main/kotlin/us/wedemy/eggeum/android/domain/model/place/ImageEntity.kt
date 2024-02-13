@@ -11,14 +11,4 @@ import us.wedemy.eggeum.android.domain.model.FileEntity
 
 public data class ImageEntity(
   val files: List<FileEntity>?,
-) {
-  public companion object {
-    public fun of(
-      files: List<FileEntity>? = null,
-    ): ImageEntity {
-      return ImageEntity(
-        files = files,
-      )
-    }
-  }
-}
+)

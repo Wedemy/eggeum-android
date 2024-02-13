@@ -34,31 +34,4 @@ public data class PlaceEntity(
       type = type,
     )
   }
-  public companion object {
-    public fun of(
-      address1: String? = null,
-      address2: String? = null,
-      id: Long,
-      image: ImageEntity? = null,
-      info: InfoEntity? = null,
-      latitude: Double? = null,
-      longitude: Double? = null,
-      menu: MenuEntity? = null,
-      name: String,
-      type: String? = null,
-    ): PlaceEntity {
-      return PlaceEntity(
-        address1 = address1,
-        address2 = address2,
-        id = id,
-        image = image,
-        info = info,
-        latitude = latitude!!,
-        longitude = longitude!!,
-        menu = menu,
-        name = name,
-        type = type,
-      )
-    }
-  }
 }

@@ -8,9 +8,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
   <application>
+
     <activity
       android:name=".ui.MainActivity"
       android:exported="false"
+      android:screenOrientation="portrait"
       android:theme="@style/Theme.Eggeum.Main"
       android:windowSoftInputMode="adjustResize" />
 

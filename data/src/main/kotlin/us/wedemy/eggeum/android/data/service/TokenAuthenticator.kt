@@ -10,6 +10,7 @@ import timber.log.Timber
 import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
+import us.wedemy.eggeum.android.domain.util.RefreshTokenExpiredException
 
 @Suppress("TooGenericExceptionCaught")
 public class TokenAuthenticator @Inject constructor(
@@ -31,7 +32,7 @@ public class TokenAuthenticator @Inject constructor(
         }
       } catch (e: Exception) {
         Timber.e("TokenAuthenticator Error :: ${e.message}")
-        null
+        throw RefreshTokenExpiredException
       }
     }
   }

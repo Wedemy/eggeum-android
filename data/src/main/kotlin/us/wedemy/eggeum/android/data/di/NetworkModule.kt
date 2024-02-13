@@ -35,6 +35,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import timber.log.Timber
 import us.wedemy.eggeum.android.data.BuildConfig
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 import us.wedemy.eggeum.android.data.service.TokenAuthenticator
 import us.wedemy.eggeum.android.data.service.TokenInterceptor
@@ -129,8 +130,9 @@ internal object NetworkModule {
   @Provides
   internal fun provideTokenAuthenticator(
     dataStoreProvider: TokenDataStoreProvider,
+    tokenDataSource: TokenDataSource,
   ): TokenAuthenticator {
-    return TokenAuthenticator(dataStoreProvider)
+    return TokenAuthenticator(dataStoreProvider, tokenDataSource)
   }
 
   @Singleton

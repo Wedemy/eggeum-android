@@ -19,22 +19,4 @@ public data class UpsertPlaceEntity(
   val placeId: Long?,
   val remarks: String?,
   val type: String?,
-) {
-  public companion object {
-    public fun of(info: InfoEntity, placeId: Long, name: String?): UpsertPlaceEntity {
-      return UpsertPlaceEntity(
-        address1 = null,
-        address2 = null,
-        image = null,
-        info = info,
-        latitude = null,
-        longitude = null,
-        menu = null,
-        name = name,
-        placeId = placeId,
-        remarks = null,
-        type = null,
-      )
-    }
-  }
-}
+)

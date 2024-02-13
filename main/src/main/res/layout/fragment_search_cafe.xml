@@ -55,6 +55,20 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/cv_search_cafe" />
 
+  <TextView
+    android:id="@+id/tv_no_search_results"
+    style="@style/TextMRegular"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="112dp"
+    android:gravity="center_horizontal"
+    android:text="@string/no_search_results"
+    android:textColor="@color/gray_500"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/cv_search_cafe" />
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_search_cafe"
     android:layout_width="0dp"
@@ -67,6 +81,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cv_search_cafe"
-    tools:listitem="@layout/item_search_cafe_location" />
+    tools:listitem="@layout/item_recent_search_cafe_result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

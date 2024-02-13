@@ -7,18 +7,17 @@
 
 <resources>
   <!--  Home-->
-
+  <string name="home">홈</string>
+  <string name="new_cafe">신규 카페</string>
+  <string name="check_new_cafe">새롭게 추가된 카페를 확인해보세요.</string>
+  <string name="cafe">카페</string>
+  <string name="study_cafe">스터디 카페</string>
+  <string name="study_room">스터디 룸</string>
 
   <!--  Search-->
   <string name="my_account">내 계정</string>
   <string name="search">검색</string>
-  <string name="home">홈</string>
-  <string name="new_cafe">신규 카페</string>
-  <string name="check_new_cafe">새롭게 추가된 카페를 확인해보세요.</string>
   <string name="search_cafe">카페 검색</string>
-  <string name="cafe">카페</string>
-  <string name="study_cafe">스터디 카페</string>
-  <string name="study_room">스터디 룸</string>
   <string name="location_permission_educational_message">지도 사용을 위해 위치 권한을 허용해주세요.(필수권한)</string>
   <string name="check">확인</string>
   <string name="cancel">취소</string>
@@ -47,6 +46,8 @@
   <string name="cafe_image_report">사진 신고하기</string>
   <string name="image_index"><font color="#ffffff">5</font><font color="#6b7280">/25</font></string>
   <string name="proposal_info_edit">정보 수정 제안</string>
+  <string name="no_recent_searches">최근 검색어가 없습니다.</string>
+  <string name="no_search_results">검색 결과가 존재하지 않습니다.</string>
 
   <!--  MyAccount-->
   <string name="edit_my_info">내 정보 수정</string>
@@ -101,7 +102,6 @@
   <string name="pornographic_or_sexual_content">포르노 또는 성적인 콘텐츠</string>
   <string name="spam">스팸</string>
   <string name="copyright_or_legal_matter">저작권 또는 법적 문제</string>
-  <string name="no_recent_searches">최근 검색어가 없습니다.</string>
   <string name="invalid_address">올바른 주소가 아닙니다</string>
   <string name="withdraw_complete">회원 탈퇴가 완료되었습니다.</string>
   <string name="logout_complete">로그아웃이 완료되었습니다.</string>

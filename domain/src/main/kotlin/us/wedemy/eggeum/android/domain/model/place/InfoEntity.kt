@@ -23,42 +23,4 @@ public data class InfoEntity(
   val restRoom: String?,
   val singleSeatCount: Int?,
   val websiteUri: String?,
-) {
-  public companion object {
-    public fun of(
-      areaSize: String? = null,
-      blogUri: String? = null,
-      businessHours: List<String>? = null,
-      existsSmokingArea: Boolean? = null,
-      existsWifi: Boolean? = null,
-      existsOutlet: Boolean? = null,
-      instagramUri: String? = null,
-      meetingRoomCount: Int? = null,
-      mobileCharging: String? = null,
-      multiSeatCount: Int? = null,
-      parking: String? = null,
-      phone: String? = null,
-      restRoom: String? = null,
-      singleSeatCount: Int? = null,
-      websiteUri: String? = null,
-    ): InfoEntity {
-      return InfoEntity(
-        areaSize = areaSize,
-        blogUri = blogUri,
-        businessHours = businessHours,
-        existsSmokingArea = existsSmokingArea,
-        existsWifi = existsWifi,
-        existsOutlet = existsOutlet,
-        instagramUri = instagramUri,
-        meetingRoomCount = meetingRoomCount,
-        mobileCharging = mobileCharging,
-        multiSeatCount = multiSeatCount,
-        parking = parking,
-        phone = phone,
-        restRoom = restRoom,
-        singleSeatCount = singleSeatCount,
-        websiteUri = websiteUri,
-      )
-    }
-  }
-}
+)

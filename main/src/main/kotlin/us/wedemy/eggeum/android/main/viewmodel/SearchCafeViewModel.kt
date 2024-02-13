@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.naver.maps.geometry.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,6 +29,7 @@ import us.wedemy.eggeum.android.domain.usecase.DeleteRecentSearchPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.GetSearchPlaceListUseCase
 import us.wedemy.eggeum.android.domain.usecase.InsertRecentSearchPlaceUseCase
 
+// TODO 검색 결과 아이템과 최근 검색 결과 아이템의 디자인이 달라야함
 @HiltViewModel
 class SearchCafeViewModel @Inject constructor(
   getSearchPlaceListUseCase: GetSearchPlaceListUseCase,
@@ -39,6 +41,9 @@ class SearchCafeViewModel @Inject constructor(
     savedStateHandle.getMutableStateFlow(KEY_CAFE_NAME, "")
   val searchQuery = _searchQuery.asStateFlow()
 
+  private val currentLocation: LatLng =
+    requireNotNull(savedStateHandle.get<LatLng>(KEY_CURRENT_LOCATION)) { "currentLocation is required." }
+
   @OptIn(FlowPreview::class)
   val debouncedSearchQuery: Flow<String?> = searchQuery
     .debounce(SEARCH_TIME_DELAY)
@@ -47,7 +52,12 @@ class SearchCafeViewModel @Inject constructor(
   @OptIn(ExperimentalCoroutinesApi::class)
   val searchPlaceList: Flow<PagingData<PlaceEntity>> =
     debouncedSearchQuery.flatMapLatest { query ->
-      getSearchPlaceListUseCase(query)
+      getSearchPlaceListUseCase(
+        query = query,
+        distance = 2500.0,
+        latitude = currentLocation.latitude,
+        longitude = currentLocation.longitude,
+      )
     }.cachedIn(viewModelScope)
 
   fun setSearchQuery(query: String) {
@@ -68,6 +78,7 @@ class SearchCafeViewModel @Inject constructor(
 
   private companion object {
     private const val KEY_CAFE_NAME = "cafe_name"
-    private const val SEARCH_TIME_DELAY = 500L
+    private const val SEARCH_TIME_DELAY = 300L
+    private const val KEY_CURRENT_LOCATION = "current_location"
   }
 }

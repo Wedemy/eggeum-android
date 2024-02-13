@@ -28,13 +28,14 @@ class SearchViewModel @Inject constructor(
   private val getPlaceListUseCase: GetPlaceListUseCase,
 ) : ViewModel() {
   private val _currentLocation = MutableStateFlow(LatLng(-1.0, -1.0))
+  val currentLocation: StateFlow<LatLng> = _currentLocation.asStateFlow()
 
   fun setCurrentLocation(latitude: Double, longitude: Double) {
     _currentLocation.value = LatLng(latitude, longitude)
   }
 
   // TODO 맵 zoom level, 내 위치가 변하면 값이 갱신 되어야 함
-  // 반경 1km 내에 위치한 장소에 마커가 찍히도록
+  // 반경 2.5km 내에 위치한 장소에 마커가 찍히도록
   @OptIn(ExperimentalCoroutinesApi::class)
   val placeList = _currentLocation
     .filter { location ->

@@ -18,6 +18,7 @@ public data class PlaceEntity(
   val menu: MenuEntity?,
   val name: String,
   val type: String?,
+  val isRecentSearch: Boolean,
 ) {
   public fun toUpsertPlaceEntity(): UpsertPlaceEntity {
     return UpsertPlaceEntity(
@@ -33,32 +34,5 @@ public data class PlaceEntity(
       remarks = null,
       type = type,
     )
-  }
-  public companion object {
-    public fun of(
-      address1: String? = null,
-      address2: String? = null,
-      id: Long,
-      image: ImageEntity? = null,
-      info: InfoEntity? = null,
-      latitude: Double? = null,
-      longitude: Double? = null,
-      menu: MenuEntity? = null,
-      name: String,
-      type: String? = null,
-    ): PlaceEntity {
-      return PlaceEntity(
-        address1 = address1,
-        address2 = address2,
-        id = id,
-        image = image,
-        info = info,
-        latitude = latitude!!,
-        longitude = longitude!!,
-        menu = menu,
-        name = name,
-        type = type,
-      )
-    }
   }
 }

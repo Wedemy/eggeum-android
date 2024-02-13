@@ -31,14 +31,14 @@ class SearchCafeAdapter(private val clickListener: SearchCafeClickListener? = nu
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-    return when(viewType) {
+    return when (viewType) {
       VIEW_TYPE_SEARCH_CAFE -> SearchCafeViewHolder(
-        ItemSearchCafeResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemSearchCafeResultBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
       VIEW_TYPE_RECENT_SEARCH_CAFE -> RecentSearchCafeViewHolder(
-        ItemRecentSearchCafeResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemRecentSearchCafeResultBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       )
-      else -> throw IllegalStateException("Unknown viewType $viewType")
+      else -> error("Unknown viewType $viewType")
     }
   }
 

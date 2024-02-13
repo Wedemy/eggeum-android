@@ -91,17 +91,15 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         searchCafeAdapter.loadStateFlow
           .distinctUntilChangedBy { it.refresh }
           .collect { loadStates ->
-            if (loadStates.source.refresh is LoadState.NotLoading && loadStates.append.endOfPaginationReached && searchCafeAdapter.itemCount < 1
-            ) {
-              binding.apply {
-                tvNoRecentSearches.visibility = View.VISIBLE
-                binding.rvSearchCafe.visibility = View.GONE
-              }
-            } else {
-              binding.apply {
-                tvNoRecentSearches.visibility = View.GONE
-                binding.rvSearchCafe.visibility = View.VISIBLE
-              }
+            val isListEmpty = loadStates.source.refresh is LoadState.NotLoading &&
+              loadStates.append.endOfPaginationReached &&
+              searchCafeAdapter.itemCount < 1
+            val isSearchQueryEmpty = searchCafeViewModel.searchQuery.value.isEmpty()
+
+            binding.apply {
+              tvNoRecentSearches.visibility = if (isListEmpty && isSearchQueryEmpty) View.VISIBLE else View.GONE
+              tvNoSearchResults.visibility = if (isListEmpty && !isSearchQueryEmpty) View.VISIBLE else View.GONE
+              rvSearchCafe.visibility = if (isListEmpty) View.GONE else View.VISIBLE
             }
           }
       }

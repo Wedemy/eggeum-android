@@ -47,6 +47,7 @@
   <string name="image_index"><font color="#ffffff">5</font><font color="#6b7280">/25</font></string>
   <string name="proposal_info_edit">정보 수정 제안</string>
   <string name="no_recent_searches">최근 검색어가 없습니다.</string>
+  <string name="no_search_results">검색 결과가 존재하지 않습니다.</string>
 
   <!--  MyAccount-->
   <string name="edit_my_info">내 정보 수정</string>

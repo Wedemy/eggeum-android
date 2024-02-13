@@ -122,7 +122,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     }
 
     binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment()
+      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
       findNavController().safeNavigate(action)
     }
   }

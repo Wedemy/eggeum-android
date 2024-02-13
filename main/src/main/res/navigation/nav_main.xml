@@ -130,6 +130,10 @@
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <argument
+      android:name="current_location"
+      app:argType="com.naver.maps.geometry.LatLng" />
+
   </fragment>
 
   <fragment

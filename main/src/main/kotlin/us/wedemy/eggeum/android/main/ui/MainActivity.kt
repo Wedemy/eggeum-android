@@ -120,7 +120,7 @@ class MainActivity : BaseActivity() {
       } else {
         controller?.setSystemBarsAppearance(
           WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
         )
       }
     } else {

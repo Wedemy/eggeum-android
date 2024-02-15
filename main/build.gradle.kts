@@ -53,6 +53,7 @@ dependencies {
     libs.timber,
     libs.naver.map,
     libs.photo.view,
+    libs.insetter,
     projects.common,
     projects.designResource,
     projects.domain,

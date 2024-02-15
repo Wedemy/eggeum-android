@@ -14,14 +14,17 @@ import android.view.View
 import android.view.WindowInsetsController
 import androidx.activity.SystemBarStyle
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import us.wedemy.eggeum.android.common.base.BaseActivity
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.ActivityMainBinding
-import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.navigator.LoginNavigator
 import us.wedemy.eggeum.android.navigator.UpdateCafeNavigator
 
@@ -64,12 +67,39 @@ class MainActivity : BaseActivity() {
     navController?.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
         R.id.fragment_cafe_image_detail -> {
-          val systemBarColor = ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900)
-          updateSystemBars(systemBarColor)
+          updateSystemBars(ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900))
+          binding.root.applyInsetter {
+            type(
+              ime = true,
+              statusBars = true,
+              navigationBars = false,
+              f = InsetterApplyTypeDsl::padding,
+            )
+          }
+        }
+
+        R.id.fragment_search, R.id.fragment_map -> {
+          updateSystemBars(Color.TRANSPARENT)
+          binding.root.applyInsetter {
+            type(
+              ime = true,
+              statusBars = false,
+              navigationBars = false,
+              f = InsetterApplyTypeDsl::padding,
+            )
+          }
         }
 
         else -> {
           updateSystemBars(Color.TRANSPARENT)
+          binding.root.applyInsetter {
+            type(
+              ime = true,
+              statusBars = true,
+              navigationBars = false,
+              f = InsetterApplyTypeDsl::padding,
+            )
+          }
         }
       }
     }
@@ -79,19 +109,23 @@ class MainActivity : BaseActivity() {
     window.statusBarColor = color
     window.navigationBarColor = color
 
+    val isDarkColor =
+      color == ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900)
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      WindowCompat.setDecorFitsSystemWindows(window, false)
       val controller = window.insetsController
-      if (color == ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900)) {
+      if (isDarkColor) {
         controller?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
       } else {
         controller?.setSystemBarsAppearance(
           WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+          WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
         )
       }
     } else {
       @Suppress("DEPRECATION")
-      if (color == Color.BLACK) {
+      if (isDarkColor) {
         window.decorView.systemUiVisibility = 0
       } else {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

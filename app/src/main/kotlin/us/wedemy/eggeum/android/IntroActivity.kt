@@ -14,23 +14,18 @@
 
 package us.wedemy.eggeum.android
 
-import android.animation.ObjectAnimator
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.animation.LinearInterpolator
 import androidx.activity.SystemBarStyle
 import androidx.activity.viewModels
-import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.startActivityWithAnimation
-import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.databinding.ActivityIntroBinding
 import us.wedemy.eggeum.android.login.LoginActivity
 import us.wedemy.eggeum.android.main.ui.MainActivity
@@ -55,31 +50,6 @@ class IntroActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()
     super.onCreate(savedInstanceState)
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      splashScreen.setOnExitAnimationListener { splashScreenView ->
-        ObjectAnimator.ofFloat(splashScreenView, View.ALPHA, 1f, 0f).run {
-          interpolator = LinearInterpolator()
-          duration = 500L
-          doOnEnd { splashScreenView.remove() }
-          start()
-        }
-      }
-    }
-
-//    binding.lavLogo.addAnimatorListener(
-//      object : Animator.AnimatorListener {
-//        override fun onAnimationRepeat(animation: Animator) = Unit
-//        override fun onAnimationStart(animation: Animator) = Unit
-//        override fun onAnimationCancel(animation: Animator) = Unit
-//        override fun onAnimationEnd(animation: Animator) {
-//          lifecycleScope.launch {
-//            delay(50)
-//            changeActivityWithAnimation<LoginActivity>()
-//          }
-//        }
-//      },
-//    )
     initObserver()
   }
 
@@ -87,13 +57,13 @@ class IntroActivity : BaseActivity() {
     repeatOnStarted {
       launch {
         viewModel.navigateToLoginEvent.collect {
-          delay(500L)
+          delay(1500L)
           startActivityWithAnimation<LoginActivity>()
         }
       }
       launch {
         viewModel.navigateToMainEvent.collect {
-          delay(500L)
+          delay(1500L)
           startActivityWithAnimation<MainActivity>()
         }
       }

@@ -7,9 +7,12 @@
 
 package us.wedemy.eggeum.android.updatecafe.ui
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.navigator.MainNavigator
@@ -36,5 +39,17 @@ class UpdateCafeActivity : BaseActivity() {
       activity = this,
       withFinish = true,
     )
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding.root.applyInsetter {
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = true,
+        f = InsetterApplyTypeDsl::padding,
+      )
+    }
   }
 }

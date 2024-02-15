@@ -32,6 +32,7 @@ dependencies {
     libs.bundles.androidx.navigation,
     libs.coil,
     libs.timber,
+    libs.insetter,
     projects.common,
     projects.designResource,
     projects.domain,

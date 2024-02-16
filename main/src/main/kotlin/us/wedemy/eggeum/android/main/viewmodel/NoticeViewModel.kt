@@ -33,6 +33,8 @@ class NoticeViewModel @Inject constructor(
   getNoticeListUseCase: GetNoticeListUseCase,
   savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+  val noticeId = requireNotNull(savedStateHandle.get<Long>(KEY_NOTICE_ID)) { "noticeId is required." }
+
   private val _searchQuery: SaveableMutableStateFlow<String> =
     savedStateHandle.getMutableStateFlow(KEY_SEARCH_KEYWORD, "")
   val searchQuery = _searchQuery.asStateFlow()
@@ -57,6 +59,7 @@ class NoticeViewModel @Inject constructor(
   }
 
   private companion object {
+    private const val KEY_NOTICE_ID = "notice_id"
     private const val KEY_SEARCH_KEYWORD = "search_keyword"
     private const val SEARCH_TIME_DELAY = 300L
   }

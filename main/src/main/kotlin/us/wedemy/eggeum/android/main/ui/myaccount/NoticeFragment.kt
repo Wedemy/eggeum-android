@@ -11,8 +11,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.addDivider
@@ -61,6 +63,21 @@ class NoticeFragment : BaseFragment<FragmentNoticeBinding>() {
         viewModel.noticeList.collectLatest { notices ->
           noticeAdapter.submitData(notices)
         }
+      }
+
+      launch {
+        noticeAdapter.loadStateFlow
+          .distinctUntilChangedBy { it.refresh }
+          .collect { loadStates ->
+            if (loadStates.source.refresh is LoadState.NotLoading) {
+              val selectedIndex = noticeAdapter.snapshot().items.indexOfFirst { it.id == viewModel.noticeId }
+              if (selectedIndex != -1) {
+                val notice = noticeAdapter.snapshot().items[selectedIndex]
+                notice.isExpanded = !notice.isExpanded
+                noticeAdapter.notifyItemChanged(selectedIndex)
+              }
+            }
+          }
       }
 
       launch {

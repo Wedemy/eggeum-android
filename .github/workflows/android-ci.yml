@@ -41,6 +41,12 @@ jobs:
           echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> keystore.properties
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> keystore.properties  
 
+      - name: Generate secrets.properties
+        run: |
+          echo "SERVER_BASE_URL=${{ secrets.SERVER_BASE_URL }}" >> secrets.properties
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> secrets.properties
+          echo "NAVER_MAP_CLIENT_ID=${{ secrets.NAVER_MAP_CLIENT_ID }}" >> secrets.properties
+
       - name: Code style checks
         run: ./gradlew ktlintCheck detekt
 

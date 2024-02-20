@@ -7,4 +7,5 @@
 
 <resources>
   <string name="app_name">이끔</string>
+  <string name="app_name_dev">이끔.dev</string>
 </resources>

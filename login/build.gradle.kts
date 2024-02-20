@@ -10,7 +10,7 @@
 plugins {
   eggeum("android-library")
   eggeum("android-hilt")
-  id(libs.plugins.google.gms.get().pluginId)
+  alias(libs.plugins.google.services)
   alias(libs.plugins.google.secrets)
 }
 

@@ -65,7 +65,7 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 gradle-dependency-handler-extensions = { id = "land.sungbin.dependency.handler.extensions", version.ref = "gradle-dependency-handler-extensions" }
 
 google-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "google-secrets" }
-google-gms = { id = "com.google.gms.google-services", version.ref = "google-gms-google-services" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-gms-google-services" }
 
 kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "kotlin-detekt" }
 kotlin-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "kotlin-ktlint-gradle" }

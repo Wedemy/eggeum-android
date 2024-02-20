@@ -12,7 +12,7 @@ import java.util.Properties
 plugins {
   eggeum("android-application")
   eggeum("android-hilt")
-  id(libs.plugins.google.gms.get().pluginId)
+  alias(libs.plugins.google.services)
   alias(libs.plugins.google.secrets)
 }
 
@@ -41,7 +41,7 @@ android {
     }
 
     getByName("release") {
-      isDebuggable = false
+      isDebuggable = true
       signingConfig = signingConfigs.getByName("release")
       manifestPlaceholders += mapOf(
         "appName" to "@string/app_name",

@@ -14,10 +14,55 @@
       },
       "oauth_client": [
         {
+          "client_id": "44067650485-nuc5qt372gofhpbbb1hntcsufgi8tg5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "us.wedemy.eggeum.android",
+            "certificate_hash": "a4bedd8f53019f1bbbc452200866fa697d1acd34"
+          }
+        },
+        {
           "client_id": "44067650485-rb29i3i8b57m4jo9dgt814tjrjqvtj38.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "us.wedemy.eggeum.android",
+            "certificate_hash": "f815bf3587470a6d12ccc191569e579132a87a68"
+          }
+        },
+        {
+          "client_id": "44067650485-m983uf8ib57mfso5gshvnvo6hd7h3ok2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL24sGfqpSPm5llowgHpbG9JExkmmfYtE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44067650485-en2vd28ie333dlaba4gb8amecuookbic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44067650485:android:37523e6620a39bcc92f7fc",
+        "android_client_info": {
+          "package_name": "us.wedemy.eggeum.android.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44067650485-j5uvtdjbu9sgtuv2765qtd1r00vs6dkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "us.wedemy.eggeum.android.dev",
             "certificate_hash": "f815bf3587470a6d12ccc191569e579132a87a68"
           }
         },

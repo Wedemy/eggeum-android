@@ -43,7 +43,7 @@ okhttp = "5.0.0-alpha.12"
 moshi = "1.15.1"
 moshix-ir = "0.25.1"
 
-coil = "2.5.0"
+coil = "2.6.0"
 lottie = "6.3.0"
 insetter = "0.6.1"
 timber = "5.0.1"

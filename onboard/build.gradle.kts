@@ -31,6 +31,12 @@ android {
 
     buildConfigField(
       "String",
+      "PRIVACY_THIRD_WEB_VIEW_URL",
+      properties["PRIVACY_THIRD_WEB_VIEW_URL"] as String
+    )
+
+    buildConfigField(
+      "String",
       "SERVICE_TERMS_WEB_VIEW_URL",
       properties["SERVICE_TERMS_WEB_VIEW_URL"] as String
     )
@@ -46,6 +52,7 @@ dependencies {
     libs.timber,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
+    libs.insetter,
     projects.common,
     projects.designResource,
     projects.domain,

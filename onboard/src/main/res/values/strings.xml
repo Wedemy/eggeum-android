@@ -10,6 +10,7 @@
   <string name="register_account">계정 등록</string>
   <string name="service_terms">서비스 이용약관</string>
   <string name="privacy_policy">개인정보 처리 방침</string>
+  <string name="privacy_third">개인정보 제3자 제공 동의</string>
   <string name="detail"><u>내용보기</u></string>
   <string name="agree_to_service_terms">서비스 이용약관 동의 <font color="#6B7280">(필수)</font></string>
   <string name="agree_to_collect_personal_info">개인정보 수집 이용 동의 <font color="#6B7280">(필수)</font></string>

@@ -52,7 +52,7 @@ class OnboardPrivacyThirdFragment : BaseFragment<FragmentOnboardPrivacyThirdBind
       }
 
       btnPrivacyThirdCheck.setOnClickListener {
-        viewModel.checkCbAgreeToCollectPersonalInfo()
+        viewModel.checkCbAgreeToProvidePersonalInfoTo3rdParty()
         findNavController().navigateUp()
       }
     }

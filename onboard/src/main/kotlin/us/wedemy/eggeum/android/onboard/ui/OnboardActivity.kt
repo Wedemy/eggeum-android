@@ -7,9 +7,12 @@
 
 package us.wedemy.eggeum.android.onboard.ui
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import us.wedemy.eggeum.android.common.base.BaseActivity
 import us.wedemy.eggeum.android.navigator.MainNavigator
@@ -26,6 +29,18 @@ class OnboardActivity : BaseActivity() {
   lateinit var mainNavigator: MainNavigator
 
   override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding.root.applyInsetter {
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = true,
+        f = InsetterApplyTypeDsl::padding,
+      )
+    }
+  }
 
   fun navigateToMain() {
     mainNavigator.navigateFrom(

@@ -52,6 +52,7 @@ dependencies {
     libs.timber,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
+    libs.insetter,
     projects.common,
     projects.designResource,
     projects.domain,

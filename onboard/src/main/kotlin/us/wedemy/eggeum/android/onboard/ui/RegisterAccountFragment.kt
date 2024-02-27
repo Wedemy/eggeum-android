@@ -76,7 +76,7 @@ class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
       }
 
       tvAgreeToProvidePersonalInfoTo3rdPartyDetail.setOnClickListener {
-        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyPolicy()
+        val action = RegisterAccountFragmentDirections.actionFragmentRegisterAccountToFragmentOnboardPrivacyThird()
         findNavController().safeNavigate(action)
       }
 

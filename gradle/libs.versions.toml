@@ -19,7 +19,7 @@ kotlinx-serialization = "1.6.3"
 kotlinx-serialization-converter = "1.0.0"
 
 android-material = "1.11.0"
-android-hilt = "2.50"
+android-hilt = "2.51"
 android-play-services-location = "21.1.0"
 
 androidx-splash = "1.0.1"

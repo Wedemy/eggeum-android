@@ -48,7 +48,7 @@ lottie = "6.3.0"
 insetter = "0.6.1"
 timber = "5.0.1"
 naver-map = "3.17.0"
-ksp = "1.9.22-1.0.17"
+ksp = "1.9.22-1.0.18"
 photo-view = "1.0.1"
 
 javax-inject = "1"

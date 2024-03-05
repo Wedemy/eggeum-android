@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
 import us.wedemy.eggeum.android.domain.model.report.ReportEntity
 import us.wedemy.eggeum.android.domain.repository.ReportRepository
-import us.wedemy.eggeum.android.domain.util.ReportApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -23,7 +22,7 @@ public class GetReportUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(reportId: Long): Result<ReportEntity> =
     runSuspendCatching {
-      repository.getReport(reportId) ?: throw ReportApiResponseIsNull
+      repository.getReport(reportId)
     }
 }
 

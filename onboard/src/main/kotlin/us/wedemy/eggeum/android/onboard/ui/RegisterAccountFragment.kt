@@ -20,7 +20,6 @@ import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.onboard.databinding.FragmentRegisterAccountBinding
 import us.wedemy.eggeum.android.onboard.viewmodel.OnBoardViewModel
 
-// TODO 개인정보 제3자 제공 동의도 웹뷰 화면을 추가해야 함
 @AndroidEntryPoint
 class RegisterAccountFragment : BaseFragment<FragmentRegisterAccountBinding>() {
   override fun getViewBinding() = FragmentRegisterAccountBinding.inflate(layoutInflater)

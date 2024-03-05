@@ -7,7 +7,6 @@
 
 package us.wedemy.eggeum.android.data.service
 
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -18,23 +17,23 @@ import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 
 public interface UserService {
   @GET("app/users/me")
-  public suspend fun getUserInfo(): Response<UserInfoResponse>
+  public suspend fun getUserInfo(): UserInfoResponse
 
   @PUT("app/users/me")
   public suspend fun updateUserInfo(
     @Body updateUserInfoRequest: UpdateUserInfoRequest,
-  ): Response<Unit>
+  )
 
   @DELETE("app/users/me")
-  public suspend fun withdraw(): Response<Unit>
+  public suspend fun withdraw()
 
   @PUT("app/users/me/nickname")
   public suspend fun updateUserNickname(
     @Body nickname: String,
-  ): Response<Unit>
+  )
 
   @GET("app/users/nickname/exists")
   public suspend fun checkNicknameExist(
     @Query("nickname") nickname: String,
-  ): Response<Boolean>
+  ): Boolean
 }

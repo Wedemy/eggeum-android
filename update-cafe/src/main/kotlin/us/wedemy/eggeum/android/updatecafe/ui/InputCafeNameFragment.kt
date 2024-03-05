@@ -29,10 +29,10 @@ class InputCafeNameFragment : BaseFragment<FragmentInputCafeNameBinding>() {
   }
 
   private fun initListener() {
-    // TODO
+    //
   }
 
   private fun initObserver() {
-    // TODO
+    //
   }
 }

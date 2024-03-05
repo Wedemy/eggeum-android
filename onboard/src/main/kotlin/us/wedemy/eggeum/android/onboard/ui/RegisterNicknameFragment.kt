@@ -20,9 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.util.EditTextState
 import us.wedemy.eggeum.android.common.util.TextInputError
 import us.wedemy.eggeum.android.onboard.R
@@ -84,7 +84,13 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
+        }
+      }
+
+      launch {
+        viewModel.navigateToLoginEvent.collect {
+          (activity as OnboardActivity).navigateToLogin()
         }
       }
     }

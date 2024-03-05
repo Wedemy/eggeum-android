@@ -15,7 +15,7 @@ public interface UserRepository {
   /**
    * 내 정보 조회
    */
-  public suspend fun getUserInfo(): UserInfoEntity?
+  public suspend fun getUserInfo(): UserInfoEntity
 
   /**
    * 내 정보 수정
@@ -42,5 +42,5 @@ public interface UserRepository {
    *
    * @param nickname 닉네임
    */
-  public suspend fun checkNicknameExist(nickname: String): Boolean?
+  public suspend fun checkNicknameExist(nickname: String): Boolean
 }

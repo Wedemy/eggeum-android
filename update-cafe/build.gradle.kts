@@ -25,6 +25,11 @@ android {
 
 dependencies {
   implementations(
+    projects.common,
+    projects.designResource,
+    projects.navigator,
+    projects.domain,
+
     libs.kotlinx.coroutines.android,
     libs.android.material,
     libs.androidx.core,
@@ -33,9 +38,5 @@ dependencies {
     libs.bundles.androidx.navigation,
     libs.timber,
     libs.insetter,
-    projects.common,
-    projects.designResource,
-    projects.navigator,
-    projects.domain,
   )
 }

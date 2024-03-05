@@ -5,8 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused", "UnusedPrivateProperty")
-
 package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle

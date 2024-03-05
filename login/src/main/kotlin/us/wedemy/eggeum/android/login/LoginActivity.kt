@@ -62,7 +62,6 @@ class LoginActivity : BaseActivity() {
   private lateinit var googleSignInClient: GoogleSignInClient
   private lateinit var loginLauncher: ActivityResultLauncher<Intent>
 
-  // TODO 네트워크 연결 문제 관련 토스트 출력
 //  private val oneTapClientResult =
 //    registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
 //      if (result.resultCode == Activity.RESULT_OK) {
@@ -193,7 +192,7 @@ class LoginActivity : BaseActivity() {
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(this@LoginActivity, message.asString(this@LoginActivity), Toast.LENGTH_SHORT).show()
         }
       }
     }

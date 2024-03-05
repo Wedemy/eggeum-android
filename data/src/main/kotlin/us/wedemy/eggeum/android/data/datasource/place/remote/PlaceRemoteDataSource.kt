@@ -13,7 +13,7 @@ import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 
 public interface PlaceRemoteDataSource {
-  public suspend fun getPlace(placeId: Long): PlaceResponse?
+  public suspend fun getPlace(placeId: Long): PlaceResponse
 
   public fun getPlaceList(
     distance: Double?,

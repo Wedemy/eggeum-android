@@ -13,7 +13,6 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.domain.model.notice.NoticeEntity
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
-import us.wedemy.eggeum.android.domain.util.NoticeApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -22,7 +21,7 @@ public class GetNoticeUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(noticeId: Long): Result<NoticeEntity> =
     runSuspendCatching {
-      repository.getNotice(noticeId) ?: throw NoticeApiResponseIsNull
+      repository.getNotice(noticeId)
     }
 }
 

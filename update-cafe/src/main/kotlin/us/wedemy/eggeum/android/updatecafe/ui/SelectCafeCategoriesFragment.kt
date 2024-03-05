@@ -29,10 +29,10 @@ class SelectCafeCategoriesFragment : BaseFragment<FragmentSelectCafeCategoriesBi
   }
 
   private fun initListener() {
-    // TODO
+    //
   }
 
   private fun initObserver() {
-    // TODO
+    //
   }
 }

@@ -5,8 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused")
-
 package us.wedemy.eggeum.android.updatecafe.viewmodel
 
 import androidx.lifecycle.SavedStateHandle

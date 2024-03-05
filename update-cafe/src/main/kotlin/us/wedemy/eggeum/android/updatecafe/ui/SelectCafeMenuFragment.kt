@@ -33,6 +33,10 @@ interface DeleteOnClickListener {
 
 @AndroidEntryPoint
 class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
+  override fun getViewBinding() = FragmentSelectCafeMenuBinding.inflate(layoutInflater)
+
+  private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
+
   private val cafeMenuAdapter by lazy {
     CafeMenuAdapter(
       object : EditOnClickListener {
@@ -54,10 +58,6 @@ class SelectCafeMenuFragment : BaseFragment<FragmentSelectCafeMenuBinding>() {
       },
     )
   }
-
-  override fun getViewBinding() = FragmentSelectCafeMenuBinding.inflate(layoutInflater)
-
-  private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initView()

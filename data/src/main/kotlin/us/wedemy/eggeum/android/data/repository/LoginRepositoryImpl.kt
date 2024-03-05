@@ -24,14 +24,14 @@ public class LoginRepositoryImpl @Inject constructor(
   private val remoteDataSource: LoginRemoteDataSource,
   private val localDataSource: LoginLocalDataSource,
 ) : LoginRepository {
-  public override suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity? {
-    return remoteDataSource.login(loginRequestEntity.toModel())?.toEntity()
+  public override suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity {
+    return remoteDataSource.login(loginRequestEntity.toModel()).toEntity()
   }
 
   public override suspend fun signUp(
     signUpRequestEntity: SignUpRequestEntity,
-  ): SignUpResponseEntity? {
-    return remoteDataSource.signUp(signUpRequestEntity.toModel())?.toEntity()
+  ): SignUpResponseEntity {
+    return remoteDataSource.signUp(signUpRequestEntity.toModel()).toEntity()
   }
 
   override suspend fun setAccessToken(accessToken: String) {

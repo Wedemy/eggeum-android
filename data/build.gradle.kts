@@ -30,6 +30,9 @@ android {
 
 dependencies {
   implementations(
+    projects.domain,
+    projects.common,
+
     libs.androidx.datastore.preferences,
     libs.timber,
     libs.moshi.core,
@@ -38,7 +41,6 @@ dependencies {
     libs.androidx.paging.runtime,
     libs.bundles.ktor.client,
     libs.bundles.retrofit,
-    projects.domain,
   )
   testImplementation(libs.test.ktor.client.mock)
 }

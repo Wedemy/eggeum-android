@@ -20,8 +20,8 @@ import us.wedemy.eggeum.android.domain.repository.UserRepository
 public class UserRepositoryImpl @Inject constructor(
   private val dataSource: UserDataSource,
 ) : UserRepository {
-  override suspend fun getUserInfo(): UserInfoEntity? {
-    return dataSource.getUserInfo()?.toEntity()
+  override suspend fun getUserInfo(): UserInfoEntity {
+    return dataSource.getUserInfo().toEntity()
   }
 
   override suspend fun updateUserInfo(updateUserInfoEntity: UpdateUserInfoEntity) {
@@ -36,7 +36,7 @@ public class UserRepositoryImpl @Inject constructor(
     dataSource.updateUserNickname(nickname)
   }
 
-  override suspend fun checkNicknameExist(nickname: String): Boolean? {
+  override suspend fun checkNicknameExist(nickname: String): Boolean {
     return dataSource.checkNicknameExist(nickname)
   }
 }

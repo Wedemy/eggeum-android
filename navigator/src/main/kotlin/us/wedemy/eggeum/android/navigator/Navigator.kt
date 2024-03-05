@@ -14,6 +14,6 @@ interface Navigator {
   fun navigateFrom(
     activity: Activity,
     intentBuilder: Intent.() -> Intent = { this },
-    withFinish: Boolean = false,
+    withFinish: Boolean,
   )
 }

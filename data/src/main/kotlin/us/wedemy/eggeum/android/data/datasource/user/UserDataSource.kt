@@ -11,7 +11,7 @@ import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 
 public interface UserDataSource {
-  public suspend fun getUserInfo(): UserInfoResponse?
+  public suspend fun getUserInfo(): UserInfoResponse
 
   public suspend fun updateUserInfo(updateUserInfoRequest: UpdateUserInfoRequest)
 
@@ -19,5 +19,5 @@ public interface UserDataSource {
 
   public suspend fun updateUserNickname(nickname: String)
 
-  public suspend fun checkNicknameExist(nickname: String): Boolean?
+  public suspend fun checkNicknameExist(nickname: String): Boolean
 }

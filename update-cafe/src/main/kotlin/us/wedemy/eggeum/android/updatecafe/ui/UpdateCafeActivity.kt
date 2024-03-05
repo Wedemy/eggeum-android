@@ -15,7 +15,7 @@ import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import us.wedemy.eggeum.android.common.base.BaseActivity
-import us.wedemy.eggeum.android.navigator.MainNavigator
+import us.wedemy.eggeum.android.navigator.LoginNavigator
 import us.wedemy.eggeum.android.updatecafe.R
 import us.wedemy.eggeum.android.updatecafe.databinding.ActivityUpdateCafeBinding
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
@@ -30,16 +30,9 @@ class UpdateCafeActivity : BaseActivity() {
     get() = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.findNavController()
 
   @Inject
-  lateinit var mainNavigator: MainNavigator
+  lateinit var loginNavigator: LoginNavigator
 
   override fun onSupportNavigateUp() = navController?.navigateUp() ?: false
-
-  fun navigateToMain() {
-    mainNavigator.navigateFrom(
-      activity = this,
-      withFinish = true,
-    )
-  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -51,5 +44,12 @@ class UpdateCafeActivity : BaseActivity() {
         f = InsetterApplyTypeDsl::padding,
       )
     }
+  }
+
+  fun navigateToLogin() {
+    loginNavigator.navigateFrom(
+      activity = this,
+      withFinish = true,
+    )
   }
 }

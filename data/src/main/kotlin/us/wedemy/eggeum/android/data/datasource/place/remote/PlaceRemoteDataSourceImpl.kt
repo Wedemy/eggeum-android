@@ -24,15 +24,12 @@ import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 import us.wedemy.eggeum.android.data.paging.PlacePagingSource
 import us.wedemy.eggeum.android.data.service.PlaceService
 import us.wedemy.eggeum.android.data.util.Constants
-import us.wedemy.eggeum.android.data.util.safeRequest
 
 public class PlaceRemoteDataSourceImpl @Inject constructor(
   private val service: PlaceService,
 ) : PlaceRemoteDataSource {
-  override suspend fun getPlace(placeId: Long): PlaceResponse? {
-    return safeRequest {
-      service.getPlace(placeId)
-    }
+  override suspend fun getPlace(placeId: Long): PlaceResponse {
+    return service.getPlace(placeId)
   }
 
   override fun getPlaceList(
@@ -67,8 +64,6 @@ public class PlaceRemoteDataSourceImpl @Inject constructor(
   }
 
   override suspend fun upsertPlace(upsertPlaceRequest: UpsertPlaceRequest) {
-    safeRequest {
-      service.upsertPlace(upsertPlaceRequest)
-    }
+    service.upsertPlace(upsertPlaceRequest)
   }
 }

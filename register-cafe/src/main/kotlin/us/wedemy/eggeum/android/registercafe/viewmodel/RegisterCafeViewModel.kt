@@ -22,11 +22,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.EditTextState
+import us.wedemy.eggeum.android.common.util.ErrorHandlerActions
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
+import us.wedemy.eggeum.android.common.util.UiText
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.common.util.handleException
 import us.wedemy.eggeum.android.common.util.isSuccess
 import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.place.ImageEntity
@@ -34,21 +36,27 @@ import us.wedemy.eggeum.android.domain.model.place.InfoEntity
 import us.wedemy.eggeum.android.domain.model.place.MenuEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
+import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
+import us.wedemy.eggeum.android.registercafe.R
 import us.wedemy.eggeum.android.registercafe.model.CafeImageModel
 
 @HiltViewModel
 class RegisterCafeViewModel @Inject constructor(
   private val upsertPlaceUseCase: UpsertPlaceUseCase,
   private val uploadImageFileUseCase: UploadImageFileUseCase,
+  private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+) : ViewModel(), ErrorHandlerActions {
   private val _navigateToRegisterCafeCompleteEvent = MutableSharedFlow<Unit>(replay = 1)
   val navigateToRegisterCafeCompleteEvent: SharedFlow<Unit> = _navigateToRegisterCafeCompleteEvent.asSharedFlow()
 
-  private val _showToastEvent = MutableSharedFlow<String>()
-  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+  private val _showToastEvent = MutableSharedFlow<UiText>()
+  val showToastEvent: SharedFlow<UiText> = _showToastEvent.asSharedFlow()
+
+  private val _navigateToLoginEvent = MutableSharedFlow<Unit>()
+  val navigateToLoginEvent: SharedFlow<Unit> = _navigateToLoginEvent.asSharedFlow()
 
   private val _cafeImages = savedStateHandle.getMutableStateFlow(KEY_CAFE_IMAGE_URL_LIST, emptyList<CafeImageModel>())
   val cafeImages = _cafeImages.asStateFlow()
@@ -232,72 +240,62 @@ class RegisterCafeViewModel @Inject constructor(
     }
 
     viewModelScope.launch {
-      try {
-        val results = uploadJobs.awaitAll()
-        val isSuccess = results.all { it.isSuccess }
+      val results = uploadJobs.awaitAll()
+      val isSuccess = results.all { it.isSuccess }
 
-        if (isSuccess) {
-          val uploadImageFiles = results.mapNotNull { it.getOrNull() }
-            .map { fileResponse ->
-              FileEntity(
-                uploadFileId = fileResponse.uploadFileId,
-                url = fileResponse.url,
-              )
-            }
-          val (cafeLatitude, cafeLongitude) = getRandomCoordinate()
-          val upsertPlace = UpsertPlaceEntity(
-            address1 = _cafeAddress.value,
-            address2 = null,
-            image = ImageEntity(
-              files = uploadImageFiles,
-            ),
-            info = InfoEntity(
-              areaSize = cafeArea.value.toString(),
-              blogUri = cafeBlogUri.value,
-              businessHours = cafeBusinessHours.value,
-              existsSmokingArea = cafeSmokeArea.value,
-              existsWifi = cafeWifi.value,
-              existsOutlet = cafeOutlet.value,
-              instagramUri = cafeInstagramUri.value,
-              meetingRoomCount = cafeMeetingRoom.value,
-              mobileCharging = cafeMobileCharging.value,
-              multiSeatCount = cafeMultiSeat.value,
-              parking = cafeParking.value,
-              phone = cafePhone.value,
-              restRoom = cafeRestRoom.value,
-              singleSeatCount = cafeSingleSeat.value,
-              websiteUri = cafeWebsiteUri.value,
-            ),
-            latitude = cafeLatitude,
-            longitude = cafeLongitude,
-            menu = MenuEntity(
-              listOf(
-                ProductEntity(name = "아메리카노", price = 4000),
-                ProductEntity(name = "카페라떼", price = 5000),
-              ),
-            ),
-            name = _cafeName.value,
-            placeId = null,
-            remarks = null,
-            type = getRandomPlaceType(),
-          )
-          val result = upsertPlaceUseCase(upsertPlace)
-          when {
-            result.isSuccess -> {
-              _navigateToRegisterCafeCompleteEvent.emit(Unit)
-            }
-            result.isFailure -> {
-              val exception = result.exceptionOrNull()
-              Timber.d(exception)
-              _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-            }
+      if (isSuccess) {
+        val uploadImageFiles = results.mapNotNull { it.getOrNull() }
+          .map { fileResponse ->
+            FileEntity(
+              uploadFileId = fileResponse.uploadFileId,
+              url = fileResponse.url,
+            )
           }
-        } else {
-          _showToastEvent.emit("파일 업로드를 실패 했습니다")
-        }
-      } catch (exception: Exception) {
-        Timber.e(exception)
-        _showToastEvent.emit(exception.message ?: "Unknown Error Occured")
+        val (cafeLatitude, cafeLongitude) = getRandomCoordinate()
+        val upsertPlace = UpsertPlaceEntity(
+          address1 = _cafeAddress.value,
+          address2 = null,
+          image = ImageEntity(
+            files = uploadImageFiles,
+          ),
+          info = InfoEntity(
+            areaSize = cafeArea.value.toString(),
+            blogUri = cafeBlogUri.value,
+            businessHours = cafeBusinessHours.value,
+            existsSmokingArea = cafeSmokeArea.value,
+            existsWifi = cafeWifi.value,
+            existsOutlet = cafeOutlet.value,
+            instagramUri = cafeInstagramUri.value,
+            meetingRoomCount = cafeMeetingRoom.value,
+            mobileCharging = cafeMobileCharging.value,
+            multiSeatCount = cafeMultiSeat.value,
+            parking = cafeParking.value,
+            phone = cafePhone.value,
+            restRoom = cafeRestRoom.value,
+            singleSeatCount = cafeSingleSeat.value,
+            websiteUri = cafeWebsiteUri.value,
+          ),
+          latitude = cafeLatitude,
+          longitude = cafeLongitude,
+          menu = MenuEntity(
+            listOf(
+              ProductEntity(name = "아메리카노", price = 4000),
+              ProductEntity(name = "카페라떼", price = 5000),
+            ),
+          ),
+          name = _cafeName.value,
+          placeId = null,
+          remarks = null,
+          type = getRandomPlaceType(),
+        )
+        upsertPlaceUseCase(upsertPlace)
+          .onSuccess {
+            _navigateToRegisterCafeCompleteEvent.emit(Unit)
+          }.onFailure { exception ->
+            handleException(exception, this@RegisterCafeViewModel)
+          }
+      } else {
+        _showToastEvent.emit(UiText.StringResource(R.string.file_upload_error_message))
       }
     }
   }
@@ -321,6 +319,29 @@ class RegisterCafeViewModel @Inject constructor(
   private fun getRandomPlaceType(): String {
     val places = listOf("CAFE", "STUDY_CAFE", "STUDY_ROOM")
     return places.random()
+  }
+
+  override fun showServerErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.server_error_message))
+    }
+  }
+
+  override fun showNetworkErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.network_error_message))
+    }
+  }
+
+  override fun handleNotFoundException() {
+    //
+  }
+
+  override fun handleRefreshTokenExpired() {
+    viewModelScope.launch {
+      logoutUseCase()
+      _navigateToLoginEvent.emit(Unit)
+    }
   }
 
   private companion object {

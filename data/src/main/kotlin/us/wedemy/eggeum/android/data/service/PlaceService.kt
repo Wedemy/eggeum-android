@@ -7,14 +7,13 @@
 
 package us.wedemy.eggeum.android.data.service
 
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.PlaceListResponse
+import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 
 public interface PlaceService {
@@ -22,7 +21,7 @@ public interface PlaceService {
   @GET("app/place/{placeId}")
   public suspend fun getPlace(
     @Path("placeId") placeId: Long,
-  ): Response<PlaceResponse>
+  ): PlaceResponse
 
   @GET("app/place")
   public suspend fun getPlaceList(
@@ -41,5 +40,5 @@ public interface PlaceService {
   @POST("app/place/edits")
   public suspend fun upsertPlace(
     @Body upsertPlaceRequest: UpsertPlaceRequest,
-  ): Response<Unit>
+  )
 }

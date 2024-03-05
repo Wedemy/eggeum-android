@@ -19,16 +19,21 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import us.wedemy.eggeum.android.common.util.ErrorHandlerActions
+import us.wedemy.eggeum.android.common.util.UiText
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.common.util.handleException
 import us.wedemy.eggeum.android.domain.model.report.CreateReportEntity
 import us.wedemy.eggeum.android.domain.usecase.CreateReportUseCase
+import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
+import us.wedemy.eggeum.android.main.R
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
   private val createReportUseCase: CreateReportUseCase,
+  private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+) : ViewModel(), ErrorHandlerActions {
   private val _reportTitle = savedStateHandle.getMutableStateFlow(KEY_REPORT_TITLE, "")
   val reportTitle = _reportTitle.asStateFlow()
 
@@ -38,8 +43,11 @@ class ReportViewModel @Inject constructor(
   private val _navigateToReportCompleteEvent = MutableSharedFlow<Unit>(replay = 1)
   val navigateToReportCompleteEvent: SharedFlow<Unit> = _navigateToReportCompleteEvent.asSharedFlow()
 
-  private val _showToastEvent = MutableSharedFlow<String>()
-  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+  private val _showToastEvent = MutableSharedFlow<UiText>()
+  val showToastEvent: SharedFlow<UiText> = _showToastEvent.asSharedFlow()
+
+  private val _navigateToLoginEvent = MutableSharedFlow<Unit>(replay = 1)
+  val navigateToLoginEvent: SharedFlow<Unit> = _navigateToLoginEvent.asSharedFlow()
 
   fun setReportTitle(reportTitle: String) {
     _reportTitle.value = reportTitle
@@ -63,22 +71,39 @@ class ReportViewModel @Inject constructor(
 
   fun createReport() {
     viewModelScope.launch {
-      val result = createReportUseCase(
+      createReportUseCase(
         CreateReportEntity(
           title = reportTitle.value,
           content = reportContent.value,
         ),
-      )
-      when {
-        result.isSuccess -> {
-          _navigateToReportCompleteEvent.emit(Unit)
-        }
-        result.isFailure -> {
-          val exception = result.exceptionOrNull()
-          Timber.d(exception)
-          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-        }
+      ).onSuccess {
+        _navigateToReportCompleteEvent.emit(Unit)
+      }.onFailure { exception ->
+        handleException(exception, this@ReportViewModel)
       }
+    }
+  }
+
+  override fun showServerErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.server_error_message))
+    }
+  }
+
+  override fun showNetworkErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.network_error_message))
+    }
+  }
+
+  override fun handleNotFoundException() {
+    //
+  }
+
+  override fun handleRefreshTokenExpired() {
+    viewModelScope.launch {
+      logoutUseCase()
+      _navigateToLoginEvent.emit(Unit)
     }
   }
 

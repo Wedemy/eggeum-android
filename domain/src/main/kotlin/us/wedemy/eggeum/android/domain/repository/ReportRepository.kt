@@ -18,7 +18,7 @@ public interface ReportRepository {
   /**
    * 사용자 문의 단건 조회
    */
-  public suspend fun getReport(reportId: Long): ReportEntity?
+  public suspend fun getReport(reportId: Long): ReportEntity
 
   /**
    * 사용자 문의 목록 조회

@@ -5,8 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused")
-
 package us.wedemy.eggeum.android.updatecafe.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
@@ -21,13 +19,17 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.model.CafeDetailModel
+import us.wedemy.eggeum.android.common.util.ErrorHandlerActions
+import us.wedemy.eggeum.android.common.util.UiText
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.common.util.handleException
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.ProductEntity
 import us.wedemy.eggeum.android.domain.usecase.GetPlaceUseCase
+import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
 import us.wedemy.eggeum.android.domain.usecase.UpsertPlaceUseCase
+import us.wedemy.eggeum.android.updatecafe.R
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeInfoItem
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 
@@ -35,8 +37,9 @@ import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 class ProposeCafeInfoViewModel @Inject constructor(
   private val getPlaceUseCase: GetPlaceUseCase,
   private val upsertPlaceUseCase: UpsertPlaceUseCase,
+  private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+) : ViewModel(), ErrorHandlerActions {
   private val selectedCafeInfo: CafeDetailModel = requireNotNull(savedStateHandle[CAFE_DETAIL_INFO]) {
     "cafeDetailInfo is required."
   }
@@ -44,14 +47,17 @@ class ProposeCafeInfoViewModel @Inject constructor(
   private val _navigateToUpsertEvent = MutableSharedFlow<Boolean>()
   val navigateToUpsertEvent = _navigateToUpsertEvent.asSharedFlow()
 
-  private val _showToastEvent = MutableSharedFlow<String>()
-  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+  private val _showToastEvent = MutableSharedFlow<UiText>()
+  val showToastEvent: SharedFlow<UiText> = _showToastEvent.asSharedFlow()
 
   private val _getInitCall = MutableSharedFlow<Unit>(1)
   val getInitCall = _getInitCall.asSharedFlow()
 
   private val _cafeMenuItemMap = MutableStateFlow(emptyMap<String, CafeMenuItem>())
-  private val cafeMenuItemMap = _cafeMenuItemMap.asStateFlow()
+  val cafeMenuItemMap = _cafeMenuItemMap.asStateFlow()
+
+  private val _navigateToLoginEvent = MutableSharedFlow<Unit>(replay = 1)
+  val navigateToLoginEvent = _navigateToLoginEvent.asSharedFlow()
 
   fun setCafeMenuItemMap(cafeMenuItemMap: MutableMap<String, CafeMenuItem>) {
     _cafeMenuItemMap.value = cafeMenuItemMap
@@ -116,48 +122,62 @@ class ProposeCafeInfoViewModel @Inject constructor(
   fun setCafeAreaSize(cafeAreaSize: String) {
     _cafeAreaSize.value = cafeAreaSize
   }
+
   fun setCafeMeetingRoom(cafeMeetingRoom: String) {
     if (cafeMeetingRoom.isEmpty()) _cafeMeetingRoom.value = 0
     else _cafeMeetingRoom.value = cafeMeetingRoom.toInt()
   }
+
   fun setCafeMultiSeat(cafeMultiSeat: String) {
     if (cafeMultiSeat.isEmpty()) _cafeMultiSeat.value = 0
     else _cafeMultiSeat.value = cafeMultiSeat.toInt()
   }
+
   fun setCafeSingleSeat(cafeSingleSeat: String) {
     if (cafeSingleSeat.isEmpty()) _cafeSingleSeat.value = 0
     else _cafeSingleSeat.value = cafeSingleSeat.toInt()
   }
+
   fun setCafeBusinessHours(cafeBusinessHours: String) {
     _cafeBusinessHours.value = cafeBusinessHours.replace(" ", "").split(",")
   }
+
   fun setCafeParking(cafeParking: String) {
     _cafeParking.value = cafeParking
   }
+
   fun setCafeSmoking(cafeSmoking: String) {
     _cafeSmoking.value = cafeSmoking
   }
+
   fun setCafeWifi(cafeWifi: String) {
     _cafeWifi.value = cafeWifi
   }
+
   fun setCafeOutlet(cafeOutlet: String) {
     _cafeOutlet.value = cafeOutlet
   }
+
   fun setCafeRestRoom(cafeRestRoom: String) {
     _cafeRestRoom.value = cafeRestRoom
   }
+
   fun setCafeMobileCharging(cafeMobileCharging: String) {
     _cafeMobileCharging.value = cafeMobileCharging
   }
+
   fun setCafeInstagramUrl(cafeInstagramUrl: String) {
     _cafeInstagramUrl.value = cafeInstagramUrl
   }
+
   fun setCafeWebsiteUrl(cafeWebsiteUrl: String) {
     _cafeWebsiteUrl.value = cafeWebsiteUrl
   }
+
   fun setCafeBlogUrl(cafeBlogUrl: String) {
     _cafeBlogUrl.value = cafeBlogUrl
   }
+
   fun setCafePhone(cafePhone: String) {
     _cafePhone.value = cafePhone
   }
@@ -168,48 +188,36 @@ class ProposeCafeInfoViewModel @Inject constructor(
 
   private fun getCafeMenuListAndInfo(placeId: Long) {
     viewModelScope.launch {
-      val result = getPlaceUseCase(placeId)
-      when {
-        result.isSuccess && result.getOrNull() != null -> {
-          placeBody = result.getOrNull()!!
-          launch {
-            _cafeInfo.update { cafeInfo ->
-              cafeInfo.copy(
-                areaSize = placeBody.info?.areaSize,
-                blogUri = placeBody.info?.blogUri,
-                businessHours = placeBody.info?.businessHours,
-                existsSmokingArea = placeBody.info?.existsSmokingArea,
-                existsWifi = placeBody.info?.existsWifi,
-                existsOutlet = placeBody.info?.existsOutlet,
-                instagramUri = placeBody.info?.instagramUri,
-                meetingRoomCount = placeBody.info?.meetingRoomCount,
-                mobileCharging = placeBody.info?.mobileCharging,
-                multiSeatCount = placeBody.info?.multiSeatCount,
-                parking = placeBody.info?.parking,
-                phone = placeBody.info?.phone,
-                restRoom = placeBody.info?.restRoom,
-                singleSeatCount = placeBody.info?.singleSeatCount,
-                websiteUri = placeBody.info?.websiteUri,
-              )
-            }
+      getPlaceUseCase(placeId)
+        .onSuccess { placeEntity ->
+          placeBody = placeEntity
+          _cafeInfo.update { cafeInfo ->
+            cafeInfo.copy(
+              areaSize = placeBody.info?.areaSize,
+              blogUri = placeBody.info?.blogUri,
+              businessHours = placeBody.info?.businessHours,
+              existsSmokingArea = placeBody.info?.existsSmokingArea,
+              existsWifi = placeBody.info?.existsWifi,
+              existsOutlet = placeBody.info?.existsOutlet,
+              instagramUri = placeBody.info?.instagramUri,
+              meetingRoomCount = placeBody.info?.meetingRoomCount,
+              mobileCharging = placeBody.info?.mobileCharging,
+              multiSeatCount = placeBody.info?.multiSeatCount,
+              parking = placeBody.info?.parking,
+              phone = placeBody.info?.phone,
+              restRoom = placeBody.info?.restRoom,
+              singleSeatCount = placeBody.info?.singleSeatCount,
+              websiteUri = placeBody.info?.websiteUri,
+            )
           }
-          launch {
-            placeBody.menu?.products?.let {
-              val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
-              updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
-            }
+          placeBody.menu?.products?.let {
+            val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
+            updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
           }
           _getInitCall.emit(Unit)
+        }.onFailure { exception ->
+          handleException(exception, this@ProposeCafeInfoViewModel)
         }
-        result.isSuccess && result.getOrNull() == null -> {
-          Timber.e("Request succeeded but data validation failed.")
-        }
-        result.isFailure -> {
-          val exception = result.exceptionOrNull()
-          Timber.d(exception)
-          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-        }
-      }
     }
   }
 
@@ -236,7 +244,6 @@ class ProposeCafeInfoViewModel @Inject constructor(
         }
       }
     }
-
     placeBody.menu?.products?.let {
       val cafeMenuItemList: MutableList<CafeMenuItem> = initializeCafeMenuItem(products = it)
       updateCafeMenuList(cafeMenuItemList = cafeMenuItemList)
@@ -244,44 +251,36 @@ class ProposeCafeInfoViewModel @Inject constructor(
   }
 
   fun editCafeInfo() {
-    viewModelScope.launch {
-      _cafeInfo.update { cafeInfo ->
-        cafeInfo.copy(
-          areaSize = cafeAreaSize.value,
-          meetingRoomCount = cafeMeetingRoom.value,
-          multiSeatCount = cafeMultiSeat.value,
-          singleSeatCount = cafeSingleSeat.value,
-          businessHours = cafeBusinessHours.value,
-          parking = cafeParking.value,
-          existsSmokingArea = cafeSmoking.value.lowercase() == "o",
-          existsWifi = cafeWifi.value.lowercase() == "o",
-          existsOutlet = cafeOutlet.value.lowercase() == "o",
-          restRoom = cafeRestRoom.value,
-          mobileCharging = cafeMobileCharging.value,
-          instagramUri = cafeInstagramUrl.value,
-          websiteUri = cafeWebsiteUrl.value,
-          blogUri = cafeBlogUrl.value,
-          phone = cafePhone.value,
-        )
-      }
+    _cafeInfo.update { cafeInfo ->
+      cafeInfo.copy(
+        areaSize = cafeAreaSize.value,
+        meetingRoomCount = cafeMeetingRoom.value,
+        multiSeatCount = cafeMultiSeat.value,
+        singleSeatCount = cafeSingleSeat.value,
+        businessHours = cafeBusinessHours.value,
+        parking = cafeParking.value,
+        existsSmokingArea = cafeSmoking.value.lowercase() == "o",
+        existsWifi = cafeWifi.value.lowercase() == "o",
+        existsOutlet = cafeOutlet.value.lowercase() == "o",
+        restRoom = cafeRestRoom.value,
+        mobileCharging = cafeMobileCharging.value,
+        instagramUri = cafeInstagramUrl.value,
+        websiteUri = cafeWebsiteUrl.value,
+        blogUri = cafeBlogUrl.value,
+        phone = cafePhone.value,
+      )
     }
-
     placeBody.info = cafeInfo.value.toEntity()
   }
 
   fun updatePlaceBodyUseCase() {
     viewModelScope.launch {
-      val result = upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())
-      when {
-        result.isSuccess -> {
+      upsertPlaceUseCase(placeBody.toUpsertPlaceEntity())
+        .onSuccess {
           _navigateToUpsertEvent.emit(true)
+        }.onFailure { exception ->
+          handleException(exception, this@ProposeCafeInfoViewModel)
         }
-        result.isFailure -> {
-          val exception = result.exceptionOrNull()
-          Timber.d(exception)
-          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-        }
-      }
     }
   }
 
@@ -289,6 +288,29 @@ class ProposeCafeInfoViewModel @Inject constructor(
   fun initializeUpdatePlaceBodySuccess() {
     viewModelScope.launch {
       _navigateToUpsertEvent.emit(false)
+    }
+  }
+
+  override fun showServerErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.server_error_message))
+    }
+  }
+
+  override fun showNetworkErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.network_error_message))
+    }
+  }
+
+  override fun handleNotFoundException() {
+    //
+  }
+
+  override fun handleRefreshTokenExpired() {
+    viewModelScope.launch {
+      logoutUseCase()
+      _navigateToLoginEvent.emit(Unit)
     }
   }
 

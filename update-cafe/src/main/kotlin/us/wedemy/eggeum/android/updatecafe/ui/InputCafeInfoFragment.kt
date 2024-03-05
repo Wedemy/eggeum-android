@@ -5,8 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused", "UnusedPrivateProperty")
-
 package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
@@ -33,15 +31,10 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
   private val viewModel by activityViewModels<ProposeCafeInfoViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//    initView()
     initListener()
     initObserver()
     initDataObserver()
   }
-
-//  private fun initView() {
-//
-//  }
 
   private fun initListener() {
     with(binding) {
@@ -51,8 +44,8 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
         }
       }
       btnNext.setOnClickListener {
-        // TODO: 맨처음에 읽을 때, 데이터 getMutableStateFlow 에 저장
-        // TODO: editCafeInfo할 때, getMutableStateFlow에서 placeBody update
+        // 맨처음에 읽을 때, 데이터 getMutableStateFlow 에 저장
+        // editCafeInfo할 때, getMutableStateFlow에서 placeBody update
         viewModel.editCafeInfo()
         viewModel.updatePlaceBodyUseCase()
       }
@@ -150,13 +143,13 @@ class InputCafeInfoFragment : BaseFragment<FragmentInputCafeInfoBinding>() {
           val action = InputCafeInfoFragmentDirections.actionFragmentInputCafeInfoToFragmentUpdateMenuComplete()
           findNavController().safeNavigate(action)
         }
-        // TODO: 에뮬레이터와 달리 실기기로 테스트 시, 해당 state value를 초기화 안해도 마지막 완료 화면으로 넘어가지 않음. (확인 필요)
+        // 에뮬레이터와 달리 실기기로 테스트 시, 해당 state value를 초기화 안해도 마지막 완료 화면으로 넘어가지 않음. (확인 필요)
         // viewModel.initializeUpdatePlaceBodySuccess()
       }
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
         }
       }
     }

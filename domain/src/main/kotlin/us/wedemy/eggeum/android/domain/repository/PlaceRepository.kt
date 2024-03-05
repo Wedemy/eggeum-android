@@ -21,7 +21,7 @@ public interface PlaceRepository {
    */
   public suspend fun getPlace(
     placeId: Long,
-  ): PlaceEntity?
+  ): PlaceEntity
 
   /**
    * 장소 목록 조회

@@ -215,7 +215,7 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
         }
       }
 
@@ -223,6 +223,12 @@ class RegisterCafeFragment : BaseFragment<FragmentRegisterCafeBinding>() {
         viewModel.enableRegisterCafe.collect { flag ->
           binding.tvPleaseToInputAllRequiredItem.isInvisible = flag
           binding.btnRegisterCafe.isEnabled = flag
+        }
+      }
+
+      launch {
+        viewModel.navigateToLoginEvent.collect {
+          (activity as RegisterCafeActivity).navigateToLogin()
         }
       }
     }

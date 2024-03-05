@@ -6,6 +6,8 @@
   -->
 
 <resources>
+  <string name="server_error_message">서버에 문제가 발생했어요. 잠시 후 다시 시도해주세요.</string>
+  <string name="network_error_message">네트워크 연결을 확인해주세요.</string>
   <string name="update_cafe">정보 수정 제안</string>
   <string name="cancel">취소</string>
   <string name="deletion">삭제</string>
@@ -48,7 +50,7 @@
   <string name="input_cafe_info_instagram_url_hint">https://www.instagram.com/~</string>
   <string name="input_cafe_info_website_url_hint">https://www.cafename.com/~</string>
   <string name="input_cafe_info_blog_url_hint">https://blog.naver.com/~</string>
-  <string name="input_cafe_info_phone_hint">010–1234-5678</string>
+  <string name="input_cafe_info_phone_hint">010–1234–5678</string>
   <string name="description_cafe_area">면적(㎡)</string>
   <string name="description_cafe_meeting_room">회의실(개)</string>
   <string name="description_cafe_multi_seat">다인석(개)</string>

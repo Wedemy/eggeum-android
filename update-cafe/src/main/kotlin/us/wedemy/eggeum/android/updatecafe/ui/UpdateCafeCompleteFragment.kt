@@ -5,8 +5,6 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused", "UnusedPrivateProperty")
-
 package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
@@ -22,14 +20,9 @@ class UpdateCafeCompleteFragment : BaseFragment<FragmentUpdateCafeCompleteBindin
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     initListener()
-    initObserver()
   }
 
   private fun initListener() {
-    // TODO
-  }
-
-  private fun initObserver() {
     binding.btnRegisterCafeComplete.setOnClickListener {
       if (!findNavController().navigateUp()) {
         requireActivity().finish()

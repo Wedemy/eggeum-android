@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.common.base.BaseDialogFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentReportCafeImageBinding
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 
-// TOOD 사진 신고하기 API 연동
+// 사진 신고하기 API 연동
 @AndroidEntryPoint
 class ReportCafeImageFragment : BaseDialogFragment<FragmentReportCafeImageBinding>() {
   override fun getViewBinding() = FragmentReportCafeImageBinding.inflate(layoutInflater)
@@ -32,14 +32,14 @@ class ReportCafeImageFragment : BaseDialogFragment<FragmentReportCafeImageBindin
   }
 
   private fun initListener() {
-    // TODO 체크 박스 클릭 이벤트
-    // TODO 버튼 클릭을 통한 사진 신고하기 API 호출
+    // 체크 박스 클릭 이벤트
+    // 버튼 클릭을 통한 사진 신고하기 API 호출
   }
 
   private fun initObserver() {
     repeatOnStarted {
       launch {
-        // TODO 화면 이동 이벤트 구독
+        // 화면 이동 이벤트 구독
       }
     }
   }

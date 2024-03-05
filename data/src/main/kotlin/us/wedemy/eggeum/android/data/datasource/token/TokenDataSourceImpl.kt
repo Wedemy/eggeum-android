@@ -11,15 +11,14 @@ import javax.inject.Inject
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
 import us.wedemy.eggeum.android.data.model.token.TokenResponse
 import us.wedemy.eggeum.android.data.service.TokenService
-import us.wedemy.eggeum.android.data.util.safeRequest
+import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 public class TokenDataSourceImpl @Inject constructor(
   private val service: TokenService,
 ) : TokenDataSource {
 
-  override suspend fun getRefreshToken(tokenRequest: TokenRequest): TokenResponse? {
-    return safeRequest {
+  override suspend fun getRefreshToken(tokenRequest: TokenRequest): Result<TokenResponse> =
+    runSuspendCatching {
       service.getRefreshToken(tokenRequest)
     }
-  }
 }

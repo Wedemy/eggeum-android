@@ -45,17 +45,18 @@ android {
 
 dependencies {
   implementations(
+    projects.common,
+    projects.designResource,
+    projects.domain,
+    projects.navigator,
+
     libs.kotlinx.coroutines.android,
     libs.android.material,
     libs.androidx.core,
     libs.androidx.constraintlayout,
     libs.timber,
+    libs.insetter,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
-    libs.insetter,
-    projects.common,
-    projects.designResource,
-    projects.domain,
-    projects.navigator,
   )
 }

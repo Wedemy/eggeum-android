@@ -16,15 +16,12 @@ import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 import us.wedemy.eggeum.android.data.paging.NoticePagingSource
 import us.wedemy.eggeum.android.data.service.NoticeService
 import us.wedemy.eggeum.android.data.util.Constants
-import us.wedemy.eggeum.android.data.util.safeRequest
 
 public class NoticeDataSourceImpl @Inject constructor(
   private val service: NoticeService,
 ) : NoticeDataSource {
-  override suspend fun getNotice(noticeId: Long): NoticeResponse? {
-    return safeRequest {
-      service.getNotice(noticeId)
-    }
+  override suspend fun getNotice(noticeId: Long): NoticeResponse {
+    return service.getNotice(noticeId)
   }
 
   override fun getNoticeList(

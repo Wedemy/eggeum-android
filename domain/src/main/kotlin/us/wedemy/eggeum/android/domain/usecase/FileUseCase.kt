@@ -11,7 +11,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 import us.wedemy.eggeum.android.domain.repository.FileRepository
-import us.wedemy.eggeum.android.domain.util.FileApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -20,6 +19,6 @@ public class UploadImageFileUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(uri: String): Result<FileResponseEntity> =
     runSuspendCatching {
-      repository.uploadImageFile(uri) ?: throw FileApiResponseIsNull
+      repository.uploadImageFile(uri)
     }
 }

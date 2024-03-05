@@ -18,7 +18,7 @@ public interface LoginRepository {
    *
    * @param idToken 사용자 인증 토큰
    */
-  public suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity?
+  public suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity
 
   /** 회원가입 API
    *
@@ -26,7 +26,7 @@ public interface LoginRepository {
    * @param idToken 사용자 인증 토큰
    * @param nickname 유저에 앱에서 사용할 닉네임
    */
-  public suspend fun signUp(signUpRequestEntity: SignUpRequestEntity): SignUpResponseEntity?
+  public suspend fun signUp(signUpRequestEntity: SignUpRequestEntity): SignUpResponseEntity
 
   /** AccessToken 저장
    *

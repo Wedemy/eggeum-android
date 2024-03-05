@@ -15,6 +15,7 @@ import dev.chrisbanes.insetter.InsetterApplyTypeDsl
 import dev.chrisbanes.insetter.applyInsetter
 import javax.inject.Inject
 import us.wedemy.eggeum.android.common.base.BaseActivity
+import us.wedemy.eggeum.android.navigator.LoginNavigator
 import us.wedemy.eggeum.android.navigator.MainNavigator
 import us.wedemy.eggeum.android.onboard.R
 import us.wedemy.eggeum.android.onboard.databinding.ActivityOnboardBinding
@@ -27,6 +28,9 @@ class OnboardActivity : BaseActivity() {
 
   @Inject
   lateinit var mainNavigator: MainNavigator
+
+  @Inject
+  lateinit var loginNavigator: LoginNavigator
 
   override fun onSupportNavigateUp(): Boolean = navController?.navigateUp() ?: false
 
@@ -44,6 +48,13 @@ class OnboardActivity : BaseActivity() {
 
   fun navigateToMain() {
     mainNavigator.navigateFrom(
+      activity = this,
+      withFinish = true,
+    )
+  }
+
+  fun navigateToLogin() {
+    loginNavigator.navigateFrom(
       activity = this,
       withFinish = true,
     )

@@ -14,8 +14,6 @@ import us.wedemy.eggeum.android.domain.model.login.LoginResponseEntity
 import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
 import us.wedemy.eggeum.android.domain.model.login.SignUpResponseEntity
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
-import us.wedemy.eggeum.android.domain.util.LoginApiResponseIsNull
-import us.wedemy.eggeum.android.domain.util.SignUpApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -26,7 +24,7 @@ public class LoginUseCase @Inject constructor(
     loginRequestEntity: LoginRequestEntity,
   ): Result<LoginResponseEntity> =
     runSuspendCatching {
-      repository.login(loginRequestEntity) ?: throw LoginApiResponseIsNull
+      repository.login(loginRequestEntity)
     }
 }
 
@@ -38,7 +36,7 @@ public class SignUpUseCase @Inject constructor(
     signUpRequestEntity: SignUpRequestEntity,
   ): Result<SignUpResponseEntity> =
     runSuspendCatching {
-      repository.signUp(signUpRequestEntity) ?: throw SignUpApiResponseIsNull
+      repository.signUp(signUpRequestEntity)
     }
 }
 

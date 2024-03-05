@@ -5,7 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-@file:Suppress("unused", "UnusedPrivateProperty")
+@file:Suppress("UnusedPrivateProperty")
 
 package us.wedemy.eggeum.android.updatecafe.ui
 
@@ -29,10 +29,10 @@ class InputCafeAddressFragment : BaseFragment<FragmentInputCafeAddressBinding>()
   }
 
   private fun initListener() {
-    // TODO
+    //
   }
 
   private fun initObserver() {
-    // TODO
+    //
   }
 }

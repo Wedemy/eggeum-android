@@ -90,7 +90,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding>() {
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
         }
       }
     }

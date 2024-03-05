@@ -16,7 +16,7 @@ import us.wedemy.eggeum.android.domain.repository.FileRepository
 public class FileRepositoryImpl @Inject constructor(
   private val fileDataSource: FileDataSource,
 ) : FileRepository {
-  override suspend fun uploadImageFile(uri: String): FileResponseEntity? {
-    return fileDataSource.uploadImageFile(uri)?.toEntity()
+  override suspend fun uploadImageFile(uri: String): FileResponseEntity {
+    return fileDataSource.uploadImageFile(uri).toEntity()
   }
 }

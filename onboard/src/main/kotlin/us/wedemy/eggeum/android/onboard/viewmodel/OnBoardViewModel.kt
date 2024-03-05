@@ -19,25 +19,31 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.util.EditTextState
+import us.wedemy.eggeum.android.common.util.ErrorHandlerActions
 import us.wedemy.eggeum.android.common.util.SaveableMutableStateFlow
 import us.wedemy.eggeum.android.common.util.TextInputError
+import us.wedemy.eggeum.android.common.util.UiText
 import us.wedemy.eggeum.android.common.util.getMutableStateFlow
+import us.wedemy.eggeum.android.common.util.handleException
 import us.wedemy.eggeum.android.domain.model.login.SignUpRequestEntity
 import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
+import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetAccessTokenUseCase
 import us.wedemy.eggeum.android.domain.usecase.SetRefreshTokenUseCase
 import us.wedemy.eggeum.android.domain.usecase.SignUpUseCase
+import us.wedemy.eggeum.android.onboard.R
 
+// TODO navigateToLoginEvent replay = 1 없어도 되는지 확인
 @HiltViewModel
 class OnBoardViewModel @Inject constructor(
   private val signUpUseCase: SignUpUseCase,
   private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
   private val setAccessTokenUseCase: SetAccessTokenUseCase,
   private val setRefreshTokenUseCase: SetRefreshTokenUseCase,
+  private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+) : ViewModel(), ErrorHandlerActions {
   private val idToken: String =
     savedStateHandle[ID_TOKEN] ?: throw IllegalArgumentException("ID_TOKEN is missing from SavedStateHandle")
 
@@ -69,8 +75,11 @@ class OnBoardViewModel @Inject constructor(
   private val _navigateToMainEvent = MutableSharedFlow<Unit>()
   val navigateToMainEvent: SharedFlow<Unit> = _navigateToMainEvent.asSharedFlow()
 
-  private val _showToastEvent = MutableSharedFlow<String>()
-  val showToastEvent: SharedFlow<String> = _showToastEvent.asSharedFlow()
+  private val _showToastEvent = MutableSharedFlow<UiText>()
+  val showToastEvent: SharedFlow<UiText> = _showToastEvent.asSharedFlow()
+
+  private val _navigateToLoginEvent = MutableSharedFlow<Unit>()
+  val navigateToLoginEvent: SharedFlow<Unit> = _navigateToLoginEvent.asSharedFlow()
 
   fun setCbAgreeToServiceTerms() {
     _agreeToServiceTerms.value = !agreeToServiceTerms.value
@@ -143,24 +152,16 @@ class OnBoardViewModel @Inject constructor(
       }
       else -> {
         viewModelScope.launch {
-          val result = checkNicknameExistUseCase(nickname)
-          when {
-            result.isSuccess && result.getOrNull() != null -> {
-              if (result.getOrNull() == false) {
+          checkNicknameExistUseCase(nickname)
+            .onSuccess { flag ->
+              if (!flag) {
                 _nicknameState.value = EditTextState.Success
               } else {
                 _nicknameState.value = EditTextState.Error(TextInputError.ALREADY_EXIST)
               }
+            }.onFailure { exception ->
+              handleException(exception, this@OnBoardViewModel)
             }
-            result.isSuccess && result.getOrNull() == null -> {
-              Timber.e("Request succeeded but data validation failed.")
-            }
-            result.isFailure -> {
-              val exception = result.exceptionOrNull()
-              Timber.d(exception)
-              _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-            }
-          }
         }
       }
     }
@@ -168,29 +169,42 @@ class OnBoardViewModel @Inject constructor(
 
   fun signUp() {
     viewModelScope.launch {
-      val result = signUpUseCase(
+      signUpUseCase(
         SignUpRequestEntity(
           agreemMarketing = _agreeMarketing.value,
           idToken = idToken,
           nickname = _nickname.value,
         ),
-      )
-      when {
-        result.isSuccess && result.getOrNull() != null -> {
-          val signUpBody = result.getOrNull()
-          setAccessTokenUseCase(signUpBody!!.accessToken)
-          setRefreshTokenUseCase(signUpBody.refreshToken)
-          _navigateToMainEvent.emit(Unit)
-        }
-        result.isSuccess && result.getOrNull() == null -> {
-          Timber.e("Request succeeded but data validation failed.")
-        }
-        result.isFailure -> {
-          val exception = result.exceptionOrNull()
-          Timber.d(exception)
-          _showToastEvent.emit(exception?.message ?: "Unknown Error Occured")
-        }
+      ).onSuccess { signUpEntity ->
+        setAccessTokenUseCase(signUpEntity.accessToken)
+        setRefreshTokenUseCase(signUpEntity.refreshToken)
+        _navigateToMainEvent.emit(Unit)
+      }.onFailure { exception ->
+        handleException(exception, this@OnBoardViewModel)
       }
+    }
+  }
+
+  override fun showServerErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.server_error_message))
+    }
+  }
+
+  override fun showNetworkErrorToast() {
+    viewModelScope.launch {
+      _showToastEvent.emit(UiText.StringResource(R.string.network_error_message))
+    }
+  }
+
+  override fun handleNotFoundException() {
+    //
+  }
+
+  override fun handleRefreshTokenExpired() {
+    viewModelScope.launch {
+      logoutUseCase()
+      _navigateToLoginEvent.emit(Unit)
     }
   }
 

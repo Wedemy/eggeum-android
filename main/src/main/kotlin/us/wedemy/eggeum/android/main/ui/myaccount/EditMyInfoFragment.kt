@@ -18,6 +18,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.InsetterApplyTypeDsl
+import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
@@ -46,6 +48,14 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    binding.root.applyInsetter {
+      type(
+        ime = false,
+        statusBars = true,
+        navigationBars = true,
+        f = InsetterApplyTypeDsl::padding,
+      )
+    }
     initListener()
     initObserver()
   }
@@ -127,7 +137,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
 
       launch {
         viewModel.showToastEvent.collect { message ->
-          Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
         }
       }
     }

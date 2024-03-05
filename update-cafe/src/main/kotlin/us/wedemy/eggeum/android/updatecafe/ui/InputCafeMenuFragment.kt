@@ -11,12 +11,15 @@ package us.wedemy.eggeum.android.updatecafe.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.updatecafe.databinding.FragmentInputCafeMenuBinding
 import us.wedemy.eggeum.android.updatecafe.ui.item.CafeMenuItem
 import us.wedemy.eggeum.android.updatecafe.viewmodel.ProposeCafeInfoViewModel
@@ -84,6 +87,18 @@ class InputCafeMenuFragment : BaseFragment<FragmentInputCafeMenuBinding>() {
   }
 
   private fun initObserver() {
-    // TODO
+    repeatOnStarted {
+      launch {
+        viewModel.showToastEvent.collect { message ->
+          Toast.makeText(requireContext(), message.asString(requireContext()), Toast.LENGTH_SHORT).show()
+        }
+      }
+    }
+
+    repeatOnStarted {
+      viewModel.navigateToLoginEvent.collect {
+        (activity as UpdateCafeActivity).navigateToLogin()
+      }
+    }
   }
 }

@@ -10,5 +10,5 @@ package us.wedemy.eggeum.android.domain.repository
 import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 
 public interface FileRepository {
-  public suspend fun uploadImageFile(uri: String): FileResponseEntity?
+  public suspend fun uploadImageFile(uri: String): FileResponseEntity
 }

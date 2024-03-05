@@ -12,39 +12,28 @@ import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 import us.wedemy.eggeum.android.data.service.UserService
-import us.wedemy.eggeum.android.data.util.safeRequest
 
 @Singleton
 public class UserDataSourceImpl @Inject constructor(
   private val service: UserService,
 ) : UserDataSource {
-  override suspend fun getUserInfo(): UserInfoResponse? {
-    return safeRequest {
-      service.getUserInfo()
-    }
+  override suspend fun getUserInfo(): UserInfoResponse {
+    return service.getUserInfo()
   }
 
   override suspend fun updateUserInfo(updateUserInfoRequest: UpdateUserInfoRequest) {
-    safeRequest {
-      service.updateUserInfo(updateUserInfoRequest)
-    }
+    service.updateUserInfo(updateUserInfoRequest)
   }
 
   override suspend fun withdraw() {
-    safeRequest {
-      service.withdraw()
-    }
+    service.withdraw()
   }
 
   override suspend fun updateUserNickname(nickname: String) {
-    safeRequest {
-      service.updateUserNickname(nickname)
-    }
+    service.updateUserNickname(nickname)
   }
 
-  override suspend fun checkNicknameExist(nickname: String): Boolean? {
-    return safeRequest {
-      service.checkNicknameExist(nickname)
-    }
+  override suspend fun checkNicknameExist(nickname: String): Boolean {
+    return service.checkNicknameExist(nickname)
   }
 }

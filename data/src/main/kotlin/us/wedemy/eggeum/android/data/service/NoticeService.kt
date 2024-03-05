@@ -7,19 +7,18 @@
 
 package us.wedemy.eggeum.android.data.service
 
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 import us.wedemy.eggeum.android.data.model.notice.NoticeListResponse
+import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 
 public interface NoticeService {
 
   @GET("app/notice/{noticeId}")
   public suspend fun getNotice(
     @Path("noticeId") noticeId: Long,
-  ): Response<NoticeResponse>
+  ): NoticeResponse
 
   @GET("app/notice/all")
   public suspend fun getNoticeList(

@@ -20,8 +20,8 @@ import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 public class NoticeRepositoryImpl @Inject constructor(
   private val dataSource: NoticeDataSource,
 ) : NoticeRepository {
-  override suspend fun getNotice(noticeId: Long): NoticeEntity? {
-    return dataSource.getNotice(noticeId)?.toEntity()
+  override suspend fun getNotice(noticeId: Long): NoticeEntity {
+    return dataSource.getNotice(noticeId).toEntity()
   }
 
   override fun getNoticeList(

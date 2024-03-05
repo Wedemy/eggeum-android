@@ -26,7 +26,6 @@ class UpdateMenuCompleteFragment : BaseFragment<FragmentUpdateMenuCompleteBindin
   }
 
   private fun initListener() {
-    // TODO
     binding.btnRegisterCafeComplete.setOnClickListener {
       val action = UpdateMenuCompleteFragmentDirections.actionFragmentUpdateMenuCompleteToFragmentSelectInfoCategories()
       findNavController().safeNavigate(action)

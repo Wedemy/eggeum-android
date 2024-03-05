@@ -23,6 +23,8 @@ android {
 
 dependencies {
   implementations(
+    projects.designResource,
+
     libs.androidx.core,
     libs.androidx.activity,
     libs.kotlinx.coroutines.android,
@@ -31,6 +33,6 @@ dependencies {
     libs.timber,
     libs.bundles.androidx.lifecycle,
     libs.bundles.androidx.navigation,
-    projects.designResource,
+    libs.bundles.retrofit,
   )
 }

@@ -14,12 +14,15 @@
 
   <application
     android:name=".App"
+    android:allowBackup="false"
+    android:dataExtractionRules="@xml/data_extraction_rules"
     android:icon="@mipmap/ic_launcher"
     android:label="${appName}"
     android:roundIcon="@mipmap/ic_launcher_round"
-    android:theme="@style/Theme.Eggeum"
     android:screenOrientation="portrait"
-    tools:ignore="MissingApplicationIcon">
+    android:theme="@style/Theme.Eggeum"
+    tools:ignore="DataExtractionRules,MissingApplicationIcon"
+    tools:targetApi="s">
 
     <provider
       android:name="androidx.startup.InitializationProvider"
@@ -45,17 +48,17 @@
 
     </activity>
 
-<!--    <activity-->
-<!--      android:name=".registercafe.ui.RegisterCafeActivity"-->
-<!--      android:exported="true"-->
-<!--      android:theme="@style/Theme.Eggeum.RegisterCafe">-->
+    <!--    <activity-->
+    <!--      android:name=".registercafe.ui.RegisterCafeActivity"-->
+    <!--      android:exported="true"-->
+    <!--      android:theme="@style/Theme.Eggeum.RegisterCafe">-->
 
-<!--      <intent-filter>-->
-<!--        <action android:name="android.intent.action.MAIN" />-->
-<!--        <category android:name="android.intent.category.LAUNCHER" />-->
-<!--      </intent-filter>-->
+    <!--      <intent-filter>-->
+    <!--        <action android:name="android.intent.action.MAIN" />-->
+    <!--        <category android:name="android.intent.category.LAUNCHER" />-->
+    <!--      </intent-filter>-->
 
-<!--    </activity>-->
+    <!--    </activity>-->
 
   </application>
 

@@ -13,21 +13,18 @@ import androidx.paging.PagingData
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.model.report.CreateReportRequest
-import us.wedemy.eggeum.android.data.model.report.UpdateReportRequest
 import us.wedemy.eggeum.android.data.model.report.ReportResponse
+import us.wedemy.eggeum.android.data.model.report.UpdateReportRequest
 import us.wedemy.eggeum.android.data.paging.ReportPagingSource
 import us.wedemy.eggeum.android.data.service.ReportService
 import us.wedemy.eggeum.android.data.util.Constants
-import us.wedemy.eggeum.android.data.util.safeRequest
 
 public class ReportDataSourceImpl @Inject constructor(
   private val service: ReportService,
 ) : ReportDataSource {
 
-  public override suspend fun getReport(reportId: Long): ReportResponse? {
-    return safeRequest {
-      service.getReport(reportId)
-    }
+  public override suspend fun getReport(reportId: Long): ReportResponse {
+    return service.getReport(reportId)
   }
 
   override fun getReportList(
@@ -47,19 +44,15 @@ public class ReportDataSourceImpl @Inject constructor(
   }
 
   public override suspend fun createReport(createReportRequest: CreateReportRequest) {
-    safeRequest {
-      service.createReport(
-        createReportRequest = createReportRequest,
-      )
-    }
+    service.createReport(
+      createReportRequest = createReportRequest,
+    )
   }
 
   public override suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest) {
-    safeRequest {
-      service.updateReport(
-        reportId = reportId,
-        updateReportRequest = updateReportRequest,
-      )
-    }
+    service.updateReport(
+      reportId = reportId,
+      updateReportRequest = updateReportRequest,
+    )
   }
 }

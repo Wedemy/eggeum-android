@@ -12,8 +12,6 @@ import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
 import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 import us.wedemy.eggeum.android.domain.repository.UserRepository
-import us.wedemy.eggeum.android.domain.util.CheckNicknameExistResponseIsNull
-import us.wedemy.eggeum.android.domain.util.GetUserInfoApiResponseIsNull
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
 
 @Singleton
@@ -22,7 +20,7 @@ public class GetUserInfoUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(): Result<UserInfoEntity> =
     runSuspendCatching {
-      repository.getUserInfo() ?: throw GetUserInfoApiResponseIsNull
+      repository.getUserInfo()
     }
 }
 
@@ -62,6 +60,6 @@ public class CheckNicknameExistUseCase @Inject constructor(
 ) {
   public suspend operator fun invoke(nickname: String): Result<Boolean> =
     runSuspendCatching {
-      repository.checkNicknameExist(nickname) ?: throw CheckNicknameExistResponseIsNull
+      repository.checkNicknameExist(nickname)
     }
 }

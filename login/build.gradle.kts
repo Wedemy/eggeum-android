@@ -25,6 +25,12 @@ android {
 
 dependencies {
   implementations(
+    projects.data,
+    projects.domain,
+    projects.designResource,
+    projects.common,
+    projects.navigator,
+
     platform(libs.firebase.bom),
     libs.android.material,
     libs.androidx.activity,
@@ -35,11 +41,6 @@ dependencies {
     libs.google.gms.play.services.auth,
     libs.insetter,
     libs.timber,
-    projects.data,
-    projects.domain,
-    projects.designResource,
-    projects.common,
-    projects.navigator,
   )
 }
 

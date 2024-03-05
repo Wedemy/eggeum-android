@@ -40,6 +40,11 @@ android {
 
 dependencies {
   implementations(
+    projects.common,
+    projects.designResource,
+    projects.domain,
+    projects.navigator,
+
     libs.kotlinx.coroutines.android,
     libs.kotlinx.datetime,
     libs.android.material,
@@ -54,10 +59,6 @@ dependencies {
     libs.naver.map,
     libs.photo.view,
     libs.insetter,
-    projects.common,
-    projects.designResource,
-    projects.domain,
-    projects.navigator,
   )
 }
 

@@ -32,7 +32,6 @@ class DeleteCafeMenuFrament : BaseDialogFragment<FragmentDeleteCafeMenuBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initListener()
-    initObserver()
   }
 
   private fun initListener() {
@@ -59,9 +58,5 @@ class DeleteCafeMenuFrament : BaseDialogFragment<FragmentDeleteCafeMenuBinding>(
         findNavController().navigateUp()
       }
     }
-  }
-
-  private fun initObserver() {
-    // TODO
   }
 }

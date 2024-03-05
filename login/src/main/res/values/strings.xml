@@ -9,4 +9,6 @@
   <string name="app_name_english">eggeum</string>
   <string name="app_slogan">나에게 맞는 카페 찾기, 이끔</string>
   <string name="google_login">Google 계정으로 로그인</string>
+  <string name="server_error_message">서버에 문제가 발생했어요. 잠시 후 다시 시도해주세요.</string>
+  <string name="network_error_message">네트워크 연결을 확인해주세요.</string>
 </resources>

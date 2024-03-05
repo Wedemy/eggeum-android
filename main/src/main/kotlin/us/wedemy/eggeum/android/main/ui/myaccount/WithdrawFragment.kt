@@ -34,7 +34,7 @@ class WithdrawFragment : BaseFragment<FragmentWithdrawBinding>() {
     binding.root.applyInsetter {
       type(
         ime = false,
-        statusBars = true,
+        statusBars = false,
         navigationBars = true,
         f = InsetterApplyTypeDsl::padding,
       )

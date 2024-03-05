@@ -101,6 +101,10 @@ class OnBoardViewModel @Inject constructor(
     _agreeToProvidePersonalInfoTo3rdParty.value = !agreeToProvidePersonalInfoTo3rdParty.value
   }
 
+  fun checkCbAgreeToProvidePersonalInfoTo3rdParty() {
+    _agreeToProvidePersonalInfoTo3rdParty.value = true
+  }
+
   fun setCbOver14YearOld() {
     _isOver14YearOld.value = !isOver14YearOld.value
   }

@@ -52,7 +52,7 @@ import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
 
-// TODO 권한 수락하면 바로 내 위치가 맵에 뜨도록
+// TODO 권한 수락하면 바로 내 위치가 바로 반영되어 맵에 뜨도록
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback, Overlay.OnClickListener {
   override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)

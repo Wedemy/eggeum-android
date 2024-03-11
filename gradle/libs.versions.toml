@@ -53,7 +53,7 @@ photo-view = "1.0.1"
 
 javax-inject = "1"
 
-test-kotest = "5.8.0"
+test-kotest = "5.8.1"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.2"
 test-roborazzi = "1.10.1"

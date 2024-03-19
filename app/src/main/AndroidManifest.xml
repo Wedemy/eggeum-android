@@ -34,6 +34,10 @@
         android:name="us.wedemy.eggeum.android.initialize.TimberInitializer"
         android:value="androidx.startup" />
 
+      <meta-data
+        android:name="us.wedemy.eggeum.android.initialize.FirebaseCrashlyticsInitializer"
+        android:value="androidx.startup" />
+
     </provider>
 
     <activity

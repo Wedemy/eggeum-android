@@ -16,6 +16,7 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
@@ -36,6 +37,7 @@ internal fun Project.configureAndroid(extension: CommonExtension<*, *, *, *, *>)
     compileOptions {
       sourceCompatibility = ApplicationConstants.JavaVersion
       targetCompatibility = ApplicationConstants.JavaVersion
+      isCoreLibraryDesugaringEnabled = true
     }
 
     lint {
@@ -46,7 +48,10 @@ internal fun Project.configureAndroid(extension: CommonExtension<*, *, *, *, *>)
       jvmToolchain(ApplicationConstants.JavaVersionAsInt)
     }
 
-    dependencies.add("detektPlugins", libs.findLibrary("detekt-plugin-formatting").get())
+    dependencies {
+      coreLibraryDesugaring(libs.desugar.jdk.libs)
+      detektPlugins(libs.detekt.plugin.formatting)
+    }
   }
 }
 

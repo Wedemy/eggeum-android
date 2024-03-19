@@ -12,8 +12,10 @@ import java.util.Properties
 plugins {
   eggeum("android-application")
   eggeum("android-hilt")
-  alias(libs.plugins.google.services)
+  // eggeum("android-firebase")
   alias(libs.plugins.google.secrets)
+  alias(libs.plugins.google.services)
+  alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -63,7 +65,6 @@ android {
 
 dependencies {
   implementations(
-    platform(libs.firebase.bom),
     libs.android.material,
     libs.androidx.splash,
     libs.androidx.startup,
@@ -71,11 +72,15 @@ dependencies {
     libs.androidx.appcompat,
     libs.androidx.constraintlayout,
     libs.bundles.androidx.lifecycle,
-    libs.firebase.auth,
-    libs.google.gms.play.services.auth,
     libs.lottie,
     libs.insetter,
     libs.timber,
+    libs.google.gms.play.services.auth,
+    platform(libs.firebase.bom),
+    libs.firebase.auth,
+    libs.firebase.analytics,
+    libs.firebase.crashlytics,
+
     projects.data,
     projects.domain,
     projects.login,

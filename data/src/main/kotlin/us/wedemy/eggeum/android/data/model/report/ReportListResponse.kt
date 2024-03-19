@@ -10,18 +10,6 @@ package us.wedemy.eggeum.android.data.model.report
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// @JsonClass(generateAdapter = true)
-// public data class ReportListResponse(
-//   @Json(name = "list")
-//   val list: List<ReportResponse>,
-//
-//   @Json(name = "totalElements")
-//   val totalElements: Int,
-//
-//   @Json(name = "totalPages")
-//   val totalPages: Int,
-// )
-
 @Serializable
 public data class ReportListResponse(
   @SerialName("list")

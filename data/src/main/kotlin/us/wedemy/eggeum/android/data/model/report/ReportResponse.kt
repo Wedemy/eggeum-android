@@ -11,21 +11,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.user.User
 
-// @JsonClass(generateAdapter = true)
-// public data class ReportResponse(
-//   @Json(name = "content")
-//   val content: String,
-//
-//   @Json(name = "status")
-//   val status: String,
-//
-//   @Json(name = "title")
-//   val title: String,
-//
-//   @Json(name = "user")
-//   val user: User,
-// )
-
 @Serializable
 public data class ReportResponse(
   @SerialName("content")

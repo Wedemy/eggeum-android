@@ -31,6 +31,3 @@
 
  -keep class us.wedemy.eggeum.android.common.model.** { *; }
  -keep class us.wedemy.eggeum.android.main.model.** { *; }
-
- -keep class com.crashlytics.** { *; }
- -dontwarn com.crashlytics.**

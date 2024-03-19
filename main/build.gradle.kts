@@ -6,7 +6,6 @@
  */
 @file:Suppress("UnstableApiUsage", "INLINE_FROM_HIGHER_PLATFORM")
 
-
 plugins {
   eggeum("android-library")
   eggeum("android-hilt")

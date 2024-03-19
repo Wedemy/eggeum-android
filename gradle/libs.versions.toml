@@ -37,7 +37,7 @@ androidx-room = "2.6.1"
 
 ktor-client-core = "2.3.9"
 
-retrofit = "2.9.0"
+retrofit = "2.10.0"
 okhttp = "5.0.0-alpha.12"
 
 moshi = "1.15.1"

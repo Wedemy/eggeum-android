@@ -48,6 +48,10 @@ android {
       manifestPlaceholders += mapOf(
         "appName" to "@string/app_name",
       )
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
     }
   }
 

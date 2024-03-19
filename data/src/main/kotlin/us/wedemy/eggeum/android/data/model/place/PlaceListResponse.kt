@@ -10,18 +10,6 @@ package us.wedemy.eggeum.android.data.model.place
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// @JsonClass(generateAdapter = true)
-// public data class PlaceListResponse(
-//   @Json(name = "list")
-//   val list: List<PlaceResponse>,
-//
-//   @Json(name = "totalElements")
-//   val totalElements: Int,
-//
-//   @Json(name = "totalPages")
-//   val totalPages: Int,
-// )
-
 @Serializable
 public data class PlaceListResponse(
   @SerialName("list")

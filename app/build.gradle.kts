@@ -12,7 +12,7 @@ import java.util.Properties
 plugins {
   eggeum("android-application")
   eggeum("android-hilt")
-  alias(libs.plugins.google.services)
+  eggeum("android-firebase")
   alias(libs.plugins.google.secrets)
 }
 
@@ -43,7 +43,8 @@ android {
     getByName("release") {
       isDebuggable = false
       isMinifyEnabled = true
-      isShrinkResources = true
+      // https://github.com/firebase/firebase-android-sdk/issues/5562
+      // isShrinkResources = true
       signingConfig = signingConfigs.getByName("release")
       manifestPlaceholders += mapOf(
         "appName" to "@string/app_name",
@@ -63,7 +64,6 @@ android {
 
 dependencies {
   implementations(
-    platform(libs.firebase.bom),
     libs.android.material,
     libs.androidx.splash,
     libs.androidx.startup,
@@ -71,11 +71,10 @@ dependencies {
     libs.androidx.appcompat,
     libs.androidx.constraintlayout,
     libs.bundles.androidx.lifecycle,
-    libs.firebase.auth,
-    libs.google.gms.play.services.auth,
     libs.lottie,
     libs.insetter,
     libs.timber,
+
     projects.data,
     projects.domain,
     projects.login,

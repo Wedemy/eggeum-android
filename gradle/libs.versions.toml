@@ -4,15 +4,14 @@ gradle-dependency-handler-extensions = "1.1.0"
 
 google-secrets = "2.0.1"
 google-gms-google-services = "4.4.1"
-google-gms-play-services-auth = "20.7.0"
-
-firebase-bom = "32.7.4"
+google-gms-play-services-auth = "21.0.0"
 
 kotlin-core = "1.9.23"
 kotlin-detekt = "1.23.5"
 kotlin-ktlint-gradle = "11.6.1"
-kotlin-ktlint-source = "0.49.1"
+kotlin-ktlint-source = "0.50.0"
 
+javax-inject = "1"
 kotlinx-coroutines = "1.8.0"
 kotlinx-datetime = "0.5.0"
 kotlinx-serialization = "1.6.3"
@@ -50,8 +49,9 @@ timber = "5.0.1"
 naver-map = "3.17.0"
 ksp = "1.9.23-1.0.19"
 photo-view = "1.0.1"
-
-javax-inject = "1"
+firebase-bom = "32.7.4"
+firebase-crashlytics = "2.9.9"
+desugar-jdk-libs = "2.0.4"
 
 test-kotest = "5.8.1"
 test-junit-core = "4.13.2"
@@ -79,6 +79,8 @@ androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", ver
 moshix-ir = { id = "dev.zacsweers.moshix", version.ref = "moshix-ir" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+
 test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-roborazzi" }
 
 [libraries]
@@ -89,6 +91,8 @@ google-gms-play-services-auth = { module = "com.google.android.gms:play-services
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 
 # This isn't strictly used but allows Renovate to see us using the ktlint artifact
 kotlin-ktlint = { module = "com.pinterest:ktlint", version.ref = "kotlin-ktlint-source" }
@@ -135,6 +139,7 @@ okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-i
 moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 
+desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }

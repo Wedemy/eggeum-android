@@ -159,9 +159,6 @@ test-roborazzi-rule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-
 test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test-robolectric" }
 
 detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "kotlin-detekt" }
-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
-google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
-firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradle" }
 
 [bundles]
 androidx-lifecycle = [

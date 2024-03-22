@@ -49,7 +49,7 @@ timber = "5.0.1"
 naver-map = "3.17.0"
 ksp = "1.9.23-1.0.19"
 photo-view = "1.0.1"
-firebase-bom = "32.7.4"
+firebase-bom = "32.8.0"
 firebase-crashlytics = "2.9.9"
 desugar-jdk-libs = "2.0.4"
 

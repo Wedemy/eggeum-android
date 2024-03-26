@@ -74,6 +74,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
       if (isPermissionsGranted()) {
         permissionsGranted = true
+        moveToCameraToUserLocation()
+        naverMap?.locationTrackingMode = LocationTrackingMode.Follow
       } else {
         naverMap?.locationTrackingMode = LocationTrackingMode.None
       }

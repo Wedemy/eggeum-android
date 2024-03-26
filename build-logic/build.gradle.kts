@@ -18,8 +18,9 @@ gradlePlugin {
     "AndroidApplicationPlugin" to "android-application",
     "AndroidLibraryPlugin" to "android-library",
     "AndroidHiltPlugin" to "android-hilt",
-    "AndroidxRoomPlugin" to "androidx-room",
     "AndroidGmdPlugin" to "android-gmd",
+    "AndroidFirebasePlugin" to "android-firebase",
+    "AndroidxRoomPlugin" to "androidx-room",
     "JvmKotlinPlugin" to "jvm-kotlin",
     "KotlinExplicitApiPlugin" to "kotlin-explicit-api",
     "TestJUnitPlugin" to "test-junit",
@@ -53,10 +54,9 @@ sourceSets {
 }
 
 dependencies {
-  implementations(
-    libs.gradle.android,
-    libs.gradle.kotlin,
-  )
+  compileOnly(libs.gradle.android)
+  compileOnly(libs.gradle.kotlin)
+  compileOnly(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 // Pair<ClassName, PluginName>

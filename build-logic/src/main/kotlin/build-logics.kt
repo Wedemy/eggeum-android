@@ -5,9 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-// @formatter:off
-
-@file:Suppress("UnstableApiUsage","unused")
+@file:Suppress("UnstableApiUsage", "unused")
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
@@ -17,8 +15,12 @@ import internal.configureAndroid
 import internal.configureGmd
 import internal.libs
 import internal.androidExtensions
+import internal.detektPlugins
+import internal.implementation
 import internal.isAndroidProject
+import internal.ksp
 import internal.setupJunit
+import internal.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
@@ -70,25 +72,38 @@ internal class AndroidLibraryPlugin : BuildLogicPlugin({
 })
 
 internal class AndroidHiltPlugin : BuildLogicPlugin({
-  applyPlugins(
-    libs.findPlugin("android-hilt").get().get().pluginId,
-    Plugins.Ksp,
-  )
-  dependencies.add("ksp", libs.findLibrary("android-hilt-compile").get())
-  dependencies.add("implementation", libs.findLibrary("android-hilt-runtime").get())
+  applyPlugins(Plugins.hilt, Plugins.Ksp)
+  dependencies {
+    implementation(libs.android.hilt.runtime)
+    ksp(libs.android.hilt.compile)
+  }
 })
 
 internal class AndroidxRoomPlugin : BuildLogicPlugin({
   applyPlugins(Plugins.Ksp)
 
-  dependencies.add("implementation", libs.findLibrary("androidx-room-runtime").get())
-  dependencies.add("implementation", libs.findLibrary("androidx-room-ktx").get())
-  dependencies.add("implementation", libs.findLibrary("androidx-room-paging").get())
-  dependencies.add("ksp", libs.findLibrary("androidx-room-compile").get())
+  dependencies {
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    ksp(libs.androidx.room.compile)
+  }
 })
 
 internal class AndroidGmdPlugin : BuildLogicPlugin({
   configureGmd(androidExtensions)
+})
+
+internal class AndroidFirebasePlugin : BuildLogicPlugin({
+  applyPlugins(Plugins.GoogleServices, Plugins.FirebaseCrashlytics)
+
+  dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.gms.play.services.auth)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.auth)
+  }
 })
 
 internal class JvmKotlinPlugin : BuildLogicPlugin({
@@ -107,8 +122,9 @@ internal class JvmKotlinPlugin : BuildLogicPlugin({
     getByName("main").java.srcDir("src/main/kotlin")
     getByName("test").java.srcDir("src/test/kotlin")
   }
-
-  dependencies.add("detektPlugins", libs.findLibrary("detekt-plugin-formatting").get())
+  dependencies {
+    detektPlugins(libs.detekt.plugin.formatting)
+  }
 })
 
 internal class KotlinExplicitApiPlugin : BuildLogicPlugin({
@@ -131,15 +147,17 @@ internal class TestJUnitPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
   dependencies {
     setupJunit(
-      core = libs.findLibrary("test-junit-core").get(),
-      engine = libs.findLibrary("test-junit-engine").get(),
+      core = libs.test.junit.core,
+      engine = libs.test.junit.engine,
     )
   }
 })
 
 internal class TestKotestPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
-  dependencies.add("testImplementation", libs.findLibrary("test-kotest-framework").get())
+  dependencies {
+    testImplementation(libs.test.kotest.framework)
+  }
 })
 
 // ref: https://kotest.io/docs/quickstart#test-framework
@@ -158,10 +176,10 @@ private fun Project.useTestPlatformForTarget() {
       KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
         if (desc.parent == null) { // will match the outermost suite
           val output = "Results: ${result.resultType} " +
-              "(${result.testCount} tests, " +
-              "${result.successfulTestCount} passed, " +
-              "${result.failedTestCount} failed, " +
-              "${result.skippedTestCount} skipped)"
+            "(${result.testCount} tests, " +
+            "${result.successfulTestCount} passed, " +
+            "${result.failedTestCount} failed, " +
+            "${result.skippedTestCount} skipped)"
           println(output)
         }
       })

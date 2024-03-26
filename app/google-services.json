@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "44067650485-cgje8j0g9n01rfi3p9f503cgj5l6c9qi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "us.wedemy.eggeum.android",
+            "certificate_hash": "6a982ba3ccbc365cdddd0e4335567678be196b45"
+          }
+        },
+        {
           "client_id": "44067650485-nuc5qt372gofhpbbb1hntcsufgi8tg5t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

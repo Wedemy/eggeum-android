@@ -13,8 +13,5 @@ import org.gradle.plugin.use.PluginDependencySpec
 inline fun PluginDependenciesSpec.eggeum(pluginId: String): PluginDependencySpec =
   id("eggeum.plugin.$pluginId")
 
-inline fun PluginDependenciesSpec.android(pluginId: String): PluginDependencySpec =
-  id("com.android.$pluginId")
-
 val PluginDependenciesSpec.`kotlin-parcelize`: PluginDependencySpec
   inline get() = id("kotlin-parcelize")

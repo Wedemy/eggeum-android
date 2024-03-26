@@ -9,16 +9,16 @@
 
 package internal
 
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.NamedDomainObjectContainerScope
-import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.the
 
 internal val Project.libs
-  get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+  get() = the<LibrariesForLibs>()
 
 internal fun Project.applyPlugins(vararg plugins: String) {
   plugins.forEach(pluginManager::apply)
@@ -32,6 +32,6 @@ internal inline operator fun <T : Any, C : NamedDomainObjectContainer<T>> C.invo
   }
 
 internal inline fun DependencyHandler.setupJunit(core: Any, engine: Any) {
-  add("testImplementation", core)
-  add("testRuntimeOnly", engine)
+  testImplementation(core)
+  testRuntimeOnly(engine)
 }

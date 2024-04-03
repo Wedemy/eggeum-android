@@ -57,7 +57,7 @@ test-kotest = "5.8.1"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.2"
 test-roborazzi = "1.11.0"
-test-robolectric = "4.12"
+test-robolectric = "4.12.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }

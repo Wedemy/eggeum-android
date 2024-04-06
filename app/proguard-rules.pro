@@ -31,3 +31,4 @@
 
  -keep class us.wedemy.eggeum.android.common.model.** { *; }
  -keep class us.wedemy.eggeum.android.main.model.** { *; }
+ -keep class us.wedemy.eggeum.android.updatecafe.ui.item.** { *; }

@@ -69,7 +69,19 @@ class CafeImageFragment : BaseFragment<FragmentCafeImageBinding>() {
     repeatOnStarted {
       launch {
         viewModel.cafeDetailInfo.collect { cafeDetailInfo ->
-          cafeImageAdapter.replaceAll(cafeDetailInfo.image?.files)
+          val cafeImages = cafeDetailInfo.image?.files
+          cafeImageAdapter.replaceAll(cafeImages)
+          if (cafeImages?.isEmpty() == true) {
+            binding.apply {
+              tvNoImageFound.visibility = View.VISIBLE
+              rvCafeImage.visibility = View.GONE
+            }
+          } else {
+            binding.apply {
+              tvNoImageFound.visibility = View.GONE
+              rvCafeImage.visibility = View.VISIBLE
+            }
+          }
         }
       }
     }

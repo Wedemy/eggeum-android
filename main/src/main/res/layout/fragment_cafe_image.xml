@@ -12,6 +12,20 @@
   android:layout_height="match_parent"
   android:background="@color/white">
 
+  <TextView
+    android:id="@+id/tv_no_image_found"
+    style="@style/TextMRegular"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="112dp"
+    android:gravity="center_horizontal"
+    android:text="@string/no_image_found"
+    android:textColor="@color/gray_500"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_cafe_image"
     android:layout_width="0dp"

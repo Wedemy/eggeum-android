@@ -51,7 +51,6 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentMapBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
-import us.wedemy.eggeum.android.main.mapper.toUilModel
 import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.ui.MainActivity
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
@@ -376,7 +375,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         address2 = selectedPlaceModel.address2,
         id = selectedPlaceModel.id,
         image = selectedPlaceModel.image?.toUiModel(),
-        info = selectedPlaceModel.info?.toUilModel(),
+        info = selectedPlaceModel.info?.toUiModel(),
         latitude = selectedPlaceModel.latitude,
         longitude = selectedPlaceModel.longitude,
         menu = selectedPlaceModel.menu?.toUiModel(),

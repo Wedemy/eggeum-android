@@ -24,7 +24,7 @@ internal fun PlaceEntity.toUiModel() =
     address2 = address2,
     id = id,
     image = image?.toUiModel(),
-    info = info?.toUilModel(),
+    info = info?.toUiModel(),
     latitude = latitude,
     longitude = longitude,
     menu = menu?.toUiModel(),
@@ -36,7 +36,7 @@ internal fun ImageEntity.toUiModel() =
     ImageModel(files = it.map { it.toUiModel() })
   }
 
-internal fun InfoEntity.toUilModel() =
+internal fun InfoEntity.toUiModel() =
   InfoModel(
     areaSize = areaSize,
     blogUri = blogUri,

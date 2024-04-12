@@ -109,11 +109,14 @@ class EditMyInfoViewModel @Inject constructor(
   fun handleNicknameValidation(nickname: String) {
     setNickname(nickname)
     when {
-      _nickname.value.isEmpty() -> {
+      nickname.isEmpty() -> {
         _nicknameState.value = EditTextState.Error(TextInputError.EMPTY)
       }
-      _nickname.value.length < 2 -> {
+      nickname.length < 2 -> {
         _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
+      }
+      containsWhitespace(nickname) -> {
+        _nicknameState.value = EditTextState.Error(TextInputError.CONTAINS_WHITESPACE)
       }
       else -> {
         viewModelScope.launch {
@@ -181,6 +184,10 @@ class EditMyInfoViewModel @Inject constructor(
 
   override fun handleNotFoundException() {
     //
+  }
+
+  fun containsWhitespace(text: String): Boolean {
+    return text.matches(Regex(".*\\s.*"))
   }
 
   override fun handleRefreshTokenExpired() {

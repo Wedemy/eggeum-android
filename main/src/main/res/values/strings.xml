@@ -22,6 +22,7 @@
   <string name="search">검색</string>
   <string name="search_cafe">카페 검색</string>
   <string name="location_permission_educational_message">지도 사용을 위해 위치 권한을 허용해주세요.(필수권한)</string>
+  <string name="current_map_search_cafe">현 지도에서 검색</string>
   <string name="check">확인</string>
   <string name="cancel">취소</string>
   <string name="Info">정보</string>
@@ -91,6 +92,7 @@
 
   <!--  EditMyInfo-->
   <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>
+  <string name="contains_whitespace_error">닉네임에 띄어쓰기를 포함할 수 없습니다.</string>
   <string name="ic_bottom_sheet_handle">ic_bottom_sheet_handle</string>
 
   <!--  NetworkError-->

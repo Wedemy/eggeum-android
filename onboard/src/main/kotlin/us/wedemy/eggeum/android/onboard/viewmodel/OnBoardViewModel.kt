@@ -150,6 +150,9 @@ class OnBoardViewModel @Inject constructor(
       nickname.length < 2 -> {
         _nicknameState.value = EditTextState.Error(TextInputError.TOO_SHORT)
       }
+      containsWhitespace(nickname) -> {
+        _nicknameState.value = EditTextState.Error(TextInputError.CONTAINS_WHITESPACE)
+      }
       else -> {
         viewModelScope.launch {
           checkNicknameExistUseCase(nickname)
@@ -199,6 +202,10 @@ class OnBoardViewModel @Inject constructor(
 
   override fun handleNotFoundException() {
     //
+  }
+
+  fun containsWhitespace(text: String): Boolean {
+    return text.matches(Regex(".*\\s.*"))
   }
 
   override fun handleRefreshTokenExpired() {

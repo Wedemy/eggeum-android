@@ -7,8 +7,10 @@
 
 package us.wedemy.eggeum.android.main.ui.search
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,11 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.addDivider
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.design.R
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchCafeBinding
@@ -61,6 +63,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
     initView()
     initListener()
     initObserver()
+    requestSearchFocus()
   }
 
   private fun initView() {
@@ -112,5 +115,17 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
         }
       }
     }
+  }
+
+  private fun requestSearchFocus() {
+    binding.tietSearchCafe.requestFocus()
+    showKeyboard()
+  }
+
+  private fun showKeyboard() {
+    val imm: InputMethodManager =
+      context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as
+        InputMethodManager
+    imm.showSoftInput(binding.tietSearchCafe, 0)
   }
 }

@@ -131,22 +131,30 @@ class MapFragment : BaseFragment<FragmentMapBinding>(), OnMapReadyCallback, Over
         when (newState) {
           BottomSheetBehavior.STATE_COLLAPSED -> {
             binding.bottomSheet.apply {
-              fadeInView(binding.bottomSheet.ivCafeDetailHandle)
-              fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
+              fadeInView(ivCafeDetailHandle)
+              fadeOutView(ivCafeDetailShrink)
+              bottomSheet.background =
+                ContextCompat.getDrawable(requireContext(), us.wedemy.eggeum.android.design.R.drawable.radius_21)
             }
           }
           BottomSheetBehavior.STATE_DRAGGING -> {}
           BottomSheetBehavior.STATE_EXPANDED -> {
             binding.bottomSheet.apply {
-              fadeInView(binding.bottomSheet.ivCafeDetailShrink)
-              fadeOutView(binding.bottomSheet.ivCafeDetailHandle)
+              fadeInView(ivCafeDetailShrink)
+              fadeOutView(ivCafeDetailHandle)
+              bottomSheet.background =
+                ContextCompat.getDrawable(requireContext(), us.wedemy.eggeum.android.design.R.drawable.radius_0)
             }
           }
           BottomSheetBehavior.STATE_HIDDEN -> {}
           BottomSheetBehavior.STATE_SETTLING -> {}
           BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-            fadeInView(binding.bottomSheet.ivCafeDetailHandle)
-            fadeOutView(binding.bottomSheet.ivCafeDetailShrink)
+            binding.bottomSheet.apply {
+              fadeInView(ivCafeDetailHandle)
+              fadeOutView(ivCafeDetailShrink)
+              bottomSheet.background =
+                ContextCompat.getDrawable(requireContext(), us.wedemy.eggeum.android.design.R.drawable.radius_21)
+            }
           }
         }
       }

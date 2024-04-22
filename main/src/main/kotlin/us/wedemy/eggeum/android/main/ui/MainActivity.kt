@@ -70,6 +70,7 @@ class MainActivity : BaseActivity() {
           updateSystemBars(Color.TRANSPARENT)
           binding.root.applyInsetter {
             type(
+              ime = true,
               statusBars = true,
               navigationBars = false,
               f = InsetterApplyTypeDsl::padding,
@@ -81,6 +82,7 @@ class MainActivity : BaseActivity() {
           updateSystemBars(ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900))
           binding.root.applyInsetter {
             type(
+              ime = true,
               statusBars = true,
               navigationBars = false,
               f = InsetterApplyTypeDsl::padding,
@@ -92,6 +94,7 @@ class MainActivity : BaseActivity() {
           updateSystemBars(Color.TRANSPARENT)
           binding.root.applyInsetter {
             type(
+              ime = true,
               statusBars = false,
               navigationBars = false,
               f = InsetterApplyTypeDsl::padding,

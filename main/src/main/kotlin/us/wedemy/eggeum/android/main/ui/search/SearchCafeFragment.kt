@@ -123,9 +123,7 @@ class SearchCafeFragment : BaseFragment<FragmentSearchCafeBinding>() {
   }
 
   private fun showKeyboard() {
-    val imm: InputMethodManager =
-      context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as
-        InputMethodManager
+    val imm: InputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(binding.tietSearchCafe, 0)
   }
 }

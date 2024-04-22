@@ -66,11 +66,21 @@ class MainActivity : BaseActivity() {
   private fun setupDestinationChangeListener() {
     navController?.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
+        R.id.fragment_home, R.id.fragment_my_account -> {
+          updateSystemBars(Color.TRANSPARENT)
+          binding.root.applyInsetter {
+            type(
+              statusBars = true,
+              navigationBars = false,
+              f = InsetterApplyTypeDsl::padding,
+            )
+          }
+        }
+
         R.id.fragment_cafe_image_detail -> {
           updateSystemBars(ContextCompat.getColor(this, us.wedemy.eggeum.android.design.R.color.muted_900))
           binding.root.applyInsetter {
             type(
-              ime = true,
               statusBars = true,
               navigationBars = false,
               f = InsetterApplyTypeDsl::padding,
@@ -82,7 +92,6 @@ class MainActivity : BaseActivity() {
           updateSystemBars(Color.TRANSPARENT)
           binding.root.applyInsetter {
             type(
-              ime = true,
               statusBars = false,
               navigationBars = false,
               f = InsetterApplyTypeDsl::padding,
@@ -96,7 +105,7 @@ class MainActivity : BaseActivity() {
             type(
               ime = true,
               statusBars = true,
-              navigationBars = false,
+              navigationBars = true,
               f = InsetterApplyTypeDsl::padding,
             )
           }

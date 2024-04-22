@@ -13,13 +13,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dev.chrisbanes.insetter.InsetterApplyTypeDsl
-import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.coroutines.launch
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.extension.textChangesAsFlow
-import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.main.databinding.FragmentReportBinding
 import us.wedemy.eggeum.android.main.viewmodel.ReportViewModel
 
@@ -31,14 +29,6 @@ class ReportFragment : BaseFragment<FragmentReportBinding>() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.root.applyInsetter {
-      type(
-        ime = false,
-        statusBars = false,
-        navigationBars = true,
-        f = InsetterApplyTypeDsl::padding,
-      )
-    }
     initListener()
     initObserver()
   }

@@ -10,24 +10,14 @@ package us.wedemy.eggeum.android.main.ui.myaccount
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import dev.chrisbanes.insetter.InsetterApplyTypeDsl
-import dev.chrisbanes.insetter.applyInsetter
-import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.extension.safeNavigate
 import us.wedemy.eggeum.android.main.databinding.FragmentReportCompleteBinding
 
 class ReportCompleteFragment : BaseFragment<FragmentReportCompleteBinding>() {
   override fun getViewBinding() = FragmentReportCompleteBinding.inflate(layoutInflater)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    binding.root.applyInsetter {
-      type(
-        ime = false,
-        statusBars = true,
-        navigationBars = true,
-        f = InsetterApplyTypeDsl::padding,
-      )
-    }
     initListener()
   }
 

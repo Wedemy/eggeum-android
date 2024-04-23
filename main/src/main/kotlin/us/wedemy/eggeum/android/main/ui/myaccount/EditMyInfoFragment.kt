@@ -146,6 +146,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
       TextInputError.TOO_SHORT -> setTooShortTextError()
       TextInputError.ALREADY_EXIST -> setAlreadyExistTextError()
       TextInputError.CONTAINS_WHITESPACE -> setContainsWhitespaceError()
+      TextInputError.INVALID_CHARACTER -> setContainsInvalidCharacterError()
     }
   }
 
@@ -185,6 +186,19 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
   private fun setContainsWhitespaceError() {
     binding.tilEditNickname.apply {
       error = getString(R.string.contains_whitespace_error)
+      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
+      val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
+      setEndIconTintList(ColorStateList.valueOf(color))
+      setEndIconOnClickListener {
+        binding.tietEditNickname.text?.clear()
+        viewModel.setNickname("")
+      }
+    }
+  }
+
+  private fun setContainsInvalidCharacterError() {
+    binding.tilEditNickname.apply {
+      error = getString(R.string.contains_invalid_character_error)
       setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))

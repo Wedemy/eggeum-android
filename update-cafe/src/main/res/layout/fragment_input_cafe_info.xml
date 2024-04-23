@@ -28,14 +28,14 @@
       android:text="@string/update_cafe"
       android:textColor="@color/gray_900" />
 
-<!--    <TextView-->
-<!--      style="@style/Title"-->
-<!--      android:layout_width="wrap_content"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:layout_gravity="end"-->
-<!--      android:layout_marginEnd="16dp"-->
-<!--      android:text="@string/cancel"-->
-<!--      android:textColor="@color/gray_300" />-->
+    <!--    <TextView-->
+    <!--      style="@style/Title"-->
+    <!--      android:layout_width="wrap_content"-->
+    <!--      android:layout_height="wrap_content"-->
+    <!--      android:layout_gravity="end"-->
+    <!--      android:layout_marginEnd="16dp"-->
+    <!--      android:text="@string/cancel"-->
+    <!--      android:textColor="@color/gray_300" />-->
 
   </com.google.android.material.appbar.MaterialToolbar>
 
@@ -44,31 +44,30 @@
     style="@style/H4"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
     android:text="@string/input_corrections"
     android:textColor="@color/gray_900"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="16dp"
     app:layout_constraintTop_toBottomOf="@id/tb_select_input_cafe_info" />
 
   <ScrollView
     android:id="@+id/sv_input_cafe_info"
     android:layout_width="0dp"
     android:layout_height="0dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginTop="24dp"
-    android:layout_marginBottom="80dp"
     android:fillViewport="true"
     app:layout_constraintBottom_toBottomOf="@id/line_input_cafe_info"
-    android:layout_marginHorizontal="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_input_cafe_info">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:paddingBottom="24dp">
 
       <TextView
         android:id="@+id/tv_cafe_area"
@@ -83,12 +82,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_cafe_area"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_cafe_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_area">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_area"
@@ -114,12 +113,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_cafe_meeting_room"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_cafe_meeting_room"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_meeting_room">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_meeting_room"
@@ -145,12 +144,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_cafe_multi_seat"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_cafe_multi_seat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_multi_seat">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_multi_seat"
@@ -176,12 +175,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_cafe_single_seat"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_cafe_single_seat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_single_seat">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_single_seat"
@@ -207,12 +206,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_cafe_business_hours"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_cafe_business_hours"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_business_hours">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_cafe_business_hours"
@@ -238,12 +237,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_parking"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_parking"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_parking">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_parking"
@@ -269,12 +268,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_exists_smoking_area"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_exists_smoking_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_smoking_area">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_exists_smoking_area"
@@ -300,12 +299,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_exists_wifi"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_exists_wifi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_wifi">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_exists_wifi"
@@ -331,12 +330,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_exists_outlet"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_exists_outlet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_outlet">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_exists_outlet"
@@ -362,12 +361,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_rest_room"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_rest_room"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rest_room">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_rest_room"
@@ -393,12 +392,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_mobile_charging"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_mobile_charging"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mobile_charging">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_mobile_charging"
@@ -424,12 +423,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_instagram_uri"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_instagram_uri"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_instagram_uri">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_instagram_uri"
@@ -455,12 +454,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_website_uri"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_website_uri"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_website_uri">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_website_uri"
@@ -486,12 +485,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_blog_uri"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_blog_uri"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_blog_uri">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_blog_uri"
@@ -517,12 +516,12 @@
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_phone"
         style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
         app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
         app:errorTextAppearance="@style/ErrorAppearance"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_phone">
 
         <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/tiet_input_phone"

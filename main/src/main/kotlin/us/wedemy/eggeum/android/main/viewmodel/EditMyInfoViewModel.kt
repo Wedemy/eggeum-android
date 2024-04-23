@@ -118,6 +118,9 @@ class EditMyInfoViewModel @Inject constructor(
       containsWhitespace(nickname) -> {
         _nicknameState.value = EditTextState.Error(TextInputError.CONTAINS_WHITESPACE)
       }
+      containsInvalidCharacter(nickname) -> {
+        _nicknameState.value = EditTextState.Error(TextInputError.INVALID_CHARACTER)
+      }
       else -> {
         viewModelScope.launch {
           checkNicknameExistUseCase(nickname)
@@ -186,8 +189,12 @@ class EditMyInfoViewModel @Inject constructor(
     //
   }
 
-  fun containsWhitespace(text: String): Boolean {
+  private fun containsWhitespace(text: String): Boolean {
     return text.matches(Regex(".*\\s.*"))
+  }
+
+  private fun containsInvalidCharacter(text: String): Boolean {
+    return !text.matches(Regex("^[a-zA-Z가-힣0-9]{2,20}$"))
   }
 
   override fun handleRefreshTokenExpired() {

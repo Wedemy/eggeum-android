@@ -12,4 +12,5 @@ enum class TextInputError {
   TOO_SHORT,
   ALREADY_EXIST,
   CONTAINS_WHITESPACE,
+  INVALID_CHARACTER,
 }

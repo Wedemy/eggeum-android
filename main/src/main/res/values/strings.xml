@@ -93,6 +93,7 @@
   <!--  EditMyInfo-->
   <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>
   <string name="contains_whitespace_error">닉네임에 띄어쓰기를 포함할 수 없습니다.</string>
+  <string name="contains_invalid_character_error">닉네임은 영문, 숫자, 완성된 한글의 조합만 사용할 수 있습니다.\n한글의 자음이나 모음만의 조합은 허용되지 않습니다.</string>
   <string name="ic_bottom_sheet_handle">ic_bottom_sheet_handle</string>
 
   <!--  NetworkError-->

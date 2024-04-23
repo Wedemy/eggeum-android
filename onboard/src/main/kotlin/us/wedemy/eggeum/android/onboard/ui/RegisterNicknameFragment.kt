@@ -109,6 +109,7 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
       TextInputError.TOO_SHORT -> setTooShortTextError()
       TextInputError.ALREADY_EXIST -> setAlreadyExistTextError()
       TextInputError.CONTAINS_WHITESPACE -> setContainsWhitespaceError()
+      TextInputError.INVALID_CHARACTER -> setContainsInvalidCharacterError()
     }
   }
 
@@ -148,6 +149,19 @@ class RegisterNicknameFragment : BaseFragment<FragmentRegisterNicknameBinding>()
   private fun setContainsWhitespaceError() {
     binding.tilRegisterNickname.apply {
       error = getString(R.string.contains_whitespace_error)
+      setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
+      val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
+      setEndIconTintList(ColorStateList.valueOf(color))
+      setEndIconOnClickListener {
+        binding.tietRegisterNickname.text?.clear()
+        viewModel.setNickname("")
+      }
+    }
+  }
+
+  private fun setContainsInvalidCharacterError() {
+    binding.tilRegisterNickname.apply {
+      error = getString(R.string.contains_invalid_character_error)
       setEndIconDrawable(us.wedemy.eggeum.android.design.R.drawable.ic_close_filled_16)
       val color = ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400)
       setEndIconTintList(ColorStateList.valueOf(color))

@@ -128,11 +128,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         findNavController().safeNavigate(action)
       }
       cvCurrentMapSearchCafe.setOnClickListener {
-        binding.cvCurrentMapSearchCafe.visibility = View.GONE
         searchViewModel.setInitialCameraLocation(
           searchViewModel.lastCameraLocation.value.latitude,
           searchViewModel.lastCameraLocation.value.longitude
         )
+        searchViewModel.setCurrentLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude
+        )
+        cvCurrentMapSearchCafe.visibility = View.GONE
       }
     }
   }

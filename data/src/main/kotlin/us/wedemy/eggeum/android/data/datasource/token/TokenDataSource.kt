@@ -14,7 +14,6 @@
 
 package us.wedemy.eggeum.android.data.datasource.token
 
-import us.wedemy.eggeum.android.data.model.token.TokenRequest
 import us.wedemy.eggeum.android.data.model.token.TokenResponse
 
 internal interface TokenDataSource {
@@ -28,5 +27,5 @@ internal interface TokenDataSource {
 
   suspend fun clear()
 
-  suspend fun getNewAccessToken(tokenRequest: TokenRequest): Result<TokenResponse>
+  suspend fun refresh(): Result<TokenResponse>
 }

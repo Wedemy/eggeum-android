@@ -15,7 +15,7 @@ import us.wedemy.eggeum.android.data.model.token.TokenResponse
 internal interface TokenService {
 
   @POST("app/token/refresh")
-  suspend fun getRefreshToken(
+  suspend fun refresh(
     @Body tokenRequest: TokenRequest,
   ): TokenResponse
 }

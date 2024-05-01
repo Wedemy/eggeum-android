@@ -61,8 +61,9 @@ internal class TokenDataSourceImpl @Inject constructor(
     dataStore.edit { it.clear() }
   }
 
-  override suspend fun getNewAccessToken(tokenRequest: TokenRequest): Result<TokenResponse> =
+  override suspend fun refresh(): Result<TokenResponse> =
     runSuspendCatching {
-      service.getRefreshToken(tokenRequest)
+      val tokenRequest = TokenRequest(getRefreshToken())
+      service.refresh(tokenRequest)
     }
 }

@@ -14,36 +14,36 @@ import us.wedemy.eggeum.android.data.model.place.Image
 import us.wedemy.eggeum.android.data.model.place.Info
 import us.wedemy.eggeum.android.data.model.place.Menu
 
-public class OrmConverter {
+internal class OrmConverter {
   private val json = Json
 
   @TypeConverter
-  public fun fromImage(image: Image?): String? {
+  fun fromImage(image: Image?): String? {
     return image?.let { json.encodeToString(it) }
   }
 
   @TypeConverter
-  public fun toImage(imageString: String?): Image? {
+  fun toImage(imageString: String?): Image? {
     return imageString?.let { json.decodeFromString(it) }
   }
 
   @TypeConverter
-  public fun fromInfo(info: Info?): String? {
+  fun fromInfo(info: Info?): String? {
     return info?.let { json.encodeToString(it) }
   }
 
   @TypeConverter
-  public fun toInfo(infoString: String?): Info? {
+  fun toInfo(infoString: String?): Info? {
     return infoString?.let { json.decodeFromString(it) }
   }
 
   @TypeConverter
-  public fun fromMenu(menu: Menu?): String? {
+  fun fromMenu(menu: Menu?): String? {
     return menu?.let { json.encodeToString(it) }
   }
 
   @TypeConverter
-  public fun toMenu(menuString: String?): Menu? {
+  fun toMenu(menuString: String?): Menu? {
     return menuString?.let { json.decodeFromString(it) }
   }
 }

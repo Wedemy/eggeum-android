@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 import us.wedemy.eggeum.android.domain.repository.UserRepository
 
 @Singleton
-public class UserRepositoryImpl @Inject constructor(
+internal class UserRepositoryImpl @Inject constructor(
   private val dataSource: UserDataSource,
 ) : UserRepository {
   override suspend fun getUserInfo(): UserInfoEntity {

@@ -25,7 +25,7 @@ import us.wedemy.eggeum.android.data.paging.PlacePagingSource
 import us.wedemy.eggeum.android.data.service.PlaceService
 import us.wedemy.eggeum.android.data.util.Constants
 
-public class PlaceRemoteDataSourceImpl @Inject constructor(
+internal class PlaceRemoteDataSourceImpl @Inject constructor(
   private val service: PlaceService,
 ) : PlaceRemoteDataSource {
   override suspend fun getPlace(placeId: Long): PlaceResponse {

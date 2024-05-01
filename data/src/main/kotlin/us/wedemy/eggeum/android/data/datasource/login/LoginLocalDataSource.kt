@@ -7,14 +7,14 @@
 
 package us.wedemy.eggeum.android.data.datasource.login
 
-public interface LoginLocalDataSource {
-  public suspend fun setAccessToken(accessToken: String)
+internal interface LoginLocalDataSource {
+  suspend fun setAccessToken(accessToken: String)
 
-  public suspend fun setRefreshToken(refreshToken: String)
+  suspend fun setRefreshToken(refreshToken: String)
 
-  public suspend fun getAccessToken(): String
+  suspend fun getAccessToken(): String
 
-  public suspend fun getRefreshToken(): String
+  suspend fun getRefreshToken(): String
 
-  public suspend fun deleteAuthToken()
+  suspend fun deleteAuthToken()
 }

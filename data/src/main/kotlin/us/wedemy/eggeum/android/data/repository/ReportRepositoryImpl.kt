@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.domain.model.report.ReportEntity
 import us.wedemy.eggeum.android.domain.model.report.UpdateReportEntity
 import us.wedemy.eggeum.android.domain.repository.ReportRepository
 
-public class ReportRepositoryImpl @Inject constructor(
+internal class ReportRepositoryImpl @Inject constructor(
   private val dataSource: ReportDataSource,
 ) : ReportRepository {
   override suspend fun getReport(reportId: Long): ReportEntity {
@@ -43,11 +43,11 @@ public class ReportRepositoryImpl @Inject constructor(
     }
   }
 
-  public override suspend fun createReport(createReportEntity: CreateReportEntity) {
+  override suspend fun createReport(createReportEntity: CreateReportEntity) {
     dataSource.createReport(createReportEntity.toModel())
   }
 
-  public override suspend fun updateReport(reportId: Long, updateReportEntity: UpdateReportEntity) {
+  override suspend fun updateReport(reportId: Long, updateReportEntity: UpdateReportEntity) {
     dataSource.updateReport(reportId, updateReportEntity.toModel())
   }
 }

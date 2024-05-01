@@ -16,13 +16,13 @@ import androidx.room.Query
 import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 
 @Dao
-public interface PlaceSearchDao {
+internal interface PlaceSearchDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  public suspend fun insertRecentSearchPlace(place: PlaceResponse)
+  suspend fun insertRecentSearchPlace(place: PlaceResponse)
 
   @Delete
-  public suspend fun deleteRecentSearchPlace(place: PlaceResponse)
+  suspend fun deleteRecentSearchPlace(place: PlaceResponse)
 
   @Query("SELECT * FROM places")
-  public fun getRecentSearchPlaceList(): PagingSource<Int, PlaceResponse>
+  fun getRecentSearchPlaceList(): PagingSource<Int, PlaceResponse>
 }

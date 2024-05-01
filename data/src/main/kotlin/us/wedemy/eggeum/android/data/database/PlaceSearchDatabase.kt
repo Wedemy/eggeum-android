@@ -18,6 +18,6 @@ import us.wedemy.eggeum.android.data.model.place.PlaceResponse
   exportSchema = false,
 )
 @TypeConverters(OrmConverter::class)
-public abstract class PlaceSearchDatabase : RoomDatabase() {
-  public abstract fun placeSearchDao(): PlaceSearchDao
+internal abstract class PlaceSearchDatabase : RoomDatabase() {
+  abstract fun placeSearchDao(): PlaceSearchDao
 }

@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.paging.NoticePagingSource
 import us.wedemy.eggeum.android.data.service.NoticeService
 import us.wedemy.eggeum.android.data.util.Constants
 
-public class NoticeDataSourceImpl @Inject constructor(
+internal class NoticeDataSourceImpl @Inject constructor(
   private val service: NoticeService,
 ) : NoticeDataSource {
   override suspend fun getNotice(noticeId: Long): NoticeResponse {

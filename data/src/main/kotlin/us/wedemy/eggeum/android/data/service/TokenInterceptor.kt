@@ -7,7 +7,7 @@ import okhttp3.Response
 import javax.inject.Inject
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 
-public class TokenInterceptor @Inject constructor(
+internal class TokenInterceptor @Inject constructor(
   private val dataStoreProvider: TokenDataStoreProvider,
 ) : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {

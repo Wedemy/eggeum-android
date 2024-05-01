@@ -24,7 +24,7 @@ import us.wedemy.eggeum.android.domain.repository.EnumRepository
 // 추후 방법을 알아내어 Ktor 로 이를 구현할 예정
 
 @Singleton
-public class EnumRepositoryImpl @Inject constructor(
+internal class EnumRepositoryImpl @Inject constructor(
   @Named("KtorHttpClient")
   private val client: HttpClient,
   moshi: Moshi,

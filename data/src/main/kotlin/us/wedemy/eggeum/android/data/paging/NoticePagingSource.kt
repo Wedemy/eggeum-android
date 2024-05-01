@@ -17,19 +17,19 @@ import us.wedemy.eggeum.android.data.service.NoticeService
 import us.wedemy.eggeum.android.data.util.Constants.PAGING_SIZE
 import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 
-public class NoticePagingSource(
+internal class NoticePagingSource(
   private val service: NoticeService,
   private val query: String? = null,
 ) : PagingSource<Int, NoticeResponse>() {
 
-  public override fun getRefreshKey(state: PagingState<Int, NoticeResponse>): Int? {
+  override fun getRefreshKey(state: PagingState<Int, NoticeResponse>): Int? {
     return state.anchorPosition?.let { anchorPosition ->
       state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
         ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
     }
   }
 
-  public override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NoticeResponse> {
+  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NoticeResponse> {
     return try {
       val pageNumber = params.key ?: STARTING_PAGE_INDEX
       val response = service.getNoticeList(page = pageNumber, search = query, size = params.loadSize)

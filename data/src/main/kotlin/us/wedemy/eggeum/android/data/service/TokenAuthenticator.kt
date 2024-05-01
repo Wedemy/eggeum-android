@@ -11,13 +11,13 @@ import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
 import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
 
-public class TokenAuthenticator @Inject constructor(
+internal class TokenAuthenticator @Inject constructor(
   private val dataStoreProvider: TokenDataStoreProvider,
   private val tokenDataSource: TokenDataSource,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
     return runBlocking {
-      tokenDataSource.getRefreshToken(TokenRequest(dataStoreProvider.getRefreshToken()))
+      tokenDataSource.getNewAccessToken(TokenRequest(dataStoreProvider.getRefreshToken()))
         .onSuccess { tokenResponse ->
           dataStoreProvider.setAccessToken(tokenResponse.accessToken)
           dataStoreProvider.setRefreshToken(tokenResponse.refreshToken)

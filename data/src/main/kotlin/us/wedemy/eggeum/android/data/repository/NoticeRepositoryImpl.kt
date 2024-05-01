@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.mapper.toEntity
 import us.wedemy.eggeum.android.domain.model.notice.NoticeEntity
 import us.wedemy.eggeum.android.domain.repository.NoticeRepository
 
-public class NoticeRepositoryImpl @Inject constructor(
+internal class NoticeRepositoryImpl @Inject constructor(
   private val dataSource: NoticeDataSource,
 ) : NoticeRepository {
   override suspend fun getNotice(noticeId: Long): NoticeEntity {

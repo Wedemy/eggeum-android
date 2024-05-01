@@ -14,7 +14,7 @@ import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 import us.wedemy.eggeum.android.data.service.UserService
 
 @Singleton
-public class UserDataSourceImpl @Inject constructor(
+internal class UserDataSourceImpl @Inject constructor(
   private val service: UserService,
 ) : UserDataSource {
   override suspend fun getUserInfo(): UserInfoResponse {

@@ -9,11 +9,11 @@ import us.wedemy.eggeum.android.data.util.FileManager
 
 @Module
 @InstallIn(SingletonComponent::class)
-public object FileManagerModule {
+internal object FileManagerModule {
 
   @Provides
   @Singleton
-  public fun provideFileManager(): FileManager {
+  fun provideFileManager(): FileManager {
     return FileManager
   }
 }

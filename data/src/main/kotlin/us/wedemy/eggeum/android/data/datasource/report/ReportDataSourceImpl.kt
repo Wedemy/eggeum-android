@@ -19,11 +19,11 @@ import us.wedemy.eggeum.android.data.paging.ReportPagingSource
 import us.wedemy.eggeum.android.data.service.ReportService
 import us.wedemy.eggeum.android.data.util.Constants
 
-public class ReportDataSourceImpl @Inject constructor(
+internal class ReportDataSourceImpl @Inject constructor(
   private val service: ReportService,
 ) : ReportDataSource {
 
-  public override suspend fun getReport(reportId: Long): ReportResponse {
+  override suspend fun getReport(reportId: Long): ReportResponse {
     return service.getReport(reportId)
   }
 
@@ -43,13 +43,13 @@ public class ReportDataSourceImpl @Inject constructor(
     ).flow
   }
 
-  public override suspend fun createReport(createReportRequest: CreateReportRequest) {
+  override suspend fun createReport(createReportRequest: CreateReportRequest) {
     service.createReport(
       createReportRequest = createReportRequest,
     )
   }
 
-  public override suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest) {
+  override suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest) {
     service.updateReport(
       reportId = reportId,
       updateReportRequest = updateReportRequest,

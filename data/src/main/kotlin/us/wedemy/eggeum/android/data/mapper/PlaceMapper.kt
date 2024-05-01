@@ -71,7 +71,7 @@ internal fun UpsertPlaceEntity.toModel() =
     type = type,
   )
 
-public fun Info.toEntity(): InfoEntity =
+internal fun Info.toEntity(): InfoEntity =
   InfoEntity(
     areaSize = areaSize,
     blogUri = blogUri,
@@ -90,7 +90,7 @@ public fun Info.toEntity(): InfoEntity =
     websiteUri = websiteUri,
   )
 
-public fun InfoEntity.toModel(): Info =
+internal fun InfoEntity.toModel(): Info =
   Info(
     areaSize = areaSize,
     blogUri = blogUri,
@@ -109,23 +109,23 @@ public fun InfoEntity.toModel(): Info =
     websiteUri = websiteUri,
   )
 
-public fun Menu.toEntity(): MenuEntity =
+internal fun Menu.toEntity(): MenuEntity =
   MenuEntity(
     products = products?.map { it.toEntity() },
   )
 
-public fun MenuEntity.toModel(): Menu =
+internal fun MenuEntity.toModel(): Menu =
   Menu(
     products = products?.map { it.toModel() },
   )
 
-public fun Product.toEntity(): ProductEntity =
+internal fun Product.toEntity(): ProductEntity =
   ProductEntity(
     name = name,
     price = price,
   )
 
-public fun ProductEntity.toModel(): Product =
+internal fun ProductEntity.toModel(): Product =
   Product(
     name = name,
     price = price,

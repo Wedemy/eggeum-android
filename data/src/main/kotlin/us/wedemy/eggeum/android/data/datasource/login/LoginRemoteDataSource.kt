@@ -12,8 +12,8 @@ import us.wedemy.eggeum.android.data.model.login.LoginResponse
 import us.wedemy.eggeum.android.data.model.login.SignUpRequest
 import us.wedemy.eggeum.android.data.model.login.SignUpResponse
 
-public interface LoginRemoteDataSource {
-  public suspend fun login(loginRequest: LoginRequest): LoginResponse
+internal interface LoginRemoteDataSource {
+  suspend fun login(loginRequest: LoginRequest): LoginResponse
 
-  public suspend fun signUp(signUpRequest: SignUpRequest): SignUpResponse
+  suspend fun signUp(signUpRequest: SignUpRequest): SignUpResponse
 }

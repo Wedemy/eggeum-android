@@ -20,7 +20,7 @@ import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.domain.model.place.UpsertPlaceEntity
 import us.wedemy.eggeum.android.domain.repository.PlaceRepository
 
-public class PlaceRepositoryImpl @Inject constructor(
+internal class PlaceRepositoryImpl @Inject constructor(
   private val remoteDataSource: PlaceRemoteDataSource,
   private val localDataSource: PlaceLocalDataSource,
 ) : PlaceRepository {

@@ -16,31 +16,31 @@ import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 import us.wedemy.eggeum.android.domain.model.place.ImageEntity
 
-public fun FileResponse.toEntity(): FileResponseEntity =
+internal fun FileResponse.toEntity(): FileResponseEntity =
   FileResponseEntity(
     name = name,
     uploadFileId = uploadFileId,
     url = url,
   )
 
-public fun File.toEntity(): FileEntity =
+internal fun File.toEntity(): FileEntity =
   FileEntity(
     uploadFileId = uploadFileId,
     url = url,
   )
 
-public fun FileEntity.toModel(): File =
+internal fun FileEntity.toModel(): File =
   File(
     uploadFileId = uploadFileId,
     url = url,
   )
 
-public fun Image.toEntity(): ImageEntity =
+internal fun Image.toEntity(): ImageEntity =
   ImageEntity(
     files = files?.map { it.toEntity() },
   )
 
-public fun ImageEntity.toModel(): Image =
+internal fun ImageEntity.toModel(): Image =
   Image(
     files = files?.map { it.toModel() },
   )

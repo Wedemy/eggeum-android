@@ -10,6 +10,6 @@ package us.wedemy.eggeum.android.data.datasource.token
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
 import us.wedemy.eggeum.android.data.model.token.TokenResponse
 
-public interface TokenDataSource {
-  public suspend fun getRefreshToken(tokenRequest: TokenRequest): Result<TokenResponse>
+internal interface TokenDataSource {
+  suspend fun getNewAccessToken(tokenRequest: TokenRequest): Result<TokenResponse>
 }

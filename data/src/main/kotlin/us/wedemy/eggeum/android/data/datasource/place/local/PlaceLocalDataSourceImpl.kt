@@ -18,7 +18,7 @@ import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.util.Constants
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 
-public class PlaceLocalDataSourceImpl @Inject constructor(
+internal class PlaceLocalDataSourceImpl @Inject constructor(
   private val placeSearchDatabase: PlaceSearchDatabase,
 ) : PlaceLocalDataSource {
   override suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity) {

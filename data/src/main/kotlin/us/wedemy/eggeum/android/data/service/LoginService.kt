@@ -14,15 +14,15 @@ import us.wedemy.eggeum.android.data.model.login.LoginResponse
 import us.wedemy.eggeum.android.data.model.login.SignUpRequest
 import us.wedemy.eggeum.android.data.model.login.SignUpResponse
 
-public interface LoginService {
+internal interface LoginService {
 
   @POST("app/sns-sign-in")
-  public suspend fun login(
+  suspend fun login(
     @Body loginRequest: LoginRequest,
   ): LoginResponse
 
   @POST("app/sns-sign-up")
-  public suspend fun signUp(
+  suspend fun signUp(
     @Body signUpRequest: SignUpRequest,
   ): SignUpResponse
 }

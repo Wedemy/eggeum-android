@@ -58,6 +58,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private val searchCafeAdapter by lazy { SearchCafeAdapter(null) }
 
   private var naverMap: NaverMap? = null
+
   // TODO 마커 리스트를 뷰모델에서 관리
   private val markers = mutableListOf<Marker>()
   private val fusedLocationClient by lazy {
@@ -133,11 +134,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       cvCurrentMapSearchCafe.setOnClickListener {
         searchViewModel.setInitialCameraLocation(
           searchViewModel.lastCameraLocation.value.latitude,
-          searchViewModel.lastCameraLocation.value.longitude
+          searchViewModel.lastCameraLocation.value.longitude,
         )
         searchViewModel.setCurrentLocation(
           searchViewModel.lastCameraLocation.value.latitude,
-          searchViewModel.lastCameraLocation.value.longitude
+          searchViewModel.lastCameraLocation.value.longitude,
         )
         cvCurrentMapSearchCafe.visibility = View.GONE
       }

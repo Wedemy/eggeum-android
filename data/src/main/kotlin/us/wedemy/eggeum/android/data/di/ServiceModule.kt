@@ -29,7 +29,7 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideLoginService(
-    @Named("RetrofitAuthHttpClient")
+    @Named("Auth")
     retrofit: Retrofit,
   ): LoginService {
     return retrofit.create(LoginService::class.java)
@@ -38,7 +38,6 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideNoticeService(
-    @Named("RetrofitHttpClient")
     retrofit: Retrofit,
   ): NoticeService {
     return retrofit.create(NoticeService::class.java)
@@ -47,7 +46,6 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun providePlaceService(
-    @Named("RetrofitHttpClient")
     retrofit: Retrofit,
   ): PlaceService {
     return retrofit.create(PlaceService::class.java)
@@ -56,7 +54,6 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideReportService(
-    @Named("RetrofitHttpClient")
     retrofit: Retrofit,
   ): ReportService {
     return retrofit.create(ReportService::class.java)
@@ -65,7 +62,6 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideUserService(
-    @Named("RetrofitHttpClient")
     retrofit: Retrofit,
   ): UserService {
     return retrofit.create(UserService::class.java)
@@ -74,7 +70,7 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideFileService(
-    @Named("RetrofitFileHttpClient")
+    @Named("Multipart")
     retrofit: Retrofit,
   ): FileService {
     return retrofit.create(FileService::class.java)
@@ -83,7 +79,7 @@ internal object ServiceModule {
   @Singleton
   @Provides
   internal fun provideTokenService(
-    @Named("RetrofitAuthHttpClient")
+    @Named("Auth")
     retrofit: Retrofit,
   ): TokenService {
     return retrofit.create(TokenService::class.java)

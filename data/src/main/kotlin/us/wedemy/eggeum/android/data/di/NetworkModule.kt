@@ -57,9 +57,9 @@ private val jsonRule = Json {
 internal object NetworkModule {
 
   @Singleton
-  @Named("KtorAuthHttpClient")
+  @Named("Auth")
   @Provides
-  internal fun provideKtorHttpClient(): HttpClient {
+  internal fun provideKtor(): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -85,7 +85,7 @@ internal object NetworkModule {
   @Singleton
   @Named("KtorHttpClient")
   @Provides
-  internal fun provideKtorApiHttpClient(dataStoreImpl: TokenDataSourceImpl): HttpClient {
+  internal fun provideKtorApi(dataStoreImpl: TokenDataSourceImpl): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -144,8 +144,8 @@ internal object NetworkModule {
 
   @Singleton
   @Provides
-  @Named("RetrofitAuthHttpClient")
-  internal fun provideRetrofitAuthHttpClient(
+  @Named("Auth")
+  internal fun provideAuthRetrofit(
     httpLoggingInterceptor: HttpLoggingInterceptor,
   ): Retrofit {
     val contentType = "application/json".toMediaType()
@@ -163,8 +163,7 @@ internal object NetworkModule {
 
   @Singleton
   @Provides
-  @Named("RetrofitHttpClient")
-  internal fun provideRetrofitHttpClient(
+  internal fun provideRetrofit(
     tokenInterceptor: TokenInterceptor,
     tokenAuthenticator: TokenAuthenticator,
     httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -172,10 +171,10 @@ internal object NetworkModule {
     val contentType = "application/json".toMediaType()
     val httpClient = OkHttpClient.Builder()
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      // To set the token in the header
-      .addInterceptor(tokenInterceptor)
       // To update the token when it gets HTTP unauthorized error
       .authenticator(tokenAuthenticator)
+      // To set the token in the header
+      .addInterceptor(tokenInterceptor)
       .addInterceptor(httpLoggingInterceptor)
       .build()
 
@@ -188,8 +187,8 @@ internal object NetworkModule {
 
   @Singleton
   @Provides
-  @Named("RetrofitFileHttpClient")
-  internal fun provideRetrofitFileHttpClient(
+  @Named("Multipart")
+  internal fun provideFileRetrofit(
     tokenAuthenticator: TokenAuthenticator,
     tokenInterceptor: TokenInterceptor,
     httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -199,10 +198,10 @@ internal object NetworkModule {
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
       .readTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
       .writeTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      // To set the token in the header
-      .addInterceptor(tokenInterceptor)
       // To update the token when it gets HTTP unauthorized error
       .authenticator(tokenAuthenticator)
+      // To set the token in the header
+      .addInterceptor(tokenInterceptor)
       .addInterceptor(httpLoggingInterceptor)
       .build()
 

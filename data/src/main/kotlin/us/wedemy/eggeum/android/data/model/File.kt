@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class File(
+internal data class File(
   @SerialName("uploadFileId")
   val uploadFileId: Long?,
 

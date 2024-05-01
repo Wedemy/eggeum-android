@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class UpdateUserNicknameRequest(
+internal data class UpdateUserNicknameRequest(
   @SerialName("nickname")
   val nickname: String,
 )

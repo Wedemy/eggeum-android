@@ -62,7 +62,7 @@ class EditMyInfoFragment : BaseFragment<FragmentEditMyInfoBinding>() {
     }
 
     binding.btnEditMyInfo.setOnClickListener {
-      viewModel.updateUserNickname()
+      viewModel.updateUserInfo()
     }
   }
 

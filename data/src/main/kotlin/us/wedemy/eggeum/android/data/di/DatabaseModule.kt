@@ -19,11 +19,11 @@ import us.wedemy.eggeum.android.data.database.PlaceSearchDatabase
 
 @Module
 @InstallIn(SingletonComponent::class)
-public object DatabaseModule {
+internal object DatabaseModule {
 
   @Singleton
   @Provides
-  public fun providePlaceSearchDatabase(@ApplicationContext context: Context): PlaceSearchDatabase =
+  fun providePlaceSearchDatabase(@ApplicationContext context: Context): PlaceSearchDatabase =
     Room.databaseBuilder(
       context.applicationContext,
       PlaceSearchDatabase::class.java,

@@ -8,6 +8,7 @@
 package us.wedemy.eggeum.android.domain.repository
 
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserNicknameEntity
 import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 
 /** 사용자 API */
@@ -33,9 +34,9 @@ public interface UserRepository {
   /**
    * 닉네임 수정
    *
-   * @param nickname 닉네임
+   * @param updateUserNicknameEntity
    */
-  public suspend fun updateUserNickname(nickname: String)
+  public suspend fun updateUserNickname(updateUserNicknameEntity: UpdateUserNicknameEntity)
 
   /**
    * 닉네임 존재여부 조회

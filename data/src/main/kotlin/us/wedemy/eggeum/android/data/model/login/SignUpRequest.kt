@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class SignUpRequest(
+internal data class SignUpRequest(
   @SerialName("agreemMarketing")
   val agreemMarketing: Boolean?,
 

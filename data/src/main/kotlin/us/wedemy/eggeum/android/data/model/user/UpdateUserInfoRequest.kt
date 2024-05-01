@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.ProfileImage
 
 @Serializable
-public data class UpdateUserInfoRequest(
+internal data class UpdateUserInfoRequest(
   @SerialName("nickname")
   val nickname: String,
 

@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 
-public interface PlaceLocalDataSource {
-  public suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity)
+internal interface PlaceLocalDataSource {
+  suspend fun insertRecentSearchPlace(placeEntity: PlaceEntity)
 
-  public suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity)
+  suspend fun deleteRecentSearchPlace(placeEntity: PlaceEntity)
 
-  public fun getRecentSearchPlaceList(): Flow<PagingData<PlaceResponse>>
+  fun getRecentSearchPlaceList(): Flow<PagingData<PlaceResponse>>
 }

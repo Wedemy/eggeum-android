@@ -14,14 +14,14 @@ import us.wedemy.eggeum.android.data.model.login.SignUpRequest
 import us.wedemy.eggeum.android.data.model.login.SignUpResponse
 import us.wedemy.eggeum.android.data.service.LoginService
 
-public class LoginRemoteDataSourceImpl @Inject constructor(
+internal class LoginRemoteDataSourceImpl @Inject constructor(
   private val service: LoginService,
 ) : LoginRemoteDataSource {
-  public override suspend fun login(loginRequest: LoginRequest): LoginResponse {
+  override suspend fun login(loginRequest: LoginRequest): LoginResponse {
     return service.login(loginRequest)
   }
 
-  public override suspend fun signUp(
+  override suspend fun signUp(
     signUpRequest: SignUpRequest,
   ): SignUpResponse {
     return service.signUp(signUpRequest)

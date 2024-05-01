@@ -19,9 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.paging.ItemSnapshotList
 import androidx.paging.LoadState
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraAnimation
@@ -38,15 +36,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
-import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
@@ -61,76 +58,110 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private val searchCafeAdapter by lazy { SearchCafeAdapter(null) }
 
   private var naverMap: NaverMap? = null
+
+  // TODO 마커 리스트를 뷰모델에서 관리
   private val markers = mutableListOf<Marker>()
-  private lateinit var fusedLocationClient: FusedLocationProviderClient
+  private val fusedLocationClient by lazy {
+    LocationServices.getFusedLocationProviderClient(requireContext())
+  }
   private val locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
   private val permissions =
     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
-  private var permissionsGranted = false
 
   private val requestMultiplePermissionsLauncher =
-    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
-      if (isPermissionsGranted()) {
-        permissionsGranted = true
-        moveToCameraToUserLocation()
-        naverMap?.locationTrackingMode = LocationTrackingMode.Follow
-      } else {
-        naverMap?.locationTrackingMode = LocationTrackingMode.None
-      }
+    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+      val allPermissionsGranted = permissions.entries.all { it.value }
+      searchViewModel.setPermissionsGranted(allPermissionsGranted)
     }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
     binding.mvSearch.apply {
       onCreate(savedInstanceState)
       getMapAsync(this@SearchFragment)
     }
-    checkPermission()
     initListener()
     initObserver()
   }
 
   override fun onMapReady(naverMap: NaverMap) {
-    this.naverMap = naverMap
-    if (permissionsGranted) {
-      naverMap.locationTrackingMode = LocationTrackingMode.Follow
+    this.naverMap = naverMap.apply {
+      cameraPosition = CameraPosition(
+        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
+        ZOOM_LEVEL,
+      )
+      uiSettings.isScaleBarEnabled = false
+      uiSettings.isZoomControlEnabled = false
+      locationSource = this@SearchFragment.locationSource
+      addOnCameraChangeListener { _, _ ->
+        searchViewModel.setLastCameraLocation(cameraPosition.target.latitude, cameraPosition.target.longitude)
+      }
     }
-    initNaverMap()
-    addMarkersToMap(searchCafeAdapter.snapshot())
-  }
-
-  private fun isPermissionsGranted(): Boolean {
-    return permissions.all {
-      ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
-    }
+    moveToCameraToUserLocation()
   }
 
   private fun checkPermission() {
-    if (shouldShowPermissionRationale()) {
-      showLocationPermissionRationaleDialog()
+    val allPermissionsGranted = permissions.all {
+      ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    if (!allPermissionsGranted) {
+      if (shouldShowPermissionRationale()) {
+        showLocationPermissionRationaleDialog()
+      } else {
+        requestPermissions()
+      }
     } else {
-      requestPermissions()
+      searchViewModel.setPermissionsGranted(true)
+      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+      moveToCameraToUserLocation()
     }
   }
 
   private fun initListener() {
-    binding.fabSearchTracking.setOnClickListener {
-      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
-    }
-
-    binding.tietSearchCafe.setOnClickListener {
-      binding.cvSearchCafe.performClick()
-    }
-
-    binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
-      findNavController().safeNavigate(action)
+    with(binding) {
+      fabSearchTracking.setOnClickListener {
+        naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+      }
+      tietSearchCafe.setOnClickListener {
+        cvSearchCafe.performClick()
+      }
+      cvSearchCafe.setOnClickListener {
+        searchViewModel.setCurrentLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude,
+        )
+        val action =
+          SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
+        findNavController().safeNavigate(action)
+      }
+      cvCurrentMapSearchCafe.setOnClickListener {
+        searchViewModel.setInitialCameraLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude,
+        )
+        searchViewModel.setCurrentLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude,
+        )
+        cvCurrentMapSearchCafe.visibility = View.GONE
+      }
     }
   }
 
   private fun initObserver() {
     repeatOnStarted {
+      launch {
+        searchViewModel.permissionsGranted.collect { granted ->
+          if (granted) {
+            naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+            moveToCameraToUserLocation()
+          } else {
+            naverMap?.locationTrackingMode = LocationTrackingMode.None
+          }
+        }
+      }
+
       launch {
         searchViewModel.placeList.collectLatest { pagingData ->
           searchCafeAdapter.submitData(pagingData)
@@ -143,31 +174,50 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
           .collect { loadStates ->
             if (loadStates.source.refresh is LoadState.NotLoading) {
               searchViewModel.updatePlaceSnapshotList(searchCafeAdapter.snapshot())
-              addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
       }
-    }
-  }
 
-  private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
-    snapshot.toList().forEach { place ->
-      if (place != null) {
-        createAndAddMarker(place)
+      launch {
+        searchViewModel.placeSnapshotList.collect {
+          addMarkersToMap(it)
+        }
+      }
+
+      launch {
+        searchViewModel.lastCameraLocation.collect { lastCameraLocation ->
+          if (lastCameraLocation != searchViewModel.initialCameraLocation.value && searchViewModel.initialCameraLocation.value.latitude != -1.0) {
+            binding.cvCurrentMapSearchCafe.visibility = View.VISIBLE
+          } else {
+            binding.cvCurrentMapSearchCafe.visibility = View.GONE
+          }
+        }
       }
     }
   }
 
-  private fun createAndAddMarker(data: PlaceEntity) {
-    val marker = Marker()
-    if (data.latitude != null && data.longitude != null) {
-      marker.position = LatLng(data.latitude!!, data.longitude!!)
-      markers.add(marker)
-      marker.map = naverMap
+  private fun addMarkersToMap(markers: List<PlaceEntity>) {
+    clearMarkers()
+    markers.forEach {
+      createAndAddMarker(it)
     }
-    marker.tag = data.id
-    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
-    marker.onClickListener = this@SearchFragment
+  }
+
+  private fun clearMarkers() {
+    markers.forEach { marker ->
+      marker.map = null
+    }
+    markers.clear()
+  }
+
+  private fun createAndAddMarker(data: PlaceEntity) {
+    val marker = Marker().apply {
+      position = LatLng(data.latitude ?: return, data.longitude ?: return)
+      icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+      map = naverMap
+      tag = data.id
+      onClickListener = this@SearchFragment
+    }
     markers.add(marker)
   }
 
@@ -197,28 +247,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     return true
   }
 
-  private fun initNaverMap() {
-    naverMap?.apply {
-      locationSource = this@SearchFragment.locationSource
-      uiSettings.isScaleBarEnabled = false
-      uiSettings.isZoomControlEnabled = false
-      cameraPosition = CameraPosition(
-        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
-        ZOOM_LEVEL,
-      )
-      setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
-    }
-    moveToCameraToUserLocation()
-  }
-
   @SuppressLint("MissingPermission")
   private fun moveToCameraToUserLocation() {
     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
       val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
       naverMap?.moveCamera(cameraUpdate)
-      Timber.d("Current Location ${location.latitude} ${location.longitude}")
-
       searchViewModel.setCurrentLocation(location.latitude, location.longitude)
+      if (searchViewModel.initialCameraLocation.value.latitude == -1.0) {
+        searchViewModel.setInitialCameraLocation(location.latitude, location.longitude)
+      }
     }
   }
 
@@ -232,18 +269,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun showLocationPermissionRationaleDialog() {
-    val dialog = AlertDialog.Builder(requireContext())
-      .setMessage(getString(R.string.location_permission_educational_message))
-      .setPositiveButton(getString(R.string.check)) { _, _ ->
-        requestPermissions()
+    AlertDialog.Builder(requireContext()).apply {
+      setMessage(getString(R.string.location_permission_educational_message))
+      setPositiveButton(getString(R.string.check)) { _, _ -> requestPermissions() }
+      setNegativeButton(getString(R.string.cancel), null)
+      show().also {
+        it.getButton(DialogInterface.BUTTON_POSITIVE)
+          .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
+        it.getButton(DialogInterface.BUTTON_NEGATIVE)
+          .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
       }
-      .setNegativeButton(getString(R.string.cancel), null)
-      .show()
-    dialog.apply {
-      getButton(DialogInterface.BUTTON_POSITIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
-      getButton(DialogInterface.BUTTON_NEGATIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
     }
   }
 
@@ -255,6 +290,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   override fun onResume() {
     super.onResume()
     binding.mvSearch.onResume()
+    checkPermission()
   }
 
   override fun onPause() {
@@ -274,10 +310,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onDestroyView() {
-    markers.forEach { marker ->
-      marker.map = null
-    }
-    markers.clear()
+    clearMarkers()
     binding.mvSearch.onDestroy()
     naverMap = null
     super.onDestroyView()

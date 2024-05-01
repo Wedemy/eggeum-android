@@ -10,11 +10,12 @@ package us.wedemy.eggeum.android.data.datasource.user
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
+import us.wedemy.eggeum.android.data.model.user.UpdateUserNicknameRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 import us.wedemy.eggeum.android.data.service.UserService
 
 @Singleton
-public class UserDataSourceImpl @Inject constructor(
+internal class UserDataSourceImpl @Inject constructor(
   private val service: UserService,
 ) : UserDataSource {
   override suspend fun getUserInfo(): UserInfoResponse {
@@ -29,8 +30,8 @@ public class UserDataSourceImpl @Inject constructor(
     service.withdraw()
   }
 
-  override suspend fun updateUserNickname(nickname: String) {
-    service.updateUserNickname(nickname)
+  override suspend fun updateUserNickname(updateUserNicknameRequest: UpdateUserNicknameRequest) {
+    service.updateUserNickname(updateUserNicknameRequest)
   }
 
   override suspend fun checkNicknameExist(nickname: String): Boolean {

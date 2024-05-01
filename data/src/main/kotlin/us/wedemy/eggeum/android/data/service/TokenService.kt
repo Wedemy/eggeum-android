@@ -12,10 +12,10 @@ import retrofit2.http.POST
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
 import us.wedemy.eggeum.android.data.model.token.TokenResponse
 
-public interface TokenService {
+internal interface TokenService {
 
   @POST("app/token/refresh")
-  public suspend fun getRefreshToken(
+  suspend fun refresh(
     @Body tokenRequest: TokenRequest,
   ): TokenResponse
 }

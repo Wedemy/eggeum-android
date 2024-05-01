@@ -17,9 +17,9 @@ import dagger.hilt.components.SingletonComponent
 @Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
-public object MoshiProvider {
+internal object MoshiProvider {
   @Provides
-  public fun defaultMoshi(): Moshi = Moshi.Builder()
+  fun defaultMoshi(): Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 }

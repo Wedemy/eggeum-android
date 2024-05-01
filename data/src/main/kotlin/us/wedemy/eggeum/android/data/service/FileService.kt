@@ -13,11 +13,11 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import us.wedemy.eggeum.android.data.model.file.FileResponse
 
-public interface FileService {
+internal interface FileService {
 
   @Multipart
   @POST("files/images")
-  public suspend fun uploadImageFile(
+  suspend fun uploadImageFile(
     @Part file: MultipartBody.Part,
   ): FileResponse
 }

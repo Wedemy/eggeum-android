@@ -36,7 +36,7 @@ import retrofit2.Retrofit
 import timber.log.Timber
 import us.wedemy.eggeum.android.data.BuildConfig
 import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSourceImpl
 import us.wedemy.eggeum.android.data.service.TokenAuthenticator
 import us.wedemy.eggeum.android.data.service.TokenInterceptor
 import us.wedemy.eggeum.android.data.util.JsonBuilder
@@ -57,9 +57,9 @@ private val jsonRule = Json {
 internal object NetworkModule {
 
   @Singleton
-  @Named("KtorAuthHttpClient")
+  @Named("Auth")
   @Provides
-  internal fun provideKtorHttpClient(): HttpClient {
+  internal fun provideKtor(): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -85,7 +85,7 @@ internal object NetworkModule {
   @Singleton
   @Named("KtorHttpClient")
   @Provides
-  internal fun provideKtorApiHttpClient(dataStoreProvider: TokenDataStoreProvider): HttpClient {
+  internal fun provideKtorApi(dataStoreImpl: TokenDataSourceImpl): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -95,7 +95,7 @@ internal object NetworkModule {
       }
       defaultRequest {
         val accessToken = runBlocking {
-          dataStoreProvider.getAccessToken()
+          dataStoreImpl.getAccessToken()
         }
         url(BuildConfig.SERVER_BASE_URL)
         contentType(ContentType.Application.Json)
@@ -129,24 +129,23 @@ internal object NetworkModule {
   @Singleton
   @Provides
   internal fun provideTokenAuthenticator(
-    dataStoreProvider: TokenDataStoreProvider,
     tokenDataSource: TokenDataSource,
   ): TokenAuthenticator {
-    return TokenAuthenticator(dataStoreProvider, tokenDataSource)
+    return TokenAuthenticator(tokenDataSource)
   }
 
   @Singleton
   @Provides
   internal fun provideTokenInterceptor(
-    dataStoreProvider: TokenDataStoreProvider,
+    tokenDataSource: TokenDataSource,
   ): TokenInterceptor {
-    return TokenInterceptor(dataStoreProvider)
+    return TokenInterceptor(tokenDataSource)
   }
 
   @Singleton
   @Provides
-  @Named("RetrofitAuthHttpClient")
-  internal fun provideRetrofitAuthHttpClient(
+  @Named("Auth")
+  internal fun provideAuthRetrofit(
     httpLoggingInterceptor: HttpLoggingInterceptor,
   ): Retrofit {
     val contentType = "application/json".toMediaType()
@@ -164,8 +163,7 @@ internal object NetworkModule {
 
   @Singleton
   @Provides
-  @Named("RetrofitHttpClient")
-  internal fun provideRetrofitHttpClient(
+  internal fun provideRetrofit(
     tokenInterceptor: TokenInterceptor,
     tokenAuthenticator: TokenAuthenticator,
     httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -173,10 +171,10 @@ internal object NetworkModule {
     val contentType = "application/json".toMediaType()
     val httpClient = OkHttpClient.Builder()
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      // To set the token in the header
-      .addInterceptor(tokenInterceptor)
       // To update the token when it gets HTTP unauthorized error
       .authenticator(tokenAuthenticator)
+      // To set the token in the header
+      .addInterceptor(tokenInterceptor)
       .addInterceptor(httpLoggingInterceptor)
       .build()
 
@@ -189,8 +187,8 @@ internal object NetworkModule {
 
   @Singleton
   @Provides
-  @Named("RetrofitFileHttpClient")
-  internal fun provideRetrofitFileHttpClient(
+  @Named("Multipart")
+  internal fun provideFileRetrofit(
     tokenAuthenticator: TokenAuthenticator,
     tokenInterceptor: TokenInterceptor,
     httpLoggingInterceptor: HttpLoggingInterceptor,
@@ -200,10 +198,10 @@ internal object NetworkModule {
       .connectTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
       .readTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
       .writeTimeout(MaxTimeoutMillis, TimeUnit.MILLISECONDS)
-      // To set the token in the header
-      .addInterceptor(tokenInterceptor)
       // To update the token when it gets HTTP unauthorized error
       .authenticator(tokenAuthenticator)
+      // To set the token in the header
+      .addInterceptor(tokenInterceptor)
       .addInterceptor(httpLoggingInterceptor)
       .build()
 

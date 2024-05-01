@@ -9,6 +9,6 @@ package us.wedemy.eggeum.android.data.datasource.file
 
 import us.wedemy.eggeum.android.data.model.file.FileResponse
 
-public interface FileDataSource {
-  public suspend fun uploadImageFile(uri: String): FileResponse
+internal interface FileDataSource {
+  suspend fun uploadImageFile(uri: String): FileResponse
 }

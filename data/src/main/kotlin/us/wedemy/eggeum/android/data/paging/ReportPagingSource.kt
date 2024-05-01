@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.service.ReportService
 import us.wedemy.eggeum.android.data.util.Constants.PAGING_SIZE
 import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 
-public class ReportPagingSource(
+internal class ReportPagingSource(
   private val service: ReportService,
 ) : PagingSource<Int, ReportResponse>() {
 

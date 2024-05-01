@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class UpsertPlaceRequest(
+internal data class UpsertPlaceRequest(
   @SerialName("address1")
   val address1: String?,
 

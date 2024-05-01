@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.service.PlaceService
 import us.wedemy.eggeum.android.data.util.Constants.PAGING_SIZE
 import us.wedemy.eggeum.android.data.util.Constants.STARTING_PAGE_INDEX
 
-public class PlacePagingSource(
+internal class PlacePagingSource(
   private val service: PlaceService,
   private val query: String? = null,
   private val distance: Double? = null,

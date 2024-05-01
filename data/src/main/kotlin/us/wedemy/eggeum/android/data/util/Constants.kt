@@ -7,8 +7,8 @@
 
 package us.wedemy.eggeum.android.data.util
 
-public object Constants {
-  public const val SORT_TYPE: String = "sort_type"
-  public const val STARTING_PAGE_INDEX: Int = 1
-  public const val PAGING_SIZE: Int = 10
+internal object Constants {
+  const val SORT_TYPE: String = "sort_type"
+  const val STARTING_PAGE_INDEX: Int = 1
+  const val PAGING_SIZE: Int = 10
 }

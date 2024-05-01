@@ -13,16 +13,16 @@ import us.wedemy.eggeum.android.data.model.report.CreateReportRequest
 import us.wedemy.eggeum.android.data.model.report.UpdateReportRequest
 import us.wedemy.eggeum.android.data.model.report.ReportResponse
 
-public interface ReportDataSource {
-  public suspend fun getReport(reportId: Long): ReportResponse
+internal interface ReportDataSource {
+  suspend fun getReport(reportId: Long): ReportResponse
 
-  public fun getReportList(
+  fun getReportList(
     page: Int?,
     size: Int?,
     sort: String?,
   ): Flow<PagingData<ReportResponse>>
 
-  public suspend fun createReport(createReportRequest: CreateReportRequest)
+  suspend fun createReport(createReportRequest: CreateReportRequest)
 
-  public suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest)
+  suspend fun updateReport(reportId: Long, updateReportRequest: UpdateReportRequest)
 }

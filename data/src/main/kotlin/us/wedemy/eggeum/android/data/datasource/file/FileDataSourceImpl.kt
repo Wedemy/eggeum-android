@@ -17,7 +17,7 @@ import us.wedemy.eggeum.android.data.model.file.FileResponse
 import us.wedemy.eggeum.android.data.service.FileService
 import us.wedemy.eggeum.android.data.util.FileManager
 
-public class FileDataSourceImpl @Inject constructor(
+internal class FileDataSourceImpl @Inject constructor(
   private val context: Context,
   private val service: FileService,
   private val fileManager: FileManager,

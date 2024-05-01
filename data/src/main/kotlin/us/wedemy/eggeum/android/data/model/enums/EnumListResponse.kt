@@ -14,7 +14,7 @@ import com.squareup.moshi.JsonClass
 // 추후 방법을 알아내어 Ktor 로 이를 구현할 예정
 
 @JsonClass(generateAdapter = true)
-public data class EnumListResponse(
+internal data class EnumListResponse(
   @Json(name = "additionalProp1")
   val additionalProp1: List<AdditionalProperty>,
 

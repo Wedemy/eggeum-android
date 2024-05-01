@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.ProfileImage
 
 @Serializable
-public data class UserInfoResponse(
+internal data class UserInfoResponse(
   @SerialName("agreeMarketing")
   val agreeMarketing: Boolean,
 

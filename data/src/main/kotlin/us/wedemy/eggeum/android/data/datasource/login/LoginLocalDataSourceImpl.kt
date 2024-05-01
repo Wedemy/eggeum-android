@@ -8,10 +8,10 @@
 package us.wedemy.eggeum.android.data.datasource.login
 
 import javax.inject.Inject
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSourceImpl
 
-public class LoginLocalDataSourceImpl @Inject constructor(
-  private val dataStore: TokenDataStoreProvider,
+internal class LoginLocalDataSourceImpl @Inject constructor(
+  private val dataStore: TokenDataSourceImpl,
 ) : LoginLocalDataSource {
   override suspend fun setAccessToken(accessToken: String) {
     dataStore.setAccessToken(accessToken)

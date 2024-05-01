@@ -11,10 +11,10 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.model.notice.NoticeResponse
 
-public interface NoticeDataSource {
-  public suspend fun getNotice(noticeId: Long): NoticeResponse
+internal interface NoticeDataSource {
+  suspend fun getNotice(noticeId: Long): NoticeResponse
 
-  public fun getNoticeList(
+  fun getNoticeList(
     search: String?,
     page: Int?,
     size: Int?,

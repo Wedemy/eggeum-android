@@ -10,6 +10,7 @@ package us.wedemy.eggeum.android.domain.usecase
 import javax.inject.Inject
 import javax.inject.Singleton
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserNicknameEntity
 import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 import us.wedemy.eggeum.android.domain.repository.UserRepository
 import us.wedemy.eggeum.android.domain.util.runSuspendCatching
@@ -25,7 +26,7 @@ public class GetUserInfoUseCase @Inject constructor(
 }
 
 @Singleton
-public class UpdateUserInfoUseCase @Inject constructor(
+public class UpdateUserProfileAndNicknameUseCase @Inject constructor(
   private val repository: UserRepository,
 ) {
   public suspend operator fun invoke(updateUserInfoEntity: UpdateUserInfoEntity): Result<Unit> =
@@ -48,9 +49,9 @@ public class WithdrawUseCase @Inject constructor(
 public class UpdateUserNicknameUseCase @Inject constructor(
   private val repository: UserRepository,
 ) {
-  public suspend operator fun invoke(nickname: String): Result<Unit> =
+  public suspend operator fun invoke(updateUserNicknameEntity: UpdateUserNicknameEntity): Result<Unit> =
     runSuspendCatching {
-      repository.updateUserNickname(nickname)
+      repository.updateUserNickname(updateUserNicknameEntity)
     }
 }
 

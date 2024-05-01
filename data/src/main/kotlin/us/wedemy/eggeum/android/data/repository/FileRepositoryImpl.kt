@@ -13,7 +13,7 @@ import us.wedemy.eggeum.android.data.mapper.toEntity
 import us.wedemy.eggeum.android.domain.model.file.FileResponseEntity
 import us.wedemy.eggeum.android.domain.repository.FileRepository
 
-public class FileRepositoryImpl @Inject constructor(
+internal class FileRepositoryImpl @Inject constructor(
   private val fileDataSource: FileDataSource,
 ) : FileRepository {
   override suspend fun uploadImageFile(uri: String): FileResponseEntity {

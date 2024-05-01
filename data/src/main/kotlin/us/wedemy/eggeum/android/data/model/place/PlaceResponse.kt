@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "places")
-public data class PlaceResponse(
+internal data class PlaceResponse(
   @SerialName("address1")
   val address1: String?,
 

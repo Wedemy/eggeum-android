@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 
-public interface PlaceRemoteDataSource {
-  public suspend fun getPlace(placeId: Long): PlaceResponse
+internal interface PlaceRemoteDataSource {
+  suspend fun getPlace(placeId: Long): PlaceResponse
 
-  public fun getPlaceList(
+  fun getPlaceList(
     distance: Double?,
     endDate: String?,
     latitude: Double?,
@@ -28,5 +28,5 @@ public interface PlaceRemoteDataSource {
     type: String?,
   ): Flow<PagingData<PlaceResponse>>
 
-  public suspend fun upsertPlace(upsertPlaceRequest: UpsertPlaceRequest)
+  suspend fun upsertPlace(upsertPlaceRequest: UpsertPlaceRequest)
 }

@@ -20,15 +20,15 @@ import us.wedemy.eggeum.android.domain.model.login.SignUpResponseEntity
 import us.wedemy.eggeum.android.domain.repository.LoginRepository
 
 @Singleton
-public class LoginRepositoryImpl @Inject constructor(
+internal class LoginRepositoryImpl @Inject constructor(
   private val remoteDataSource: LoginRemoteDataSource,
   private val localDataSource: LoginLocalDataSource,
 ) : LoginRepository {
-  public override suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity {
+  override suspend fun login(loginRequestEntity: LoginRequestEntity): LoginResponseEntity {
     return remoteDataSource.login(loginRequestEntity.toModel()).toEntity()
   }
 
-  public override suspend fun signUp(
+  override suspend fun signUp(
     signUpRequestEntity: SignUpRequestEntity,
   ): SignUpResponseEntity {
     return remoteDataSource.signUp(signUpRequestEntity.toModel()).toEntity()

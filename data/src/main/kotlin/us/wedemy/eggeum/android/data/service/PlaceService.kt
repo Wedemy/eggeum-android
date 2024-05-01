@@ -16,15 +16,15 @@ import us.wedemy.eggeum.android.data.model.place.PlaceListResponse
 import us.wedemy.eggeum.android.data.model.place.PlaceResponse
 import us.wedemy.eggeum.android.data.model.place.UpsertPlaceRequest
 
-public interface PlaceService {
+internal interface PlaceService {
 
   @GET("app/place/{placeId}")
-  public suspend fun getPlace(
+  suspend fun getPlace(
     @Path("placeId") placeId: Long,
   ): PlaceResponse
 
   @GET("app/place")
-  public suspend fun getPlaceList(
+  suspend fun getPlaceList(
     @Query("distance") distance: Double? = null,
     @Query("endDate") endDate: String? = null,
     @Query("latitude") latitude: Double? = null,
@@ -38,7 +38,7 @@ public interface PlaceService {
   ): PlaceListResponse
 
   @POST("app/place/edits")
-  public suspend fun upsertPlace(
+  suspend fun upsertPlace(
     @Body upsertPlaceRequest: UpsertPlaceRequest,
   )
 }

@@ -30,18 +30,20 @@ import us.wedemy.eggeum.android.common.util.handleException
 import us.wedemy.eggeum.android.domain.model.FileEntity
 import us.wedemy.eggeum.android.domain.model.ProfileImageEntity
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserNicknameEntity
 import us.wedemy.eggeum.android.domain.usecase.CheckNicknameExistUseCase
 import us.wedemy.eggeum.android.domain.usecase.LogoutUseCase
-import us.wedemy.eggeum.android.domain.usecase.UpdateUserInfoUseCase
+import us.wedemy.eggeum.android.domain.usecase.UpdateUserNicknameUseCase
+import us.wedemy.eggeum.android.domain.usecase.UpdateUserProfileAndNicknameUseCase
 import us.wedemy.eggeum.android.domain.usecase.UploadImageFileUseCase
 import us.wedemy.eggeum.android.main.R
-import us.wedemy.eggeum.android.main.mapper.toEntity
 import us.wedemy.eggeum.android.main.model.UserInfoModel
 
 @HiltViewModel
 class EditMyInfoViewModel @Inject constructor(
   private val uploadImageFileUseCase: UploadImageFileUseCase,
-  private val updateUserInfoUseCase: UpdateUserInfoUseCase,
+  private val updateUserProfileAndNicknameUseCase: UpdateUserProfileAndNicknameUseCase,
+  private val updateUserNicknameUseCase: UpdateUserNicknameUseCase,
   private val checkNicknameExistUseCase: CheckNicknameExistUseCase,
   private val logoutUseCase: LogoutUseCase,
   savedStateHandle: SavedStateHandle,
@@ -139,28 +141,24 @@ class EditMyInfoViewModel @Inject constructor(
     }
   }
 
-  fun updateUserNickname() {
+  fun updateUserInfo() {
     viewModelScope.launch {
       if (newProfileImageUri.value != null && newProfileImageUri.value != userInfo.value.profileImageModel?.files?.get(0)?.url) {
         getUploadFileId(newProfileImageUri.value!!)
       } else {
-        updateUserInfoUseCase(
-          UpdateUserInfoEntity(
-            nickname = _nickname.value,
-            profileImageEntity = userInfo.value.profileImageModel?.toEntity(),
-          ),
-        ).onSuccess {
-          _userInfoUpdateSuccessEvent.emit(Unit)
-        }.onFailure { exception ->
-          handleException(exception, this@EditMyInfoViewModel)
-        }
+        updateUserNicknameUseCase(UpdateUserNicknameEntity(nickname = _nickname.value))
+          .onSuccess {
+            _userInfoUpdateSuccessEvent.emit(Unit)
+          }.onFailure { exception ->
+            handleException(exception, this@EditMyInfoViewModel)
+          }
       }
     }
   }
 
   private fun updateUserProfileAndNickname(file: FileEntity) {
     viewModelScope.launch {
-      updateUserInfoUseCase(
+      updateUserProfileAndNicknameUseCase(
         UpdateUserInfoEntity(
           nickname = _nickname.value,
           profileImageEntity = ProfileImageEntity(files = listOf(file)),

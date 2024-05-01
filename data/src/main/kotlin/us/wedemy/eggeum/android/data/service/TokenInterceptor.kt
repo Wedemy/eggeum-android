@@ -1,18 +1,18 @@
 package us.wedemy.eggeum.android.data.service
 
+import javax.inject.Inject
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import javax.inject.Inject
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
 
 internal class TokenInterceptor @Inject constructor(
-  private val dataStoreProvider: TokenDataStoreProvider,
+  private val tokenDataSource: TokenDataSource,
 ) : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {
     val accessToken = runBlocking {
-      dataStoreProvider.getAccessToken()
+      tokenDataSource.getAccessToken()
     }
     val request: Request = chain.request().newBuilder()
       .addHeader("Authorization", "Bearer $accessToken")

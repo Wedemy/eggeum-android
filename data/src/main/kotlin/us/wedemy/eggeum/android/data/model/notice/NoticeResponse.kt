@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class NoticeResponse(
+internal data class NoticeResponse(
   @SerialName("id")
   val id: Long,
 

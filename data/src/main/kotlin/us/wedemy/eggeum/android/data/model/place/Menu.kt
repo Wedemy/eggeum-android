@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class Menu(
+internal data class Menu(
   @SerialName("products")
   val products: List<Product>?,
 )

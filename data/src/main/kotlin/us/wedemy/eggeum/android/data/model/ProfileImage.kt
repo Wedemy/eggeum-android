@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ProfileImage(
+internal data class ProfileImage(
   @SerialName("files")
   val files: List<File>,
 )

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.File
 
 @Serializable
-public data class Image(
+internal data class Image(
   @SerialName("files")
   val files: List<File>?,
 )

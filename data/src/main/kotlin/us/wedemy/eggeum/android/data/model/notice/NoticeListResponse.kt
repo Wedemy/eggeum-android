@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class NoticeListResponse(
+internal data class NoticeListResponse(
   @SerialName("list")
   val list: List<NoticeResponse>,
 

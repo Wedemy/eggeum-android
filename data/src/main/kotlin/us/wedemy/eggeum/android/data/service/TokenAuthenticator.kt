@@ -8,19 +8,17 @@ import okhttp3.Response
 import okhttp3.Route
 import us.wedemy.eggeum.android.common.util.RefreshTokenExpiredException
 import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
 import us.wedemy.eggeum.android.data.model.token.TokenRequest
 
 internal class TokenAuthenticator @Inject constructor(
-  private val dataStoreProvider: TokenDataStoreProvider,
   private val tokenDataSource: TokenDataSource,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
     return runBlocking {
-      tokenDataSource.getNewAccessToken(TokenRequest(dataStoreProvider.getRefreshToken()))
+      tokenDataSource.getNewAccessToken(TokenRequest(tokenDataSource.getRefreshToken()))
         .onSuccess { tokenResponse ->
-          dataStoreProvider.setAccessToken(tokenResponse.accessToken)
-          dataStoreProvider.setRefreshToken(tokenResponse.refreshToken)
+          tokenDataSource.setAccessToken(tokenResponse.accessToken)
+          tokenDataSource.setRefreshToken(tokenResponse.refreshToken)
         }.map { tokenResponse ->
           newRequestWithAccessToken(response.request, tokenResponse.accessToken)
         }.onFailure {

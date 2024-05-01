@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 import us.wedemy.eggeum.android.data.model.user.User
 
 @Serializable
-public data class ReportResponse(
+internal data class ReportResponse(
   @SerialName("content")
   val content: String,
 

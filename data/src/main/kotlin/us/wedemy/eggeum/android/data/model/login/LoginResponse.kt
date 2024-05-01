@@ -11,7 +11,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class LoginResponse(
+internal data class LoginResponse(
   @SerialName("accessToken")
   val accessToken: String,
 

@@ -36,7 +36,7 @@ import retrofit2.Retrofit
 import timber.log.Timber
 import us.wedemy.eggeum.android.data.BuildConfig
 import us.wedemy.eggeum.android.data.datasource.token.TokenDataSource
-import us.wedemy.eggeum.android.data.datastore.TokenDataStoreProvider
+import us.wedemy.eggeum.android.data.datasource.token.TokenDataSourceImpl
 import us.wedemy.eggeum.android.data.service.TokenAuthenticator
 import us.wedemy.eggeum.android.data.service.TokenInterceptor
 import us.wedemy.eggeum.android.data.util.JsonBuilder
@@ -85,7 +85,7 @@ internal object NetworkModule {
   @Singleton
   @Named("KtorHttpClient")
   @Provides
-  internal fun provideKtorApiHttpClient(dataStoreProvider: TokenDataStoreProvider): HttpClient {
+  internal fun provideKtorApiHttpClient(dataStoreImpl: TokenDataSourceImpl): HttpClient {
     return HttpClient(engineFactory = CIO) {
       engine {
         endpoint {
@@ -95,7 +95,7 @@ internal object NetworkModule {
       }
       defaultRequest {
         val accessToken = runBlocking {
-          dataStoreProvider.getAccessToken()
+          dataStoreImpl.getAccessToken()
         }
         url(BuildConfig.SERVER_BASE_URL)
         contentType(ContentType.Application.Json)
@@ -129,18 +129,17 @@ internal object NetworkModule {
   @Singleton
   @Provides
   internal fun provideTokenAuthenticator(
-    dataStoreProvider: TokenDataStoreProvider,
     tokenDataSource: TokenDataSource,
   ): TokenAuthenticator {
-    return TokenAuthenticator(dataStoreProvider, tokenDataSource)
+    return TokenAuthenticator(tokenDataSource)
   }
 
   @Singleton
   @Provides
   internal fun provideTokenInterceptor(
-    dataStoreProvider: TokenDataStoreProvider,
+    tokenDataSource: TokenDataSource,
   ): TokenInterceptor {
-    return TokenInterceptor(dataStoreProvider)
+    return TokenInterceptor(tokenDataSource)
   }
 
   @Singleton

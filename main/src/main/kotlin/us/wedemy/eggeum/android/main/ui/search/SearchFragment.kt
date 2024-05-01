@@ -127,6 +127,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         cvSearchCafe.performClick()
       }
       cvSearchCafe.setOnClickListener {
+        searchViewModel.setCurrentLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude,
+        )
         val action =
           SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
         findNavController().safeNavigate(action)

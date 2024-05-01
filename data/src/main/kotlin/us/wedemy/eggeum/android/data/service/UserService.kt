@@ -13,6 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Query
 import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
+import us.wedemy.eggeum.android.data.model.user.UpdateUserNicknameRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 
 internal interface UserService {
@@ -29,7 +30,7 @@ internal interface UserService {
 
   @PUT("app/users/me/nickname")
   suspend fun updateUserNickname(
-    @Body nickname: String,
+    @Body updateUserNicknameRequest: UpdateUserNicknameRequest,
   )
 
   @GET("app/users/nickname/exists")

@@ -8,6 +8,7 @@
 package us.wedemy.eggeum.android.data.datasource.user
 
 import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
+import us.wedemy.eggeum.android.data.model.user.UpdateUserNicknameRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 
 internal interface UserDataSource {
@@ -17,7 +18,7 @@ internal interface UserDataSource {
 
   suspend fun withdraw()
 
-  suspend fun updateUserNickname(nickname: String)
+  suspend fun updateUserNickname(updateUserNicknameRequest: UpdateUserNicknameRequest)
 
   suspend fun checkNicknameExist(nickname: String): Boolean
 }

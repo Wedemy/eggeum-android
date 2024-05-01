@@ -9,9 +9,11 @@ package us.wedemy.eggeum.android.data.mapper
 
 import us.wedemy.eggeum.android.data.model.user.User
 import us.wedemy.eggeum.android.data.model.user.UpdateUserInfoRequest
+import us.wedemy.eggeum.android.data.model.user.UpdateUserNicknameRequest
 import us.wedemy.eggeum.android.data.model.user.UserInfoResponse
 import us.wedemy.eggeum.android.domain.model.report.UserEntity
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserNicknameEntity
 import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 
 internal fun UserInfoResponse.toEntity() =
@@ -30,6 +32,11 @@ internal fun UpdateUserInfoEntity.toModel() =
   UpdateUserInfoRequest(
     nickname = nickname,
     profileImage = profileImageEntity?.toModel(),
+  )
+
+internal fun UpdateUserNicknameEntity.toModel() =
+  UpdateUserNicknameRequest(
+    nickname = nickname,
   )
 
 internal fun User.toEntity() =

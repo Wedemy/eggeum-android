@@ -13,6 +13,7 @@ import us.wedemy.eggeum.android.data.datasource.user.UserDataSource
 import us.wedemy.eggeum.android.data.mapper.toEntity
 import us.wedemy.eggeum.android.data.mapper.toModel
 import us.wedemy.eggeum.android.domain.model.user.UpdateUserInfoEntity
+import us.wedemy.eggeum.android.domain.model.user.UpdateUserNicknameEntity
 import us.wedemy.eggeum.android.domain.model.user.UserInfoEntity
 import us.wedemy.eggeum.android.domain.repository.UserRepository
 
@@ -32,8 +33,8 @@ internal class UserRepositoryImpl @Inject constructor(
     dataSource.withdraw()
   }
 
-  override suspend fun updateUserNickname(nickname: String) {
-    dataSource.updateUserNickname(nickname)
+  override suspend fun updateUserNickname(updateUserNicknameEntity: UpdateUserNicknameEntity) {
+    dataSource.updateUserNickname(updateUserNicknameEntity.toModel())
   }
 
   override suspend fun checkNicknameExist(nickname: String): Boolean {

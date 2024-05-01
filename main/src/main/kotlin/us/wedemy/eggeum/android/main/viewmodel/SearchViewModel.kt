@@ -27,6 +27,9 @@ import us.wedemy.eggeum.android.domain.usecase.GetPlaceListUseCase
 class SearchViewModel @Inject constructor(
   private val getPlaceListUseCase: GetPlaceListUseCase,
 ) : ViewModel() {
+  private val _permissionsGranted = MutableStateFlow(false)
+  val permissionsGranted: StateFlow<Boolean> = _permissionsGranted.asStateFlow()
+
   private val _currentLocation = MutableStateFlow(LatLng(-1.0, -1.0))
   val currentLocation: StateFlow<LatLng> = _currentLocation.asStateFlow()
 
@@ -36,19 +39,9 @@ class SearchViewModel @Inject constructor(
   private val _lastCameraLocation = MutableStateFlow(LatLng(-1.0, -1.0))
   val lastCameraLocation: StateFlow<LatLng> = _lastCameraLocation.asStateFlow()
 
-  fun setCurrentLocation(latitude: Double, longitude: Double) {
-    _currentLocation.value = LatLng(latitude, longitude)
-  }
+  private val _placeSnapshoList = MutableStateFlow(emptyList<PlaceEntity>())
+  val placeSnapshotList: StateFlow<List<PlaceEntity>> = _placeSnapshoList.asStateFlow()
 
-  fun setInitialCameraLocation(latitude: Double, longitude: Double) {
-    _initialCameraLocation.value = LatLng(latitude, longitude)
-  }
-
-  fun setLastCameraLocation(latitude: Double, longitude: Double) {
-    _lastCameraLocation.value = LatLng(latitude, longitude)
-  }
-
-  // TODO 맵 zoom level, 내 위치가 변하면 값이 갱신 되어야 함
   // 반경 2.5km 내에 위치한 장소에 마커가 찍히도록
   @OptIn(ExperimentalCoroutinesApi::class)
   val placeList = _currentLocation
@@ -62,8 +55,21 @@ class SearchViewModel @Inject constructor(
       )
     }.cachedIn(viewModelScope)
 
-  private val _placeSnapshoList = MutableStateFlow(emptyList<PlaceEntity>())
-  val placeSnapshotList: StateFlow<List<PlaceEntity>> = _placeSnapshoList.asStateFlow()
+  fun setPermissionsGranted(granted: Boolean) {
+    _permissionsGranted.value = granted
+  }
+
+  fun setCurrentLocation(latitude: Double, longitude: Double) {
+    _currentLocation.value = LatLng(latitude, longitude)
+  }
+
+  fun setInitialCameraLocation(latitude: Double, longitude: Double) {
+    _initialCameraLocation.value = LatLng(latitude, longitude)
+  }
+
+  fun setLastCameraLocation(latitude: Double, longitude: Double) {
+    _lastCameraLocation.value = LatLng(latitude, longitude)
+  }
 
   fun updatePlaceSnapshotList(snapshot: ItemSnapshotList<PlaceEntity>) {
     val snapshotList = mutableListOf<PlaceEntity>()

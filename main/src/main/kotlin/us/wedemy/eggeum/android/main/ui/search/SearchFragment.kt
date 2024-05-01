@@ -38,7 +38,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
@@ -69,8 +68,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   private var permissionsGranted = false
 
   private val requestMultiplePermissionsLauncher =
-    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
-      if (isPermissionsGranted()) {
+    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+      permissionsGranted = permissions.entries.all { it.value }
+      if (permissionsGranted) {
         permissionsGranted = true
         moveToCameraToUserLocation()
         naverMap?.locationTrackingMode = LocationTrackingMode.Follow
@@ -92,25 +92,40 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onMapReady(naverMap: NaverMap) {
-    this.naverMap = naverMap
+    this.naverMap = naverMap.apply {
+      cameraPosition = CameraPosition(
+        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
+        ZOOM_LEVEL,
+      )
+      uiSettings.isScaleBarEnabled = false
+      uiSettings.isZoomControlEnabled = false
+      locationSource = this@SearchFragment.locationSource
+      addOnCameraChangeListener { _, _ ->
+        searchViewModel.setLastCameraLocation(cameraPosition.target.latitude, cameraPosition.target.longitude)
+      }
+    }
     if (permissionsGranted) {
       naverMap.locationTrackingMode = LocationTrackingMode.Follow
+      moveToCameraToUserLocation()
     }
-    initNaverMap()
     addMarkersToMap(searchCafeAdapter.snapshot())
   }
 
-  private fun isPermissionsGranted(): Boolean {
-    return permissions.all {
+  private fun checkPermission() {
+    val allPermissionsGranted = permissions.all {
       ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
-  }
 
-  private fun checkPermission() {
-    if (shouldShowPermissionRationale()) {
-      showLocationPermissionRationaleDialog()
+    if (!allPermissionsGranted) {
+      if (shouldShowPermissionRationale()) {
+        showLocationPermissionRationaleDialog()
+      } else {
+        requestPermissions()
+      }
     } else {
-      requestPermissions()
+      permissionsGranted = true
+      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+      moveToCameraToUserLocation()
     }
   }
 
@@ -173,24 +188,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun addMarkersToMap(snapshot: ItemSnapshotList<PlaceEntity>) {
+    clearMarkers()
     snapshot.toList().forEach { place ->
-      if (place != null) {
-        createAndAddMarker(place)
+      place?.let {
+        createAndAddMarker(it)
       }
     }
   }
 
-  private fun createAndAddMarker(data: PlaceEntity) {
-    val marker = Marker()
-    if (data.latitude != null && data.longitude != null) {
-      marker.position = LatLng(data.latitude!!, data.longitude!!)
-      markers.add(marker)
-      marker.map = naverMap
+  private fun clearMarkers() {
+    markers.forEach { marker ->
+      marker.map = null
     }
-    marker.tag = data.id
-    marker.icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
-    marker.onClickListener = this@SearchFragment
-    markers.add(marker)
+    markers.clear()
+  }
+
+  private fun createAndAddMarker(data: PlaceEntity) {
+    val marker = Marker().apply {
+      position = LatLng(data.latitude ?: return, data.longitude ?: return)
+      icon = OverlayImage.fromResource(us.wedemy.eggeum.android.design.R.drawable.ic_map_marker_24)
+      map = naverMap
+      tag = data.id
+      onClickListener = this@SearchFragment
+    }
+    markers.add(marker)  // 마커 리스트에 추가는 한 번만 수행
   }
 
   override fun onClick(overlay: Overlay): Boolean {
@@ -219,36 +240,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
     return true
   }
 
-  private fun initNaverMap() {
-    naverMap?.apply {
-      locationSource = this@SearchFragment.locationSource
-      uiSettings.isScaleBarEnabled = false
-      uiSettings.isZoomControlEnabled = false
-      cameraPosition = CameraPosition(
-        LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude),
-        ZOOM_LEVEL,
-      )
-      setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
-      addOnCameraChangeListener { _, _ ->
-        searchViewModel.setLastCameraLocation(
-          cameraPosition.target.latitude,
-          cameraPosition.target.longitude
-        )
-      }
-    }
-    moveToCameraToUserLocation()
-  }
-
   @SuppressLint("MissingPermission")
   private fun moveToCameraToUserLocation() {
     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
       val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
       naverMap?.moveCamera(cameraUpdate)
-      Timber.d("Current Location ${location.latitude} ${location.longitude}")
       searchViewModel.setCurrentLocation(location.latitude, location.longitude)
       if (searchViewModel.initialCameraLocation.value.latitude == -1.0) {
         searchViewModel.setInitialCameraLocation(location.latitude, location.longitude)
-        Timber.d("Initial Camera Location initialized ${searchViewModel.initialCameraLocation.value.latitude} ${searchViewModel.initialCameraLocation.value.longitude}")
       }
     }
   }
@@ -263,18 +262,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun showLocationPermissionRationaleDialog() {
-    val dialog = AlertDialog.Builder(requireContext())
-      .setMessage(getString(R.string.location_permission_educational_message))
-      .setPositiveButton(getString(R.string.check)) { _, _ ->
-        requestPermissions()
+    AlertDialog.Builder(requireContext()).apply {
+      setMessage(getString(R.string.location_permission_educational_message))
+      setPositiveButton(getString(R.string.check)) { _, _ -> requestPermissions() }
+      setNegativeButton(getString(R.string.cancel), null)
+      show().also {
+        it.getButton(DialogInterface.BUTTON_POSITIVE)
+          .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
+        it.getButton(DialogInterface.BUTTON_NEGATIVE)
+          .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
       }
-      .setNegativeButton(getString(R.string.cancel), null)
-      .show()
-    dialog.apply {
-      getButton(DialogInterface.BUTTON_POSITIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.teal_500))
-      getButton(DialogInterface.BUTTON_NEGATIVE)
-        .setTextColor(ContextCompat.getColor(requireContext(), us.wedemy.eggeum.android.design.R.color.gray_400))
     }
   }
 
@@ -305,10 +302,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   override fun onDestroyView() {
-    markers.forEach { marker ->
-      marker.map = null
-    }
-    markers.clear()
+    clearMarkers()
     binding.mvSearch.onDestroy()
     naverMap = null
     super.onDestroyView()

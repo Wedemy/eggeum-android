@@ -39,14 +39,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import us.wedemy.eggeum.android.common.base.BaseFragment
 import us.wedemy.eggeum.android.common.extension.repeatOnStarted
 import us.wedemy.eggeum.android.common.extension.safeNavigate
-import us.wedemy.eggeum.android.common.base.BaseFragment
+import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.domain.model.place.PlaceEntity
 import us.wedemy.eggeum.android.main.R
 import us.wedemy.eggeum.android.main.databinding.FragmentSearchBinding
 import us.wedemy.eggeum.android.main.mapper.toUiModel
-import us.wedemy.eggeum.android.common.model.CafeDetailModel
 import us.wedemy.eggeum.android.main.ui.adapter.SearchCafeAdapter
 import us.wedemy.eggeum.android.main.viewmodel.CafeDetailViewModel
 import us.wedemy.eggeum.android.main.viewmodel.SearchViewModel
@@ -115,17 +115,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
   }
 
   private fun initListener() {
-    binding.fabSearchTracking.setOnClickListener {
-      naverMap?.locationTrackingMode = LocationTrackingMode.Follow
-    }
-
-    binding.tietSearchCafe.setOnClickListener {
-      binding.cvSearchCafe.performClick()
-    }
-
-    binding.cvSearchCafe.setOnClickListener {
-      val action = SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
-      findNavController().safeNavigate(action)
+    with(binding) {
+      fabSearchTracking.setOnClickListener {
+        naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+      }
+      tietSearchCafe.setOnClickListener {
+        cvSearchCafe.performClick()
+      }
+      cvSearchCafe.setOnClickListener {
+        val action =
+          SearchFragmentDirections.actionFragmentSearchToFragmentSearchCafeFragment(searchViewModel.currentLocation.value)
+        findNavController().safeNavigate(action)
+      }
+      cvCurrentMapSearchCafe.setOnClickListener {
+        binding.cvCurrentMapSearchCafe.visibility = View.GONE
+        searchViewModel.setInitialCameraLocation(
+          searchViewModel.lastCameraLocation.value.latitude,
+          searchViewModel.lastCameraLocation.value.longitude
+        )
+      }
     }
   }
 
@@ -146,6 +154,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
               addMarkersToMap(searchCafeAdapter.snapshot())
             }
           }
+      }
+
+      launch {
+        searchViewModel.lastCameraLocation.collect { lastCameraLocation ->
+          if (lastCameraLocation != searchViewModel.initialCameraLocation.value && searchViewModel.initialCameraLocation.value.latitude != -1.0) {
+            binding.cvCurrentMapSearchCafe.visibility = View.VISIBLE
+          } else {
+            binding.cvCurrentMapSearchCafe.visibility = View.GONE
+          }
+        }
       }
     }
   }
@@ -207,6 +225,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
         ZOOM_LEVEL,
       )
       setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true)
+      addOnCameraChangeListener { _, _ ->
+        searchViewModel.setLastCameraLocation(
+          cameraPosition.target.latitude,
+          cameraPosition.target.longitude
+        )
+      }
     }
     moveToCameraToUserLocation()
   }
@@ -217,8 +241,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), OnMapReadyCallback
       val cameraUpdate = CameraUpdate.scrollTo(LatLng(location.latitude, location.longitude))
       naverMap?.moveCamera(cameraUpdate)
       Timber.d("Current Location ${location.latitude} ${location.longitude}")
-
       searchViewModel.setCurrentLocation(location.latitude, location.longitude)
+      if (searchViewModel.initialCameraLocation.value.latitude == -1.0) {
+        searchViewModel.setInitialCameraLocation(location.latitude, location.longitude)
+        Timber.d("Initial Camera Location initialized ${searchViewModel.initialCameraLocation.value.latitude} ${searchViewModel.initialCameraLocation.value.longitude}")
+      }
     }
   }
 

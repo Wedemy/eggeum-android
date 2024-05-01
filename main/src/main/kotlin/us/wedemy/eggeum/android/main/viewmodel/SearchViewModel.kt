@@ -30,8 +30,22 @@ class SearchViewModel @Inject constructor(
   private val _currentLocation = MutableStateFlow(LatLng(-1.0, -1.0))
   val currentLocation: StateFlow<LatLng> = _currentLocation.asStateFlow()
 
+  private val _initialCameraLocation = MutableStateFlow(LatLng(-1.0, -1.0))
+  val initialCameraLocation: StateFlow<LatLng> = _initialCameraLocation.asStateFlow()
+
+  private val _lastCameraLocation = MutableStateFlow(LatLng(-1.0, -1.0))
+  val lastCameraLocation: StateFlow<LatLng> = _lastCameraLocation.asStateFlow()
+
   fun setCurrentLocation(latitude: Double, longitude: Double) {
     _currentLocation.value = LatLng(latitude, longitude)
+  }
+
+  fun setInitialCameraLocation(latitude: Double, longitude: Double) {
+    _initialCameraLocation.value = LatLng(latitude, longitude)
+  }
+
+  fun setLastCameraLocation(latitude: Double, longitude: Double) {
+    _lastCameraLocation.value = LatLng(latitude, longitude)
   }
 
   // TODO 맵 zoom level, 내 위치가 변하면 값이 갱신 되어야 함

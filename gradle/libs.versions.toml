@@ -4,7 +4,7 @@ gradle-dependency-handler-extensions = "1.1.0"
 
 google-secrets = "2.0.1"
 google-gms-google-services = "4.4.1"
-google-gms-play-services-auth = "21.1.0"
+google-gms-play-services-auth = "21.1.1"
 
 kotlin-core = "1.9.23"
 kotlin-detekt = "1.23.6"

@@ -54,7 +54,7 @@ class SearchCafeViewModel @Inject constructor(
     debouncedSearchQuery.flatMapLatest { query ->
       getSearchPlaceListUseCase(
         query = query,
-        distance = 2500.0,
+        distance = Double.MAX_VALUE,
         latitude = currentLocation.latitude,
         longitude = currentLocation.longitude,
       )

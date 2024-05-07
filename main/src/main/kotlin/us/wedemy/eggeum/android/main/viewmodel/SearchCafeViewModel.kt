@@ -29,7 +29,6 @@ import us.wedemy.eggeum.android.domain.usecase.DeleteRecentSearchPlaceUseCase
 import us.wedemy.eggeum.android.domain.usecase.GetSearchPlaceListUseCase
 import us.wedemy.eggeum.android.domain.usecase.InsertRecentSearchPlaceUseCase
 
-// TODO 검색 결과 아이템과 최근 검색 결과 아이템의 디자인이 달라야함
 @HiltViewModel
 class SearchCafeViewModel @Inject constructor(
   getSearchPlaceListUseCase: GetSearchPlaceListUseCase,

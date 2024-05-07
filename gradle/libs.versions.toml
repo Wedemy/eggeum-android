@@ -8,7 +8,7 @@ google-gms-play-services-auth = "21.1.1"
 
 kotlin-core = "1.9.23"
 kotlin-detekt = "1.23.6"
-kotlin-ktlint-gradle = "11.6.1"
+kotlin-ktlint-gradle = "12.1.1"
 kotlin-ktlint-source = "0.50.0"
 
 javax-inject = "1"

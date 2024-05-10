@@ -53,7 +53,7 @@ firebase-bom = "32.8.1"
 firebase-crashlytics = "2.9.9"
 desugar-jdk-libs = "2.0.4"
 
-test-kotest = "5.8.1"
+test-kotest = "5.9.0"
 test-junit-core = "4.13.2"
 test-junit-engine = "5.10.2"
 test-roborazzi = "1.15.0"

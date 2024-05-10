@@ -12,7 +12,7 @@ kotlin-ktlint-gradle = "11.6.1"
 kotlin-ktlint-source = "0.50.0"
 
 javax-inject = "1"
-kotlinx-coroutines = "1.8.0"
+kotlinx-coroutines = "1.8.1"
 kotlinx-datetime = "0.5.0"
 kotlinx-serialization = "1.6.3"
 kotlinx-serialization-converter = "1.0.0"

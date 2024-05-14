@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center"
+  android:layout_marginHorizontal="40dp">
+
+  <TextView
+    android:id="@+id/tv_report_cafe_image_title"
+    style="@style/H6"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginTop="24dp"
+    android:ellipsize="end"
+    android:maxLines="2"
+    android:text="@string/report_cafe_image_title"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <CheckBox
+    android:id="@+id/cb_wrong_place"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="24dp"
+    android:background="@drawable/selector_circle_checkbox_24"
+    android:button="@android:color/transparent"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_report_cafe_image_title" />
+
+  <TextView
+    android:id="@+id/tv_wrong_place"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:text="@string/wrong_place"
+    android:textColor="@color/gray_700"
+    app:layout_constraintBottom_toBottomOf="@id/cb_wrong_place"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintStart_toEndOf="@+id/cb_wrong_place"
+    app:layout_constraintTop_toTopOf="@id/cb_wrong_place" />
+
+  <CheckBox
+    android:id="@+id/cb_expression_of_hatred_or_outright_violence"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/selector_circle_checkbox_24"
+    android:button="@android:color/transparent"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cb_wrong_place" />
+
+  <TextView
+    android:id="@+id/tv_expression_of_hatred_or_outright_violence"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:text="@string/expression_of_hatred_or_outright_violence"
+    android:textColor="@color/gray_700"
+    app:layout_constraintBottom_toBottomOf="@id/cb_expression_of_hatred_or_outright_violence"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintStart_toEndOf="@+id/cb_expression_of_hatred_or_outright_violence"
+    app:layout_constraintTop_toTopOf="@id/cb_expression_of_hatred_or_outright_violence" />
+
+  <CheckBox
+    android:id="@+id/cb_pornographic_or_sexual_content"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/selector_circle_checkbox_24"
+    android:button="@android:color/transparent"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cb_expression_of_hatred_or_outright_violence" />
+
+  <TextView
+    android:id="@+id/tv_pornographic_or_sexual_content"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:text="@string/pornographic_or_sexual_content"
+    android:textColor="@color/gray_700"
+    app:layout_constrainedWidth="true"
+    app:layout_constraintBottom_toBottomOf="@id/cb_pornographic_or_sexual_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintStart_toEndOf="@+id/cb_pornographic_or_sexual_content"
+    app:layout_constraintTop_toTopOf="@id/cb_pornographic_or_sexual_content" />
+
+  <CheckBox
+    android:id="@+id/cb_spam"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/selector_circle_checkbox_24"
+    android:button="@android:color/transparent"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cb_pornographic_or_sexual_content" />
+
+  <TextView
+    android:id="@+id/tv_spam"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:text="@string/spam"
+    android:textColor="@color/gray_700"
+    app:layout_constraintBottom_toBottomOf="@id/cb_spam"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintStart_toEndOf="@+id/cb_spam"
+    app:layout_constraintTop_toTopOf="@id/cb_spam" />
+
+  <CheckBox
+    android:id="@+id/cb_copyright_or_legal_matter"
+    android:layout_width="16dp"
+    android:layout_height="16dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/selector_circle_checkbox_24"
+    android:button="@android:color/transparent"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cb_spam" />
+
+  <TextView
+    android:id="@+id/tv_copyright_or_legal_matter"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:ellipsize="end"
+    android:text="@string/copyright_or_legal_matter"
+    android:textColor="@color/gray_700"
+    app:layout_constrainedWidth="true"
+    app:layout_constraintBottom_toBottomOf="@id/cb_copyright_or_legal_matter"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintStart_toEndOf="@+id/cb_copyright_or_legal_matter"
+    app:layout_constraintTop_toTopOf="@id/cb_copyright_or_legal_matter" />
+
+  <View
+    android:id="@+id/line_report_cafe_image"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_report_cafe_image"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cb_copyright_or_legal_matter" />
+
+  <Button
+    android:id="@+id/btn_report_cafe_image"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:text="@string/check"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

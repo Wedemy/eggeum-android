@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tb_select_input_cafe_info"
+    style="@style/Widget.Eggeum.Toolbar.WithArrow"
+    android:layout_width="0dp"
+    android:layout_height="56dp"
+    android:elevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/update_cafe"
+      android:textColor="@color/gray_900" />
+
+    <!--    <TextView-->
+    <!--      style="@style/Title"-->
+    <!--      android:layout_width="wrap_content"-->
+    <!--      android:layout_height="wrap_content"-->
+    <!--      android:layout_gravity="end"-->
+    <!--      android:layout_marginEnd="16dp"-->
+    <!--      android:text="@string/cancel"-->
+    <!--      android:textColor="@color/gray_300" />-->
+
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <TextView
+    android:id="@+id/tv_input_cafe_info"
+    style="@style/H4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/input_corrections"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_select_input_cafe_info" />
+
+  <ScrollView
+    android:id="@+id/sv_input_cafe_info"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="24dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toBottomOf="@id/line_input_cafe_info"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_input_cafe_info">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="24dp">
+
+      <TextView
+        android:id="@+id/tv_cafe_area"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/description_cafe_area"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_area"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_area">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_area"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_cafe_meeting_room"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/description_cafe_meeting_room"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_cafe_area" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_meeting_room"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_meeting_room">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_meeting_room"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_count_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_cafe_multi_seat"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/description_cafe_multi_seat"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_cafe_meeting_room" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_multi_seat"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_multi_seat">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_multi_seat"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_count_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_cafe_single_seat"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/description_cafe_single_seat"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_cafe_multi_seat" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_single_seat"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_single_seat">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_single_seat"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_count_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_cafe_business_hours"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/description_cafe_business_hours"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_cafe_single_seat" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_cafe_business_hours"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_business_hours">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_cafe_business_hours"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_business_hours_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_parking"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_parking"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_cafe_business_hours" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_parking"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_parking">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_parking"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_parking_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_exists_smoking_area"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_exists_smoking_area"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_parking" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_exists_smoking_area"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_smoking_area">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_exists_smoking_area"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_ox_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_exists_wifi"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_exists_wifi"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_exists_smoking_area" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_exists_wifi"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_wifi">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_exists_wifi"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_ox_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_exists_outlet"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_exists_outlet"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_exists_wifi" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_exists_outlet"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_exists_outlet">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_exists_outlet"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_ox_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_rest_room"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_rest_room"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_exists_outlet" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_rest_room"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rest_room">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_rest_room"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_restroom_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_mobile_charging"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_mobile_charging"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_rest_room" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_mobile_charging"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mobile_charging">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_mobile_charging"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_charging_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_instagram_uri"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_instagram_uri"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_mobile_charging" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_instagram_uri"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_instagram_uri">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_instagram_uri"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_instagram_url_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_website_uri"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_website_uri"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_instagram_uri" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_website_uri"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_website_uri">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_website_uri"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_website_url_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_blog_uri"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_blog_uri"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_website_uri" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_blog_uri"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_blog_uri">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_blog_uri"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_blog_url_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:id="@+id/tv_phone"
+        style="@style/TextSMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/input_phone"
+        android:textColor="@color/gray_800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_input_blog_uri" />
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_phone"
+        style="@style/Widget.Eggeum.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="4dp"
+        app:boxStrokeColor="@drawable/selector_box_stroke_color_gray_200"
+        app:errorTextAppearance="@style/ErrorAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_phone">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/tiet_input_phone"
+          style="@style/Widget.Eggeum.TextInputEditText.OutlinedBox"
+          android:ellipsize="end"
+          android:hint="@string/input_cafe_info_phone_hint"
+          android:inputType="text"
+          android:maxLines="1" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
+
+  <View
+    android:id="@+id/line_input_cafe_info"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_next"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_next"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:text="@string/next"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

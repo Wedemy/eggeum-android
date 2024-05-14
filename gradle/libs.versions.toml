@@ -1,35 +1,189 @@
 [versions]
-gradle-android = "8.0.1"
+android-gradle-plugin = "8.2.2"
 gradle-dependency-handler-extensions = "1.1.0"
 
-kotlin-core = "1.8.21"
-kotlin-detekt = "1.22.0"
-kotlin-ktlint-gradle = "11.3.2"
-kotlin-ktlint-source = "0.48.2"
+google-secrets = "2.0.1"
+google-gms-google-services = "4.4.1"
+google-gms-play-services-auth = "21.1.1"
 
-android-material = "1.9.0"
+kotlin-core = "1.9.24"
+kotlin-detekt = "1.23.6"
+kotlin-ktlint-gradle = "11.6.1"
+kotlin-ktlint-source = "0.50.0"
 
+javax-inject = "1"
+kotlinx-coroutines = "1.8.1"
+kotlinx-datetime = "0.5.0"
+kotlinx-serialization = "1.6.3"
+kotlinx-serialization-converter = "1.0.0"
+
+android-material = "1.12.0"
+android-hilt = "2.51.1"
+android-play-services-location = "21.2.0"
+
+androidx-splash = "1.0.1"
+androidx-startup = "1.1.1"
+androidx-core = "1.13.1"
 androidx-appcompat = "1.6.1"
+androidx-activity = "1.9.0"
 androidx-constraintlayout = "2.1.4"
+androidx-datastore = "1.1.1"
+androidx-lifecycle = "2.7.0"
+androidx-navigation = "2.7.7"
+androidx-hilt-navigation = "1.2.0"
+androidx-paging3 = "3.2.1"
+androidx-room = "2.6.1"
+
+ktor-client-core = "2.3.11"
+
+retrofit = "2.11.0"
+okhttp = "5.0.0-alpha.14"
+
+moshi = "1.15.1"
+moshix-ir = "0.26.0"
+
+coil = "2.6.0"
+lottie = "6.4.0"
+insetter = "0.6.1"
+timber = "5.0.1"
+naver-map = "3.17.0"
+ksp = "1.9.24-1.0.20"
+photo-view = "1.0.1"
+firebase-bom = "32.8.1"
+firebase-crashlytics = "2.9.9"
+desugar-jdk-libs = "2.0.4"
+
+test-kotest = "5.9.0"
+test-junit-core = "4.13.2"
+test-junit-engine = "5.10.2"
+test-roborazzi = "1.15.0"
+test-robolectric = "4.12.1"
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 gradle-dependency-handler-extensions = { id = "land.sungbin.dependency.handler.extensions", version.ref = "gradle-dependency-handler-extensions" }
 
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-core" }
+google-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "google-secrets" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-gms-google-services" }
+
 kotlin-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "kotlin-detekt" }
 kotlin-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "kotlin-ktlint-gradle" }
 
-[libraries]
-gradle-android = { module = "com.android.tools.build:gradle", version.ref = "gradle-android" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-core" }
 
-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-core" }
+android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "android-hilt" }
+
+androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
+
+moshix-ir = { id = "dev.zacsweers.moshix", version.ref = "moshix-ir" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+
+test-roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "test-roborazzi" }
+
+[libraries]
+gradle-android = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }
+gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-core" }
+
+google-gms-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "google-gms-play-services-auth" }
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 
 # This isn't strictly used but allows Renovate to see us using the ktlint artifact
 kotlin-ktlint = { module = "com.pinterest:ktlint", version.ref = "kotlin-ktlint-source" }
 
-android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+android-material = { module = "com.google.android.material:material", version.ref = "android-material" }
+android-hilt-compile = { module = "com.google.dagger:hilt-android-compiler", version.ref = "android-hilt" }
+android-hilt-runtime = { module = "com.google.dagger:hilt-android", version.ref = "android-hilt" }
+android-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "android-play-services-location" }
+
+androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
+androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidx-startup" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx.datastore" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-savedstate = { module = "androidx.lifecycle:lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
+androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "androidx-hilt-navigation" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "androidx.paging3"}
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "androidx.paging3"}
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
+androidx-room-compile = { module = "androidx.room:room-compiler", version.ref = "androidx.room"}
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room"}
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room"}
+
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client-core" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-client-core" }
+ktor-client-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client-core" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinx-serialization-converter" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+
+desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+naver-map = { module = "com.naver.maps:map-sdk", version.ref = "naver-map" }
+photo-view = { module = "io.getstream:photoview", version.ref = "photo-view"}
+
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
+
+test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor-client-core" }
+test-kotest-framework = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "test-kotest" }
+test-kotest-assertion = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "test-kotest" }
+test-junit-core = { module = "junit:junit", version.ref = "test-junit-core" }
+test-junit-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "test-junit-engine" } # testRuntimeOnly
+test-roborazzi-core = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "test-roborazzi" }
+test-roborazzi-rule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "test-roborazzi" }
+test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test-robolectric" }
 
 detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "kotlin-detekt" }
+
+[bundles]
+androidx-lifecycle = [
+    "androidx-lifecycle-runtime",
+    "androidx-lifecycle-viewmodel",
+    "androidx-lifecycle-savedstate",
+]
+androidx-navigation = [
+    "androidx-navigation-ui",
+    "androidx-navigation-fragment",
+    "androidx-hilt-navigation-fragment",
+]
+ktor-client = [
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-client-engine-cio",
+]
+test-roborazzi = [
+    "test-roborazzi-core",
+    "test-roborazzi-rule",
+]
+
+retrofit = [
+    "retrofit",
+    "retrofit-kotlinx-serialization-converter",
+    "okhttp",
+    "okhttp-logging-interceptor",
+]

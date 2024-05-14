@@ -5,9 +5,7 @@
  * Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
  */
 
-// @formatter:off
-
-@file:Suppress("UnstableApiUsage","unused")
+@file:Suppress("UnstableApiUsage", "unused")
 
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
@@ -17,8 +15,12 @@ import internal.configureAndroid
 import internal.configureGmd
 import internal.libs
 import internal.androidExtensions
+import internal.detektPlugins
+import internal.implementation
 import internal.isAndroidProject
+import internal.ksp
 import internal.setupJunit
+import internal.testImplementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
@@ -33,6 +35,9 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.gradle.kotlin.dsl.KotlinClosure2
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+private const val EXPLICIT_API = "-Xexplicit-api=strict"
 
 internal abstract class BuildLogicPlugin(private val block: Project.() -> Unit) : Plugin<Project> {
   final override fun apply(project: Project) {
@@ -66,8 +71,39 @@ internal class AndroidLibraryPlugin : BuildLogicPlugin({
   }
 })
 
+internal class AndroidHiltPlugin : BuildLogicPlugin({
+  applyPlugins(Plugins.hilt, Plugins.Ksp)
+  dependencies {
+    implementation(libs.android.hilt.runtime)
+    ksp(libs.android.hilt.compile)
+  }
+})
+
+internal class AndroidxRoomPlugin : BuildLogicPlugin({
+  applyPlugins(Plugins.Ksp)
+
+  dependencies {
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+    ksp(libs.androidx.room.compile)
+  }
+})
+
 internal class AndroidGmdPlugin : BuildLogicPlugin({
   configureGmd(androidExtensions)
+})
+
+internal class AndroidFirebasePlugin : BuildLogicPlugin({
+  applyPlugins(Plugins.GoogleServices, Plugins.FirebaseCrashlytics)
+
+  dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.gms.play.services.auth)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.auth)
+  }
 })
 
 internal class JvmKotlinPlugin : BuildLogicPlugin({
@@ -86,24 +122,42 @@ internal class JvmKotlinPlugin : BuildLogicPlugin({
     getByName("main").java.srcDir("src/main/kotlin")
     getByName("test").java.srcDir("src/test/kotlin")
   }
-
-  dependencies.add("detektPlugins", libs.findLibrary("detekt-plugin-formatting").get())
+  dependencies {
+    detektPlugins(libs.detekt.plugin.formatting)
+  }
 })
 
-// prefix가 `Jvm`이 아니라 `Test`인 이유:
-// 적용 타켓(android or pure)에 따라 `useJUnitPlatform()` 방식이 달라짐
+internal class KotlinExplicitApiPlugin : BuildLogicPlugin({
+  tasks
+    .matching { task ->
+      task is KotlinCompile &&
+        !task.name.contains("test", ignoreCase = true)
+    }
+    .configureEach {
+      if (!project.hasProperty("kotlin.optOutExplicitApi")) {
+        val kotlinCompile = this as KotlinCompile
+        if (EXPLICIT_API !in kotlinCompile.kotlinOptions.freeCompilerArgs) {
+          kotlinCompile.kotlinOptions.freeCompilerArgs += EXPLICIT_API
+        }
+      }
+    }
+})
+
 internal class TestJUnitPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
   dependencies {
     setupJunit(
-      core = libs.findLibrary("test-junit-core").get(),
-      engine = libs.findLibrary("test-junit-engine").get(),
+      core = libs.test.junit.core,
+      engine = libs.test.junit.engine,
     )
   }
 })
+
 internal class TestKotestPlugin : BuildLogicPlugin({
   useTestPlatformForTarget()
-  dependencies.add("testImplementation", libs.findLibrary("test-kotest-framework").get())
+  dependencies {
+    testImplementation(libs.test.kotest.framework)
+  }
 })
 
 // ref: https://kotest.io/docs/quickstart#test-framework
@@ -122,10 +176,10 @@ private fun Project.useTestPlatformForTarget() {
       KotlinClosure2<TestDescriptor, TestResult, Unit>({ desc, result ->
         if (desc.parent == null) { // will match the outermost suite
           val output = "Results: ${result.resultType} " +
-              "(${result.testCount} tests, " +
-              "${result.successfulTestCount} passed, " +
-              "${result.failedTestCount} failed, " +
-              "${result.skippedTestCount} skipped)"
+            "(${result.testCount} tests, " +
+            "${result.successfulTestCount} passed, " +
+            "${result.failedTestCount} failed, " +
+            "${result.skippedTestCount} skipped)"
           println(output)
         }
       })

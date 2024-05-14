@@ -15,17 +15,25 @@ plugins {
   alias(libs.plugins.kotlin.detekt)
   alias(libs.plugins.kotlin.ktlint)
   alias(libs.plugins.gradle.dependency.handler.extensions)
+  alias(libs.plugins.android.application) apply false
+  alias(libs.plugins.android.library) apply false
+  alias(libs.plugins.google.secrets) apply false
+  alias(libs.plugins.kotlinx.serialization) apply false
+  alias(libs.plugins.android.hilt) apply false
+  alias(libs.plugins.google.services) apply false
+  alias(libs.plugins.firebase.crashlytics) apply false
+  alias(libs.plugins.ksp) apply false
 }
 
 buildscript {
   repositories {
     google()
     mavenCentral()
+    maven("https://www.jitpack.io")
   }
 
   dependencies {
-    classpath(libs.kotlin.gradle)
-    classpath(libs.gradle.android)
+    classpath(libs.gradle.kotlin)
   }
 }
 
@@ -33,6 +41,8 @@ allprojects {
   repositories {
     google()
     mavenCentral()
+    maven("https://naver.jfrog.io/artifactory/maven/")
+    maven("https://www.jitpack.io")
   }
 
   apply {
@@ -66,6 +76,21 @@ allprojects {
   }
 }
 
-tasks.register(name = "cleanAll", type = Delete::class) {
+tasks.register("cleanAll", type = Delete::class) {
   allprojects.map(Project::getBuildDir).forEach(::delete)
+}
+
+tasks.register("clean", type = Delete::class) {
+  rootProject.buildDir.delete()
+}
+
+tasks.register("bundleRelease", type = Exec::class) {
+  commandLine(project.rootDir.resolve("gradlew"), "bundle")
+  workingDir = project.rootDir
+}
+
+tasks.register("release") {
+  dependsOn(tasks["clean"])
+  dependsOn(tasks["bundleRelease"])
+  mustRunAfter(tasks["clean"])
 }

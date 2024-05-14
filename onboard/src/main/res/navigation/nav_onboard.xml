@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_onboarding"
+  app:startDestination="@id/fragment_register_account">
+
+  <fragment
+    android:id="@+id/fragment_register_account"
+    android:name="us.wedemy.eggeum.android.onboard.ui.RegisterAccountFragment"
+    android:label="RegisterAccountFragment"
+    tools:layout="@layout/fragment_register_account">
+
+    <action
+      android:id="@+id/action_fragment_register_account_to_fragment_onboard_service_terms"
+      app:destination="@id/fragment_onboard_service_terms"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+      android:id="@+id/action_fragment_register_account_to_fragment_register_nickname"
+      app:destination="@id/fragment_register_nickname"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+      android:id="@+id/action_fragment_register_account_to_fragment_onboard_privacy_policy"
+      app:destination="@id/fragment_onboard_privacy_policy"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <action
+      android:id="@+id/action_fragment_register_account_to_fragment_onboard_privacy_third"
+      app:destination="@id/fragment_onboard_privacy_third"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/fragment_onboard_service_terms"
+    android:name="us.wedemy.eggeum.android.onboard.ui.OnboardServiceTermsFragment"
+    android:label="OnboardServiceTermsFragment"
+    tools:layout="@layout/fragment_onboard_service_terms" />
+
+  <fragment
+    android:id="@+id/fragment_register_nickname"
+    android:name="us.wedemy.eggeum.android.onboard.ui.RegisterNicknameFragment"
+    android:label="RegisterNicknameFragment"
+    tools:layout="@layout/fragment_register_nickname" />
+
+  <fragment
+    android:id="@+id/fragment_onboard_privacy_policy"
+    android:name="us.wedemy.eggeum.android.onboard.ui.OnboardPrivacyPolicyFragment"
+    android:label="OnboardPrivacyPolicyFragment"
+    tools:layout="@layout/fragment_onboard_privacy_policy" />
+
+  <fragment
+    android:id="@+id/fragment_onboard_privacy_third"
+    android:name="us.wedemy.eggeum.android.onboard.ui.OnboardPrivacyThirdFragment"
+    android:label="OnboardPrivacyThirdFragment"
+    tools:layout="@layout/fragment_onboard_privacy_third"/>
+
+</navigation>

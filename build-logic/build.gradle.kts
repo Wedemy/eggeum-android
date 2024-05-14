@@ -9,7 +9,7 @@
 
 plugins {
   `kotlin-dsl`
-  alias(libs.plugins.kotlin.jvm)
+  kotlin("jvm") version libs.versions.kotlin.core.get()
   alias(libs.plugins.gradle.dependency.handler.extensions)
 }
 
@@ -17,8 +17,12 @@ gradlePlugin {
   val pluginClasses = listOf(
     "AndroidApplicationPlugin" to "android-application",
     "AndroidLibraryPlugin" to "android-library",
+    "AndroidHiltPlugin" to "android-hilt",
     "AndroidGmdPlugin" to "android-gmd",
+    "AndroidFirebasePlugin" to "android-firebase",
+    "AndroidxRoomPlugin" to "androidx-room",
     "JvmKotlinPlugin" to "jvm-kotlin",
+    "KotlinExplicitApiPlugin" to "kotlin-explicit-api",
     "TestJUnitPlugin" to "test-junit",
     "TestKotestPlugin" to "test-kotest",
   )
@@ -50,10 +54,9 @@ sourceSets {
 }
 
 dependencies {
-  implementations(
-    libs.gradle.android,
-    libs.kotlin.gradle,
-  )
+  compileOnly(libs.gradle.android)
+  compileOnly(libs.gradle.kotlin)
+  compileOnly(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 // Pair<ClassName, PluginName>

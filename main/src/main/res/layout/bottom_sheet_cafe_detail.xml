@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/radius_21"
+  app:behavior_draggable="true"
+  app:behavior_fitToContents="true"
+  app:behavior_hideable="false"
+  app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+  tools:ignore="HardcodedText">
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_shrink"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="42dp"
+    android:contentDescription="@string/ic_bottom_sheet_handle"
+    android:src="@drawable/ic_arrow_down_outlined_24"
+    android:visibility="invisible"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_handle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:contentDescription="@string/ic_bottom_sheet_handle"
+    android:src="@drawable/ic_bottom_sheet_handle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+    android:id="@+id/iv_cafe_detail_option"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="42dp"
+    android:layout_marginEnd="16dp"
+    android:background="@drawable/ic_menu_filled_24"
+    android:contentDescription="Cafe Menu Option"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_cafe_detail_name"
+    style="@style/H5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="@color/gray_900"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/iv_cafe_detail_shrink"
+    tools:text="스타벅스 강남역신분당역사점" />
+
+  <TextView
+    android:id="@+id/tv_cafe_detail_address"
+    style="@style/TextMRegular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_cafe_detail_name"
+    tools:text="서울특별시 강남구 강남대로 396" />
+
+  <com.google.android.material.tabs.TabLayout
+    android:id="@+id/tl_cafe_detail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="24dp"
+    android:background="@color/white"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_cafe_detail_address"
+    app:tabGravity="start"
+    app:tabIndicatorColor="@color/teal_500"
+    app:tabIndicatorHeight="2dp"
+    app:tabRippleColor="@null"
+    app:tabSelectedTextColor="@color/gray_900"
+    app:tabTextAppearance="@style/EggeumTabItemText"
+    app:tabTextColor="@color/gray_500">
+
+    <com.google.android.material.tabs.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/Info" />
+
+    <com.google.android.material.tabs.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/image" />
+
+    <com.google.android.material.tabs.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/menu" />
+
+  </com.google.android.material.tabs.TabLayout>
+
+  <FrameLayout
+    android:id="@+id/child_fragment_container"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tl_cafe_detail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white"
+  tools:ignore="HardcodedText">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/tv_cafe_info_area_value"
+      style="@style/H2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="30 m²" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_area"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="@string/area"
+      android:textColor="@color/gray_500"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_area_value" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gl_cafe_info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintGuide_percent="0.5"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_meeting_room_value"
+      style="@style/H2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="@id/gl_cafe_info"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="3" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_meeting_room"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="@string/meeting_room"
+      android:textColor="@color/gray_500"
+      app:layout_constraintStart_toStartOf="@id/gl_cafe_info"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_meeting_room_value" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_multi_seat_value"
+      style="@style/H2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="22dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_area"
+      tools:text="24" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_multi_seat"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="@string/multi_seat"
+      android:textColor="@color/gray_500"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_multi_seat_value" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_single_seat_value"
+      style="@style/H2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="22dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintStart_toStartOf="@id/gl_cafe_info"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_meeting_room"
+      tools:text="1" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_single_seat"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:text="@string/single_seat"
+      android:textColor="@color/gray_500"
+      app:layout_constraintStart_toStartOf="@id/gl_cafe_info"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_single_seat_value" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_business_hours"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="24dp"
+      android:contentDescription="Business Hours"
+      android:src="@drawable/ic_clock_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_cafe_info_multi_seat" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_business_hours"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/business_hours"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_business_hours"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_business_hours"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_business_hours" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_business_hours_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_business_hours"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_business_hours"
+      tools:text="매일 09:00 - 21:00" />
+
+    <View
+      android:id="@+id/line_cafe_info_business_hours"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_business_hours" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_rest_room"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Rest Room"
+      android:src="@drawable/ic_rest_room_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_business_hours" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_rest_room"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/rest_room"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_rest_room"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_rest_room"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_rest_room" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_rest_room_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_rest_room"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_rest_room"
+      tools:text="내부 / 남녀 분리 / 장애인 화장실 있음" />
+
+    <View
+      android:id="@+id/line_cafe_info_rest_room"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_rest_room" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_parking"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Parking"
+      android:src="@drawable/ic_parking_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_rest_room" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_parking"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/parking"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_parking"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_parking"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_parking" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_parking_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_parking"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_parking"
+      tools:text="가능 / 기본 1시간 / 시간당 3,000원" />
+
+    <View
+      android:id="@+id/line_cafe_info_parking"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_parking" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_smoking"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Smoking"
+      android:src="@drawable/ic_smoking_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_parking" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_smoking"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/smoking_zone"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_smoking"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_smoking"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_smoking" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_smoking_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:contentDescription="Smoking Value"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_smoking"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_smoking"
+      tools:src="@drawable/ic_x_colored_16" />
+
+    <View
+      android:id="@+id/line_cafe_info_smoking"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_smoking" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_wifi"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="WIFI"
+      android:src="@drawable/ic_wifi_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_smoking" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_wifi"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/wifi"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_wifi"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_wifi"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_wifi" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_wifi_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:contentDescription="WIFI Value"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_wifi"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_wifi"
+      tools:src="@drawable/ic_o_filled_16" />
+
+    <View
+      android:id="@+id/line_cafe_info_wifi"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_wifi" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_outlet"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Outlet"
+      android:src="@drawable/ic_outlet_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_wifi" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_outlet"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/outlet"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_outlet"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_outlet"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_outlet" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_outlet_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:contentDescription="Outlet Value"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_outlet"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_outlet"
+      tools:src="@drawable/ic_o_filled_16" />
+
+    <View
+      android:id="@+id/line_cafe_info_outlet"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_outlet" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_mobile_charging"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Phone Charging"
+      android:src="@drawable/ic_phone_charging_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_outlet" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_mobile_charging"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/phone_charging"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_mobile_charging"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_mobile_charging"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_mobile_charging" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_mobile_charging_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_mobile_charging"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_mobile_charging"
+      tools:text="카운터에서 가능" />
+
+    <View
+      android:id="@+id/line_cafe_info_mobile_charging"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_mobile_charging" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_phone"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="Phone"
+      android:src="@drawable/ic_phone_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_mobile_charging" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_phone"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/phone"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_phone"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_phone"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_phone" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_phone_number"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="@color/gray_900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_phone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_phone"
+      tools:text="02-123-4567" />
+
+    <View
+      android:id="@+id/line_cafe_info_phone"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_phone" />
+
+    <ImageView
+      android:id="@+id/iv_cafe_info_sns"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:contentDescription="SNS"
+      android:src="@drawable/ic_sns_outlined_24"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/line_cafe_info_phone" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_sns"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:text="@string/sns"
+      android:textColor="@color/gray_400"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintStart_toEndOf="@id/iv_cafe_info_sns"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_blog_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_instagram_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/blog" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_dot_first"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/dot"
+      android:textColor="#e5e7eb"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_instagram_value"
+      app:layout_constraintStart_toEndOf="@id/tv_cafe_info_blog_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/dot" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_instagram_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_website_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/instagram" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_dot_second"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/dot"
+      android:textColor="#e5e7eb"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_website_value"
+      app:layout_constraintStart_toEndOf="@id/tv_cafe_info_instagram_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/dot" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_website_value"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:textColor="#14b8a6"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/website" />
+
+    <TextView
+      android:id="@+id/tv_cafe_info_dot_third"
+      style="@style/TextSMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/dot"
+      android:textColor="#e5e7eb"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@id/iv_cafe_info_sns"
+      app:layout_constraintEnd_toStartOf="@id/tv_cafe_info_website_value"
+      app:layout_constraintStart_toEndOf="@id/tv_cafe_info_blog_value"
+      app:layout_constraintTop_toTopOf="@id/iv_cafe_info_sns"
+      tools:text="@string/dot" />
+
+    <View
+      android:id="@+id/line_cafe_info_sns"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@color/gray_100"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_cafe_info_sns" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

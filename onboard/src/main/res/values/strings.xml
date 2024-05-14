@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<resources>
+  <string name="server_error_message">서버에 문제가 발생했어요. 잠시 후 다시 시도해주세요.</string>
+  <string name="network_error_message">네트워크 연결을 확인해주세요.</string>
+  <string name="nickname_setting">닉네임 설정</string>
+  <string name="register_account">계정 등록</string>
+  <string name="service_terms">서비스 이용약관</string>
+  <string name="privacy_policy">개인정보 처리 방침</string>
+  <string name="privacy_third">개인정보 제3자 제공 동의</string>
+  <string name="detail"><u>내용보기</u></string>
+  <string name="agree_to_service_terms">서비스 이용약관 동의 <font color="#6B7280">(필수)</font></string>
+  <string name="agree_to_collect_personal_info">개인정보 수집 이용 동의 <font color="#6B7280">(필수)</font></string>
+  <string name="agree_to_provide_personal_info_to_3rd_party">개인정보 제3자 제공 동의 <font color="#6B7280">(필수)</font></string>
+  <string name="is_over_14_year_old">만 14세 이상입니다. <font color="#6B7280">(필수)</font></string>
+  <string name="agree_to_all_required_items">모든 필수항목에 동의합니다.</string>
+  <string name="would_like_to_receive_info_about_new_cafe_and_events">뉴스레터 형식으로 신규 카페, 이벤트에 대한 정보를 받고 싶습니다. <font color="#6B7280">(선택)</font></string>
+  <string name="register_account_title">서비스를 이용하려면\n계정을 등록해야 합니다.</string>
+  <string name="check">확인</string>
+  <string name="please_agree_to_all_required_items">필수 항목에 모두 동의 해주세요.</string>
+  <string name="nickname">닉네임</string>
+  <string name="next">다음</string>
+  <string name="too_short_text_error">최소 2자 이상 입력해주세요.</string>
+  <string name="register_nickname_title">닉네임을 설정해주세요.</string>
+  <string name="temp">최소 2자 이상 입력해주세요.</string>
+  <string name="empty_text_error">닉네임을 입력해주세요.</string>
+  <string name="already_exist_text_error">이미 있는 닉네임 입니다.</string>
+  <string name="contains_whitespace_error">닉네임에 띄어쓰기를 포함할 수 없습니다.</string>
+  <string name="contains_invalid_character_error">닉네임은 영문, 숫자, 완성된 한글의 조합만 사용할 수 있습니다.\n한글의 자음이나 모음만의 조합은 허용되지 않습니다.</string>
+  <string name="finish">완료</string>
+  <string name="sign_up_complete">회원가입이 완료되었습니다.</string>
+</resources>

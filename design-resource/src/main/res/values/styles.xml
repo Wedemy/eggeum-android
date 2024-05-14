@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<resources>
+
+  <style name="Widget.Eggeum.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+    <item name="android:background">@color/white</item>
+    <item name="android:title">@null</item>
+  </style>
+
+  <style name="Widget.Eggeum.Toolbar.WithArrow" parent="Widget.Eggeum.Toolbar">
+    <item name="navigationIcon">@drawable/ic_arrow_left_outlined_24</item>
+  </style>
+
+  <style name="ShapeAppearance.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">50%</item>
+  </style>
+
+  <style name="ShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">16dp</item>
+  </style>
+
+  <style name="ShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">8dp</item>
+  </style>
+
+  <style name="Widget.Eggeum.Button" parent="Widget.MaterialComponents.Button">
+    <item name="shapeAppearance">@style/ShapeAppearance.SmallComponent</item>
+    <item name="backgroundTint">@drawable/selector_button</item>
+    <item name="android:insetBottom">0dp</item>
+    <item name="android:insetTop">0dp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:layout_height">52dp</item>
+    <item name="android:stateListAnimator">@null</item>
+    <item name="android:fontFamily">@font/pretendard_medium</item>
+  </style>
+
+  <style name="ThemeOverlay.Eggeum.TextInputLayout.CursorColor" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+    <item name="colorControlActivated">@color/teal_500</item>
+  </style>
+
+  <style name="Widget.Eggeum.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="shapeAppearance">@style/ShapeAppearance.MediumComponent</item>
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="boxCornerRadiusTopEnd">8dp</item>
+    <item name="boxCornerRadiusTopStart">8dp</item>
+    <item name="boxCornerRadiusBottomEnd">8dp</item>
+    <item name="boxCornerRadiusBottomStart">8dp</item>
+    <item name="boxStrokeWidthFocused">1dp</item>
+    <item name="boxStrokeWidth">1dp</item>
+    <item name="boxBackgroundColor">@color/white</item>
+    <item name="endIconMode">custom</item>
+    <item name="errorIconDrawable">@null</item>
+    <item name="errorTextAppearance">@style/TextXsRegular</item>
+    <item name="boxStrokeErrorColor">@color/error_500</item>
+    <item name="errorTextColor">@color/error_500</item>
+    <item name="hintEnabled">false</item>
+    <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>
+  </style>
+
+  <style name="Widget.Eggeum.TextInputLayout.SearchBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="shapeAppearance">@style/ShapeAppearance.MediumComponent</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="boxCornerRadiusTopEnd">8dp</item>
+    <item name="boxCornerRadiusTopStart">8dp</item>
+    <item name="boxCornerRadiusBottomEnd">8dp</item>
+    <item name="boxCornerRadiusBottomStart">8dp</item>
+    <item name="boxBackgroundColor">@color/white</item>
+    <item name="hintEnabled">false</item>
+    <item name="android:theme">@style/ThemeOverlay.Eggeum.TextInputLayout.CursorColor</item>
+  </style>
+
+  <style name="Widget.Eggeum.TextInputEditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+    <item name="android:paddingStart">12dp</item>
+    <item name="android:paddingTop">14dp</item>
+    <item name="android:paddingBottom">14dp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:textAppearance">@style/TextLRegular</item>
+    <item name="android:textColor">@color/gray_900</item>
+    <item name="android:textColorHint">@color/gray_400</item>
+  </style>
+
+  <style name="ErrorAppearance" parent="@style/TextAppearance.Design.Error">
+    <item name="android:textSize">0sp</item>
+  </style>
+
+  <style name="EggeumDialog" parent="@style/Theme.MaterialComponents.Dialog">
+    <item name="android:background">@drawable/bg_eggeum_dialog</item>
+  </style>
+
+  <style name="EggeumBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/EggeumBottomSheet</item>
+  </style>
+
+  <style name="EggeumBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+    <item name="shapeAppearanceOverlay">@style/EggeumShapeAppearanceBottomSheetDialog</item>
+  </style>
+
+  <style name="EggeumShapeAppearanceBottomSheetDialog" parent="">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSizeTopRight">32dp</item>
+    <item name="cornerSizeTopLeft">32dp</item>
+    <item name="cornerSizeBottomRight">0dp</item>
+    <item name="cornerSizeBottomLeft">0dp</item>
+  </style>
+
+  <style name="EggeumTabItemText" parent="@android:style/TextAppearance.Widget.TabWidget">
+    <item name="android:textAppearance">@style/TextMSemiBold</item>
+  </style>
+
+</resources>

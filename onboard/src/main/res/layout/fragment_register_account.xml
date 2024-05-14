@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Designed and developed by Wedemy 2023.
+  ~
+  ~ Licensed under the MIT.
+  ~ Please see full license: https://github.com/Wedemy/eggeum-android/blob/main/LICENSE
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/tb_register_account"
+    style="@style/Widget.Eggeum.Toolbar.WithArrow"
+    android:layout_width="0dp"
+    android:layout_height="56dp"
+    android:elevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      style="@style/Title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/register_account"
+      android:textColor="@color/gray_900" />
+
+  </com.google.android.material.appbar.MaterialToolbar>
+
+  <TextView
+    android:id="@+id/tv_register_account_title"
+    style="@style/H3"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/register_account_title"
+    android:textColor="@color/gray_900"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_register_account" />
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="38dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toTopOf="@id/line_register_account"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_register_account_title">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_agree_to_service_terms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_service_terms_detail"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+          android:id="@+id/cb_agree_to_service_terms"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
+          android:background="@drawable/selector_check_16"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_agree_to_service_terms"
+          style="@style/TextSMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/agree_to_service_terms"
+          android:textColor="@color/gray_700"
+          app:layout_constraintBottom_toBottomOf="@id/cb_agree_to_service_terms"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toEndOf="@+id/cb_agree_to_service_terms"
+          app:layout_constraintTop_toTopOf="@id/cb_agree_to_service_terms" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+        android:id="@+id/tv_agree_to_service_terms_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:padding="6dp"
+        android:text="@string/detail"
+        app:layout_constraintBottom_toBottomOf="@id/cl_agree_to_service_terms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_agree_to_service_terms" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_agree_to_collect_personal_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_collect_personal_info_detail"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_agree_to_service_terms">
+
+        <CheckBox
+          android:id="@+id/cb_agree_to_collect_personal_info"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
+          android:background="@drawable/selector_check_16"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_agree_to_collect_personal_info"
+          style="@style/TextSMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/agree_to_collect_personal_info"
+          android:textColor="@color/gray_700"
+          app:layout_constraintBottom_toBottomOf="@id/cb_agree_to_collect_personal_info"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toEndOf="@+id/cb_agree_to_collect_personal_info"
+          app:layout_constraintTop_toTopOf="@id/cb_agree_to_collect_personal_info" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+        android:id="@+id/tv_agree_to_collect_personal_info_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:padding="6dp"
+        android:text="@string/detail"
+        app:layout_constraintBottom_toBottomOf="@id/cl_agree_to_collect_personal_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_agree_to_collect_personal_info" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_agree_to_provide_personal_info_to_3rd_party"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_agree_to_collect_personal_info">
+
+        <CheckBox
+          android:id="@+id/cb_agree_to_provide_personal_info_to_3rd_party"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
+          android:background="@drawable/selector_check_16"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_agree_to_provide_personal_info_to_3rd_party"
+          style="@style/TextSMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/agree_to_provide_personal_info_to_3rd_party"
+          android:textColor="@color/gray_700"
+          app:layout_constrainedWidth="true"
+          app:layout_constraintBottom_toBottomOf="@id/cb_agree_to_provide_personal_info_to_3rd_party"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toEndOf="@+id/cb_agree_to_provide_personal_info_to_3rd_party"
+          app:layout_constraintTop_toTopOf="@id/cb_agree_to_provide_personal_info_to_3rd_party" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+        android:id="@+id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:padding="6dp"
+        android:text="@string/detail"
+        app:layout_constraintBottom_toBottomOf="@id/cl_agree_to_provide_personal_info_to_3rd_party"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_agree_to_provide_personal_info_to_3rd_party" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_is_over_14_year_old"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_agree_to_provide_personal_info_to_3rd_party">
+
+        <CheckBox
+          android:id="@+id/cb_is_over_14_year_old"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
+          android:background="@drawable/selector_check_16"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_is_over_14_year_old"
+          style="@style/TextSMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/is_over_14_year_old"
+          android:textColor="@color/gray_700"
+          app:layout_constraintBottom_toBottomOf="@id/cb_is_over_14_year_old"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toEndOf="@+id/cb_is_over_14_year_old"
+          app:layout_constraintTop_toTopOf="@id/cb_is_over_14_year_old" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_would_like_to_receive_info_about_new_cafe_and_events"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_is_over_14_year_old">
+
+        <CheckBox
+          android:id="@+id/cb_would_like_to_receive_info_about_new_cafe_and_events"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
+          android:background="@drawable/selector_check_16"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_would_like_to_receive_info_about_new_cafe_and_events"
+          style="@style/TextSMedium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:ellipsize="end"
+          android:text="@string/would_like_to_receive_info_about_new_cafe_and_events"
+          android:textColor="@color/gray_700"
+          app:layout_constrainedWidth="true"
+          app:layout_constraintBottom_toBottomOf="@id/cb_would_like_to_receive_info_about_new_cafe_and_events"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toEndOf="@+id/cb_would_like_to_receive_info_about_new_cafe_and_events"
+          app:layout_constraintTop_toTopOf="@id/cb_would_like_to_receive_info_about_new_cafe_and_events" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <View
+        android:id="@+id/line_register_account_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_would_like_to_receive_info_about_new_cafe_and_events" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_agree_to_all_required_items"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_agree_to_provide_personal_info_to_3rd_party_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_register_account_divider">
+
+        <CheckBox
+          android:id="@+id/cb_agree_to_all_required_items"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:background="@drawable/selector_check_background_24"
+          android:button="@android:color/transparent"
+          android:clickable="false"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/tv_agree_to_all_required_item"
+          style="@style/TextMSemiBold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/agree_to_all_required_items"
+          android:textColor="@color/gray_700"
+          app:layout_constraintBottom_toBottomOf="@id/cb_agree_to_all_required_items"
+          app:layout_constraintStart_toEndOf="@+id/cb_agree_to_all_required_items"
+          app:layout_constraintTop_toTopOf="@id/cb_agree_to_all_required_items" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+        android:id="@+id/tv_please_to_agree_all_required_item"
+        style="@style/TextXsRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/please_agree_to_all_required_items"
+        android:textColor="@color/error_500"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_agree_to_all_required_items"
+        app:layout_constraintVertical_bias="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
+
+  <View
+    android:id="@+id/line_register_account"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginBottom="16dp"
+    android:background="@color/gray_200"
+    app:layout_constraintBottom_toTopOf="@id/btn_register_account"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+    android:id="@+id/btn_register_account"
+    style="@style/Widget.Eggeum.Button"
+    android:layout_width="0dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    android:text="@string/next"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
 [![targetSdkVersion](https://img.shields.io/badge/targetSdkVersion-34-orange)](https://developer.android.com/distribute/best-practices/develop/target-sdk)
 <br/>
 
-이끔 : 나에게 맞는 카페찾기 [PlayStore](https://play.google.com/store/apps/details?id=us.wedemy.eggeum.android)
+이끔 - 나에게 맞는 카페찾기 [PlayStore](https://play.google.com/store/apps/details?id=us.wedemy.eggeum.android)
 
 ![eggeum_graphic_image](https://github.com/Wedemy/eggeum-android/assets/51016231/94422e61-10a6-426a-9829-fc81cd827321)
 
